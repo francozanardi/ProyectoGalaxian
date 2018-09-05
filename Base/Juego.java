@@ -1,30 +1,35 @@
+package Proyecto;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class Juego extends JFrame
 {
-	public static final int	GAME_WIDTH	= 400,
-							GAME_HEIGHT	= 600,
-							GAME_FPS	= 100;
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private JPanel contentPane;
-	
-	private Juego j;
-	private MainThread tiempo;
+	public static final int		GAME_WIDTH	= 400,
+								GAME_HEIGHT	= 600,
+								GAME_FPS	= 100;
+	public static final String	GAME_TITLE = "Galaxian Trucho";
 
-	/**
-	 * Launch the application.
-	 */
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private JPanel		panel;
+	private MainThread	tiempo;
+	private Mapa		mapa;
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static void main(String[] args)
 	{
 		EventQueue.invokeLater(new Runnable()
@@ -44,42 +49,99 @@ public class Juego extends JFrame
 		});
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	public Juego()
 	{
-		addKeyListener(
-			new KeyAdapter()
-			{
-				public void keyReleased(KeyEvent arg0)
-				{
-					mover(arg0);
-				}
-			}
-		);
-		getContentPane().setLayout(null);
+		super( GAME_TITLE );
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		addKeyListener( new OyenteTeclado() );
+		addMouseListener( new OyenteMouse() );
+		addMouseMotionListener( new OyenteMouse() );
+				
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setBounds( 0, 0, GAME_WIDTH, GAME_HEIGHT );
 		setLocationRelativeTo( null );
 		setResizable( false );
 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		crearPanel( );
 		
-		Mapa mapa = new Mapa( this );
-		tiempo = new MainThread(mapa, GAME_FPS);
-		tiempo.start();
+		Jugador p = new Jugador();
+		mapa = new Mapa( this, p );
+		p.setMapa( mapa );
+		
+		tiempo = new MainThread( mapa, GAME_FPS );
+		tiempo.start( );
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void crearPanel( )
+	{
+		panel = new JPanel();
+		panel.setLayout( null );
+		setContentPane( panel );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public JPanel obtenerPanel( )
 	{
-		return contentPane;
+		return panel;
 	}
 	
-	protected void mover(KeyEvent key){
-				
-		this.repaint();
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private class OyenteMouse implements MouseListener, MouseMotionListener
+	{
+		public void mouseClicked(MouseEvent arg0)
+		{			
+		}
+
+		public void mouseEntered(MouseEvent arg0)
+		{
+		}
+
+		public void mouseExited(MouseEvent arg0)
+		{			
+		}
+
+		public void mousePressed(MouseEvent arg0)
+		{			
+		}
+
+		public void mouseReleased(MouseEvent arg0)
+		{
+		}
+		
+		public void mouseDragged(MouseEvent arg0)
+		{
+		}
+
+		public void mouseMoved(MouseEvent arg0)
+		{
+		}
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private class OyenteTeclado implements KeyListener
+	{
+		public void keyPressed(KeyEvent arg0)
+		{
+			mapa.actividadTeclado( arg0 );
+		}
+
+		public void keyReleased(KeyEvent arg0)
+		{
+		}
+
+		public void keyTyped(KeyEvent arg0)
+		{
+		}
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

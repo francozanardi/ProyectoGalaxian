@@ -1,48 +1,62 @@
 package Proyecto;
 
 import java.awt.Color;
-import java.util.Random;
 import javax.swing.JPanel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class Enemigo extends Entidad
-{
+public class Jugador extends Entidad
+{	
 	///////////////////////////////////////////////////////////////////////////////////////////////
-		
-	private Random rand;
+	
+	public static final int	PLAYER_WIDTH = 20,
+							PLAYER_HEIGHT = 40;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Enemigo( Mapa mapa )
+	public Jugador( )
 	{
-		this.mapa	= mapa;
 		this.panel	= new JPanel( );
 		this.pos	= new int[2];
 		this.tamano	= new int[2];
 		
-		rand = new Random();
+		this.pos[0] = (Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2);
+		this.pos[1] = Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30;
 		
-		this.pos[0] = rand.nextInt( Juego.GAME_WIDTH );
-		this.pos[1] = rand.nextInt( Juego.GAME_HEIGHT );
-		
-		this.tamano[0] = 10;
-		this.tamano[1] = 10;
+		this.tamano[0] = PLAYER_WIDTH;
+		this.tamano[1] = PLAYER_HEIGHT;
 		
 		panel.setOpaque( true );
-		panel.setBackground( new Color( rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)) );
+		panel.setBackground( new Color( 255, 255, 255 ) );
 		panel.setBounds( pos[0], pos[1], tamano[0], tamano[1] );
 		panel.setVisible( true );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void mover( )
+	public void setMapa( Mapa map )
 	{
-		this.pos[0] += -1 + rand.nextInt( 3 );
-		this.pos[1] += -1 + rand.nextInt( 3 );
+		this.mapa = map;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void setPos( int posX )
+	{
+		pos[0] = posX;
+	}
+	
+	public void mover( int direccion )
+	{
+		pos[0] += (direccion * 2);
 		
 		panel.setBounds( pos[0], pos[1], tamano[0], tamano[1] );
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void mover()
+	{
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

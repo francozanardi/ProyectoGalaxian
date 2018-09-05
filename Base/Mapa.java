@@ -1,30 +1,72 @@
+package Proyecto;
+
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JPanel;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class Mapa
 {
-	private Juego juego;
-	private Entidad[] e;
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Mapa( Juego juego )
+	private final int	CANTIDAD_ENEMIGOS = 20;
+	private final Color COLOR_FONDO = new Color( 10, 10, 10 );
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private Juego		juego;
+	private Jugador		player;
+	private Entidad[]	e;
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Mapa( Juego juego, Jugador player )
 	{
-		this.juego = juego;
+		this.juego	= juego;
+		this.player	= player;
 		
+		establecerFondo( );
 		crearEnemigos( );
+		establecerJugador( );
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void establecerFondo( )
+	{
+		juego.obtenerPanel().setBackground( COLOR_FONDO );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void establecerJugador( )
+	{
+		// Centrar al jugador
+		player.setPos( (Juego.GAME_WIDTH / 2) - (Jugador.PLAYER_WIDTH / 2) );
+		
+		// Agregarlo al panel principal
+		juego.obtenerPanel().add( player.obtenerPanel() );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void crearEnemigos( )
 	{
-		e = new Entidad[10];
-		JPanel panelJuego = juego.obtenerPanel();
+		e = new Entidad[CANTIDAD_ENEMIGOS];
+		JPanel panel = juego.obtenerPanel();
 		
 		for (int i = 0; i < e.length; i ++)
 		{
 			e[i] = new Enemigo( this );
 			
-			panelJuego.add( e[i].obtenerPanel() );
+			panel.add( e[i].obtenerPanel() );
 		}
 		
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void actualizar( )
 	{
@@ -35,5 +77,28 @@ public class Mapa
 		
 		juego.obtenerPanel().repaint();
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	public void actividadTeclado( KeyEvent t )
+	{
+		switch ( t.getKeyCode() )
+		{
+			case KeyEvent.VK_LEFT:
+			{
+				player.mover( -1 );
+				break;
+			}
+			
+			case KeyEvent.VK_RIGHT:
+			{
+				player.mover( 1 );
+				break;
+			}
+		}
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
