@@ -15,7 +15,7 @@ public class ArmaCuadrado2 extends Arma {
 		
 		panel.setOpaque(true);
 		panel.setBackground(new Color(0, 0, 105));
-		panel.setBounds(pos.getX(), pos.getY(), tamano.getWidth(), tamano.getHeight());
+		actualizarPosicion();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		panel.setVisible(true);
 	}

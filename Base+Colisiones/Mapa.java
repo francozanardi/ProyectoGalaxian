@@ -152,13 +152,13 @@ public class Mapa
 		{
 			case KeyEvent.VK_LEFT:
 			{
-				player.mover( -1 );
+				player.mover( -2 );
 				break;
 			}
 			
 			case KeyEvent.VK_RIGHT:
 			{
-				player.mover( 1 );
+				player.mover( 2 );
 				break;
 			}
 			//funciona pero hay un error que creo que se debe por modificar la lista en el hilo principal y al mismo tiempo en el hilo creado.
