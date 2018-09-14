@@ -1,0 +1,57 @@
+package Inteligencia;
+
+import java.util.Random;
+
+import Enemigo.Enemigo;
+import Grafica.Juego;
+import Grafica.Posicion;
+import Mapa.Mapa;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public class IAComun extends Inteligencia
+{
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public IAComun( Mapa map )
+	{
+		this.map = map;
+		this.rand = new Random( );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void mover( Enemigo me )
+	{
+		Posicion pos = me.getPos();
+		
+		int x = pos.getX(),
+			y = pos.getY();
+		
+		
+		// Oscilan hacia los costados
+		x = x - 1 + rand.nextInt(3);
+		
+		// Descender obligatoriamente
+		y = y + 1; 
+		
+		// No permitir que se vaya por los costados de la pantalla
+		if (x < 0)
+			x = 0;
+		else if (x > Juego.GAME_WIDTH)
+			x = Juego.GAME_WIDTH;
+		
+		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba
+		if (y > Juego.GAME_HEIGHT)
+			y = 0;
+		
+		
+		// Finalmente actualizar posicion
+		pos.setX( x );
+		pos.setY( y );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
