@@ -1,38 +1,31 @@
 package Disparo;
 
 import java.awt.Color;
-import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
 import Entidad.Personaje;
 import Grafica.Posicion;
 import Grafica.Size;
+import Grafica.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class DisparoCuadrado2 extends Disparo
+public class DisparoEnemigo extends Disparo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoCuadrado2(Personaje lanzador, Posicion posInicial)
+	public DisparoEnemigo(Posicion posInicial, Vector vectorVelocidad)
 	{
-		panel = new JPanel();
-		pos = posInicial;
-		tamano = new Size(5, 5);
-		fuerza = 1;
+		panel	= new JPanel();
+		pos		= posInicial;
+		tamano	= new Size(5, 5);
+		fuerza	= 1;
+		vecVelocidad = vectorVelocidad;
 		
-		actualizarPanel( true, Color.blue );
+		actualizarPanel( true, Color.green );
 		
-		this.lanzador = lanzador;
-	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void avanzar()
-	{
-		pos.setY(pos.getY()-10);
-		actualizarPosicion();
+		colisionador = new Colisiones.ColisionadorDisparoEnemigo();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

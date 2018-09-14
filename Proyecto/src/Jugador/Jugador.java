@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import Arma.ArmaCuadrado2;
 import Colisiones.Colisionador;
+import Colisiones.ColisionadorJugador;
 import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Entidad.EntidadConVida;
@@ -32,6 +33,7 @@ public class Jugador extends Personaje
 		this.tamano	= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
 		this.vida = 1000;
 		this.arma = new ArmaCuadrado2();
+		colisionador = new ColisionadorJugador();
 		
 		
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
@@ -58,24 +60,19 @@ public class Jugador extends Personaje
 	public void mover()
 	{
 	}
-
-	@Override
-	public void hacerDMG(Colisionador c, EntidadConVida receptor, Disparo disparo) {
-		receptor.recibirDMG(c, this, disparo);	
+	
+	public void colisionar(EntidadConVida e) { //agregado
+		e.serChocado(colisionador);
 	}
 
 
 	@Override
-	public void recibirDMG(Colisionador c, Jugador lanzador, Disparo disparo) {
-		c.huboColision(lanzador, this, disparo);
+	public void serChocado(Colisionador col) {
+		col.afectarJugador(this);
 		
 	}
 
-	@Override
-	public void recibirDMG(Colisionador c, Enemigo lanzador, Disparo disparo) {
-		c.huboColision(lanzador, this, disparo);
-		
-	}
+
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }

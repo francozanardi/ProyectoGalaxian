@@ -8,10 +8,7 @@ import Jugador.Jugador;
 public abstract class EntidadConVida extends Entidad{
 	
 	protected float vida;
-	
-	public abstract void recibirDMG(Colisionador c, Jugador lanzador, Disparo disparo);
-	public abstract void recibirDMG(Colisionador c, Enemigo lanzador, Disparo disparo);
-	
+	protected Colisionador colisionador;
 	
 	public void setVida(float vida) {
 		this.vida = vida;
@@ -19,5 +16,14 @@ public abstract class EntidadConVida extends Entidad{
 	
 	public float getVida() {
 		return vida;
+	}
+	
+	public abstract void serChocado(Colisionador col);
+	//{
+		//afectar(this);
+	//}
+	
+	public void colisionar(EntidadConVida e) { //agregado
+		e.serChocado(colisionador);
 	}
 }

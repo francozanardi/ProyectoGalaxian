@@ -3,13 +3,11 @@ package Arma;
 import java.awt.Color;
 
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-
-import Disparo.Disparo;
-import Disparo.DisparoCuadrado2;
+import Disparo.*;
 import Entidad.Personaje;
 import Grafica.Posicion;
 import Grafica.Size;
+import Grafica.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,8 +18,8 @@ public class ArmaCuadrado2 extends Arma
 	public ArmaCuadrado2()
 	{
 		panel = new JPanel();
-		tamano = new Size(10, 10);
-		this.pos = new Posicion(5, 5); // pos
+		tamano = new Size(10, 20);
+		this.pos = new Posicion(3, 3); // pos
 		
 		actualizarPanel( true, new Color(0, 0, 105) );
 	}
@@ -30,12 +28,15 @@ public class ArmaCuadrado2 extends Arma
 	
 	public Disparo lanzarDisparo(Personaje p)
 	{
-		return	new DisparoCuadrado2(
-					p,
+		Vector v = new Vector();
+		v.setEnPolares( Math.PI / 2, 5.0 );
+	
+		return	new DisparoJugador(
 					new Posicion(
 						p.getPos().getX() + this.pos.getX(),
 						p.getPos().getY() - 5
-					)
+					),
+					v
 				);
 	}
 	

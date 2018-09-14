@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import Arma.ArmaCuadrado;
 import Colisiones.Colisionador;
+import Colisiones.ColisionadorKamikaze;
 import Disparo.Disparo;
 import Entidad.EntidadConVida;
 import Grafica.Juego;
@@ -35,34 +36,27 @@ public class Kamikaze extends Enemigo
 		rand = new Random();
 		this.panel	= new JPanel( );
 		this.pos	= new Posicion(rand.nextInt(Juego.GAME_WIDTH), rand.nextInt( Juego.GAME_HEIGHT ));
-		this.tamano	= new Size(35, 20);
+		this.tamano	= new Size(30, 15);
 		this.arma = new ArmaCuadrado();
 		this.vida = 100;
 		
 		actualizarPanel( true, new Color( 100, 0, 0 ) );
 		
 		panel.add( arma.obtenerPanel() );
+		colisionador = new ColisionadorKamikaze();
 		
 
+	}
+
+	@Override
+	public void serChocado(Colisionador col) {
+		col.afectarKamikaze(this);
+		
 	}
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
-	@Override
-	public void hacerDMG(Colisionador c, EntidadConVida receptor, Disparo disparo) {
-		receptor.recibirDMG(c, this, disparo);
-	}
 
-	@Override
-	public void recibirDMG(Colisionador c, Jugador lanzador, Disparo disparo) {
-		c.huboColision(lanzador, this, disparo);
-		
-	}
-	
-	public void recibirDMG(Colisionador c, Enemigo lanzador, Disparo disparo) {
-		c.huboColision(lanzador, this, disparo);
-		
-	}
 }
 
 

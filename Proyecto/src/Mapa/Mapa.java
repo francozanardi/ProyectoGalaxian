@@ -14,6 +14,7 @@ import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Enemigo.EnemigoConcreto1;
 import Enemigo.Kamikaze;
+import Entidad.Entidad;
 import Entidad.EntidadConVida;
 import Grafica.Fondo;
 import Grafica.FondoGenerico;
@@ -39,7 +40,6 @@ public class Mapa
 	private Collection<Enemigo>			enemigos;
 	private Collection<Disparo>			disparos;
 	private Collection<EntidadConVida>	entidades;
-	private Colisionador				colisiones;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -55,7 +55,6 @@ public class Mapa
 		this.disparos	= new CopyOnWriteArrayList<Disparo>();
 		this.entidades	= new CopyOnWriteArrayList<EntidadConVida>();
 		this.enemigos	= new CopyOnWriteArrayList<Enemigo>();
-		this.colisiones	= new Colisionador();
 		
 		//establecerFondo( );
 		establecerJugador( );
@@ -128,8 +127,8 @@ public class Mapa
 			
 			
 			for(EntidadConVida ent: entidades) {
-				if(ent.obtenerPanel().getBounds().contains(d.obtenerPanel().getBounds())) {
-					d.getLanzador().hacerDMG(colisiones, ent, d);
+				if( verificarColision(ent, d) ) {
+					d.colisionar(ent);
 					if(ent.getVida() <= 0) {
 						ent.eliminar();
 						entidades.remove(ent);
@@ -142,8 +141,8 @@ public class Mapa
 			//control de colisiones con enemigos
 			if(!choco) {
 				for(Enemigo enemigo: enemigos) {
-					if(enemigo.obtenerPanel().getBounds().contains(d.obtenerPanel().getBounds())) {
-						d.getLanzador().hacerDMG(colisiones, enemigo, d);
+					if( verificarColision(enemigo, d) ) {
+						d.colisionar(enemigo);
 						
 						if(enemigo.getVida() <= 0) {
 							
@@ -164,9 +163,9 @@ public class Mapa
 			// control de colisiones con jugador
 			if (!choco)
 			{
-				if (player.obtenerPanel().getBounds().contains( d.obtenerPanel().getBounds() ) )
+				if ( verificarColision(player, d) )
 				{
-					d.getLanzador().hacerDMG(colisiones, player, d);
+					d.colisionar(player);
 					
 					choco = true;
 				}
@@ -183,10 +182,51 @@ public class Mapa
 		}
 		
 		
+		for(Enemigo e: enemigos) {
+			if( verificarColision(player, e) ) {
+				e.colisionar(player);
+				player.colisionar( e );
+				
+				if (e.getVida() <= 0.0)
+				{
+					e.eliminar();
+					enemigos.remove(e);
+				}
+			}
+		}
+		
+		
 		
 		panel.repaint();
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private boolean verificarColision( Entidad a, Entidad b )
+	{
+		int ax1 = a.getPos().getX(),
+			ay1 = a.getPos().getY(),
+			aSX = a.getSize().getWidth(),
+			aSY = a.getSize().getHeight(),
+			bx = b.getPos().getX(),
+			by = b.getPos().getY(),
+			bSX = b.getSize().getWidth(),
+			bSY = b.getSize().getHeight();
+		
+		return	rectanguloContienePunto( ax1, ay1, aSX, aSY, bx,       by ) ||
+				rectanguloContienePunto( ax1, ay1, aSX, aSY, bx + bSX, by ) ||
+				rectanguloContienePunto( ax1, ay1, aSX, aSY, bx + bSX, by + bSY ) ||
+				rectanguloContienePunto( ax1, ay1, aSX, aSY, bx,       by + bSY );
+	}
+	
+	private boolean rectanguloContienePunto( int x, int y, int sizeX, int sizeY, int pX, int pY )
+	{
+		pX -= x;
+		pY -= y;
+		
+		return (0 < pX) && (pX < sizeX) && (0 < pY) && (pY < sizeY);
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public Posicion coordenadasDelJugador( )

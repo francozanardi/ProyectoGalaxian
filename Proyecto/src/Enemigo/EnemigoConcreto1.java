@@ -45,23 +45,14 @@ public class EnemigoConcreto1 extends Enemigo
 		
 
 	}
+
+	@Override
+	public void serChocado(Colisionador col) {
+		col.afectarEnemigo(this);
+		
+	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 
-	@Override
-	public void hacerDMG(Colisionador c, EntidadConVida receptor, Disparo disparo) {
-		receptor.recibirDMG(c, this, disparo);
-	}
-
-	@Override
-	public void recibirDMG(Colisionador c, Jugador lanzador, Disparo disparo) {
-		c.huboColision(lanzador, this, disparo);
-		
-	}
-	
-	public void recibirDMG(Colisionador c, Enemigo lanzador, Disparo disparo) {
-		c.huboColision(lanzador, this, disparo);
-		
-	}
 }

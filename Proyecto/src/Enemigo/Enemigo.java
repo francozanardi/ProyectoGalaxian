@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.util.Random;
 import javax.swing.JPanel;
 
+import Colisiones.Colisionador;
+import Colisiones.ColisionadorEnemigo;
+import Entidad.EntidadConVida;
 import Entidad.Personaje;
 import Inteligencia.Inteligencia;
 
@@ -16,6 +19,7 @@ public abstract class Enemigo extends Personaje
 	protected Random rand;
 	protected Inteligencia ia;
 	protected float dificultad;
+	protected Colisionador colisionador = new ColisionadorEnemigo();
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -28,7 +32,9 @@ public abstract class Enemigo extends Personaje
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-
+	public void colisionar(EntidadConVida e) { //aca lo volvemos a poner porque sino toma que colisionador es nulo, ya que en entidadconvida lo es
+		e.serChocado(colisionador);
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
