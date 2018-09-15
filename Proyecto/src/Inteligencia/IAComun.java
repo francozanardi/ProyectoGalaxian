@@ -1,11 +1,10 @@
 package Inteligencia;
 
-import java.util.Random;
-
 import Enemigo.Enemigo;
 import Grafica.Juego;
-import Grafica.Posicion;
 import Mapa.Mapa;
+import Utils.Posicion;
+import Utils.Randomizador;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -15,8 +14,8 @@ public class IAComun extends Inteligencia
 	
 	public IAComun( Mapa map )
 	{
-		this.map = map;
-		this.rand = new Random( );
+		this.map	= map;
+		this.rand	= new Randomizador( );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,12 +24,11 @@ public class IAComun extends Inteligencia
 	{
 		Posicion pos = me.getPos();
 		
-		int x = pos.getX(),
-			y = pos.getY();
-		
+		double	x = pos.getX(),
+				y = pos.getY();
 		
 		// Oscilan hacia los costados
-		x = x - 1 + rand.nextInt(3);
+		x = x + rand.nextInt(-1, 1);
 		
 		// Descender obligatoriamente
 		y = y + 1; 

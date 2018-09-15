@@ -19,8 +19,9 @@ import Entidad.EntidadConVida;
 import Grafica.Fondo;
 import Grafica.FondoGenerico;
 import Grafica.Juego;
-import Grafica.Posicion;
 import Jugador.Jugador;
+import Utils.Posicion;
+import Utils.Randomizador;
 
 import javax.swing.JLabel;
 
@@ -34,6 +35,7 @@ public class Mapa
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	private Randomizador				rand;
 	private Juego						juego;
 	private Jugador						player;
 	private Fondo						fondo;
@@ -52,6 +54,7 @@ public class Mapa
 		// Inicializar objetos
 		this.juego		= juego;
 		this.player		= player;
+		this.rand		= new Randomizador( );
 		this.disparos	= new CopyOnWriteArrayList<Disparo>();
 		this.entidades	= new CopyOnWriteArrayList<EntidadConVida>();
 		this.enemigos	= new CopyOnWriteArrayList<Enemigo>();
@@ -172,9 +175,25 @@ public class Mapa
 			}
 			
 			//avanzamos el disparo o lo eliminamos
-			if(!choco) {
+			if(!choco)
+			{
+				final int offset = 100;
+				
 				d.avanzar();
-			} else {
+				
+				// eliminar el disparo si se fue de la pantalla
+				if ((d.getPos().getY() < (0 - offset)) ||
+					(d.getPos().getY() > (Juego.GAME_HEIGHT + offset)) ||
+					(d.getPos().getX() < (0 - offset)) ||
+					(d.getPos().getX() > (Juego.GAME_WIDTH + offset)))
+				{
+					System.out.println("uno menos!");
+					d.eliminar();
+					disparos.remove(d);
+				}
+			}
+			else
+			{
 				d.eliminar();
 				disparos.remove(d);
 			}
@@ -204,12 +223,12 @@ public class Mapa
 	
 	private boolean verificarColision( Entidad a, Entidad b )
 	{
-		int ax1 = a.getPos().getX(),
-			ay1 = a.getPos().getY(),
-			aSX = a.getSize().getWidth(),
+		double	ax1 = a.getPos().getX(),
+				ay1 = a.getPos().getY(),
+				bx = b.getPos().getX(),
+				by = b.getPos().getY();
+		int aSX = a.getSize().getWidth(),
 			aSY = a.getSize().getHeight(),
-			bx = b.getPos().getX(),
-			by = b.getPos().getY(),
 			bSX = b.getSize().getWidth(),
 			bSY = b.getSize().getHeight();
 		
@@ -218,8 +237,10 @@ public class Mapa
 				rectanguloContienePunto( ax1, ay1, aSX, aSY, bx + bSX, by + bSY ) ||
 				rectanguloContienePunto( ax1, ay1, aSX, aSY, bx,       by + bSY );
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private boolean rectanguloContienePunto( int x, int y, int sizeX, int sizeY, int pX, int pY )
+	private boolean rectanguloContienePunto( double x, double y, double sizeX, double sizeY, double pX, double pY )
 	{
 		pX -= x;
 		pY -= y;
@@ -232,6 +253,13 @@ public class Mapa
 	public Posicion coordenadasDelJugador( )
 	{
 		return player.getPos();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Randomizador obtenerRandomizador( )
+	{
+		return rand;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

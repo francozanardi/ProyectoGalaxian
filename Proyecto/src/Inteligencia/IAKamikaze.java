@@ -1,11 +1,10 @@
 package Inteligencia;
 
-import java.util.Random;
-
 import Enemigo.Enemigo;
 import Grafica.Juego;
-import Grafica.Posicion;
 import Mapa.Mapa;
+import Utils.Posicion;
+import Utils.Randomizador;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -19,8 +18,8 @@ public class IAKamikaze extends Inteligencia
 	
 	public IAKamikaze( Mapa map )
 	{
-		this.rand = new Random( );
-		this.map = map;
+		this.rand 	= new Randomizador( );
+		this.map	= map;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,10 +29,10 @@ public class IAKamikaze extends Inteligencia
 		Posicion	pos			= me.getPos(),
 					posPlayer	= map.coordenadasDelJugador( );
 		
-		int x = pos.getX(),
-			y = pos.getY();
-		int px = posPlayer.getX(),
-			py = posPlayer.getY();
+		double	x = pos.getX(),
+				y = pos.getY(),
+				px = posPlayer.getX(),
+				py = posPlayer.getY();
 		
 		
 		// Cada 3 actualizaciones del mapa, dirigirse hacia el jugador

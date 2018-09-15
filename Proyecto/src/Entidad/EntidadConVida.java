@@ -7,8 +7,8 @@ import Jugador.Jugador;
 
 public abstract class EntidadConVida extends Entidad{
 	
-	protected float vida;
-	protected Colisionador colisionador;
+	protected float			vida;
+	protected Colisionador	colisionador;
 	
 	public void setVida(float vida) {
 		this.vida = vida;

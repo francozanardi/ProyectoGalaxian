@@ -2,10 +2,9 @@ package Entidad;
 
 import javax.swing.JPanel;
 
-import Colisiones.Colisionador;
-import Grafica.Posicion;
-import Grafica.Size;
 import Mapa.Mapa;
+import Utils.Posicion;
+import Utils.Size;
 
 import java.awt.Color;
 
@@ -37,10 +36,17 @@ public abstract class Entidad
 		panel.setBackground( colorFondo );
 		panel.setVisible( true );
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void actualizarPosicion()
 	{
-		panel.setBounds( pos.getX(), pos.getY(), tamano.getWidth(), tamano.getHeight() );
+		panel.setBounds(
+			(int) Math.round( pos.getX() ),
+			(int) Math.round( pos.getY() ),
+			tamano.getWidth(),
+			tamano.getHeight()
+		);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +54,9 @@ public abstract class Entidad
 	public void eliminar()
 	{
 		panel.setVisible(false);
-		panel = null;
-		pos = null;
-		tamano = null;
+		panel	= null;
+		pos		= null;
+		tamano	= null;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,10 +85,6 @@ public abstract class Entidad
 	{
 		this.map = map;
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }

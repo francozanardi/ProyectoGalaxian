@@ -4,7 +4,7 @@ import Colisiones.Colisionador;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
 import Entidad.Personaje;
-import Grafica.Vector;
+import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,10 +20,10 @@ public abstract class Disparo extends Entidad
 	
 	public void avanzar()
 	{
-		pos.setX( (int) (pos.getX() + 1.0 * vecVelocidad.getX()) );
+		pos.setX( pos.getX() + 1.0 * vecVelocidad.getX() );
 		
 		// Aquí restamos ya que el eje Y del JFrame aumenta hacia abajo, y hay que corregir la trayectoria.
-		pos.setY( (int) (pos.getY() - 1.0 * vecVelocidad.getY()) );
+		pos.setY( pos.getY() - 1.0 * vecVelocidad.getY() );
 		
 		actualizarPosicion();
 	}

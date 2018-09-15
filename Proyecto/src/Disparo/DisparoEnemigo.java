@@ -5,9 +5,9 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import Entidad.Personaje;
-import Grafica.Posicion;
-import Grafica.Size;
-import Grafica.Vector;
+import Utils.Posicion;
+import Utils.Size;
+import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

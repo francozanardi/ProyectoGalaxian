@@ -1,4 +1,4 @@
-package Grafica;
+package Utils;
 
 public class Size {
 	private int width;

@@ -9,6 +9,7 @@ import Colisiones.ColisionadorEnemigo;
 import Entidad.EntidadConVida;
 import Entidad.Personaje;
 import Inteligencia.Inteligencia;
+import Utils.Randomizador;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -16,10 +17,10 @@ public abstract class Enemigo extends Personaje
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 		
-	protected Random rand;
-	protected Inteligencia ia;
-	protected float dificultad;
-	protected Colisionador colisionador = new ColisionadorEnemigo();
+	protected Randomizador	rand;
+	protected Inteligencia	ia;
+	protected float			dificultad;
+	protected Colisionador	colisionador = new ColisionadorEnemigo();
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
