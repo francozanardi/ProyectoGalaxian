@@ -5,7 +5,8 @@ import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Jugador.Jugador;
 
-public abstract class EntidadConVida extends Entidad{
+public abstract class EntidadConVida extends Entidad
+{
 	
 	protected float			vida;
 	protected Colisionador	colisionador;

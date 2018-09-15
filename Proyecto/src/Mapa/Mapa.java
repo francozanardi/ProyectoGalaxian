@@ -1,19 +1,16 @@
 package Mapa;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JPanel;
 
-import Colisiones.Colisionador;
 import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Enemigo.EnemigoConcreto1;
-import Enemigo.Kamikaze;
+import Enemigo.Guiado;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
 import Grafica.Fondo;
@@ -89,7 +86,7 @@ public class Mapa
 			enemigos.add(e);
 			panel.add(e.obtenerPanel());
 			
-			Enemigo e2 = new Kamikaze( this, DIFICULTAD );
+			Enemigo e2 = new Guiado( this, DIFICULTAD );
 			enemigos.add( e2 );
 			panel.add( e2.obtenerPanel() );
 			
@@ -174,6 +171,7 @@ public class Mapa
 				}
 			}
 			
+			
 			//avanzamos el disparo o lo eliminamos
 			if(!choco)
 			{
@@ -187,7 +185,6 @@ public class Mapa
 					(d.getPos().getX() < (0 - offset)) ||
 					(d.getPos().getX() > (Juego.GAME_WIDTH + offset)))
 				{
-					System.out.println("uno menos!");
 					d.eliminar();
 					disparos.remove(d);
 				}

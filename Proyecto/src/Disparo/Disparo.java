@@ -30,14 +30,20 @@ public abstract class Disparo extends Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public float getFuerza()
+	public float getFuerza( )
 	{
 		return fuerza;
 	}
 	
+	public void setFuerza( float fuerza )
+	{
+		this.fuerza = fuerza;
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void colisionar(EntidadConVida e) {
+	public void colisionar(EntidadConVida e)
+	{
 		e.serChocado(colisionador);
 	}
 	
