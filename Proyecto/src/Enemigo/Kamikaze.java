@@ -14,7 +14,7 @@ public abstract class Kamikaze extends Enemigo
 	
 	public void serChocado(Colisionador col)
 	{
-		col.afectarKamikaze(this);
+		col.afectar(this);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +30,12 @@ public abstract class Kamikaze extends Enemigo
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public void actualizar() {
+		mover();
+		
+	}
 
 }
 

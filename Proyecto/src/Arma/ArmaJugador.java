@@ -13,16 +13,19 @@ import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class ArmaCuadrado2 extends Arma
+public class ArmaJugador extends Arma
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public ArmaCuadrado2( )
+	public ArmaJugador(Mapa map)
 	{
 		this.rand	= new Randomizador( );
 		this.panel	= new JPanel();
 		this.tamano	= new Size(10, 20);
 		this.pos	= new Posicion(3, 3);
+		this.tiempoUltimoDisparo = 0;
+		this.velocidad = 10; //o Juego.FPS / 3
+		this.map = map;
 		
 		actualizarPanel( true, new Color(0, 0, 105) );
 	}
@@ -31,16 +34,25 @@ public class ArmaCuadrado2 extends Arma
 	
 	public Disparo lanzarDisparo(Personaje p)
 	{
-		Vector v = new Vector();
-		v.setEnPolares( Math.PI / 2, 5.0 );
-	
-		return	new DisparoJugador(
-					new Posicion(
-						p.getPos().getX() + this.pos.getX(),
-						p.getPos().getY() - 5
-					),
-					v
-				);
+		long	tiempoActual = System.nanoTime(),
+				tiempoFinal = tiempoUltimoDisparo + TIEMPO_DISPARO/velocidad;
+		
+		if(tiempoActual >= tiempoFinal) {
+			tiempoUltimoDisparo = System.nanoTime();
+			Vector v = new Vector();
+			v.setEnPolares( Math.PI / 2, 5.0 );
+
+			return	new DisparoJugador(
+						map,
+						new Posicion(
+							p.getPos().getX() + this.pos.getX(),
+							p.getPos().getY() - 5
+						),
+						v
+					);
+		}
+		
+		return null;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

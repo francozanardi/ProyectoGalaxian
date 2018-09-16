@@ -1,12 +1,10 @@
 package Enemigo;
 
-import java.awt.Color;
-import java.util.Random;
-import javax.swing.JPanel;
 
-import Colisiones.Colisionador;
-import Colisiones.ColisionadorEnemigo;
-import Entidad.EntidadConVida;
+
+import java.util.Random;
+
+import Disparo.Disparo;
 import Entidad.Personaje;
 import Inteligencia.Inteligencia;
 import Utils.Randomizador;
@@ -20,7 +18,6 @@ public abstract class Enemigo extends Personaje
 	protected Randomizador	rand;
 	protected Inteligencia	ia;
 	protected float			dificultad;
-	protected Colisionador	colisionador = new ColisionadorEnemigo();
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -45,11 +42,24 @@ public abstract class Enemigo extends Personaje
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void colisionar(EntidadConVida e) { //aca lo volvemos a poner porque sino toma que colisionador es nulo, ya que en entidadconvida lo es
+	/*public void colisionar(EntidadConVida e) { //aca lo volvemos a poner porque sino toma que colisionador es nulo, ya que en entidadconvida lo es
 		e.serChocado(colisionador);
 	}
-	
+	*/
 	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void actualizar() {
+		mover();
+		Random rand = new Random();
+		if(rand.nextInt(100) == 1) {
+			Disparo d = lanzarDisparo();
+			if(d != null) {
+				map.agregarEntidad(d);
+			}
+			
+		}
+		
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

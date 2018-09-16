@@ -2,6 +2,8 @@ package Entidad;
 
 import javax.swing.JPanel;
 
+import Colisiones.Colisionador;
+import Colisiones.ColisionadorEntidad;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
@@ -18,6 +20,7 @@ public abstract class Entidad
 	protected Posicion	pos;
 	protected Size		tamano;
 	protected Mapa		map;
+	protected Colisionador colisionador = new ColisionadorEntidad();
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -28,7 +31,7 @@ public abstract class Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizarPanel( boolean esOpaco, Color colorFondo )
+	protected void actualizarPanel( boolean esOpaco, Color colorFondo )
 	{
 		actualizarPosicion( );
 		panel.setLayout( null );
@@ -39,7 +42,7 @@ public abstract class Entidad
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizarPosicion()
+	protected void actualizarPosicion()
 	{
 		panel.setBounds(
 			(int) Math.round( pos.getX() ),
@@ -53,6 +56,7 @@ public abstract class Entidad
 	
 	public void eliminar()
 	{
+		map.borrarEntidad(this);
 		panel.setVisible(false);
 		panel	= null;
 		pos		= null;
@@ -87,6 +91,18 @@ public abstract class Entidad
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void colisionar(Entidad e)
+	{
+		e.serChocado(colisionador);
+	}
+	
+	public void serChocado(Colisionador col) {
+		//col.afectar(this);
+	}
+
+	public abstract void actualizar();
+	
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

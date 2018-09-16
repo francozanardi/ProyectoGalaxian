@@ -3,7 +3,7 @@ package Enemigo;
 import java.awt.Color;
 import javax.swing.JPanel;
 
-import Arma.ArmaCuadrado;
+import Arma.ArmaEnemigo;
 import Colisiones.Colisionador;
 import Mapa.Mapa;
 import Utils.Posicion;
@@ -14,11 +14,11 @@ import Grafica.Juego;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class EnemigoConcreto1 extends Enemigo
+public class Comun extends Enemigo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 		
-	public EnemigoConcreto1( Mapa map, float dificultad )
+	public Comun( Mapa map, float dificultad )
 	{
 		this.map = map;
 		
@@ -32,7 +32,7 @@ public class EnemigoConcreto1 extends Enemigo
 		this.panel	= new JPanel( );
 		this.pos	= new Posicion(rand.nextInt(Juego.GAME_WIDTH), rand.nextInt( Juego.GAME_HEIGHT ));
 		this.tamano	= new Size(15, 15);
-		this.arma	= new ArmaCuadrado( );
+		this.arma	= new ArmaEnemigo(map);
 		this.vida	= 50;
 
 		actualizarPanel( true, new Color( rand.nextInt(256), rand.nextInt(256), rand.nextInt(256) ) );
@@ -44,8 +44,9 @@ public class EnemigoConcreto1 extends Enemigo
 	
 	public void serChocado(Colisionador col)
 	{
-		col.afectarEnemigo(this);
+		col.afectar(this);
 	}
+
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	

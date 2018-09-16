@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 import Entidad.Personaje;
+import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
 import Utils.Vector;
@@ -16,13 +17,14 @@ public class DisparoJugador extends Disparo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoJugador(Posicion posInicial, Vector vectorVelocidad)
+	public DisparoJugador(Mapa mapa, Posicion posInicial, Vector vectorDireccion)
 	{
 		panel = new JPanel();
 		pos = posInicial;
 		tamano = new Size(5, 5);
 		fuerza = 1;
-		vecVelocidad = vectorVelocidad;
+		vecDireccion = vectorDireccion;
+		map = mapa;
 		
 		actualizarPanel( true, Color.blue );
 		

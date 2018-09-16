@@ -7,9 +7,19 @@ import Entidad.EntidadConVida;
 import Jugador.Jugador;
 
 public abstract class Colisionador {
-	public abstract void afectarJugador(Jugador jugador);
-	public abstract void afectarEnemigo(Enemigo enemigo);
-	public void afectarKamikaze(Kamikaze kamikaze) {
+	public void afectar(Jugador jugador) {
+		
+	}
+	
+	public void afectar(Enemigo enemigo) {
+		
+	}
+	
+	public void afectar(Kamikaze kamikaze) {
 
+	}
+	
+	public void afectar(Disparo disparo) {
+		
 	}
 }

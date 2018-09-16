@@ -2,14 +2,16 @@ package Mapa;
 
 import java.awt.event.KeyEvent;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JPanel;
 
 import Disparo.Disparo;
 import Enemigo.Enemigo;
-import Enemigo.EnemigoConcreto1;
+import Enemigo.Comun;
 import Enemigo.Guiado;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
@@ -36,9 +38,8 @@ public class Mapa
 	private Juego						juego;
 	private Jugador						player;
 	private Fondo						fondo;
-	private Collection<Enemigo>			enemigos;
-	private Collection<Disparo>			disparos;
-	private Collection<EntidadConVida>	entidades;
+	private Collection<Entidad>			entidades;
+	private Set<Integer> teclasApretadas = new HashSet<Integer>(); //necesitamos una estructura que no pueda tener elementos repetidos, por eso set
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -52,9 +53,8 @@ public class Mapa
 		this.juego		= juego;
 		this.player		= player;
 		this.rand		= new Randomizador( );
-		this.disparos	= new CopyOnWriteArrayList<Disparo>();
-		this.entidades	= new CopyOnWriteArrayList<EntidadConVida>();
-		this.enemigos	= new CopyOnWriteArrayList<Enemigo>();
+		this.entidades	= new CopyOnWriteArrayList<Entidad>();
+		this.entidades.add(player);
 		
 		//establecerFondo( );
 		establecerJugador( );
@@ -78,148 +78,85 @@ public class Mapa
 	{
 		final float DIFICULTAD = 1;
 		
-		JPanel panel = juego.obtenerPanel();
-		
 		for (int i = 0; i < this.CANTIDAD_ENEMIGOS; i ++)
 		{
-			Enemigo e = new EnemigoConcreto1( this, DIFICULTAD );
-			enemigos.add(e);
-			panel.add(e.obtenerPanel());
+			Enemigo e = new Comun( this, DIFICULTAD );
+			agregarEntidad(e);
 			
 			Enemigo e2 = new Guiado( this, DIFICULTAD );
-			enemigos.add( e2 );
-			panel.add( e2.obtenerPanel() );
-			
-			//panel.add( e[i].getArma().obtenerPanel());
+			agregarEntidad(e2);
+
 		}
 		
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	
+	private void controlarColisiones() {
+		//Collection<Entidad[]> aColisionar = new CopyOnWriteArrayList<Entidad[]>();
+
+		for(Entidad entidad1: entidades) {
+			if(entidad1.obtenerPanel() != null) { //puede que haya sido eliminado cuando se llama a colisionar
+				//por lo tanto debemos asegurarnos de que no sea null.
+				//otra solucion es guardar en una lista las entidades colisionadas asi las borramos luego de este for-each
+				for(Entidad entidad2: entidades) {
+					if(entidad2.obtenerPanel() != null) { //idem anterior
+						if(entidad1 != entidad2) {
+							if(verificarColision(entidad1, entidad2)) {
+								entidad1.colisionar(entidad2);
+								entidad2.colisionar(entidad1);
+								
+								if(entidad1.obtenerPanel() == null) //puede que al colisionar la entidad1 desaparezca y sigamos buscando más colisiones
+									break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void actualizarEntidades() {
+		for(Entidad ent: entidades) {
+			ent.actualizar();
+		}
+	}
+	
+	public void borrarEntidad(Entidad e) {
+		entidades.remove(e);
+	}
+	
+	public void agregarEntidad(Entidad e) {
+		entidades.add(e);
+		juego.obtenerPanel().add(e.obtenerPanel());
+	}
+	
 	public void actualizar( )
 	{
-		
-		JPanel panel = juego.obtenerPanel();
-		fondo.actualizar();
-		
-		JLabel lbl = juego.obtenerLabelPuntaje( );
-		lbl.setText(
-			String.format( "FPS: %d   |   Puntaje: %d   |   Vida: %.1f", Juego.GAME_FPS, player.getPuntaje(), player.getVida() )
-		);
-		
-		
-		for(Enemigo enemigo: enemigos) {
-			enemigo.mover();
-			//para probar vamos a hacer que disparen todos desde el mapa.
-			Random rand = new Random();
-			if(rand.nextInt(100) == 1) {
-				Disparo d = enemigo.lanzarDisparo();
-				disparos.add(d);
-				panel.add(d.obtenerPanel());
-			}
+		if(player.getVida() > 0) {
+			controlarTeclado();
+			fondo.actualizar();
+			
+			JLabel lbl = juego.obtenerLabelPuntaje( );
+			lbl.setText(
+				String.format( "FPS: %d   |   Puntaje: %d   |   Vida: %.1f", Juego.GAME_FPS, player.getPuntaje(), player.getVida() )
+			);
+			
+			controlarColisiones();
+			actualizarEntidades();		
+			juego.obtenerPanel().repaint();
+			
+		} else {
+			juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja manco.");
 		}
-		
-		
-		//control de colisiones con entidades con vida
-		for(Disparo d: disparos) {
-			boolean choco = false;
-			
-			
-			for(EntidadConVida ent: entidades) {
-				if( verificarColision(ent, d) ) {
-					d.colisionar(ent);
-					if(ent.getVida() <= 0) {
-						ent.eliminar();
-						entidades.remove(ent);
-					}
-					choco = true;
-					break;
-				}
-			}
-			
-			//control de colisiones con enemigos
-			if(!choco) {
-				for(Enemigo enemigo: enemigos) {
-					if( verificarColision(enemigo, d) ) {
-						d.colisionar(enemigo);
-						
-						if(enemigo.getVida() <= 0) {
-							
-							// NUEVO (Y PROVISORIO) !!
-							player.setPuntaje( player.getPuntaje() + enemigo.getPuntaje() );
-						
-							enemigo.eliminar();
-							enemigos.remove(enemigo);
-						}
-						
-						choco = true;
-						break;
-					}
-				}
-			}
-			
-			
-			// control de colisiones con jugador
-			if (!choco)
-			{
-				if ( verificarColision(player, d) )
-				{
-					d.colisionar(player);
-					
-					choco = true;
-				}
-			}
-			
-			
-			//avanzamos el disparo o lo eliminamos
-			if(!choco)
-			{
-				final int offset = 100;
-				
-				d.avanzar();
-				
-				// eliminar el disparo si se fue de la pantalla
-				if ((d.getPos().getY() < (0 - offset)) ||
-					(d.getPos().getY() > (Juego.GAME_HEIGHT + offset)) ||
-					(d.getPos().getX() < (0 - offset)) ||
-					(d.getPos().getX() > (Juego.GAME_WIDTH + offset)))
-				{
-					d.eliminar();
-					disparos.remove(d);
-				}
-			}
-			else
-			{
-				d.eliminar();
-				disparos.remove(d);
-			}
-			
-		}
-		
-		
-		for(Enemigo e: enemigos) {
-			if( verificarColision(player, e) ) {
-				e.colisionar(player);
-				player.colisionar( e );
-				
-				if (e.getVida() <= 0.0)
-				{
-					e.eliminar();
-					enemigos.remove(e);
-				}
-			}
-		}
-		
-		
-		
-		panel.repaint();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	private boolean verificarColision( Entidad a, Entidad b )
 	{
+		//System.out.println(a.toString() + " " + b.toString());
 		double	ax1 = a.getPos().getX(),
 				ay1 = a.getPos().getY(),
 				bx = b.getPos().getX(),
@@ -258,43 +195,38 @@ public class Mapa
 	{
 		return rand;
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actividadTeclado( KeyEvent t )
-	{
-		switch ( t.getKeyCode() )
-		{
-			case KeyEvent.VK_LEFT:
-			{
-				if(player.getPos().getX() > player.getSize().getWidth()/2) {
-					player.mover( -2 );
-				}
-				break;
-			}
-			
-			case KeyEvent.VK_RIGHT:
-			{
-				if(player.getPos().getX() < Juego.GAME_WIDTH - player.getSize().getWidth()*2) {
-					player.mover( 2 );
-				}
-				break;
-			}
-			//funciona pero hay un error que creo que se debe por modificar la lista en el hilo principal y al mismo tiempo en el hilo creado.
-			//posible solucion: crear una lista auxiliar para los disparos del jugador.
-			//lo solucione con una estructura de datos adecuada para threads
-			case KeyEvent.VK_SPACE:
-			{
-				Disparo d = player.lanzarDisparo();
-				disparos.add(d);
-				juego.obtenerPanel().add(d.obtenerPanel());
-				break;
-			}
-		
-		}
+	public void teclaApretada( KeyEvent t )	{
+		teclasApretadas.add(t.getKeyCode());
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void teclaSuelta(KeyEvent t) {
+		teclasApretadas.remove(t.getKeyCode());
+	}
+	
+	public void controlarTeclado() {
+		if(teclasApretadas.contains(KeyEvent.VK_LEFT)) {
+			if(player.getPos().getX() > player.getSize().getWidth()/2) {
+				player.mover( -2 );
+			}
+		}
+		if(teclasApretadas.contains(KeyEvent.VK_RIGHT)) {
+			if(player.getPos().getX() < Juego.GAME_WIDTH - player.getSize().getWidth()*2) {
+				player.mover( 2 );
+			}
+		}
+		if(teclasApretadas.contains(KeyEvent.VK_SPACE)) {
+			Disparo d = player.lanzarDisparo();
+			if(d != null) {
+				agregarEntidad(d);
+			}
+		}
+
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

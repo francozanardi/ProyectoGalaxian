@@ -4,7 +4,9 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import Colisiones.Colisionador;
 import Entidad.Personaje;
+import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
 import Utils.Vector;
@@ -15,18 +17,21 @@ public class DisparoEnemigo extends Disparo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoEnemigo(Posicion posInicial, Vector vectorVelocidad)
+	public DisparoEnemigo(Mapa mapa, Posicion posInicial, Vector vectorDireccion)
 	{
 		panel	= new JPanel();
 		pos		= posInicial;
 		tamano	= new Size(5, 5);
 		fuerza	= 1;
-		vecVelocidad = vectorVelocidad;
+		vecDireccion = vectorDireccion;
+		map = mapa;
 		
 		actualizarPanel( true, Color.green );
 		
 		colisionador = new Colisiones.ColisionadorDisparoEnemigo();
 	}
+
+
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }

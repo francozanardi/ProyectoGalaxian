@@ -1,25 +1,20 @@
 package Colisiones;
 
+import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Enemigo.Kamikaze;
 import Jugador.Jugador;
 
 public class ColisionadorJugador extends Colisionador{
-
-	@Override
-	public void afectarJugador(Jugador jugador) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void afectarEnemigo(Enemigo enemigo) {
-		// TODO Auto-generated method stub
-		
+	
+	public void afectar(Kamikaze kamikaze) {
+		kamikaze.setVida(0);
+		//falta lo del puntaje
+		kamikaze.eliminar();
 	}
 	
-	public void afectarKamikaze(Kamikaze kamikaze) {
-		kamikaze.setVida(0);
+	public void afectar(Disparo disparo) {
+		disparo.eliminar();
 	}
 
 }

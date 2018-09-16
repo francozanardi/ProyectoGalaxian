@@ -6,12 +6,15 @@ import Jugador.Jugador;
 public class ColisionadorDisparoEnemigo extends Colisionador {
 
 	@Override
-	public void afectarJugador(Jugador jugador) {
+	public void afectar(Jugador jugador) {
 		jugador.setVida(jugador.getVida()-10);
+		if(jugador.getVida() <= 0) {
+			jugador.eliminar();
+		}
 	}
 
 	@Override
-	public void afectarEnemigo(Enemigo enemigo) {
+	public void afectar(Enemigo enemigo) {
 		
 	}
 	

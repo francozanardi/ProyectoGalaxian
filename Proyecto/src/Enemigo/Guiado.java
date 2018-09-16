@@ -3,7 +3,7 @@ package Enemigo;
 import java.awt.Color;
 import javax.swing.JPanel;
 
-import Arma.ArmaCuadrado;
+import Arma.ArmaEnemigo;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorKamikaze;
 import Grafica.Juego;
@@ -33,7 +33,7 @@ public class Guiado extends Kamikaze
 		this.panel			= new JPanel( );
 		this.pos			= new Posicion(rand.nextInt(Juego.GAME_WIDTH), rand.nextInt( Juego.GAME_HEIGHT ));
 		this.tamano			= new Size(30, 15);
-		this.arma			= new ArmaCuadrado( );
+		this.arma			= new ArmaEnemigo(map);
 		this.vida			= 100;
 		this.explosionDmg	= 10;
 		
@@ -46,9 +46,10 @@ public class Guiado extends Kamikaze
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void serChocado(Colisionador col) {
-		col.afectarKamikaze(this);
+		col.afectar(this);
 		
 	}
+	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -78,6 +78,10 @@ public class Juego extends JFrame
 		Jugador p = new Jugador();
 		mapa = new Mapa( this, p );
 		
+		p.setMapa(mapa); //Esto debemos hacerlo así, ya que de esta manera pasamos el objeto mapa. Sino le pasamos un null.
+		p.getArma().setMapa(mapa); //Como ponemos el mapa ahora también debemos procurar que nuestra arma tenga el verdadero mapa.
+		
+		
 		tiempo = new MainThread( mapa, GAME_FPS );
 		tiempo.start( );
 		
@@ -158,11 +162,12 @@ public class Juego extends JFrame
 	{
 		public void keyPressed(KeyEvent arg0)
 		{
-			mapa.actividadTeclado( arg0 );
+			mapa.teclaApretada( arg0 );
 		}
 
 		public void keyReleased(KeyEvent arg0)
 		{
+			mapa.teclaSuelta( arg0 );
 		}
 
 		public void keyTyped(KeyEvent arg0)

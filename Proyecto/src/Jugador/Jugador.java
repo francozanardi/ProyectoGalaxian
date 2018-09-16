@@ -3,12 +3,13 @@ package Jugador;
 import java.awt.Color;
 import javax.swing.JPanel;
 
-import Arma.ArmaCuadrado2;
+import Arma.ArmaJugador;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorJugador;
 import Entidad.EntidadConVida;
 import Entidad.Personaje;
 import Grafica.Juego;
+import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
 
@@ -23,13 +24,13 @@ public class Jugador extends Personaje
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Jugador( )
+	public Jugador()
 	{
 		this.panel	= new JPanel( );
 		this.pos	= new Posicion((Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2), Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30);
 		this.tamano	= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
 		this.vida = 1000;
-		this.arma = new ArmaCuadrado2( );
+		this.arma = new ArmaJugador(map);
 		colisionador = new ColisionadorJugador();
 		
 		
@@ -54,9 +55,6 @@ public class Jugador extends Personaje
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void mover()
-	{
-	}
 	
 	public void colisionar(EntidadConVida e) { //agregado
 		e.serChocado(colisionador);
@@ -65,7 +63,21 @@ public class Jugador extends Personaje
 
 	@Override
 	public void serChocado(Colisionador col) {
-		col.afectarJugador(this);
+		col.afectar(this);
+		
+	}
+
+
+	@Override
+	public void actualizar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mover() {
+		// TODO Auto-generated method stub
 		
 	}
 
