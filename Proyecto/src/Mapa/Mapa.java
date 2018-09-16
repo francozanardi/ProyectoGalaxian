@@ -142,9 +142,13 @@ public class Mapa
 			lbl.setText(
 				String.format( "FPS: %d   |   Puntaje: %d   |   Vida: %.1f", Juego.GAME_FPS, player.getPuntaje(), player.getVida() )
 			);
-			
+	
+			actualizarEntidades();//si esto estuviera abajo de controlarColisiones lo que podría suceder es que
+			//colisionaría el jugador con un kamikaze, se le quitaría la vida al jugador, y si este muere, queda null.
+			//entonces luego en actualizar entidades, al momento de mover los kamikazes restantes, tendrían que obtener
+			//la pos del jugador, la cual es nula, entonces provocaría error en tiempo de ejecución.
 			controlarColisiones();
-			actualizarEntidades();		
+			
 			juego.obtenerPanel().repaint();
 			
 		} else {
