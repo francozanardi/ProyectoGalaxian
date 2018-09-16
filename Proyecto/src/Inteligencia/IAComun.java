@@ -34,10 +34,14 @@ public class IAComun extends Inteligencia
 		y = y + 1; 
 		
 		// No permitir que se vaya por los costados de la pantalla
-		if (x < 0)
-			x = 0;
-		else if (x > Juego.GAME_WIDTH)
-			x = Juego.GAME_WIDTH;
+		if (x < me.obtenerPanel().getBounds().getWidth()/2)  
+			x = me.obtenerPanel().getBounds().getWidth()/2;
+		
+		// Esto de dividirlo por 2 y multiplicarlo por 2 lo agregué porque el enemigo se iba al borde de la pantalla,
+		// un lugar donde el jugador no puede disparar.
+
+		else if (x > Juego.GAME_WIDTH - me.obtenerPanel().getBounds().getWidth()*2)
+			x = Juego.GAME_WIDTH - me.obtenerPanel().getBounds().getWidth()*2;
 		
 		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba
 		if (y > Juego.GAME_HEIGHT)

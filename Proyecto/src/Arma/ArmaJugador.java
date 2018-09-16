@@ -24,7 +24,7 @@ public class ArmaJugador extends Arma
 		this.tamano	= new Size(10, 20);
 		this.pos	= new Posicion(3, 3);
 		this.tiempoUltimoDisparo = 0;
-		this.velocidad = 10; //o Juego.FPS / 3
+		this.velocidad = 5; //o Juego.FPS / 3
 		this.map = map;
 		
 		actualizarPanel( true, new Color(0, 0, 105) );
