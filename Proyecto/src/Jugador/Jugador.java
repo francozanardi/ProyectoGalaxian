@@ -6,9 +6,10 @@ import javax.swing.JPanel;
 import Arma.ArmaJugador;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorJugador;
+import Disparo.Disparo;
 import Entidad.EntidadConVida;
 import Entidad.Personaje;
-import Grafica.Juego;
+import Logica.Juego;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
@@ -19,20 +20,23 @@ public class Jugador extends Personaje
 {	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static final int	PLAYER_WIDTH = 20,
+	private final double	VELOCIDAD_HORIZONTAL = 50.0;
+	
+	private final int		PLAYER_WIDTH = 20,
 							PLAYER_HEIGHT = 40;
+	
+	private int dir;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public Jugador()
 	{
-		this.panel	= new JPanel( );
-		this.pos	= new Posicion((Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2), Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30);
-		this.tamano	= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
-		this.vida = 400;
-		this.arma = new ArmaJugador(map);
-		colisionador = new ColisionadorJugador();
-		
+		this.panel			= new JPanel( );
+		this.pos			= new Posicion((Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2), Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30);
+		this.tamano			= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
+		this.vida			= 400;
+		this.arma			= new ArmaJugador(map);
+		this.colisionador	= new ColisionadorJugador();
 		
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
 		
@@ -46,42 +50,49 @@ public class Jugador extends Personaje
 	{
 		pos.setX(posX);
 	}
-	
-	public void mover( int direccion )
-	{
-		pos.setX(pos.getX() + (direccion * 2));
-		actualizarPosicion();
-	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
+	public void setDireccion( int dir )
+	{
+		this.dir = dir;
+	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void colisionar(EntidadConVida e) { //agregado
 		e.serChocado(colisionador);
 	}
-
-
-	@Override
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public void serChocado(Colisionador col) {
 		col.afectar(this);
 		
 	}
 
-
-	@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
-		
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void actualizar( double msDesdeUltActualizacion )
+	{
+		mover( msDesdeUltActualizacion );
 	}
 
-
-	@Override
-	public void mover() {
-		// TODO Auto-generated method stub
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void disparar( )
+	{		
+		Disparo d = arma.lanzarDisparo(this);
 		
+		if (d != null)
+			map.agregarEntidad(d);
 	}
-
-
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void mover( double msDesdeUltActualizacion )
+	{
+		pos.setX( pos.getX() + dir * calcularVelocidad(VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion) );
+		actualizarPosicion();
+	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }

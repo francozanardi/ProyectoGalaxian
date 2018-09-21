@@ -1,7 +1,5 @@
 package Enemigo;
 
-
-
 import java.util.Random;
 
 import Disparo.Disparo;
@@ -17,25 +15,25 @@ public abstract class Enemigo extends Personaje
 		
 	protected Randomizador	rand;
 	protected Inteligencia	ia;
-	protected float			dificultad;
+	protected double		dificultad;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void mover( )
+	public void mover( double msDesdeUltActualizacion )
 	{
-		ia.mover( this );
+		ia.mover( this, msDesdeUltActualizacion );
 		
 		actualizarPosicion();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void setDificultad( float dif )
+	public void setDificultad( double dif )
 	{
 		dificultad = dif;
 	}
 	
-	public float getDificultad( )
+	public double getDificultad( )
 	{
 		return dificultad;
 	}
@@ -46,20 +44,27 @@ public abstract class Enemigo extends Personaje
 		e.serChocado(colisionador);
 	}
 	*/
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void disparar( )
+	{
+		Disparo d = ia.disparar( this );
+				
+		if (d != null)
+			map.agregarEntidad(d);
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizar() {
-		mover();
-		Random rand = new Random();
-		if(rand.nextInt(100) == 1) {
-			Disparo d = lanzarDisparo();
-			if(d != null) {
-				map.agregarEntidad(d);
-			}
-			
-		}
+	public void actualizar( double msDesdeUltActualizacion )
+	{
+		mover( msDesdeUltActualizacion );
 		
+		disparar( );
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

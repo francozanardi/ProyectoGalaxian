@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import Colisiones.Colisionador;
+import Colisiones.ColisionadorDisparoEnemigo;
 import Entidad.Personaje;
 import Mapa.Mapa;
 import Utils.Posicion;
@@ -28,10 +29,8 @@ public class DisparoEnemigo extends Disparo
 		
 		actualizarPanel( true, Color.green );
 		
-		colisionador = new Colisiones.ColisionadorDisparoEnemigo();
+		colisionador = new ColisionadorDisparoEnemigo();
 	}
-
-
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }

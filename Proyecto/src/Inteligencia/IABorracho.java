@@ -1,7 +1,9 @@
 package Inteligencia;
 
+import java.awt.Color;
+
 import Curva.Curva;
-import Curva.OscilacionComun;
+import Curva.OscilacionBorracho;
 import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Logica.Juego;
@@ -11,62 +13,73 @@ import Utils.Randomizador;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class IAComun extends Inteligencia
-{
+public class IABorracho extends Inteligencia
+{	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	protected Curva curvaMovimiento;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public IAComun( Mapa map )
+	public IABorracho( Mapa map )
 	{
+		this.rand 	= new Randomizador( );
 		this.map	= map;
-		this.rand	= new Randomizador( );
 		
-		this.curvaMovimiento = new OscilacionComun( rand.nextDouble(0.0, 1000.0) );
+		this.curvaMovimiento = new OscilacionBorracho( rand.nextDouble(0.0, 1000.0) );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public Disparo disparar( Enemigo me )
 	{
-		// 50% de chance de disparar
-		if (rand.nextInt(2) == 0)
-			return me.getArma().lanzarDisparo( me );
+		Disparo miDisparo = me.getArma().lanzarDisparo( me );
 		
-		return null;
+		if (miDisparo != null)
+			miDisparo.obtenerPanel().setBackground( Color.red );
+		
+		return miDisparo;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void mover( Enemigo me, double msDesdeUltActualizacion )
 	{
+		final double	VELOCIDAD_HORIZONTAL	= 15.0,
+						VELOCIDAD_VERTICAL		= 25.0;
+		
 		Posicion	pos			= me.getPos(),
-					movimiento	= curvaMovimiento.obtenerCambio( msDesdeUltActualizacion );
-				
-		double	x = pos.getX() + movimiento.getX(),
-				y = pos.getY() + movimiento.getY();
-		/*
-		// Oscilan hacia los costados
-		x = x + rand.nextInt(-1, 1);
+					posPlayer	= map.coordenadasDelJugador( ),
+					movCurva	= curvaMovimiento.obtenerCambio( msDesdeUltActualizacion );
+		
+		double	x = pos.getX(),
+				y = pos.getY(),
+				px = posPlayer.getX();
+		
+		// Moverse hacia la posición del jugador
+		if (x > px)
+			x -= calcularVelocidad( VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion );
+		else if (x < px)
+			x += calcularVelocidad( VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion );
+		
+		// Agregar el movimiento extra de la parametrización
+		x += movCurva.getX();
 		
 		// Descender obligatoriamente
-		y = y + 1; 
-		*/
+		y += calcularVelocidad( VELOCIDAD_VERTICAL, msDesdeUltActualizacion ); 
 		
 		// No permitir que se vaya por los costados de la pantalla
-		if (x < me.obtenerPanel().getBounds().getWidth()/2)  
-			x = me.obtenerPanel().getBounds().getWidth()/2;
+		if (x < 0)
+			x = 0;
+		else if (x > Juego.GAME_WIDTH)
+			x = Juego.GAME_WIDTH;
 		
-		// Esto de dividirlo por 2 y multiplicarlo por 2 lo agregué porque el enemigo se iba al borde de la pantalla,
-		// un lugar donde el jugador no puede disparar.
-		else if (x > Juego.GAME_WIDTH - me.obtenerPanel().getBounds().getWidth()*2)
-			x = Juego.GAME_WIDTH - me.obtenerPanel().getBounds().getWidth()*2;
-		
-		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba
+		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba, pero deben volver a aparecer en una coordenada X aleatoria
 		if (y > Juego.GAME_HEIGHT)
+		{
+			x = rand.nextInt( Juego.GAME_WIDTH );
 			y = 0;
+		}
 		
 		// Finalmente actualizar posicion
 		pos.setX( x );

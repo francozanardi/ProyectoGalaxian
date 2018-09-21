@@ -1,28 +1,39 @@
-package Grafica;
+package Curva;
 
-import java.util.Random;
-import java.awt.Color;
-import javax.swing.JPanel;
+import Utils.Posicion;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class FondoEstatico extends Fondo
+public class OscilacionBorracho extends Curva
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
-
-	public FondoEstatico( JPanel panelDelJuego )
-	{	
-		super( panelDelJuego );
-		
-		panel.setBackground( new Color(0, 0, 0) );
-	}
 	
+	public OscilacionBorracho( double tiempoInicial )
+	{
+		time = tiempoInicial;
+	}
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizar( double msDesdeUltActualizacion )
+	public Posicion obtenerCambio(double tiempoTranscurridoMS)
 	{
+		double x, y, t;
+		Posicion pos;
+		time += tiempoTranscurridoMS;
+		
+		t = time / 300.0;
+		
+		x = 10.0 * Math.cos(t);
+		y = 0.0;
+		
+		pos = new Posicion( x - oldX, y - oldY );
+		
+		oldX = x;
+		oldY = y;
+		
+		return pos;
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

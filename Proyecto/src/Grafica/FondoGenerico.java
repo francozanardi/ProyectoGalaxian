@@ -10,8 +10,14 @@ public class FondoGenerico extends Fondo
 {	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private int fade,
-				suma;
+	private final int	TIEMPO_FADE_MS = 1000,
+						FADE_MINIMO = 0,
+						FADE_MAXIMO = 50;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private double	fade,
+					suma;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -22,25 +28,27 @@ public class FondoGenerico extends Fondo
 		fade = 0;
 		suma = 1;
 		
-		actualizar();
+		actualizar( 1.0 );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizar( )
+	public void actualizar( double msDesdeUltActualizacion  )
 	{
-		fade += suma;
+		fade += suma * (msDesdeUltActualizacion / ((TIEMPO_FADE_MS * 1.0) / (FADE_MAXIMO - FADE_MINIMO)));
 		
-		if (fade <= 0)
+		if (fade <= FADE_MINIMO)
 		{
+			fade = FADE_MINIMO;
 			suma = 1;
 		}
-		else if (fade >= 50)
+		else if (fade >= FADE_MAXIMO)
 		{
+			fade = FADE_MAXIMO;
 			suma = -1;
 		}
 		
-		this.panel.setBackground( new Color(fade, fade, fade) );
+		this.panel.setBackground( new Color((int) fade, (int) fade, (int) fade) );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

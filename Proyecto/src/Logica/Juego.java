@@ -1,4 +1,4 @@
-package Grafica;
+package Logica;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import Jugador.Jugador;
 import Mapa.Mapa;
+import Mapa.MapaGenerico;
 
 import javax.swing.JLabel;
 
@@ -26,7 +27,7 @@ public class Juego extends JFrame
 	
 	public static final int		GAME_WIDTH	= 400,
 								GAME_HEIGHT	= 600,
-								GAME_FPS	= 30;
+								GAME_FPS	= 100;
 	public static final String	GAME_TITLE = "Galaxian Trucho";
 
 	////////////////////////////////////////////////w///////////////////////////////////////////////
@@ -35,6 +36,7 @@ public class Juego extends JFrame
 	private JLabel		labelPuntaje;
 	private MainThread	tiempo;
 	private Mapa		mapa;
+	private Teclado		teclado;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -75,8 +77,10 @@ public class Juego extends JFrame
 		crearPanel( );
 		crearLabel( );
 		
+		teclado = new Teclado( );
+		
 		Jugador p = new Jugador();
-		mapa = new Mapa( this, p );
+		mapa = new MapaGenerico( this, p, "MAPA GENÉRICO LVL.1", 1.0 );
 		
 		p.setMapa(mapa); //Esto debemos hacerlo así, ya que de esta manera pasamos el objeto mapa. Sino le pasamos un null.
 		p.getArma().setMapa(mapa); //Como ponemos el mapa ahora también debemos procurar que nuestra arma tenga el verdadero mapa.
@@ -122,6 +126,13 @@ public class Juego extends JFrame
 	{
 		return labelPuntaje;
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Teclado obtenerTeclado( )
+	{
+		return teclado;
+	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -162,12 +173,12 @@ public class Juego extends JFrame
 	{
 		public void keyPressed(KeyEvent arg0)
 		{
-			mapa.teclaApretada( arg0 );
+			teclado.press( arg0.getKeyCode() );
 		}
 
 		public void keyReleased(KeyEvent arg0)
 		{
-			mapa.teclaSuelta( arg0 );
+			teclado.release( arg0.getKeyCode() );
 		}
 
 		public void keyTyped(KeyEvent arg0)

@@ -23,7 +23,7 @@ public class Fondo
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizar( )
+	public void actualizar( double msDesdeUltActualizacion )
 	{
 	}
 	

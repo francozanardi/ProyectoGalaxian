@@ -1,4 +1,4 @@
-package Grafica;
+package Logica;
 
 import Mapa.Mapa;
 
@@ -8,18 +8,23 @@ public class MainThread extends Thread
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private Mapa mapa;
-	private int fps;
+	private Mapa	mapa;
+	private int		fps;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public MainThread( Mapa mapa, int fps )
 	{
-		this.mapa = mapa;
-		this.fps = fps;
+		this.mapa		= mapa;
+		this.fps		= fps;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public int getFPS( )
+	{
+		return this.fps;
+	}
 	
 	public void setFPS( int fps )
 	{
@@ -30,8 +35,9 @@ public class MainThread extends Thread
 	
 	public void run( )
 	{
-		long	tiempoActual = System.nanoTime(),
-				tiempoFinal = tiempoActual + (1000000 * 1000 / fps);
+		long	tiempoActual	= System.nanoTime(),
+				tiempoFinal		= tiempoActual + (1000000 * 1000 / fps),
+				tiempoUltima	= tiempoActual;
 		
 		while (true)
 		{
@@ -40,18 +46,21 @@ public class MainThread extends Thread
 			if (tiempoActual >= tiempoFinal)
 			{
 				tiempoFinal = tiempoActual + (1000000 * 1000 / fps);
-								
-				// Actualizaciones del juego
-				cicloDelJuego( );
+									
+				// Actualizaciones del juego, le pasamos la cantidad de MS transcurridos desde la última actualización
+				cicloDelJuego( (tiempoActual - tiempoUltima) / 1000000.0 );
+					
+				tiempoUltima = System.nanoTime();
 			}
 		}
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void cicloDelJuego( )
+	private void cicloDelJuego( double msDesdeUltActualizacion )
 	{
-		mapa.actualizar();
+		mapa.actualizar( msDesdeUltActualizacion );
+		//System.out.printf("tiempo: %f  -  fps: %f\n", msDesdeUltActualizacion, 1000.0 / msDesdeUltActualizacion );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

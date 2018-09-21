@@ -1,7 +1,8 @@
 package Inteligencia;
 
+import Disparo.Disparo;
 import Enemigo.Enemigo;
-import Grafica.Juego;
+import Logica.Juego;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
@@ -9,11 +10,7 @@ import Utils.Randomizador;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class IAKamikaze extends Inteligencia
-{
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	private int cont;
-	
+{	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public IAKamikaze( Mapa map )
@@ -24,31 +21,39 @@ public class IAKamikaze extends Inteligencia
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void mover( Enemigo me )
+	public Disparo disparar( Enemigo me )
 	{
+		return null;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void mover( Enemigo me, double msDesdeUltActualizacion )
+	{
+		final double	VELOCIDAD_HORIZONTAL	= 25.0,
+						VELOCIDAD_VERTICAL		= 25.0;
+		
 		Posicion	pos			= me.getPos(),
 					posPlayer	= map.coordenadasDelJugador( );
 		
 		double	x = pos.getX(),
 				y = pos.getY(),
 				px = posPlayer.getX(),
-				py = posPlayer.getY();
+				dx = Math.abs( x - px ),
+				mov = calcularVelocidad( VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion );
 		
-		
-		// Cada 3 actualizaciones del mapa, dirigirse hacia el jugador
-		cont ++;
-		if (cont == 3)
-		{
-			if (x > px)
-				x -=3;
-			else if (x < px)
-				x +=3;
-	
-			cont = 0;
-		}
+		// Si la distancia que debería moverse horizontalmente es mayor a la distancia horizontal con el jugador, ponerlos en la misma linea
+		if (dx < mov)
+			mov = dx;
+				
+		// Moverse hacia la posición del jugador
+		if (x > px)
+			x -= mov;
+		else if (x < px)
+			x += mov;
 		
 		// Descender obligatoriamente
-		y = y + 1; 
+		y += calcularVelocidad( VELOCIDAD_VERTICAL, msDesdeUltActualizacion ); 
 		
 		// No permitir que se vaya por los costados de la pantalla
 		if (x < 0)
@@ -62,7 +67,6 @@ public class IAKamikaze extends Inteligencia
 			x = rand.nextInt( Juego.GAME_WIDTH );
 			y = 0;
 		}
-		
 		
 		// Finalmente actualizar posicion
 		pos.setX( x );

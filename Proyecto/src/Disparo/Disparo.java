@@ -1,10 +1,12 @@
 package Disparo;
 
+import java.awt.Color;
+
 import Colisiones.Colisionador;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
 import Entidad.Personaje;
-import Grafica.Juego;
+import Logica.Juego;
 import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13,23 +15,29 @@ public abstract class Disparo extends Entidad
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	private final double VELOCIDAD_MOVIMIENTO = 25.0;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	protected float fuerza;
 	protected Vector vecDireccion;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void avanzar()
+	public void avanzar( double msDesdeUltActualizacion )
 	{
-		pos.setX( pos.getX() + 1.0 * vecDireccion.getX() );
+		pos.setX( pos.getX() + calcularVelocidad(VELOCIDAD_MOVIMIENTO * vecDireccion.getX(), msDesdeUltActualizacion) );
 		
 		// Aquí restamos ya que el eje Y del JFrame aumenta hacia abajo, y hay que corregir la trayectoria.
-		pos.setY( pos.getY() - 1.0 * vecDireccion.getY() );
+		pos.setY( pos.getY() - calcularVelocidad(VELOCIDAD_MOVIMIENTO * vecDireccion.getY(), msDesdeUltActualizacion) );
 		
 		actualizarPosicion();
 	}
 	
-	public void actualizar() {
-		avanzar();
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void actualizar( double msDesdeUltActualizacion ) {
+		avanzar( msDesdeUltActualizacion );
 		final int offset = 100;
 		
 		
@@ -54,13 +62,14 @@ public abstract class Disparo extends Entidad
 	{
 		this.fuerza = fuerza;
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void serChocado(Colisionador col) {
 		col.afectar(this);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
-
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

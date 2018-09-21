@@ -16,30 +16,32 @@ public class ArmaEnemigo extends Arma
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	private final double AMPLITUD_DISPARO = Math.PI / 12;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public ArmaEnemigo(Mapa map)
 	{
-		this.rand	= new Randomizador( );
-		this.panel	= new JPanel();
-		this.tamano	= new Size(5, 15);
-		this.pos	= new Posicion(4, 4); // pos
-		this.map	= map;
+		this.map					= map;
+		this.rand					= new Randomizador( );
+		this.panel					= new JPanel();
+		this.tamano					= new Size(5, 15);
+		this.pos					= new Posicion(5, 5);
+		this.cadenciaDisparo		= (int) (1000.0 / 0.5); // 0.5 disparos por segundo = 1 disparo cada 2 segundos
+		
+		inicializar( );
 		
 		actualizarPanel( true, new Color(255, 255, 255) );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	//el arma enemigo no tiene el control de velocidad hecho para lanzar disparos, a diferencia del arma jugador que si lo tiene hecho.
-	public Disparo lanzarDisparo(Personaje p)
+	protected Disparo crearDisparo( Personaje p )
 	{
-		final double AMPLITUD_DISPARO = Math.PI / 12;
-		
-		Vector v = new Vector( );
-		
+		Vector v = new Vector();
 		double ang = (3 * Math.PI / 2) + rand.nextDouble( -AMPLITUD_DISPARO, AMPLITUD_DISPARO );
-		
-		v.setEnPolares( ang, 5.0);		 
-		
+		v.setEnPolares( ang, 5.0);	
+
 		return	new DisparoEnemigo(
 					map,
 					new Posicion(

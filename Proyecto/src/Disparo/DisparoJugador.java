@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
+import Colisiones.ColisionadorDisparoJugador;
 import Entidad.Personaje;
 import Mapa.Mapa;
 import Utils.Posicion;
@@ -26,9 +27,9 @@ public class DisparoJugador extends Disparo
 		vecDireccion = vectorDireccion;
 		map = mapa;
 		
-		actualizarPanel( true, Color.blue );
+		actualizarPanel( true, Color.cyan );
 		
-		colisionador = new Colisiones.ColisionadorDisparoJugador();
+		colisionador = new ColisionadorDisparoJugador();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
