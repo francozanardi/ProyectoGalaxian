@@ -93,7 +93,7 @@ public class Juego extends JFrame
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void crearPanel( )
+	private void crearPanel( )
 	{
 		panel = new JPanel();
 		panel.setLayout( null );
@@ -102,7 +102,7 @@ public class Juego extends JFrame
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void crearLabel( )
+	private void crearLabel( )
 	{
 		labelPuntaje = new JLabel( );
 		labelPuntaje.setBounds(5, 5, GAME_WIDTH, 30);

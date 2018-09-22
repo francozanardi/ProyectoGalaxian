@@ -6,6 +6,7 @@ import Colisiones.Colisionador;
 import Colisiones.ColisionadorEntidad;
 import Mapa.Mapa;
 import Utils.Posicion;
+import Utils.Randomizador;
 import Utils.Size;
 
 import java.awt.Color;
@@ -16,11 +17,12 @@ public abstract class Entidad
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected JPanel	panel;
-	protected Posicion	pos;
-	protected Size		tamano;
-	protected Mapa		map;
-	protected Colisionador colisionador = new ColisionadorEntidad();
+	protected JPanel		panel;
+	protected Posicion		pos;
+	protected Size			tamano;
+	protected Mapa			map;
+	protected Randomizador	rand;
+	protected Colisionador	colisionador = new ColisionadorEntidad();
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	

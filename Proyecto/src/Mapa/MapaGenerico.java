@@ -77,7 +77,8 @@ public class MapaGenerico extends Mapa
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private void controlarColisiones() {
+	protected void controlarColisiones()
+	{
 		//Collection<Entidad[]> aColisionar = new CopyOnWriteArrayList<Entidad[]>();
 
 		for(Entidad entidad1: entidades) {

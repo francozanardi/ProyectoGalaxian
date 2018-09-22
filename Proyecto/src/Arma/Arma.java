@@ -14,7 +14,6 @@ public abstract class Arma extends Entidad
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected Randomizador	rand;
 	protected int			cadenciaDisparo; // determina cada cuantos MILISEGUNDOS se puede disparar.
 	protected long			tiempoUltimoDisparo;
 	

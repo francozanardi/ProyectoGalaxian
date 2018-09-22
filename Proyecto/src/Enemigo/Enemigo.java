@@ -12,8 +12,7 @@ import Utils.Randomizador;
 public abstract class Enemigo extends Personaje
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
-		
-	protected Randomizador	rand;
+
 	protected Inteligencia	ia;
 	protected double		dificultad;
 	
