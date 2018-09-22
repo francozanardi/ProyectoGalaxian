@@ -1,9 +1,9 @@
 package Colisiones;
 
-import Disparo.Disparo;
+import Disparo.DisparoEnemigo;
+import Disparo.DisparoJugador;
 import Enemigo.Enemigo;
 import Enemigo.Kamikaze;
-import Entidad.EntidadConVida;
 import Jugador.Jugador;
 
 public abstract class Colisionador {
@@ -19,7 +19,11 @@ public abstract class Colisionador {
 
 	}
 	
-	public void afectar(Disparo disparo) {
+	public void afectar(DisparoEnemigo disparo) {
+		
+	}
+	
+	public void afectar(DisparoJugador disparo) {
 		
 	}
 }

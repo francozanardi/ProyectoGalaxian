@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import Arma.ArmaEnemigo;
 import Colisiones.Colisionador;
+import Colisiones.ColisionadorEnemigo;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
@@ -36,6 +37,7 @@ public class Comun extends Enemigo
 		actualizarPanel( true, new Color( rand.nextInt(256), rand.nextInt(256), rand.nextInt(256) ) );
 		
 		panel.add( arma.obtenerPanel() );
+		colisionador = new ColisionadorEnemigo();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

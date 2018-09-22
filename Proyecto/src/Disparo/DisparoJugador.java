@@ -5,8 +5,10 @@ import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
+import Colisiones.Colisionador;
 import Colisiones.ColisionadorDisparoJugador;
 import Entidad.Personaje;
+import Jugador.Jugador;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
@@ -18,10 +20,10 @@ public class DisparoJugador extends Disparo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoJugador(Mapa mapa, Posicion posInicial, Vector vectorDireccion)
+	public DisparoJugador(Mapa mapa, Posicion p, Personaje jugador, Vector vectorDireccion)
 	{
 		panel = new JPanel();
-		pos = posInicial;
+		pos = p;
 		tamano = new Size(5, 5);
 		fuerza = 1;
 		vecDireccion = vectorDireccion;
@@ -29,10 +31,14 @@ public class DisparoJugador extends Disparo
 		
 		actualizarPanel( true, Color.cyan );
 		
-		colisionador = new ColisionadorDisparoJugador();
+		colisionador = new ColisionadorDisparoJugador(this, jugador);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void serChocado(Colisionador col) {
+		col.afectar(this);
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

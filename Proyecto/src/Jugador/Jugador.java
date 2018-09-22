@@ -90,7 +90,11 @@ public class Jugador extends Personaje
 	
 	public void mover( double msDesdeUltActualizacion )
 	{
-		pos.setX( pos.getX() + dir * calcularVelocidad(VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion) );
+		double futuraPosX = pos.getX() + dir * calcularVelocidad(VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion);
+		
+		if(futuraPosX > 5 && futuraPosX < Juego.GAME_WIDTH - tamano.getWidth()-10) {
+			pos.setX(futuraPosX);
+		}
 		actualizarPosicion();
 	}
 	

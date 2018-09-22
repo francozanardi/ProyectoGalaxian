@@ -44,6 +44,7 @@ public class ArmaJugador extends Arma
 						p.getPos().getX() + this.pos.getX(),
 						p.getPos().getY() - 5
 					),
+					p,
 					v
 				);
 	}
