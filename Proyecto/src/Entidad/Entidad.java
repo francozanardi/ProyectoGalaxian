@@ -56,7 +56,7 @@ public abstract class Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
-	protected double calcularVelocidad( double unidadesPorSegundo, double tiempoTranscurrido )
+	protected double conversionEnTiempo( double unidadesPorSegundo, double tiempoTranscurrido )
 	{
 		return tiempoTranscurrido * (unidadesPorSegundo / 1000.0);
 	}
@@ -66,10 +66,6 @@ public abstract class Entidad
 	public void eliminar()
 	{
 		map.borrarEntidad(this);
-		panel.setVisible(false);
-		panel	= null;
-		pos		= null;
-		tamano	= null;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,7 +106,6 @@ public abstract class Entidad
 	
 	public void serChocado(Colisionador col)
 	{
-		//col.afectar(this);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

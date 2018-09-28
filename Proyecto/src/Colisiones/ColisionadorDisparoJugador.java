@@ -8,11 +8,11 @@ import Jugador.Jugador;
 
 public class ColisionadorDisparoJugador extends Colisionador {
 	private Disparo disparo;
-	private Personaje jugador;
+	private Personaje lanzador;
 	
 	public ColisionadorDisparoJugador(Disparo d, Personaje j) {
 		disparo = d;
-		jugador = j;
+		lanzador = j;
 	}
 	
 	@Override
@@ -23,22 +23,18 @@ public class ColisionadorDisparoJugador extends Colisionador {
 
 	@Override
 	public void afectar(Enemigo enemigo) {
-		enemigo.setVida(enemigo.getVida()-10);
-		if(enemigo.getVida() <= 0) {
-			jugador.setPuntaje(jugador.getPuntaje()+enemigo.getPuntaje());
-			enemigo.eliminar();
-			
-			//para dar puntaje al jugador lo necesitamos conocer,
-			//solucion posible crear atributo de tipo jugador y que lo reciba en el constructor
-		}
+		enemigo.recibirDMG(10);
 		
+		if(enemigo.getVida() <= 0) {
+			lanzador.setPuntaje(lanzador.getPuntaje() + enemigo.getPuntaje());
+		}
 	}
 	
 	public void afectar(Kamikaze kamikaze) {
-		kamikaze.setVida(kamikaze.getVida()-10);
+		kamikaze.recibirDMG(10);
+		
 		if(kamikaze.getVida() <= 0) {
-			jugador.setPuntaje(jugador.getPuntaje()+kamikaze.getPuntaje());
-			kamikaze.eliminar();
+			lanzador.setPuntaje(lanzador.getPuntaje() + kamikaze.getPuntaje());
 		}
 	}
 

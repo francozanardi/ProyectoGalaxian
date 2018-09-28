@@ -9,9 +9,7 @@ import Jugador.Jugador;
 public class ColisionadorJugador extends Colisionador{
 	
 	public void afectar(Kamikaze kamikaze) {
-		kamikaze.setVida(0);
-		//falta lo del puntaje
-		kamikaze.eliminar();
+		kamikaze.recibirDMG(kamikaze.getVida());
 	}
 	
 	public void afectar(DisparoEnemigo disparo) {

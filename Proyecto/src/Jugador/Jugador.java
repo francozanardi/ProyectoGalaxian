@@ -1,6 +1,8 @@
 package Jugador;
 
 import java.awt.Color;
+import java.util.LinkedList;
+
 import javax.swing.JPanel;
 
 import Arma.ArmaJugador;
@@ -9,6 +11,8 @@ import Colisiones.ColisionadorJugador;
 import Disparo.Disparo;
 import Entidad.EntidadConVida;
 import Entidad.Personaje;
+import Escudo.Escudo;
+import Escudo.EscudoHealer;
 import Logica.Juego;
 import Mapa.Mapa;
 import Utils.Posicion;
@@ -36,9 +40,12 @@ public class Jugador extends Personaje
 		this.tamano			= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
 		this.vida			= 400;
 		this.arma			= new ArmaJugador(map);
+		this.escudo			= new LinkedList<Escudo>( );
 		this.colisionador	= new ColisionadorJugador();
 		
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
+		
+		addEscudo( new EscudoHealer(this) );
 		
 		panel.add(arma.obtenerPanel());
 	}
@@ -71,9 +78,14 @@ public class Jugador extends Personaje
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizar( double msDesdeUltActualizacion )
+	public void actualizar( double msDesdeUltAct )
 	{
-		mover( msDesdeUltActualizacion );
+		for (Escudo e: escudo)
+		{
+			e.actualizar( msDesdeUltAct );
+		}
+		
+		mover( msDesdeUltAct );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +102,7 @@ public class Jugador extends Personaje
 	
 	public void mover( double msDesdeUltActualizacion )
 	{
-		double futuraPosX = pos.getX() + dir * calcularVelocidad(VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion);
+		double futuraPosX = pos.getX() + dir * conversionEnTiempo(VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion);
 		
 		if(futuraPosX > 5 && futuraPosX < Juego.GAME_WIDTH - tamano.getWidth()-10) {
 			pos.setX(futuraPosX);

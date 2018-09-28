@@ -1,5 +1,6 @@
 package Mapa;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.HashSet;
@@ -36,6 +37,8 @@ public abstract class Mapa
 	protected Jugador				player;
 	protected Fondo					fondo;
 	protected Collection<Entidad>	entidades;
+	protected Collection<Entidad>	entidadesParaEliminar;
+	protected Collection<Entidad>	entidadesParaAgregar;
 	protected double				dificultad;
 	protected String				nombre;
 		
@@ -69,8 +72,6 @@ public abstract class Mapa
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected abstract void controlarColisiones( );
-	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public abstract void establecerJugador( );
@@ -83,15 +84,27 @@ public abstract class Mapa
 	
 	public void borrarEntidad(Entidad e)
 	{
-		entidades.remove(e);
+		entidadesParaEliminar.add(e);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void agregarEntidad(Entidad e)
 	{
-		entidades.add(e);
-		juego.obtenerPanel().add( e.obtenerPanel() );
+		entidadesParaAgregar.add(e);
+	}
+	
+	protected void controlarColisiones()
+	{
+		for(Entidad entidad1: entidades) {
+			for(Entidad entidad2: entidades) {
+				if(entidad1 != entidad2) {
+					if(hayColision(entidad1, entidad2) || hayColision(entidad2, entidad1)) {
+						entidad1.colisionar(entidad2);
+					}
+				}
+			}
+		}
 	}
 		
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,6 +130,25 @@ public abstract class Mapa
 			ent.actualizar( msDesdeUltActualizacion );
 		}
 	}
+	
+	protected void borrarEntidades() {
+		for(Entidad e: entidadesParaEliminar) {
+			juego.obtenerPanel().remove(e.obtenerPanel());
+			e.obtenerPanel().setVisible(false);
+			entidades.remove(e);
+		}
+		
+		entidadesParaEliminar.clear();
+	}
+	
+	protected void agregarEntidades() {
+		for(Entidad e: entidadesParaAgregar) {
+			entidades.add(e);
+			juego.obtenerPanel().add(e.obtenerPanel());
+		}
+		
+		entidadesParaAgregar.clear();
+	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -133,32 +165,15 @@ public abstract class Mapa
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected boolean verificarColision( Entidad a, Entidad b )
+	protected boolean hayColision( Entidad a, Entidad b )
 	{
-		//System.out.println(a.toString() + " " + b.toString());
-		double	ax1 = a.getPos().getX(),
-				ay1 = a.getPos().getY(),
-				bx = b.getPos().getX(),
-				by = b.getPos().getY();
-		int aSX = a.getSize().getWidth(),
-			aSY = a.getSize().getHeight(),
-			bSX = b.getSize().getWidth(),
-			bSY = b.getSize().getHeight();
+		Rectangle boundsA = a.obtenerPanel().getBounds();
+		Rectangle boundsB = b.obtenerPanel().getBounds();
 		
-		return	rectanguloContienePunto( ax1, ay1, aSX, aSY, bx,       by ) ||
-				rectanguloContienePunto( ax1, ay1, aSX, aSY, bx + bSX, by ) ||
-				rectanguloContienePunto( ax1, ay1, aSX, aSY, bx + bSX, by + bSY ) ||
-				rectanguloContienePunto( ax1, ay1, aSX, aSY, bx,       by + bSY );
-	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	protected boolean rectanguloContienePunto( double x, double y, double sizeX, double sizeY, double pX, double pY )
-	{
-		pX -= x;
-		pY -= y;
-		
-		return (0 < pX) && (pX < sizeX) && (0 < pY) && (pY < sizeY);
+		return	boundsA.contains(boundsB.getMinX(), boundsB.getMinY()) ||
+				boundsA.contains(boundsB.getMinX(), boundsB.getMaxY()) ||
+				boundsA.contains(boundsB.getMaxX(), boundsB.getMinY()) ||
+				boundsA.contains(boundsB.getMaxX(), boundsB.getMaxY());
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

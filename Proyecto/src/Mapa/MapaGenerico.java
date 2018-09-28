@@ -1,5 +1,7 @@
 package Mapa;
 
+import java.awt.Component;
+import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import Enemigo.Borracho;
@@ -31,7 +33,9 @@ public class MapaGenerico extends Mapa
 		this.juego		= juego;
 		this.player		= player;
 		this.rand		= new Randomizador( );
-		this.entidades	= new CopyOnWriteArrayList<Entidad>();
+		this.entidades	= new LinkedList<Entidad>();
+		this.entidadesParaEliminar = new LinkedList<Entidad>();
+		this.entidadesParaAgregar = new LinkedList<Entidad>();
 		this.entidades.add(player);
 		
 		this.nombre		= nombre;
@@ -73,34 +77,11 @@ public class MapaGenerico extends Mapa
 		
 		for (i = 0; i < cantBorracho; i ++)
 			agregarEntidad( new Borracho( this, dificultad ) );
+		
+		agregarEntidades();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	protected void controlarColisiones()
-	{
-		//Collection<Entidad[]> aColisionar = new CopyOnWriteArrayList<Entidad[]>();
-
-		for(Entidad entidad1: entidades) {
-			if(entidad1.obtenerPanel() != null) { //puede que haya sido eliminado cuando se llama a colisionar
-				//por lo tanto debemos asegurarnos de que no sea null.
-				//otra solucion es guardar en una lista las entidades colisionadas asi las borramos luego de este for-each
-				for(Entidad entidad2: entidades) {
-					if(entidad2.obtenerPanel() != null) { //idem anterior
-						if(entidad1 != entidad2) {
-							if(verificarColision(entidad1, entidad2)) {
-								entidad1.colisionar(entidad2);
-								entidad2.colisionar(entidad1);
-								
-								if(entidad1.obtenerPanel() == null) //puede que al colisionar la entidad1 desaparezca y sigamos buscando más colisiones
-									break;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -119,12 +100,22 @@ public class MapaGenerico extends Mapa
 			//entonces luego en actualizar entidades, al momento de mover los kamikazes restantes, tendrían que obtener
 			//la pos del jugador, la cual es nula, entonces provocaría error en tiempo de ejecución.
 			
+			
 			controlarColisiones();
+			borrarEntidades();
+			agregarEntidades();
+			
+			
+			for(Component c: juego.obtenerPanel().getComponents()) {
+				if(c==null) {
+					System.out.println("HAY NULOOOOOOO");
+				}
+			}
 			
 			juego.obtenerPanel().repaint();
 			
 		} else {
-			juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja manco.");
+			juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja.");
 		}
 	}
 	

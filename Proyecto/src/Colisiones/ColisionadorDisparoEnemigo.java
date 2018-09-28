@@ -13,10 +13,7 @@ public class ColisionadorDisparoEnemigo extends Colisionador {
 	
 	@Override
 	public void afectar(Jugador jugador) {
-		jugador.setVida(jugador.getVida()-10);
-		if(jugador.getVida() <= 0) {
-			jugador.eliminar();
-		}
+		jugador.recibirDMG(10);
 	}
 
 	@Override
