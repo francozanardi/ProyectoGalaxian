@@ -15,10 +15,6 @@ public abstract class Disparo extends Entidad
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double VELOCIDAD_MOVIMIENTO = 25.0;
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
 	protected float fuerza;
 	protected Vector vecDireccion;
 	
@@ -26,10 +22,10 @@ public abstract class Disparo extends Entidad
 	
 	public void avanzar( double msDesdeUltActualizacion )
 	{
-		pos.setX( pos.getX() + conversionEnTiempo(VELOCIDAD_MOVIMIENTO * vecDireccion.getX(), msDesdeUltActualizacion) );
+		pos.setX( pos.getX() + conversionEnTiempo( vecDireccion.getX(), msDesdeUltActualizacion) );
 		
 		// Aquí restamos ya que el eje Y del JFrame aumenta hacia abajo, y hay que corregir la trayectoria.
-		pos.setY( pos.getY() - conversionEnTiempo(VELOCIDAD_MOVIMIENTO * vecDireccion.getY(), msDesdeUltActualizacion) );
+		pos.setY( pos.getY() - conversionEnTiempo( vecDireccion.getY(), msDesdeUltActualizacion) );
 		
 		actualizarPosicion();
 	}

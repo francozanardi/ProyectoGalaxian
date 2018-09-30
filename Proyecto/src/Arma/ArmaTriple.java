@@ -12,23 +12,23 @@ import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class ArmaEnemigo extends Arma
+public class ArmaTriple extends Arma
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double AMPLITUD_DISPARO		= Math.PI / 12;
-	private final double VELOCIDAD_MOVIMIENTO	= 100.0;
+	private final double AMPLITUD_DISPARO	= Math.PI / 8;
+	private final double VELOCIDAD_DISPARO	= 100.0;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public ArmaEnemigo(Mapa map)
+	public ArmaTriple(Mapa map)
 	{
 		this.map					= map;
 		this.rand					= new Randomizador( );
 		this.panel					= new JPanel();
 		this.tamano					= new Size(5, 15);
 		this.pos					= new Posicion(5, 5);
-		this.cadenciaDisparo		= (int) (1000.0 / 0.5); // 0.5 disparos por segundo = 1 disparo cada 2 segundos
+		this.cadenciaDisparo		= (int) (1000.0 / 0.33); // 0.33 disparos por segundo = 1 disparo cada 3 segundos
 		
 		inicializar( );
 		
@@ -39,19 +39,54 @@ public class ArmaEnemigo extends Arma
 	
 	protected void crearDisparo( Personaje p )
 	{
-		Vector v = new Vector();
-		double ang = (3 * Math.PI / 2) + rand.nextDouble( -AMPLITUD_DISPARO, AMPLITUD_DISPARO );
-		v.setEnPolares( ang, VELOCIDAD_MOVIMIENTO );	
-
-		map.agregarEntidad( new DisparoEnemigo(
+		Vector v;
+		Disparo d;
+		double ang	= (3 * Math.PI / 2);
+		
+		
+		// disparo 1
+		v = new Vector();
+		v.setEnPolares( ang - AMPLITUD_DISPARO, VELOCIDAD_DISPARO );	
+		d = new DisparoEnemigo(
 				map,
 				new Posicion(
 					p.getPos().getX() + this.pos.getX(),
 					p.getPos().getY() + p.getSize().getHeight() + 5
 				),
 				v
-			)
-		);	
+			);		
+		map.agregarEntidad( d );
+		d.getPanel().setBackground( Color.pink );
+		
+		
+		// disparo 2
+		v = new Vector();
+		v.setEnPolares( ang, VELOCIDAD_DISPARO );	
+		d = new DisparoEnemigo(
+				map,
+				new Posicion(
+					p.getPos().getX() + this.pos.getX(),
+					p.getPos().getY() + p.getSize().getHeight() + 5
+				),
+				v
+			);
+		map.agregarEntidad( d );
+		d.getPanel().setBackground( Color.pink );
+		
+		
+		// disparo 3
+		v = new Vector();
+		v.setEnPolares( ang + AMPLITUD_DISPARO, VELOCIDAD_DISPARO );	
+		d = new DisparoEnemigo(
+				map,
+				new Posicion(
+					p.getPos().getX() + this.pos.getX(),
+					p.getPos().getY() + p.getSize().getHeight() + 5
+				),
+				v
+			);
+		map.agregarEntidad( d );
+		d.getPanel().setBackground( Color.pink );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

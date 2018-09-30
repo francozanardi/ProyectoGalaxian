@@ -1,14 +1,25 @@
 package Entidad;
 
+import java.awt.Color;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import Arma.Arma;
+import Arma.ArmaJugador;
 import Colisiones.Colisionador;
+import Colisiones.ColisionadorJugador;
 import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Escudo.Escudo;
 import Jugador.Jugador;
+import Logica.Juego;
+import Mapa.Mapa;
+import Utils.Posicion;
+import Utils.Randomizador;
+import Utils.Size;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -19,12 +30,13 @@ public abstract class EntidadConVida extends Entidad
 	protected double		vida;
 	protected Arma			arma;
 	protected List<Escudo>	escudo;
-
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void setArma( Arma arma )
 	{
 		this.arma = arma;
+		this.panel.add( arma.getPanel() );
 	}
 	
 	public Arma getArma( )
@@ -34,9 +46,14 @@ public abstract class EntidadConVida extends Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void addEscudo( Escudo escudo )
+	public void addEscudo( Escudo e )
 	{
-		this.escudo.add( escudo );
+		escudo.add( e );
+	}
+	
+	public void removeEscudo( Escudo e )
+	{
+		escudo.remove( e );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,12 +70,29 @@ public abstract class EntidadConVida extends Entidad
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void recibirDMG(double dmg) {
+	private double utilizarEscudos( double dmg )
+	{
+		for (Escudo e: escudo)
+		{
+			dmg = e.modificarDmg( dmg );
+		}
+		
+		return dmg;
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void recibirDMG(double dmg)
+	{
+		dmg = utilizarEscudos( dmg );
+		
 		vida = vida-dmg;
 		if(vida <= 0) {
 			eliminar();
 		}
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

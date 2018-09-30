@@ -26,7 +26,7 @@ public abstract class Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public JPanel obtenerPanel( )
+	public JPanel getPanel( )
 	{
 		return panel;
 	}

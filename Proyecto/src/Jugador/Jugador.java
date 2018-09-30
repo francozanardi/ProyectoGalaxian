@@ -12,6 +12,8 @@ import Disparo.Disparo;
 import Entidad.EntidadConVida;
 import Entidad.Personaje;
 import Escudo.Escudo;
+import Escudo.EscudoAbsoluto;
+import Escudo.EscudoBasico;
 import Escudo.EscudoHealer;
 import Logica.Juego;
 import Mapa.Mapa;
@@ -39,17 +41,16 @@ public class Jugador extends Personaje
 		this.pos			= new Posicion((Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2), Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30);
 		this.tamano			= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
 		this.vida			= 400;
-		this.arma			= new ArmaJugador(map);
 		this.escudo			= new LinkedList<Escudo>( );
 		this.colisionador	= new ColisionadorJugador();
 		
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
 		
+		setArma( new ArmaJugador(map) );
 		addEscudo( new EscudoHealer(this) );
-		
-		panel.add(arma.obtenerPanel());
+		addEscudo( new EscudoAbsoluto(this) );
+		addEscudo( new EscudoBasico(this) );
 	}
-	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -92,10 +93,7 @@ public class Jugador extends Personaje
 	
 	public void disparar( )
 	{		
-		Disparo d = arma.lanzarDisparo(this);
-		
-		if (d != null)
-			map.agregarEntidad(d);
+		arma.lanzarDisparo(this);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

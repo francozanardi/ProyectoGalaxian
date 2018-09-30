@@ -31,14 +31,11 @@ public class IABorracho extends Inteligencia
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Disparo disparar( Enemigo me )
+	public void disparar( Enemigo me )
 	{
-		Disparo miDisparo = me.getArma().lanzarDisparo( me );
-		
-		if (miDisparo != null)
-			miDisparo.obtenerPanel().setBackground( Color.red );
-		
-		return miDisparo;
+		// 10% de chance de disparar
+		if (rand.nextDouble() <= 0.1)
+			me.getArma().lanzarDisparo( me );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

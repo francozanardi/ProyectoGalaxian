@@ -11,4 +11,10 @@ public abstract class Escudo extends Entidad
 	{
 		return dmg;
 	}
+	
+	public void remove( )
+	{
+		holder.removeEscudo( this );
+		holder.getPanel().remove( this.panel );
+	}
 }

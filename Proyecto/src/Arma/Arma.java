@@ -19,7 +19,7 @@ public abstract class Arma extends Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected abstract Disparo crearDisparo( Personaje p );
+	protected abstract void crearDisparo( Personaje p );
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -41,26 +41,24 @@ public abstract class Arma extends Entidad
 	 */
 	protected void inicializar( )
 	{
-		tiempoUltimoDisparo = System.nanoTime() + (rand.nextInt(1000) * 1000000);
+		tiempoUltimoDisparo = System.nanoTime() + (rand.nextInt(1000) * 1000000L);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Disparo lanzarDisparo(Personaje p)
+	public void lanzarDisparo(Personaje p)
 	{
 		Disparo disp			= null;
 		long	tiempoActual	= System.nanoTime(),
-				tiempoFinal		= tiempoUltimoDisparo + (cadenciaDisparo * 1000000);
+				tiempoFinal		= tiempoUltimoDisparo + (cadenciaDisparo * 1000000L);
 		
 		// Si entre el último disparo y este intento pasó el tiempo mínimo establecido por la cadencia de disparo, entonces disparar.
 		if(tiempoActual >= tiempoFinal)
 		{
 			tiempoUltimoDisparo = System.nanoTime();
 			
-			disp = crearDisparo( p );
+			crearDisparo( p );
 		}
-		
-		return disp;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

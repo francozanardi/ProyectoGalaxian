@@ -1,11 +1,22 @@
 package Enemigo;
 
+import java.awt.Color;
+import java.util.LinkedList;
 import java.util.Random;
 
+import javax.swing.JPanel;
+
+import Colisiones.Colisionador;
 import Disparo.Disparo;
 import Entidad.Personaje;
+import Escudo.Escudo;
+import Inteligencia.IAComun;
 import Inteligencia.Inteligencia;
+import Logica.Juego;
+import Mapa.Mapa;
+import Utils.Posicion;
 import Utils.Randomizador;
+import Utils.Size;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,10 +59,7 @@ public abstract class Enemigo extends Personaje
 
 	public void disparar( )
 	{
-		Disparo d = ia.disparar( this );
-				
-		if (d != null)
-			map.agregarEntidad(d);
+		ia.disparar( this );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

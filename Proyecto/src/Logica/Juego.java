@@ -115,7 +115,7 @@ public class Juego extends JFrame
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public JPanel obtenerPanel( )
+	public JPanel getPanel( )
 	{
 		return panel;
 	}

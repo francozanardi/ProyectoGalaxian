@@ -133,8 +133,8 @@ public abstract class Mapa
 	
 	protected void borrarEntidades() {
 		for(Entidad e: entidadesParaEliminar) {
-			juego.obtenerPanel().remove(e.obtenerPanel());
-			e.obtenerPanel().setVisible(false);
+			juego.getPanel().remove(e.getPanel());
+			e.getPanel().setVisible(false);
 			entidades.remove(e);
 		}
 		
@@ -144,7 +144,7 @@ public abstract class Mapa
 	protected void agregarEntidades() {
 		for(Entidad e: entidadesParaAgregar) {
 			entidades.add(e);
-			juego.obtenerPanel().add(e.obtenerPanel());
+			juego.getPanel().add(e.getPanel());
 		}
 		
 		entidadesParaAgregar.clear();
@@ -167,8 +167,8 @@ public abstract class Mapa
 	
 	protected boolean hayColision( Entidad a, Entidad b )
 	{
-		Rectangle boundsA = a.obtenerPanel().getBounds();
-		Rectangle boundsB = b.obtenerPanel().getBounds();
+		Rectangle boundsA = a.getPanel().getBounds();
+		Rectangle boundsB = b.getPanel().getBounds();
 		
 		return	boundsA.contains(boundsB.getMinX(), boundsB.getMinY()) ||
 				boundsA.contains(boundsB.getMinX(), boundsB.getMaxY()) ||

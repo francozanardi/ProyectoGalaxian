@@ -15,8 +15,8 @@ public class MainThread extends Thread
 	
 	public MainThread( Mapa mapa, int fps )
 	{
-		this.mapa		= mapa;
-		this.fps		= fps;
+		this.mapa	= mapa;
+		this.fps	= fps;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ public class MainThread extends Thread
 	public void run( )
 	{
 		long	tiempoActual	= System.nanoTime(),
-				tiempoFinal		= tiempoActual + (1000000 * 1000 / fps),
+				tiempoFinal		= tiempoActual + (1000000L * 1000L / fps),
 				tiempoUltima	= tiempoActual;
 		
 		while (true)
@@ -45,7 +45,7 @@ public class MainThread extends Thread
 			
 			if (tiempoActual >= tiempoFinal)
 			{
-				tiempoFinal = tiempoActual + (1000000 * 1000 / fps);
+				tiempoFinal = tiempoActual + (1000000L * 1000L / fps);
 									
 				// Actualizaciones del juego, le pasamos la cantidad de MS transcurridos desde la última actualización
 				cicloDelJuego( (tiempoActual - tiempoUltima) / 1000000.0 );

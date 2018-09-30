@@ -29,13 +29,11 @@ public class IAComun extends Inteligencia
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Disparo disparar( Enemigo me )
+	public void disparar( Enemigo me )
 	{
-		// 50% de chance de disparar
-		if (rand.nextInt(2) == 0)
-			return me.getArma().lanzarDisparo( me );
-		
-		return null;
+		// 20% de chance de disparar
+		if (rand.nextDouble() <= 0.5)
+			me.getArma().lanzarDisparo( me );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,13 +54,13 @@ public class IAComun extends Inteligencia
 		*/
 		
 		// No permitir que se vaya por los costados de la pantalla
-		if (x < me.obtenerPanel().getBounds().getWidth()/2)  
-			x = me.obtenerPanel().getBounds().getWidth()/2;
+		if (x < me.getPanel().getBounds().getWidth()/2)  
+			x = me.getPanel().getBounds().getWidth()/2;
 		
 		// Esto de dividirlo por 2 y multiplicarlo por 2 lo agregué porque el enemigo se iba al borde de la pantalla,
 		// un lugar donde el jugador no puede disparar.
-		else if (x > Juego.GAME_WIDTH - me.obtenerPanel().getBounds().getWidth()*2)
-			x = Juego.GAME_WIDTH - me.obtenerPanel().getBounds().getWidth()*2;
+		else if (x > Juego.GAME_WIDTH - me.getPanel().getBounds().getWidth()*2)
+			x = Juego.GAME_WIDTH - me.getPanel().getBounds().getWidth()*2;
 		
 		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba
 		if (y > Juego.GAME_HEIGHT)

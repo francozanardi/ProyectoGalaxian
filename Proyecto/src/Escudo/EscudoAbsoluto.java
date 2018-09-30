@@ -10,34 +10,39 @@ import Utils.Size;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class EscudoHealer extends Escudo
+public class EscudoAbsoluto extends Escudo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double HEAL_POR_SEG = 2;
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public EscudoHealer( EntidadConVida holder )
+	public EscudoAbsoluto( EntidadConVida holder )
 	{
 		this.pos	= new Posicion(2, 2);
-		this.tamano	= new Size(10, 10);
+		this.tamano	= new Size(10, 30);
 		this.panel	= new JPanel();
 		
 		this.holder = holder;
 
-		this.actualizarPanel(true, Color.green);
+		this.actualizarPanel(true, Color.yellow);
 		holder.getPanel().add( panel );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizar(double msDesdeUltActualizacion)
+	public double modificarDmg( double dmg )
 	{
-		double curacion = conversionEnTiempo( HEAL_POR_SEG, msDesdeUltActualizacion );
-		holder.setVida( holder.getVida() + curacion );
+		System.out.println("bloquié: " + dmg + "!");
+
+		remove( );
+		
+		return 0.0;
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	public void actualizar(double msDesdeUltActualizacion)
+	{		
+	}
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

@@ -27,7 +27,7 @@ public class MapaGenerico extends Mapa
 	public MapaGenerico( Juego juego, Jugador player, String nombre, double dificultad )
 	{
 		// Seleccionar un tipo de fondo espec√≠fico
-		this.fondo = new FondoGenerico( juego.obtenerPanel() );
+		this.fondo = new FondoGenerico( juego.getPanel() );
 		
 		// Inicializar objetos
 		this.juego		= juego;
@@ -57,7 +57,7 @@ public class MapaGenerico extends Mapa
 		player.setVida( 1000 );
 		
 		// Agregarlo al panel principal
-		juego.obtenerPanel().add( player.obtenerPanel() );
+		juego.getPanel().add( player.getPanel() );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,13 +106,13 @@ public class MapaGenerico extends Mapa
 			agregarEntidades();
 			
 			
-			for(Component c: juego.obtenerPanel().getComponents()) {
+			for(Component c: juego.getPanel().getComponents()) {
 				if(c==null) {
 					System.out.println("HAY NULOOOOOOO");
 				}
 			}
 			
-			juego.obtenerPanel().repaint();
+			//juego.getPanel().repaint();
 			
 		} else {
 			juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no est· listo, jaja.");
