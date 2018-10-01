@@ -15,7 +15,7 @@ public abstract class Disparo extends Entidad
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected float fuerza;
+	protected double dmg;
 	protected Vector vecDireccion;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,10 +32,10 @@ public abstract class Disparo extends Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizar( double msDesdeUltActualizacion ) {
+	public void actualizar( double msDesdeUltActualizacion )
+	{
 		avanzar( msDesdeUltActualizacion );
 		final int offset = 100;
-		
 		
 		// eliminar el disparo si se fue de la pantalla
 		if ((pos.getY() < (0 - offset)) ||
@@ -43,24 +43,21 @@ public abstract class Disparo extends Entidad
 			(pos.getX() < (0 - offset)) ||
 			(pos.getX() > (Juego.GAME_WIDTH + offset)))
 		{
-			eliminar();
+			remove();
 		}
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public float getFuerza( )
+	public double getDmg( )
 	{
-		return fuerza;
+		return dmg;
 	}
 	
-	public void setFuerza( float fuerza )
+	public void setDmg( double dmg )
 	{
-		this.fuerza = fuerza;
+		this.dmg = dmg;
 	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
-
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }

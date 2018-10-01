@@ -14,8 +14,9 @@ public abstract class Arma extends Entidad
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected int			cadenciaDisparo; // determina cada cuantos MILISEGUNDOS se puede disparar.
-	protected long			tiempoUltimoDisparo;
+	protected int		cadenciaDisparo; // determina cada cuantos MILISEGUNDOS se puede disparar.
+	protected double	multiplicadorDmg;
+	protected long		tiempoUltimoDisparo;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -35,6 +36,18 @@ public abstract class Arma extends Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	public void setMultiplicadorDmg( double mult )
+	{
+		multiplicadorDmg = mult;
+	}
+	
+	public double getMultiplicadorDmg( )
+	{
+		return multiplicadorDmg;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	/**
 	 * Este método inicializa la variable tiempoUltimoDisparo con un delay aleatorio entre 0 y 1000 miliegundos,
 	 * de esta forma nos aseguramos de que los enemigos no disparen todos a la vez.
@@ -48,7 +61,6 @@ public abstract class Arma extends Entidad
 	
 	public void lanzarDisparo(Personaje p)
 	{
-		Disparo disp			= null;
 		long	tiempoActual	= System.nanoTime(),
 				tiempoFinal		= tiempoUltimoDisparo + (cadenciaDisparo * 1000000L);
 		

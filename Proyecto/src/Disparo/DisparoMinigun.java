@@ -17,33 +17,22 @@ import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class DisparoJugador extends Disparo
+public class DisparoMinigun extends DisparoJugador
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double DMG_BASE = 20.0;
+	private final double DMG_BASE = 10.0;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoJugador(Mapa mapa, Arma arma, Posicion p, Personaje jugador, Vector vectorDireccion)
+	public DisparoMinigun(Mapa mapa, Arma arma, Posicion p, Personaje jugador, Vector vectorDireccion)
 	{
-		map				= mapa;
-		panel			= new JPanel();
-		pos				= p;
-		tamano			= new Size(5, 5);
-		dmg				= DMG_BASE * arma.getMultiplicadorDmg();
-		vecDireccion	= vectorDireccion;
+		super(mapa, arma, p, jugador, vectorDireccion);
 		
-		actualizarPanel( true, Color.cyan );
+		tamano	= new Size(4, 4);
+		dmg		= DMG_BASE * arma.getMultiplicadorDmg();
 		
-		colisionador = new ColisionadorDisparoJugador(this, jugador);
-	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void serChocado(Colisionador col)
-	{
-		col.afectar(this);
+		actualizarPanel( true, Color.white );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

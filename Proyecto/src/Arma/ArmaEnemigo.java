@@ -16,19 +16,22 @@ public class ArmaEnemigo extends Arma
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double AMPLITUD_DISPARO		= Math.PI / 12;
-	private final double VELOCIDAD_MOVIMIENTO	= 100.0;
+	private final double	AMPLITUD_DISPARO		= Math.PI / 12,
+							VELOCIDAD_MOVIMIENTO	= 100.0,
+							DISPAROS_POR_SEGUNDO	= 0.5,
+							MULTIPLICADOR_DMG		= 1.0;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public ArmaEnemigo(Mapa map)
 	{
-		this.map					= map;
-		this.rand					= new Randomizador( );
-		this.panel					= new JPanel();
-		this.tamano					= new Size(5, 15);
-		this.pos					= new Posicion(5, 5);
-		this.cadenciaDisparo		= (int) (1000.0 / 0.5); // 0.5 disparos por segundo = 1 disparo cada 2 segundos
+		this.map				= map;
+		this.rand				= new Randomizador( );
+		this.panel				= new JPanel();
+		this.tamano				= new Size(5, 15);
+		this.pos				= new Posicion(5, 5);
+		this.cadenciaDisparo	= (int) (1000.0 / DISPAROS_POR_SEGUNDO);
+		this.multiplicadorDmg	= MULTIPLICADOR_DMG;
 		
 		inicializar( );
 		
@@ -45,6 +48,7 @@ public class ArmaEnemigo extends Arma
 
 		map.agregarEntidad( new DisparoEnemigo(
 				map,
+				this,
 				new Posicion(
 					p.getPos().getX() + this.pos.getX(),
 					p.getPos().getY() + p.getSize().getHeight() + 5

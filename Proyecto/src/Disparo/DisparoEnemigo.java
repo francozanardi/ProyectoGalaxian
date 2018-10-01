@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import Arma.Arma;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorDisparoEnemigo;
 import Entidad.Personaje;
@@ -18,14 +19,18 @@ public class DisparoEnemigo extends Disparo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoEnemigo(Mapa mapa, Posicion posInicial, Vector vectorDireccion)
+	private final double DMG_BASE = 10;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public DisparoEnemigo(Mapa mapa, Arma arma, Posicion posInicial, Vector vectorDireccion)
 	{
-		panel	= new JPanel();
-		pos		= posInicial;
-		tamano	= new Size(5, 5);
-		fuerza	= 1;
-		vecDireccion = vectorDireccion;
-		map = mapa;
+		map				= mapa;
+		panel			= new JPanel();
+		pos				= posInicial;
+		tamano			= new Size(5, 5);
+		dmg				= DMG_BASE * arma.getMultiplicadorDmg( );
+		vecDireccion	= vectorDireccion;
 		
 		actualizarPanel( true, Color.green );
 		
@@ -34,9 +39,12 @@ public class DisparoEnemigo extends Disparo
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void serChocado(Colisionador col) {
+	public void serChocado(Colisionador col)
+	{
 		col.afectar(this);
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -14,13 +14,18 @@ public class EscudoBasico extends Escudo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public EscudoBasico( EntidadConVida holder )
+	private double reduccion;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public EscudoBasico( EntidadConVida holder, double reduccion )
 	{
-		this.pos	= new Posicion(2, 2);
-		this.tamano	= new Size(10, 20);
-		this.panel	= new JPanel();
+		this.pos		= new Posicion(2, 2);
+		this.tamano		= new Size(10, 20);
+		this.panel		= new JPanel();
+		this.reduccion	= reduccion;
 		
-		this.holder = holder;
+		this.holder	 = holder;
 
 		this.actualizarPanel(true, Color.pink);
 		holder.getPanel().add( panel );
@@ -30,7 +35,7 @@ public class EscudoBasico extends Escudo
 	
 	public double modificarDmg(double dmg)
 	{
-		return dmg / 2.0;
+		return dmg / reduccion;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

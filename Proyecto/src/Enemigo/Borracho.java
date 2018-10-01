@@ -28,7 +28,6 @@ public class Borracho extends Kamikaze
 		this.map			= map;
 		this.ia				= new IABorracho( map );
 		this.dificultad		= dificultad;
-		this.colisionador	= new ColisionadorKamikaze();
 		
 		this.rand			= new Randomizador();
 		this.panel			= new JPanel( );
@@ -37,8 +36,10 @@ public class Borracho extends Kamikaze
 		this.escudo			= new LinkedList<Escudo>( );
 		
 		this.puntaje		= (int) (dificultad * 50);
-		this.explosionDmg	= 10 * dificultad;
+		this.explosionDmg	= 200 * dificultad;
 		this.vida			= 250 * dificultad;
+		
+		this.colisionador	= new ColisionadorKamikaze( explosionDmg );
 		
 		actualizarPanel( true, new Color( 0, 100, 0 ) );
 		
@@ -47,14 +48,13 @@ public class Borracho extends Kamikaze
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void serChocado(Colisionador col) {
+	public void serChocado(Colisionador col)
+	{
 		col.afectar(this);
-		
 	}
-	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

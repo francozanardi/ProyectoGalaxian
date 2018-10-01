@@ -16,8 +16,10 @@ public class ArmaTriple extends Arma
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double AMPLITUD_DISPARO	= Math.PI / 8;
-	private final double VELOCIDAD_DISPARO	= 100.0;
+	private final double	AMPLITUD_DISPARO		= Math.PI / 8,
+							VELOCIDAD_DISPARO		= 100.0,
+							DISPAROS_POR_SEGUNDO	= 0.33,
+							MULTIPLICADOR_DMG 		= 1.0;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -28,7 +30,8 @@ public class ArmaTriple extends Arma
 		this.panel					= new JPanel();
 		this.tamano					= new Size(5, 15);
 		this.pos					= new Posicion(5, 5);
-		this.cadenciaDisparo		= (int) (1000.0 / 0.33); // 0.33 disparos por segundo = 1 disparo cada 3 segundos
+		this.cadenciaDisparo		= (int) (1000.0 / DISPAROS_POR_SEGUNDO);
+		this.multiplicadorDmg		= MULTIPLICADOR_DMG;
 		
 		inicializar( );
 		
@@ -49,6 +52,7 @@ public class ArmaTriple extends Arma
 		v.setEnPolares( ang - AMPLITUD_DISPARO, VELOCIDAD_DISPARO );	
 		d = new DisparoEnemigo(
 				map,
+				this,
 				new Posicion(
 					p.getPos().getX() + this.pos.getX(),
 					p.getPos().getY() + p.getSize().getHeight() + 5
@@ -64,6 +68,7 @@ public class ArmaTriple extends Arma
 		v.setEnPolares( ang, VELOCIDAD_DISPARO );	
 		d = new DisparoEnemigo(
 				map,
+				this,
 				new Posicion(
 					p.getPos().getX() + this.pos.getX(),
 					p.getPos().getY() + p.getSize().getHeight() + 5
@@ -79,6 +84,7 @@ public class ArmaTriple extends Arma
 		v.setEnPolares( ang + AMPLITUD_DISPARO, VELOCIDAD_DISPARO );	
 		d = new DisparoEnemigo(
 				map,
+				this,
 				new Posicion(
 					p.getPos().getX() + this.pos.getX(),
 					p.getPos().getY() + p.getSize().getHeight() + 5

@@ -1,6 +1,9 @@
 package PowerUp;
 
 import Entidad.EntidadConVida;
+import Jugador.Jugador;
+import Logica.Juego;
+import Utils.Posicion;
 import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -9,7 +12,52 @@ public abstract class PowerUp extends EntidadConVida
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected Vector dirMovimiento;
+	protected Vector vecDireccion;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public abstract void afectar( Jugador player );
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void caer( Posicion posInicial )
+	{		
+		final double VELOCIDAD_CAIDA = 75.0;
+		
+		pos = posInicial;
+		
+		vecDireccion = new Vector( );
+		vecDireccion.setEnCartesianas( 0.0, -1.0 );
+		vecDireccion.setNorma( VELOCIDAD_CAIDA );
+		
+		map.agregarEntidad( this );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void recibirDMG( double dmg )
+	{
+		vida -= dmg;
+		
+		if (vida <= 0.0)
+			remove();
+	}
+		
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void actualizar( double msDesdeUltActualizacion )
+	{		
+		pos.setX( pos.getX() + conversionEnTiempo( vecDireccion.getX(), msDesdeUltActualizacion) );
+		
+		// Aquí restamos ya que el eje Y del JFrame aumenta hacia abajo, y hay que corregir la trayectoria.
+		pos.setY( pos.getY() - conversionEnTiempo( vecDireccion.getY(), msDesdeUltActualizacion) );
+		
+		actualizarPosicion();
+		
+		// Si el powerUp se fue por abajo, destruirlo.
+		if (pos.getY() > (Juego.GAME_HEIGHT + 50))
+			remove( );
+	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }

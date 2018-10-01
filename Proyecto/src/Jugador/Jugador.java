@@ -47,9 +47,8 @@ public class Jugador extends Personaje
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
 		
 		setArma( new ArmaJugador(map) );
-		addEscudo( new EscudoHealer(this) );
-		addEscudo( new EscudoAbsoluto(this) );
-		addEscudo( new EscudoBasico(this) );
+		addEscudo( new EscudoAbsoluto(this, 2) );
+		//addEscudo( new EscudoBasico(this) );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,15 +65,9 @@ public class Jugador extends Personaje
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void colisionar(EntidadConVida e) { //agregado
-		e.serChocado(colisionador);
-	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void serChocado(Colisionador col) {
+	public void serChocado(Colisionador col)
+	{
 		col.afectar(this);
-		
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

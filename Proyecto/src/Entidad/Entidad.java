@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorEntidad;
 import Mapa.Mapa;
+import PowerUp.PowerUp;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -63,9 +64,9 @@ public abstract class Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void eliminar()
+	public void remove()
 	{
-		map.borrarEntidad(this);
+		map.removeEntity(this);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +99,7 @@ public abstract class Entidad
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void colisionar(Entidad e)
-	{
+	{		
 		e.serChocado(colisionador);
 	}
 

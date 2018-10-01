@@ -21,6 +21,7 @@ import Grafica.FondoGenerico;
 import Jugador.Jugador;
 import Logica.Juego;
 import Logica.Teclado;
+import PowerUp.PowerUp;
 import Utils.Posicion;
 import Utils.Randomizador;
 
@@ -72,8 +73,6 @@ public abstract class Mapa
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
 	public abstract void establecerJugador( );
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,7 +81,7 @@ public abstract class Mapa
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void borrarEntidad(Entidad e)
+	public void removeEntity(Entidad e)
 	{
 		entidadesParaEliminar.add(e);
 	}
@@ -90,7 +89,7 @@ public abstract class Mapa
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void agregarEntidad(Entidad e)
-	{
+	{		
 		entidadesParaAgregar.add(e);
 	}
 	
@@ -137,7 +136,7 @@ public abstract class Mapa
 			e.getPanel().setVisible(false);
 			entidades.remove(e);
 		}
-		
+				
 		entidadesParaEliminar.clear();
 	}
 	

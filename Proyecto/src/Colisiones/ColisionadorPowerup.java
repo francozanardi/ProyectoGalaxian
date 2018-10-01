@@ -1,54 +1,44 @@
-package Escudo;
+package Colisiones;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
-import Entidad.EntidadConVida;
-import Utils.Posicion;
-import Utils.Size;
+import Disparo.DisparoJugador;
+import Jugador.Jugador;
+import PowerUp.PowerUp;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class EscudoAbsoluto extends Escudo
+public class ColisionadorPowerup extends Colisionador
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private int disparosMitigados;
-	
+	private PowerUp powerup;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public EscudoAbsoluto( EntidadConVida holder, int duracionEnDisparos )
+	public ColisionadorPowerup( PowerUp me )
 	{
-		this.pos				= new Posicion(2, 2);
-		this.tamano				= new Size(10, 30);
-		this.panel				= new JPanel();
-		this.disparosMitigados	= duracionEnDisparos;
-		
-		this.holder				= holder;
-
-		this.actualizarPanel(true, Color.yellow);
-		holder.getPanel().add( panel );
+		powerup = me;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public double modificarDmg( double dmg )
+	// PowerUp choca a Jugador
+	public void afectar(Jugador jugador)
 	{
-		disparosMitigados --;
-				
-		if (disparosMitigados == 0)
-			remove( );
+		powerup.afectar( jugador );
 		
-		return 0.0;
+		powerup.remove( );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void actualizar(double msDesdeUltActualizacion)
-	{		
+	// PowerUp choca con un DisparoJugador
+	public void afectar(DisparoJugador disparo)
+	{
+		powerup.recibirDMG( disparo.getDmg( ) );
+		
+		disparo.remove();
 	}
-
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

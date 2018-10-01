@@ -5,37 +5,63 @@ import Enemigo.Enemigo;
 import Enemigo.Kamikaze;
 import Entidad.Personaje;
 import Jugador.Jugador;
+import Obstaculo.Barricada;
+import Obstaculo.ObstaculoDestructible;
 
-public class ColisionadorDisparoJugador extends Colisionador {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public class ColisionadorDisparoJugador extends Colisionador
+{
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	private Disparo disparo;
 	private Personaje lanzador;
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public ColisionadorDisparoJugador(Disparo d, Personaje j) {
+	public ColisionadorDisparoJugador(Disparo d, Personaje j)
+	{
 		disparo = d;
 		lanzador = j;
 	}
-	
-	@Override
-	public void afectar(Jugador jugador) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void afectar(Enemigo enemigo) {
-		enemigo.recibirDMG(10);
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void afectar(Enemigo enemigo)
+	{
+		enemigo.recibirDMG( disparo.getDmg() );
 		
 		if(enemigo.getVida() <= 0) {
 			lanzador.setPuntaje(lanzador.getPuntaje() + enemigo.getPuntaje());
 		}
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(Kamikaze kamikaze) {
-		kamikaze.recibirDMG(10);
+	public void afectar(Kamikaze kamikaze)
+	{
+		kamikaze.recibirDMG( disparo.getDmg() );
 		
 		if(kamikaze.getVida() <= 0) {
 			lanzador.setPuntaje(lanzador.getPuntaje() + kamikaze.getPuntaje());
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void afectar(ObstaculoDestructible obstaculo)
+	{
+		obstaculo.recibirDMG( disparo.getDmg() );
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void afectar(Barricada barricada)
+	{
+		barricada.recibirDMG( disparo.getDmg() );
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

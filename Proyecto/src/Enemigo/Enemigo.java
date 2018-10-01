@@ -14,6 +14,7 @@ import Inteligencia.IAComun;
 import Inteligencia.Inteligencia;
 import Logica.Juego;
 import Mapa.Mapa;
+import PowerUp.PowerUp;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -26,6 +27,7 @@ public abstract class Enemigo extends Personaje
 
 	protected Inteligencia	ia;
 	protected double		dificultad;
+	protected PowerUp		powerUp;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -50,6 +52,13 @@ public abstract class Enemigo extends Personaje
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	public void setPowerUp( PowerUp powerUp )
+	{
+		this.powerUp = powerUp;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	/*public void colisionar(EntidadConVida e) { //aca lo volvemos a poner porque sino toma que colisionador es nulo, ya que en entidadconvida lo es
 		e.serChocado(colisionador);
 	}
@@ -57,6 +66,25 @@ public abstract class Enemigo extends Personaje
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	private void dropearPowerUp( )
+	{
+		if (powerUp != null)
+		{
+			Posicion posInicial = new Posicion( pos.getX(), pos.getY() );
+			
+			powerUp.caer( posInicial );
+		}
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void morir( )
+	{
+		dropearPowerUp( );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public void disparar( )
 	{
 		ia.disparar( this );

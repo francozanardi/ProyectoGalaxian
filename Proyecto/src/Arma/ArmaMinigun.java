@@ -1,6 +1,7 @@
 package Arma;
 
 import java.awt.Color;
+
 import javax.swing.JPanel;
 import Disparo.*;
 import Entidad.Personaje;
@@ -12,50 +13,52 @@ import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class ArmaCannon extends Arma
+public class ArmaMinigun extends Arma
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double VELOCIDAD_MOVIMIENTO	= 200.0;
-	
+	private final double	VELOCIDAD_MOVIMIENTO = 250.0,
+							DISPAROS_POR_SEGUNDO = 10.0,
+							MULTIPLICADOR_DMG = 1.0;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public ArmaCannon(Mapa map)
+	public ArmaMinigun(Mapa map)
 	{
-		this.map					= map;
-		this.rand					= new Randomizador( );
-		this.panel					= new JPanel();
-		this.tamano					= new Size(5, 15);
-		this.pos					= new Posicion(5, 5);
-		this.cadenciaDisparo		= (int) (1000.0 / 0.5); // 0.5 disparos por segundo = 1 disparo cada 2 segundos
-		
+		this.map				= map;
+		this.rand				= new Randomizador( );
+		this.panel				= new JPanel();
+		this.tamano				= new Size(8, 300);
+		this.pos				= new Posicion(3, 3);
+		this.cadenciaDisparo	= (int) (1000.0 / DISPAROS_POR_SEGUNDO);
+		this.multiplicadorDmg	= MULTIPLICADOR_DMG;
+
 		inicializar( );
 		
-		actualizarPanel( true, new Color(255, 255, 255) );
+		actualizarPanel( true, Color.red );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected void crearDisparo( Personaje p )
+	protected void crearDisparo(Personaje p)
 	{
-		Posicion comienzoDisparo =	new Posicion(
-										p.getPos().getX() + this.pos.getX(),
-										p.getPos().getY() + p.getSize().getHeight() + 5
-									);
-		Posicion posJugador = map.coordenadasDelJugador();
-		
 		Vector v = new Vector();
-		v.setEnCartesianas( posJugador.getX() - comienzoDisparo.getX(), -(posJugador.getY() - comienzoDisparo.getY()) );
-		v.setNorma( VELOCIDAD_MOVIMIENTO );
+		v.setEnPolares( Math.PI / 2, VELOCIDAD_MOVIMIENTO );
 
-		map.agregarEntidad( new DisparoCannon(
+		map.agregarEntidad(
+			new DisparoMinigun(
 				map,
-				comienzoDisparo,
+				this,
+				new Posicion(
+					p.getPos().getX() + this.pos.getX(),
+					p.getPos().getY() - 5
+				),
+				p,
 				v
 			)
-		);	
+		);
 	}
-
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

@@ -12,6 +12,9 @@ import Grafica.FondoGenerico;
 import Jugador.Jugador;
 import Logica.Juego;
 import Logica.Teclado;
+import Obstaculo.BarricadaComun;
+import Obstaculo.ObstaculoComun;
+import Utils.Posicion;
 import Utils.Randomizador;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +48,9 @@ public class MapaGenerico extends Mapa
 		
 		establecerJugador( );
 		crearEnemigos( );
+		crearObjetos( );
+		
+		agregarEntidades();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,12 +83,17 @@ public class MapaGenerico extends Mapa
 		
 		for (i = 0; i < cantBorracho; i ++)
 			agregarEntidad( new Borracho( this, dificultad ) );
-		
-		agregarEntidades();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	public void crearObjetos( )
+	{
+		agregarEntidad( new BarricadaComun( this, new Posicion( 20, Juego.GAME_HEIGHT / 2 ) ) );
+		
+		agregarEntidad( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH / 2, Juego.GAME_HEIGHT / 2 ) ) );
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void actualizar( double msDesdeUltActualizacion )

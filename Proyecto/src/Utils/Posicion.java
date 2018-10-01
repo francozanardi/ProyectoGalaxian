@@ -32,4 +32,15 @@ public class Posicion
 	public double getY() {
 		return y;
 	}
+	
+	public void copy( Posicion src )
+	{
+		this.x = src.getX();
+		this.y = src.getY();
+	}
+	
+	public Posicion clone( )
+	{
+		return new Posicion( this.x, this.y );
+	}
 }
