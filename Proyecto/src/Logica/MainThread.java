@@ -49,8 +49,22 @@ public class MainThread extends Thread
 									
 				// Actualizaciones del juego, le pasamos la cantidad de MS transcurridos desde la última actualización
 				cicloDelJuego( (tiempoActual - tiempoUltima) / 1000000.0 );
+
+				tiempoUltima = tiempoActual;
+				
+				try
+				{
+					tiempoActual = (tiempoFinal - System.nanoTime() - 1000);
+					long	sleepTimeMS = (tiempoActual) / 1000000L,
+							sleepTimeNS = (tiempoActual) % 1000000L;
 					
-				tiempoUltima = System.nanoTime();
+					if (sleepTimeMS >= 0 && sleepTimeNS > 0)
+						Thread.sleep( sleepTimeMS, (int) sleepTimeNS );
+				}
+				catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -60,7 +74,6 @@ public class MainThread extends Thread
 	private void cicloDelJuego( double msDesdeUltActualizacion )
 	{
 		mapa.actualizar( msDesdeUltActualizacion );
-		//System.out.printf("tiempo: %f  -  fps: %f\n", msDesdeUltActualizacion, 1000.0 / msDesdeUltActualizacion );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

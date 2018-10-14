@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import Arma.ArmaSniper;
+import Colisiones.ColDispEnemigo;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorKamikaze;
 import Escudo.Escudo;
@@ -37,7 +38,7 @@ public class Guiado extends Kamikaze
 		
 		this.puntaje		= (int) (dificultad * 50);
 		this.explosionDmg	= 100 * dificultad;
-		this.vida			= 100 * dificultad;
+		this.vida			= 400 * dificultad;
 
 		this.colisionador	= new ColisionadorKamikaze( explosionDmg );
 		
@@ -45,7 +46,7 @@ public class Guiado extends Kamikaze
 		
 		actualizarPanel( true, new Color( 100, 0, 0 ) );
 		
-		setArma( new ArmaSniper(map) );
+		setArma( new ArmaSniper(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

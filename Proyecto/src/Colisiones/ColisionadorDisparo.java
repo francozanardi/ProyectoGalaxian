@@ -1,66 +1,50 @@
 package Colisiones;
 
 import Disparo.Disparo;
-import Enemigo.Enemigo;
-import Enemigo.Kamikaze;
 import Entidad.Personaje;
-import Jugador.Jugador;
-import Obstaculo.Barricada;
-import Obstaculo.ObstaculoDestructible;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class ColisionadorDisparoJugador extends Colisionador
+public abstract class ColisionadorDisparo extends Colisionador
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private Disparo disparo;
-	private Personaje lanzador;
+	protected Disparo disparo;
+	protected Personaje tirador;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public ColisionadorDisparoJugador(Disparo d, Personaje j)
+	public abstract ColisionadorDisparo clone( );
+	public abstract void afectarAOtro( Disparo d, Colisionador otro );
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void setDisparo( Disparo d )
 	{
-		disparo = d;
-		lanzador = j;
+		this.disparo = d;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(Enemigo enemigo)
+	public Disparo getDisparo( )
 	{
-		enemigo.recibirDMG( disparo.getDmg() );
-		
-		if(enemigo.getVida() <= 0) {
-			lanzador.setPuntaje(lanzador.getPuntaje() + enemigo.getPuntaje());
-		}
+		return this.disparo;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(Kamikaze kamikaze)
+	public void setLanzador( Personaje p )
 	{
-		kamikaze.recibirDMG( disparo.getDmg() );
-		
-		if(kamikaze.getVida() <= 0) {
-			lanzador.setPuntaje(lanzador.getPuntaje() + kamikaze.getPuntaje());
-		}
+		this.tirador = p;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(ObstaculoDestructible obstaculo)
+	public Personaje getLanzador( )
 	{
-		obstaculo.recibirDMG( disparo.getDmg() );
+		return this.tirador;
 	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(Barricada barricada)
-	{
-		barricada.recibirDMG( disparo.getDmg() );
-	}
-
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

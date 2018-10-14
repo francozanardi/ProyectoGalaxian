@@ -5,7 +5,9 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
-import Arma.ArmaEnemigo;
+import Arma.ArmaDefaultEnemigo;
+import Arma.ArmaMinigun;
+import Colisiones.ColDispEnemigo;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorEnemigo;
 import Escudo.Escudo;
@@ -36,10 +38,10 @@ public class Comun extends Enemigo
 		this.tamano			= new Size(15, 15);
 		this.escudo			= new LinkedList<Escudo>( );
 		
-		this.vida			= 50 * dificultad;
+		this.vida			= 200.0 * dificultad;
 		this.puntaje		= (int) (dificultad * 30);
 
-		setArma( new ArmaEnemigo(map) );
+		setArma( new ArmaDefaultEnemigo(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		
 		actualizarPanel( true, new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ) );
 	}

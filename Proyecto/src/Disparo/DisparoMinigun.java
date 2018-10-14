@@ -1,15 +1,9 @@
 package Disparo;
 
 import java.awt.Color;
-import java.awt.Rectangle;
-
-import javax.swing.JPanel;
 
 import Arma.Arma;
-import Colisiones.Colisionador;
-import Colisiones.ColisionadorDisparoJugador;
-import Entidad.Personaje;
-import Jugador.Jugador;
+import Colisiones.ColisionadorDisparo;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
@@ -17,24 +11,21 @@ import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class DisparoMinigun extends DisparoJugador
+public class DisparoMinigun extends Disparo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double DMG_BASE = 10.0;
-	
+	private double DMG_BASE = 15.0;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoMinigun(Mapa mapa, Arma arma, Posicion p, Personaje jugador, Vector vectorDireccion)
+	public DisparoMinigun(Mapa mapa, ColisionadorDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion)
 	{
-		super(mapa, arma, p, jugador, vectorDireccion);
-		
-		tamano	= new Size(4, 4);
-		dmg		= DMG_BASE * arma.getMultiplicadorDmg();
+		inicializar( new Size(4, 4), mapa, col, arma, posInicial, vectorDireccion, DMG_BASE );
 		
 		actualizarPanel( true, Color.white );
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

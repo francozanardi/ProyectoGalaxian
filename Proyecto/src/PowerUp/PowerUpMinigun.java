@@ -5,8 +5,8 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import Arma.ArmaMinigun;
+import Colisiones.ColDispJugador;
 import Colisiones.ColisionadorPowerup;
-import Escudo.EscudoHealer;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Utils.Posicion;
@@ -35,7 +35,7 @@ public class PowerUpMinigun extends PowerUp
 	public void afectar(Jugador player)
 	{
 		System.out.println("Has agarrado el PowerUpMinigun, tu arma ha sido cambiada por una minigun!");
-		player.setArma( new ArmaMinigun(map) );
+		player.setArma( new ArmaMinigun(map, player, new ColDispJugador(), 0.5 * Math.PI) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

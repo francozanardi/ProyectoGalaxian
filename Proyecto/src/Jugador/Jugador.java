@@ -5,8 +5,11 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
-import Arma.ArmaJugador;
+import Arma.ArmaComun;
+import Arma.ArmaDefaultEnemigo;
+import Arma.ArmaTriple;
 import Colisiones.Colisionador;
+import Colisiones.ColDispJugador;
 import Colisiones.ColisionadorJugador;
 import Disparo.Disparo;
 import Entidad.EntidadConVida;
@@ -46,8 +49,8 @@ public class Jugador extends Personaje
 		
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
 		
-		setArma( new ArmaJugador(map) );
-		addEscudo( new EscudoAbsoluto(this, 2) );
+		setArma( new ArmaComun(map, this, new ColDispJugador(), 0.5 * Math.PI) );
+		addEscudo( new EscudoAbsoluto(this, 20) );
 		//addEscudo( new EscudoBasico(this) );
 	}
 	

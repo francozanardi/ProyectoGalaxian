@@ -1,7 +1,8 @@
 package Colisiones;
 
-import Disparo.DisparoEnemigo;
-import Disparo.DisparoJugador;
+import Disparo.Disparo;
+import Enemigo.Enemigo;
+import Jugador.Jugador;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -9,14 +10,14 @@ public class ColisionadorEntidad extends Colisionador
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(DisparoEnemigo disparo)
+	public void afectar(Disparo disparo, Enemigo tirador)
 	{
 		disparo.remove();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(DisparoJugador disparo)
+	public void afectar(Disparo disparo, Jugador tirador)
 	{
 		disparo.remove();
 	}

@@ -1,7 +1,6 @@
 package Colisiones;
 
 import Disparo.Disparo;
-import Disparo.DisparoJugador;
 import Enemigo.Enemigo;
 import Jugador.Jugador;
 
@@ -29,7 +28,7 @@ public class ColisionadorKamikaze extends Colisionador
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(DisparoJugador disparo)
+	public void afectar(Disparo disparo, Jugador tirador)
 	{
 		disparo.remove();
 	}

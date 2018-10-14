@@ -3,6 +3,8 @@ package Arma;
 import java.awt.Color;
 
 import javax.swing.JPanel;
+
+import Colisiones.ColisionadorDisparo;
 import Disparo.*;
 import Entidad.Personaje;
 import Mapa.Mapa;
@@ -22,18 +24,19 @@ public class ArmaMinigun extends Arma
 							MULTIPLICADOR_DMG = 1.0;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public ArmaMinigun(Mapa map)
-	{
-		this.map				= map;
-		this.rand				= new Randomizador( );
-		this.panel				= new JPanel();
-		this.tamano				= new Size(8, 300);
-		this.pos				= new Posicion(3, 3);
-		this.cadenciaDisparo	= (int) (1000.0 / DISPAROS_POR_SEGUNDO);
-		this.multiplicadorDmg	= MULTIPLICADOR_DMG;
 
-		inicializar( );
+	public ArmaMinigun( Mapa map, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
+	{
+		inicializar(
+			new Posicion(3, 3),
+			new Size(8, 20),
+			tirador,
+			miColisionador,
+			map,
+			anguloDelDisparo,
+			DISPAROS_POR_SEGUNDO,
+			MULTIPLICADOR_DMG
+		);
 		
 		actualizarPanel( true, Color.red );
 	}
@@ -43,17 +46,14 @@ public class ArmaMinigun extends Arma
 	protected void crearDisparo(Personaje p)
 	{
 		Vector v = new Vector();
-		v.setEnPolares( Math.PI / 2, VELOCIDAD_MOVIMIENTO );
+		v.setEnPolares( corregirAngulo( 0.0 ), VELOCIDAD_MOVIMIENTO );
 
 		map.agregarEntidad(
 			new DisparoMinigun(
 				map,
+				colisionador.clone(),
 				this,
-				new Posicion(
-					p.getPos().getX() + this.pos.getX(),
-					p.getPos().getY() - 5
-				),
-				p,
+				getPosicionLanzamiento( p ),
 				v
 			)
 		);

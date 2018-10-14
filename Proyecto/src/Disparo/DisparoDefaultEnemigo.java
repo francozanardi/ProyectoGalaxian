@@ -2,12 +2,8 @@ package Disparo;
 
 import java.awt.Color;
 
-import javax.swing.JPanel;
-
 import Arma.Arma;
-import Colisiones.Colisionador;
-import Colisiones.ColisionadorDisparoEnemigo;
-import Entidad.Personaje;
+import Colisiones.ColisionadorDisparo;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
@@ -15,35 +11,21 @@ import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class DisparoEnemigo extends Disparo
+public class DisparoDefaultEnemigo extends Disparo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double DMG_BASE = 10;
-	
+	private double DMG_BASE = 10.0;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoEnemigo(Mapa mapa, Arma arma, Posicion posInicial, Vector vectorDireccion)
+	public DisparoDefaultEnemigo(Mapa mapa, ColisionadorDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion)
 	{
-		map				= mapa;
-		panel			= new JPanel();
-		pos				= posInicial;
-		tamano			= new Size(5, 5);
-		dmg				= DMG_BASE * arma.getMultiplicadorDmg( );
-		vecDireccion	= vectorDireccion;
+		inicializar( new Size(5, 5), mapa, col, arma, posInicial, vectorDireccion, DMG_BASE );
 		
 		actualizarPanel( true, Color.green );
-		
-		colisionador = new ColisionadorDisparoEnemigo(this);
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void serChocado(Colisionador col)
-	{
-		col.afectar(this);
-	}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

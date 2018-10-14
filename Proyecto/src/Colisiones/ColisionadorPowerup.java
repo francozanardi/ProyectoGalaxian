@@ -1,6 +1,6 @@
 package Colisiones;
 
-import Disparo.DisparoJugador;
+import Disparo.Disparo;
 import Jugador.Jugador;
 import PowerUp.PowerUp;
 
@@ -32,7 +32,7 @@ public class ColisionadorPowerup extends Colisionador
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// PowerUp choca con un DisparoJugador
-	public void afectar(DisparoJugador disparo)
+	public void afectar(Disparo disparo, Jugador tirador)
 	{
 		powerup.recibirDMG( disparo.getDmg( ) );
 		

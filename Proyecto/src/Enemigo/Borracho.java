@@ -5,8 +5,9 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
-import Arma.ArmaEnemigo;
+import Arma.ArmaDefaultEnemigo;
 import Arma.ArmaTriple;
+import Colisiones.ColDispEnemigo;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorKamikaze;
 import Escudo.Escudo;
@@ -36,14 +37,14 @@ public class Borracho extends Kamikaze
 		this.escudo			= new LinkedList<Escudo>( );
 		
 		this.puntaje		= (int) (dificultad * 50);
-		this.explosionDmg	= 200 * dificultad;
-		this.vida			= 250 * dificultad;
+		this.explosionDmg	= 100 * dificultad;
+		this.vida			= 1000.0 * dificultad;
 		
 		this.colisionador	= new ColisionadorKamikaze( explosionDmg );
 		
 		actualizarPanel( true, new Color( 0, 100, 0 ) );
 		
-		setArma( new ArmaTriple(map) );
+		setArma( new ArmaTriple(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

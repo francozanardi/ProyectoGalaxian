@@ -2,6 +2,8 @@ package Arma;
 
 import java.awt.Color;
 import javax.swing.JPanel;
+
+import Colisiones.ColisionadorDisparo;
 import Disparo.*;
 import Entidad.Personaje;
 import Mapa.Mapa;
@@ -21,19 +23,20 @@ public class ArmaSniper extends Arma
 							MULTIPLICADOR_DMG = 1.0;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public ArmaSniper(Mapa map)
+
+	public ArmaSniper( Mapa map, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
 	{
-		this.map					= map;
-		this.rand					= new Randomizador( );
-		this.panel					= new JPanel();
-		this.tamano					= new Size(5, 15);
-		this.pos					= new Posicion(5, 5);
-		this.cadenciaDisparo		= (int) (1000.0 / DISPAROS_POR_SEGUNDO);
-		this.multiplicadorDmg		= MULTIPLICADOR_DMG;
-		
-		inicializar( );
-		
+		inicializar(
+			new Posicion(5, 5),
+			new Size(5, 15),
+			tirador,
+			miColisionador,
+			map,
+			anguloDelDisparo,
+			DISPAROS_POR_SEGUNDO,
+			MULTIPLICADOR_DMG
+		);
+				
 		actualizarPanel( true, new Color(255, 255, 255) );
 	}
 	
@@ -48,13 +51,15 @@ public class ArmaSniper extends Arma
 		Posicion posJugador = map.coordenadasDelJugador();
 		
 		Vector v = new Vector();
-		v.setEnCartesianas( posJugador.getX() - comienzoDisparo.getX(), -(posJugador.getY() - comienzoDisparo.getY()) );
+		v.setEnCartesianas( posJugador.getX() - comienzoDisparo.getX(), posJugador.getY() - comienzoDisparo.getY() );
 		v.setNorma( VELOCIDAD_MOVIMIENTO );
 
-		map.agregarEntidad( new DisparoSniper(
+		map.agregarEntidad(
+			new DisparoSniper(
 				map,
+				colisionador.clone(),
 				this,
-				comienzoDisparo,
+				getPosicionLanzamiento( p ),
 				v
 			)
 		);	

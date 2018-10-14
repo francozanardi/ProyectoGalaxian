@@ -2,6 +2,8 @@ package Arma;
 
 import java.awt.Color;
 import javax.swing.JPanel;
+
+import Colisiones.ColisionadorDisparo;
 import Disparo.*;
 import Entidad.Personaje;
 import Mapa.Mapa;
@@ -12,7 +14,7 @@ import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class ArmaEnemigo extends Arma
+public class ArmaDefaultEnemigo extends Arma
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -22,19 +24,20 @@ public class ArmaEnemigo extends Arma
 							MULTIPLICADOR_DMG		= 1.0;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public ArmaEnemigo(Mapa map)
+
+	public ArmaDefaultEnemigo( Mapa map, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
 	{
-		this.map				= map;
-		this.rand				= new Randomizador( );
-		this.panel				= new JPanel();
-		this.tamano				= new Size(5, 15);
-		this.pos				= new Posicion(5, 5);
-		this.cadenciaDisparo	= (int) (1000.0 / DISPAROS_POR_SEGUNDO);
-		this.multiplicadorDmg	= MULTIPLICADOR_DMG;
-		
-		inicializar( );
-		
+		inicializar(
+			new Posicion(5, 5),
+			new Size(5, 15),
+			tirador,
+			miColisionador,
+			map,
+			anguloDelDisparo,
+			DISPAROS_POR_SEGUNDO,
+			MULTIPLICADOR_DMG
+		);
+						
 		actualizarPanel( true, new Color(255, 255, 255) );
 	}
 	
@@ -43,16 +46,14 @@ public class ArmaEnemigo extends Arma
 	protected void crearDisparo( Personaje p )
 	{
 		Vector v = new Vector();
-		double ang = (3 * Math.PI / 2) + rand.nextDouble( -AMPLITUD_DISPARO, AMPLITUD_DISPARO );
-		v.setEnPolares( ang, VELOCIDAD_MOVIMIENTO );	
+		v.setEnPolares( corregirAngulo( rand.nextDouble( -AMPLITUD_DISPARO, AMPLITUD_DISPARO ) ), VELOCIDAD_MOVIMIENTO );	
 
-		map.agregarEntidad( new DisparoEnemigo(
+		map.agregarEntidad(
+			new DisparoDefaultEnemigo(
 				map,
+				colisionador.clone(),
 				this,
-				new Posicion(
-					p.getPos().getX() + this.pos.getX(),
-					p.getPos().getY() + p.getSize().getHeight() + 5
-				),
+				getPosicionLanzamiento( p ),
 				v
 			)
 		);	

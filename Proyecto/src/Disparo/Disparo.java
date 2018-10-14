@@ -2,11 +2,18 @@ package Disparo;
 
 import java.awt.Color;
 
+import javax.swing.JPanel;
+
+import Arma.Arma;
 import Colisiones.Colisionador;
+import Colisiones.ColisionadorDisparo;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
 import Entidad.Personaje;
 import Logica.Juego;
+import Mapa.Mapa;
+import Utils.Posicion;
+import Utils.Size;
 import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,8 +22,46 @@ public abstract class Disparo extends Entidad
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected double dmg;
-	protected Vector vecDireccion;
+	protected double				dmg;
+	protected Vector				vecDireccion;
+	protected ColisionadorDisparo	colisionador;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected void inicializar( Size size, Mapa mapa, ColisionadorDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion, double dmgBase )
+	{
+		colisionador	= col;
+		map				= mapa;
+		panel			= new JPanel();
+		pos				= posInicial;
+		tamano			= size;
+		dmg				= dmgBase * arma.getMultiplicadorDmg( );
+		vecDireccion	= vectorDireccion;
+		
+		inicializarColisionador( arma.getOwner() );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void colisionar(Entidad e)
+	{		
+		e.serChocado(colisionador);
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void serChocado(Colisionador col)
+	{
+		colisionador.afectarAOtro( this, col );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected void inicializarColisionador( Personaje tirador )
+	{
+		this.colisionador.setDisparo( this );
+		this.colisionador.setLanzador( tirador );
+	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -24,8 +69,7 @@ public abstract class Disparo extends Entidad
 	{
 		pos.setX( pos.getX() + conversionEnTiempo( vecDireccion.getX(), msDesdeUltActualizacion) );
 		
-		// Aquí restamos ya que el eje Y del JFrame aumenta hacia abajo, y hay que corregir la trayectoria.
-		pos.setY( pos.getY() - conversionEnTiempo( vecDireccion.getY(), msDesdeUltActualizacion) );
+		pos.setY( pos.getY() + conversionEnTiempo( vecDireccion.getY(), msDesdeUltActualizacion) );
 		
 		actualizarPosicion();
 	}

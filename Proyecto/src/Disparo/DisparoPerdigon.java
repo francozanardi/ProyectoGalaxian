@@ -11,19 +11,19 @@ import Utils.Vector;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class DisparoSniper extends Disparo
+public class DisparoPerdigon extends Disparo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private double DMG_BASE = 50.0;
+	private double DMG_BASE = 30.0;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public DisparoSniper(Mapa mapa, ColisionadorDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion)
+	public DisparoPerdigon(Mapa mapa, ColisionadorDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion)
 	{
-		inicializar( new Size(8, 8), mapa, col, arma, posInicial, vectorDireccion, DMG_BASE );
+		inicializar( new Size(4, 4), mapa, col, arma, posInicial, vectorDireccion, DMG_BASE );
 		
-		actualizarPanel( true, Color.red );
+		actualizarPanel( true, Color.pink );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
