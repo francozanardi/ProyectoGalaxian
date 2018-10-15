@@ -1,5 +1,6 @@
 package Escudo;
 
+import Colisiones.Colisionador;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
 
@@ -23,6 +24,19 @@ public abstract class Escudo extends Entidad
 	public void remove( )
 	{
 		holder.removeEscudo( this );
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void serChocado( Colisionador col )
+	{
+		col.afectar( this );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void actualizar(double msDesdeUltActualizacion)
+	{		
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

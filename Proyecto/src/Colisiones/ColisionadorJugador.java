@@ -1,8 +1,9 @@
 package Colisiones;
 
 import Disparo.Disparo;
+import Enemigo.Borracho;
 import Enemigo.Enemigo;
-import Enemigo.Kamikaze;
+import Enemigo.Guiado;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -10,7 +11,12 @@ public class ColisionadorJugador extends Colisionador
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(Kamikaze kamikaze)
+	public void afectar(Borracho kamikaze)
+	{
+		kamikaze.recibirDMG(kamikaze.getVida());
+	}
+	
+	public void afectar(Guiado kamikaze)
 	{
 		kamikaze.recibirDMG(kamikaze.getVida());
 	}

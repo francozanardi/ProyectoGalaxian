@@ -2,6 +2,7 @@ package Arma;
 
 import javax.swing.JPanel;
 
+import Colisiones.Colisionador;
 import Colisiones.ColisionadorDisparo;
 import Disparo.Disparo;
 import Entidad.Entidad;
@@ -121,6 +122,13 @@ public abstract class Arma extends Entidad
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void serChocado( Colisionador col )
+	{
+		col.afectar(this);
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void actualizar( double msDesdeUltActualizacion )

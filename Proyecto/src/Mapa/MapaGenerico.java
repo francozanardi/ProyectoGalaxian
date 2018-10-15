@@ -76,22 +76,22 @@ public class MapaGenerico extends Mapa
 			i;
 		
 		for (i = 0; i < cantComun; i ++)
-			agregarEntidad( new Comun( this, dificultad ) );
+			addEntity( new Comun( this, dificultad ) );
 		
 		for (i = 0; i < cantGuiado; i ++)
-			agregarEntidad( new Guiado( this, dificultad ) );
+			addEntity( new Guiado( this, dificultad ) );
 		
 		for (i = 0; i < cantBorracho; i ++)
-			agregarEntidad( new Borracho( this, dificultad ) );
+			addEntity( new Borracho( this, dificultad ) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void crearObjetos( )
 	{
-		agregarEntidad( new BarricadaComun( this, new Posicion( 20, Juego.GAME_HEIGHT / 2 ) ) );
+		addEntity( new BarricadaComun( this, new Posicion( 20, Juego.GAME_HEIGHT / 2 ) ) );
 		
-		agregarEntidad( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH / 2, Juego.GAME_HEIGHT / 2 ) ) );
+		addEntity( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH / 2, Juego.GAME_HEIGHT / 2 ) ) );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

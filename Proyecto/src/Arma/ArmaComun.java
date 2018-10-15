@@ -45,7 +45,7 @@ public class ArmaComun extends Arma
 		Vector v = new Vector();
 		v.setEnPolares( corregirAngulo( 0.0 ), VELOCIDAD_MOVIMIENTO );
 
-		map.agregarEntidad(
+		map.addEntity(
 			new DisparoComun(
 				map,
 				colisionador.clone(),

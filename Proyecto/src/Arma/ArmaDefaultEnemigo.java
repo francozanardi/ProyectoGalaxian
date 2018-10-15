@@ -48,7 +48,7 @@ public class ArmaDefaultEnemigo extends Arma
 		Vector v = new Vector();
 		v.setEnPolares( corregirAngulo( rand.nextDouble( -AMPLITUD_DISPARO, AMPLITUD_DISPARO ) ), VELOCIDAD_MOVIMIENTO );	
 
-		map.agregarEntidad(
+		map.addEntity(
 			new DisparoDefaultEnemigo(
 				map,
 				colisionador.clone(),

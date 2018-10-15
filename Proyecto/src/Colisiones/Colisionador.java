@@ -1,11 +1,17 @@
 package Colisiones;
 
+import Arma.Arma;
 import Disparo.Disparo;
+import Enemigo.Borracho;
+import Enemigo.Camuflado;
 import Enemigo.Enemigo;
-import Enemigo.Kamikaze;
+import Enemigo.Guiado;
+import Enemigo.KamikazeFragil;
+import Escudo.Escudo;
 import Jugador.Jugador;
 import Obstaculo.Barricada;
 import Obstaculo.ObstaculoDestructible;
+import PowerUp.PowerUp;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,9 +29,19 @@ public abstract class Colisionador
 	{
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void afectar(Kamikaze kamikaze)
+	public void afectar(Borracho kamikaze)
+	{
+	}
+
+	public void afectar(Guiado kamikaze)
+	{
+	}
+
+	public void afectar(Camuflado kamikaze)
+	{
+	}
+
+	public void afectar(KamikazeFragil kamikaze)
 	{
 	}
 	
@@ -39,6 +55,20 @@ public abstract class Colisionador
 	{
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void afectar(PowerUp powerup)
+	{
+	}
+	
+	public void afectar(Arma arma)
+	{
+	}
+
+	public void afectar(Escudo escudo)
+	{
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void afectar(ObstaculoDestructible obstaculo)

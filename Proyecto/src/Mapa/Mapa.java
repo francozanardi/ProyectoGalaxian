@@ -88,8 +88,8 @@ public abstract class Mapa
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void agregarEntidad(Entidad e)
-	{		
+	public void addEntity(Entidad e)
+	{
 		entidadesParaAgregar.add(e);
 	}
 	
@@ -132,7 +132,7 @@ public abstract class Mapa
 	
 	protected void borrarEntidades() {
 		for(Entidad e: entidadesParaEliminar) {
-			juego.getPanel().remove(e.getPanel());
+			//juego.getPanel().remove(e.getPanel());
 			e.getPanel().setVisible(false);
 			entidades.remove(e);
 		}

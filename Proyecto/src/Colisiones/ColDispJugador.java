@@ -1,9 +1,9 @@
 package Colisiones;
 
 import Disparo.Disparo;
+import Enemigo.Borracho;
 import Enemigo.Enemigo;
-import Enemigo.Kamikaze;
-import Entidad.Personaje;
+import Enemigo.Guiado;
 import Jugador.Jugador;
 import Obstaculo.Barricada;
 import Obstaculo.ObstaculoDestructible;
@@ -46,14 +46,26 @@ public class ColDispJugador extends ColisionadorDisparo
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(Kamikaze kamikaze)
+	private void afectarKamikaze( Enemigo e )
 	{
-		kamikaze.recibirDMG( disparo.getDmg() );
+		e.recibirDMG( disparo.getDmg() );
 		
-		if(kamikaze.getVida() <= 0)
+		if (e.getVida() <= 0)
 		{
-			tirador.setPuntaje(tirador.getPuntaje() + kamikaze.getPuntaje());
+			tirador.setPuntaje(tirador.getPuntaje() + e.getPuntaje());
 		}
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void afectar(Borracho kamikaze)
+	{
+		afectarKamikaze( kamikaze );
+	}
+	
+	public void afectar(Guiado kamikaze)
+	{
+		afectarKamikaze( kamikaze );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

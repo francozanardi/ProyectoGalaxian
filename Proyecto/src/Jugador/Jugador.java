@@ -50,7 +50,7 @@ public class Jugador extends Personaje
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
 		
 		setArma( new ArmaComun(map, this, new ColDispJugador(), 0.5 * Math.PI) );
-		addEscudo( new EscudoAbsoluto(this, 20) );
+		addEscudo( new EscudoAbsoluto(this, 5) );
 		//addEscudo( new EscudoBasico(this) );
 	}
 	

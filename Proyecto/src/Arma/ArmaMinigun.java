@@ -48,7 +48,7 @@ public class ArmaMinigun extends Arma
 		Vector v = new Vector();
 		v.setEnPolares( corregirAngulo( 0.0 ), VELOCIDAD_MOVIMIENTO );
 
-		map.agregarEntidad(
+		map.addEntity(
 			new DisparoMinigun(
 				map,
 				colisionador.clone(),

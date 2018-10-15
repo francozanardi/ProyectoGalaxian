@@ -1,5 +1,6 @@
 package PowerUp;
 
+import Colisiones.Colisionador;
 import Entidad.EntidadConVida;
 import Jugador.Jugador;
 import Logica.Juego;
@@ -30,7 +31,7 @@ public abstract class PowerUp extends EntidadConVida
 		vecDireccion.setEnCartesianas( 0.0, -1.0 );
 		vecDireccion.setNorma( VELOCIDAD_CAIDA );
 		
-		map.agregarEntidad( this );
+		map.addEntity( this );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,6 +58,13 @@ public abstract class PowerUp extends EntidadConVida
 		// Si el powerUp se fue por abajo, destruirlo.
 		if (pos.getY() > (Juego.GAME_HEIGHT + 50))
 			remove( );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void serChocado( Colisionador col )
+	{
+		col.afectar(this);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

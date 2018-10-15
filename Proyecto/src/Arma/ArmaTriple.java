@@ -59,7 +59,7 @@ public class ArmaTriple extends Arma
 				getPosicionLanzamiento( p ),
 				v
 			);		
-		map.agregarEntidad( d );
+		map.addEntity( d );
 		
 		
 		// disparo 2
@@ -72,7 +72,7 @@ public class ArmaTriple extends Arma
 				getPosicionLanzamiento( p ),
 				v
 			);
-		map.agregarEntidad( d );
+		map.addEntity( d );
 		
 		
 		// disparo 3
@@ -85,7 +85,7 @@ public class ArmaTriple extends Arma
 				getPosicionLanzamiento( p ),
 				v
 			);
-		map.agregarEntidad( d );
+		map.addEntity( d );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

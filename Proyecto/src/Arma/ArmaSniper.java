@@ -54,7 +54,7 @@ public class ArmaSniper extends Arma
 		v.setEnCartesianas( posJugador.getX() - comienzoDisparo.getX(), posJugador.getY() - comienzoDisparo.getY() );
 		v.setNorma( VELOCIDAD_MOVIMIENTO );
 
-		map.agregarEntidad(
+		map.addEntity(
 			new DisparoSniper(
 				map,
 				colisionador.clone(),
