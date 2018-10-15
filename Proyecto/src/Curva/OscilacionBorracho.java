@@ -21,9 +21,9 @@ public class OscilacionBorracho extends Curva
 		Posicion pos;
 		time += tiempoTranscurridoMS;
 		
-		t = time / 300.0;
+		t = time / 15000.0;
 		
-		x = 10.0 * Math.cos(t);
+		x = 40.0 * (Math.cos(t) + Math.cos(7*t) + Math.cos(13*t) + Math.cos(17*t));
 		y = 0.0;
 		
 		pos = new Posicion( x - oldX, y - oldY );

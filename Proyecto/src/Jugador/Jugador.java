@@ -43,7 +43,7 @@ public class Jugador extends Personaje
 		this.panel			= new JPanel( );
 		this.pos			= new Posicion((Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2), Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30);
 		this.tamano			= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
-		this.vida			= 400;
+		this.vida			= 2000;
 		this.escudo			= new LinkedList<Escudo>( );
 		this.colisionador	= new ColisionadorJugador();
 		

@@ -42,8 +42,8 @@ public class IABorracho extends Inteligencia
 	
 	public void mover( Enemigo me, double msDesdeUltActualizacion )
 	{
-		final double	VELOCIDAD_HORIZONTAL	= 15.0,
-						VELOCIDAD_VERTICAL		= 25.0;
+		final double	VELOCIDAD_HORIZONTAL	= 7.5,
+						VELOCIDAD_VERTICAL		= 30.0;
 		
 		Posicion	pos			= me.getPos(),
 					posPlayer	= map.coordenadasDelJugador( ),

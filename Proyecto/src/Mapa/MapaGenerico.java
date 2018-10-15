@@ -59,9 +59,7 @@ public class MapaGenerico extends Mapa
 	{
 		// Centrar al jugador
 		player.setPos( (Juego.GAME_WIDTH / 2) - (player.getSize().getWidth() / 2) );
-		
-		player.setVida( 1000 );
-		
+				
 		// Agregarlo al panel principal
 		juego.getPanel().add( player.getPanel() );
 	}
@@ -75,11 +73,11 @@ public class MapaGenerico extends Mapa
 			cantBorracho	= CANTIDAD_TOTAL_ENEMIGOS - cantGuiado - cantComun,
 			i;
 		
-		for (i = 0; i < cantComun; i ++)
+		/*for (i = 0; i < cantComun; i ++)
 			addEntity( new Comun( this, dificultad ) );
 		
 		for (i = 0; i < cantGuiado; i ++)
-			addEntity( new Guiado( this, dificultad ) );
+			addEntity( new Guiado( this, dificultad ) );*/
 		
 		for (i = 0; i < cantBorracho; i ++)
 			addEntity( new Borracho( this, dificultad ) );
