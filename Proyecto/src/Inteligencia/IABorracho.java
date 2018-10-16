@@ -26,7 +26,7 @@ public class IABorracho extends Inteligencia
 		this.rand 	= new Randomizador( );
 		this.map	= map;
 		
-		this.curvaMovimiento = new OscilacionBorracho( rand.nextDouble(0.0, 1000.0) );
+		this.curvaMovimiento = new OscilacionBorracho( rand.nextDouble(0.0, 100000.0) );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

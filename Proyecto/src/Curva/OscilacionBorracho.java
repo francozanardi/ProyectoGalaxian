@@ -11,6 +11,8 @@ public class OscilacionBorracho extends Curva
 	public OscilacionBorracho( double tiempoInicial )
 	{
 		time = tiempoInicial;
+		oldX = 0;
+		oldY = 0;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,6 +27,11 @@ public class OscilacionBorracho extends Curva
 		
 		x = 40.0 * (Math.cos(t) + Math.cos(7*t) + Math.cos(13*t) + Math.cos(17*t));
 		y = 0.0;
+		
+		if(oldX == 0 && oldY == 0) {
+			oldX = x;
+			oldY = y;
+		}
 		
 		pos = new Posicion( x - oldX, y - oldY );
 		

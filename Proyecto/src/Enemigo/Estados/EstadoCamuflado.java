@@ -1,6 +1,6 @@
 package Enemigo.Estados;
 
-public class EstadoCamuflado
+public abstract class EstadoCamuflado extends Estado
 {
 
 }

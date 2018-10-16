@@ -53,6 +53,11 @@ public abstract class EntidadConVida extends Entidad
 	public void setVida(double vida)
 	{
 		this.vida = vida;
+		if (vida <= 0)
+		{
+			morir( );
+			remove( );
+		}
 	}
 
 	public double getVida()

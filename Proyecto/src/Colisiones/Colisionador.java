@@ -29,21 +29,6 @@ public abstract class Colisionador
 	{
 	}
 
-	public void afectar(Borracho kamikaze)
-	{
-	}
-
-	public void afectar(Guiado kamikaze)
-	{
-	}
-
-	public void afectar(Camuflado kamikaze)
-	{
-	}
-
-	public void afectar(KamikazeFragil kamikaze)
-	{
-	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	

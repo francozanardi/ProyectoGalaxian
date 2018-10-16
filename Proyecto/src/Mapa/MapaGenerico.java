@@ -5,8 +5,10 @@ import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import Enemigo.Borracho;
+import Enemigo.Camuflado;
 import Enemigo.Comun;
 import Enemigo.Guiado;
+import Enemigo.KamikazeFragil;
 import Entidad.Entidad;
 import Grafica.FondoGenerico;
 import Jugador.Jugador;
@@ -77,10 +79,16 @@ public class MapaGenerico extends Mapa
 			addEntity( new Comun( this, dificultad ) );
 		
 		for (i = 0; i < cantGuiado; i ++)
-			addEntity( new Guiado( this, dificultad ) );*/
+			addEntity( new Guiado( this, dificultad ) );
 		
 		for (i = 0; i < cantBorracho; i ++)
 			addEntity( new Borracho( this, dificultad ) );
+			
+		*/
+		
+		for(i = 0; i < 10; i++) {
+			addEntity( new Camuflado(this, dificultad));
+		}
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

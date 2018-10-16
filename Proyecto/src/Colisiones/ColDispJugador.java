@@ -4,6 +4,7 @@ import Disparo.Disparo;
 import Enemigo.Borracho;
 import Enemigo.Enemigo;
 import Enemigo.Guiado;
+import Enemigo.KamikazeFragil;
 import Jugador.Jugador;
 import Obstaculo.Barricada;
 import Obstaculo.ObstaculoDestructible;
@@ -36,17 +37,12 @@ public class ColDispJugador extends ColisionadorDisparo
 	
 	public void afectar(Enemigo enemigo)
 	{
-		enemigo.recibirDMG( disparo.getDmg() );
-		
-		if(enemigo.getVida() <= 0)
-		{
-			tirador.setPuntaje(tirador.getPuntaje() + enemigo.getPuntaje());
-		}
+		afectarEnemigo(enemigo);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private void afectarKamikaze( Enemigo e )
+	private void afectarEnemigo( Enemigo e )
 	{
 		e.recibirDMG( disparo.getDmg() );
 		
@@ -56,17 +52,6 @@ public class ColDispJugador extends ColisionadorDisparo
 		}
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-
-	public void afectar(Borracho kamikaze)
-	{
-		afectarKamikaze( kamikaze );
-	}
-	
-	public void afectar(Guiado kamikaze)
-	{
-		afectarKamikaze( kamikaze );
-	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
