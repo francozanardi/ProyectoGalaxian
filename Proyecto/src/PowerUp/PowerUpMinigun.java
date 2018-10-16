@@ -35,7 +35,7 @@ public class PowerUpMinigun extends PowerUp
 	public void afectar(Jugador player)
 	{
 		System.out.println("Has agarrado el PowerUpMinigun, tu arma ha sido cambiada por una minigun!");
-		player.setArma( new ArmaMinigun(map, player, new ColDispJugador(), 0.5 * Math.PI) );
+		player.changeArma( new ArmaMinigun(map, player, new ColDispJugador(), 0.5 * Math.PI) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

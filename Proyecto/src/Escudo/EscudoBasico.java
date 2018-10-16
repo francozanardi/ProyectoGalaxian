@@ -28,7 +28,6 @@ public class EscudoBasico extends Escudo
 		this.holder	 = holder;
 
 		this.actualizarPanel(true, Color.pink);
-		holder.getPanel().add( panel );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

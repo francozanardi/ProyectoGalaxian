@@ -14,8 +14,13 @@ public class EscudoHealer extends Escudo
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final double HEAL_POR_SEG = 2;
+	private final double	HEAL_POR_SEG = 10.0,
+							HEAL_TOTAL = 200.0;
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private double totalHPRegenerado;
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public EscudoHealer( EntidadConVida holder )
@@ -26,8 +31,9 @@ public class EscudoHealer extends Escudo
 		
 		this.holder = holder;
 
+		this.totalHPRegenerado = 0;
+		
 		this.actualizarPanel(true, Color.green);
-		holder.getPanel().add( panel );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +41,21 @@ public class EscudoHealer extends Escudo
 	public void actualizar(double msDesdeUltActualizacion)
 	{
 		double curacion = conversionEnTiempo( HEAL_POR_SEG, msDesdeUltActualizacion );
+		
+		// Verificar que no curemos de más
+		if ((curacion + totalHPRegenerado) > HEAL_TOTAL)
+			curacion = HEAL_TOTAL - totalHPRegenerado;
+		
+		totalHPRegenerado += curacion;
+		
 		holder.setVida( holder.getVida() + curacion );
+		
+		// Al haber curado toda la vida, destruir el escudo
+		if (totalHPRegenerado == HEAL_TOTAL)
+		{
+			System.out.println("Escudo regeneracion: off!");
+			remove();
+		}
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

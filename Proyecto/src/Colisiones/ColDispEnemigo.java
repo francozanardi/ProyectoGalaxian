@@ -21,19 +21,13 @@ public class ColDispEnemigo extends ColisionadorDisparo
 	{
 		return new ColDispEnemigo( );
 	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void afectarAOtro( Disparo d, Colisionador otro )
-	{
-		otro.afectar( d, (Enemigo) tirador );
-	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void afectar(Jugador jugador)
 	{
 		jugador.recibirDMG( disparo.getDmg() );
+		disparo.remove();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +35,7 @@ public class ColDispEnemigo extends ColisionadorDisparo
 	public void afectar(ObstaculoDestructible obstaculo)
 	{
 		obstaculo.recibirDMG( disparo.getDmg() );
+		disparo.remove();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

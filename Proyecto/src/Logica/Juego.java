@@ -82,10 +82,6 @@ public class Juego extends JFrame
 		Jugador p = new Jugador();
 		mapa = new MapaGenerico( this, p, "MAPA GENÉRICO LVL.1", 1.0 );
 		
-		p.setMapa(mapa); //Esto debemos hacerlo así, ya que de esta manera pasamos el objeto mapa. Sino le pasamos un null.
-		p.getArma().setMapa(mapa); //Como ponemos el mapa ahora también debemos procurar que nuestra arma tenga el verdadero mapa.
-		
-		
 		tiempo = new MainThread( mapa, GAME_FPS );
 		tiempo.start( );
 		

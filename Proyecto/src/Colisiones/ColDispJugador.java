@@ -6,7 +6,9 @@ import Enemigo.Enemigo;
 import Enemigo.Guiado;
 import Jugador.Jugador;
 import Obstaculo.Barricada;
+import Obstaculo.Obstaculo;
 import Obstaculo.ObstaculoDestructible;
+import PowerUp.PowerUp;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -24,62 +26,68 @@ public class ColDispJugador extends ColisionadorDisparo
 	{
 		return new ColDispJugador( );
 	}
-	
+		
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectarAOtro( Disparo d, Colisionador otro )
+	private void afectarAEnemigo( Enemigo e )
 	{
-		otro.afectar( d, (Jugador) tirador );
+		e.recibirDMG( disparo.getDmg() );
+		disparo.remove();
+		
+		// Si el enemigo murió, transferirle su puntaje al jugador
+		if (e.getVida() <= 0)
+			tirador.setPuntaje(tirador.getPuntaje() + e.getPuntaje());
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void afectar(Enemigo enemigo)
 	{
-		enemigo.recibirDMG( disparo.getDmg() );
-		
-		if(enemigo.getVida() <= 0)
-		{
-			tirador.setPuntaje(tirador.getPuntaje() + enemigo.getPuntaje());
-		}
+		afectarAEnemigo( enemigo );
 	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	private void afectarKamikaze( Enemigo e )
-	{
-		e.recibirDMG( disparo.getDmg() );
-		
-		if (e.getVida() <= 0)
-		{
-			tirador.setPuntaje(tirador.getPuntaje() + e.getPuntaje());
-		}
-	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void afectar(Borracho kamikaze)
 	{
-		afectarKamikaze( kamikaze );
+		afectarAEnemigo( kamikaze );
 	}
 	
 	public void afectar(Guiado kamikaze)
 	{
-		afectarKamikaze( kamikaze );
+		afectarAEnemigo( kamikaze );
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void afectar(PowerUp powerup)
+	{
+		powerup.recibirDMG( disparo.getDmg() );
+		disparo.remove();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private void afectarAObstaculo( Obstaculo obj )
+	{
+		obj.recibirDMG( disparo.getDmg() );
+		disparo.remove();
+		
+		if (obj.getVida() <= 0.0)
+		{
+			tirador.setPuntaje( tirador.getPuntaje() + 10 );
+			System.out.println("Destruiste un obstaculo! +10 puntos");
+		}
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void afectar(ObstaculoDestructible obstaculo)
 	{
-		obstaculo.recibirDMG( disparo.getDmg() );
+		afectarAObstaculo( obstaculo );
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
 	public void afectar(Barricada barricada)
 	{
-		barricada.recibirDMG( disparo.getDmg() );
+		afectarAObstaculo( barricada );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

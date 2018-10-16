@@ -52,7 +52,7 @@ public abstract class Disparo extends Entidad
 	
 	public void serChocado(Colisionador col)
 	{
-		colisionador.afectarAOtro( this, col );
+		colisionador.afectar( this );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

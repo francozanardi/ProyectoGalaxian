@@ -1,5 +1,6 @@
 package Entidad;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import Arma.Arma;
@@ -14,6 +15,7 @@ public abstract class EntidadConVida extends Entidad
 	protected double		vida;
 	protected Arma			arma;
 	protected List<Escudo>	escudo;
+	private   List<Escudo>	escudosABorrar = new LinkedList<Escudo>( );
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -29,6 +31,17 @@ public abstract class EntidadConVida extends Entidad
 		this.panel.add( arma.getPanel() );
 	}
 	
+	public void changeArma( Arma nuevaArma )
+	{
+		double multViejo = 1.0;
+		
+		if (arma != null)
+			multViejo = arma.getMultiplicadorDmg();
+		
+		nuevaArma.setMultiplicadorDmg( multViejo );
+		setArma( nuevaArma );
+	}
+	
 	public Arma getArma( )
 	{
 		return arma;
@@ -39,13 +52,16 @@ public abstract class EntidadConVida extends Entidad
 	public void addEscudo( Escudo e )
 	{
 		escudo.add( e );
+		
+		this.panel.add( e.getPanel() );
 	}
 	
 	public void removeEscudo( Escudo e )
 	{
 		this.panel.remove( e.getPanel() );
 		
-		escudo.remove( e );
+		// Lo quitamos de la lista de escudos
+		escudosABorrar.add( e );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,8 +78,28 @@ public abstract class EntidadConVida extends Entidad
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private double utilizarEscudos( double dmg )
+	protected void actualizarEscudos( double msDesdeUltActualizacion )
 	{
+		if (!escudosABorrar.isEmpty())
+		{
+			for (Escudo e: escudosABorrar)
+				escudo.remove( e );
+		}
+		
+		for (Escudo e: escudo)
+			e.actualizar(msDesdeUltActualizacion);
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected double utilizarEscudos( double dmg )
+	{
+		if (!escudosABorrar.isEmpty())
+		{
+			for (Escudo e: escudosABorrar)
+				escudo.remove( e );
+		}
+		
 		for (Escudo e: escudo)
 			dmg = e.modificarDmg( dmg );
 		
@@ -84,6 +120,13 @@ public abstract class EntidadConVida extends Entidad
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void actualizar( double msDesdeUltAct )
+	{
+		actualizarEscudos( msDesdeUltAct );
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

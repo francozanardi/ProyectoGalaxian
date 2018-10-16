@@ -9,7 +9,7 @@ public class ColisionadorEnemigo extends Colisionador
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(Disparo disparo, Jugador tirador)
+	public void afectar( Disparo disparo )
 	{
 		disparo.remove();
 	}

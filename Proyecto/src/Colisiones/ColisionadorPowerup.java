@@ -28,16 +28,6 @@ public class ColisionadorPowerup extends Colisionador
 		
 		powerup.remove( );
 	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// PowerUp choca con un DisparoJugador
-	public void afectar(Disparo disparo, Jugador tirador)
-	{
-		powerup.recibirDMG( disparo.getDmg( ) );
-		
-		disparo.remove();
-	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -13,19 +13,12 @@ public class ColisionadorJugador extends Colisionador
 	
 	public void afectar(Borracho kamikaze)
 	{
-		kamikaze.recibirDMG(kamikaze.getVida());
+		kamikaze.recibirDMG( kamikaze.getVida() );
 	}
 	
 	public void afectar(Guiado kamikaze)
 	{
-		kamikaze.recibirDMG(kamikaze.getVida());
-	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void afectar(Disparo disparo, Enemigo tirador)
-	{
-		disparo.remove();
+		kamikaze.recibirDMG( kamikaze.getVida() );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

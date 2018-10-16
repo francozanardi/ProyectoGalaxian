@@ -1,5 +1,6 @@
 package Inteligencia;
 
+import Arma.Arma;
 import Curva.Curva;
 import Curva.OscilacionComun;
 import Disparo.Disparo;
@@ -31,8 +32,10 @@ public class IAComun extends Inteligencia
 	
 	public void disparar( Enemigo me )
 	{
-		// 20% de chance de disparar
-		if (rand.nextDouble() <= 0.5)
+		Arma arma = me.getArma();
+		
+		// 50% de chance de disparar
+		if (arma != null && rand.nextDouble() <= 0.5)
 			me.getArma().lanzarDisparo( me );
 	}
 	
