@@ -42,12 +42,6 @@ public abstract class Enemigo extends Personaje
 		this.powerUp = powerUp;
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/*public void colisionar(EntidadConVida e) { //aca lo volvemos a poner porque sino toma que colisionador es nulo, ya que en entidadconvida lo es
-		e.serChocado(colisionador);
-	}
-	*/
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 

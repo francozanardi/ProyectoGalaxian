@@ -15,7 +15,7 @@ public class EstadoBorracho extends EstadoKamikazeFragil {
 		contenedor = e;
 		vidaMaxima = contenedor.getVida();
 		
-		contenedor.setInteligencia(new IABorracho(contenedor.getMapa()));
+		contenedor.setIA(new IABorracho(contenedor.getMapa()));
 		contenedor.setExplosionDmg(100*contenedor.getDificultad());
 		contenedor.setColisionador(new ColisionadorKamikaze(contenedor.getExplosionDmg()));
 		//contenedor.getPanel().setBackground(new Color(0, 100, 0));
@@ -25,20 +25,19 @@ public class EstadoBorracho extends EstadoKamikazeFragil {
 	}
 
 	@Override
-	protected void transformar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void controlarTransformacion() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void choque() {
+	public void explotar() {
 		contenedor.setVida(0);
+	}
+
+	@Override
+	public Estado transformar() {
+		return null; //no tiene siguiente estado, deberíamos crear una excepcion
 	}
 	
 }

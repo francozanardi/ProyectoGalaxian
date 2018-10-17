@@ -25,11 +25,11 @@ public class ColisionadorJugador extends Colisionador
 	
 	public void afectar(KamikazeFragil kamikaze)
 	{
-		kamikaze.choque();
+		kamikaze.explotar();
 	}
 	
 	public void afectar(Camuflado camuflado) {
-		camuflado.choque();
+		camuflado.explotar();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

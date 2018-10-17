@@ -9,25 +9,18 @@ public abstract class Transformable extends Enemigo {
 	protected Estado estado;
 	protected double explosionDmg;
 	
-	public Estado getEstado() {
-		return estado;
-	}
-	
-	public void setEstado(Estado estado) {
+
+	/*
+	public void setEstado(Estado estado) { //quitamos que se pueda setear el estado y pusimos un método transformar para evitar que un cliente cambie a cualquier estado.
 		this.estado = estado;
 	}
 	
-	public Inteligencia getInteligencia() {
-		return ia;
-	}
+	*/
 	
-	public void setInteligencia(Inteligencia ia) {
-		this.ia = ia;
-	}
-	
-	public Mapa getMapa() {
+	public Mapa getMapa() { //Esto se puede quitar haciendo que los estados reciban en su constructor por parámetro el mapa.
 		return map;
 	}
+
 	
 	public double getExplosionDmg() {
 		return explosionDmg;
@@ -41,6 +34,7 @@ public abstract class Transformable extends Enemigo {
 		colisionador = col;
 	}
 	
-	public abstract void choque();
+	public abstract void explotar();
+	public abstract void transformar();
 	
 }

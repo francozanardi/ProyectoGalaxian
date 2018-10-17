@@ -10,6 +10,7 @@ import Colisiones.ColDispEnemigo;
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorEnemigo;
 import Enemigo.Estados.EstadoComun;
+import Enemigo.Estados.EstadoKamikaze;
 import Escudo.Escudo;
 import Inteligencia.IAComun;
 import Logica.Juego;
@@ -33,13 +34,14 @@ public class Camuflado extends Transformable
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 3) );
 		this.tamano 		= new Size(15, 15);
 		this.escudo			= new LinkedList<Escudo>( );
-		this.vida			= 200.0 * dificultad;
+		this.vida			= 400.0 * dificultad; //tiene más vida que un común normal.
 		this.puntaje		= (int) (dificultad * 30);
 
 		actualizarPanel( true, new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ) );
 		setPowerUp( new PowerUpHeal(map) );
 		
-		this.estado 		= new EstadoComun(this);
+		this.estado 		= new EstadoComun(this); //la inteligencia y demás caracteristicas faltantes las determina su estado.
+
 	}
 
 	public void serChocado(Colisionador col)
@@ -48,13 +50,18 @@ public class Camuflado extends Transformable
 	}
 
 	@Override
-	public void choque() {
-		estado.choque();
+	public void explotar() {
+		estado.explotar();
 	}
 	
 	public void recibirDMG(double dmg) {
 		super.recibirDMG(dmg);
 		estado.controlarTransformacion();
+	}
+
+	@Override
+	public void transformar() {
+		estado = estado.transformar();
 	}
 
 }

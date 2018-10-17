@@ -8,6 +8,6 @@ public abstract class Estado {
 	protected double vidaMaxima;
 	
 	public abstract void controlarTransformacion();
-	public abstract void choque();
-	protected abstract void transformar();
+	public abstract void explotar();
+	public abstract Estado transformar();
 }

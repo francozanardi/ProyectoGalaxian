@@ -20,7 +20,7 @@ public class EstadoComun extends EstadoCamuflado {
 	public EstadoComun(Transformable e) {
 		contenedor = e;
 		vidaMaxima = contenedor.getVida();
-		contenedor.setInteligencia(new IAComun(contenedor.getMapa()));
+		contenedor.setIA(new IAComun(contenedor.getMapa()));
 		contenedor.setColisionador(new ColisionadorEnemigo());
 	
 		Randomizador rand = new Randomizador();
@@ -30,22 +30,22 @@ public class EstadoComun extends EstadoCamuflado {
 		contenedor.getSize().setWidth(15);
 		contenedor.setExplosionDmg(0);
 	}
-	
-	@Override
-	protected void transformar() {
-		contenedor.setEstado(new EstadoKamikaze(contenedor));
-	}
 
 	@Override
 	public void controlarTransformacion() {
 		if(contenedor.getVida() <= vidaMaxima*PORCENTAJE_TRANSFORMACION/100 ) {
-			transformar();
+			contenedor.transformar();
 		}
 	}
 
 	@Override
-	public void choque() {
+	public void explotar() {
 		
+	}
+
+	@Override
+	public Estado transformar() {
+		return new EstadoKamikaze(contenedor);
 	}
 
 }

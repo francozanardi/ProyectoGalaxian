@@ -85,9 +85,13 @@ public abstract class EntidadConVida extends Entidad
 	
 	private void controlarEscudosABorrar( )
 	{
-		if (!escudosABorrar.isEmpty())
-			for (Escudo e: escudosABorrar)
+		if (!escudosABorrar.isEmpty()) {
+			for (Escudo e: escudosABorrar) {
 				escudo.remove( e );
+			}
+		}
+		
+		escudosABorrar.clear();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

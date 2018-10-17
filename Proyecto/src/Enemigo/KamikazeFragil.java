@@ -12,6 +12,7 @@ import Colisiones.Colisionador;
 import Colisiones.ColisionadorEnemigo;
 import Colisiones.ColisionadorKamikaze;
 import Enemigo.Estados.Estado;
+import Enemigo.Estados.EstadoBorracho;
 import Enemigo.Estados.EstadoGuiado;
 import Enemigo.Estados.EstadoKamikazeFragil;
 import Escudo.Escudo;
@@ -44,7 +45,7 @@ public class KamikazeFragil extends Transformable
 		
 		this.puntaje		= (int) (dificultad * 50);
 		this.vida			= 400 * dificultad;
-		this.estado			= new EstadoGuiado(this);
+		this.estado			= new EstadoGuiado(this); //la inteligencia y demás caracteristicas faltantes las determina su estado.
 
 		setArma( new ArmaSniper(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		setPowerUp( new PowerUpMultiplicador(map) );
@@ -65,8 +66,13 @@ public class KamikazeFragil extends Transformable
 
 
 	@Override
-	public void choque() {
-		estado.choque();		
+	public void explotar() {
+		estado.explotar();		
+	}
+
+	@Override
+	public void transformar() {
+		estado = estado.transformar();
 	}
 }
 

@@ -14,18 +14,13 @@ public class EstadoKamikaze extends EstadoCamuflado{
 		contenedor = e;
 		vidaMaxima = contenedor.getVida();
 		
-		contenedor.setInteligencia(new IAKamikaze(contenedor.getMapa()));
+		contenedor.setIA(new IAKamikaze(contenedor.getMapa()));
 		contenedor.setExplosionDmg(100*contenedor.getDificultad());
 		contenedor.setColisionador(new ColisionadorKamikaze(contenedor.getExplosionDmg()));
 		contenedor.getPanel().setBackground(new Color(100, 0, 0));
 		contenedor.setArma(new ArmaSniper(contenedor.getMapa(), contenedor, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI));
 		contenedor.getSize().setHeight(15);
 		contenedor.getSize().setWidth(30);
-	}
-	@Override
-	protected void transformar() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -34,9 +29,14 @@ public class EstadoKamikaze extends EstadoCamuflado{
 		
 	}
 	@Override
-	public void choque() {
+	public void explotar() {
 		contenedor.setVida(0);
 		
+	}
+
+	@Override
+	public Estado transformar() {
+		return null; //no tiene siguiente estado, deberíamos crear una excepcions
 	}
 
 }

@@ -18,7 +18,7 @@ public class EstadoGuiado extends EstadoKamikazeFragil {
 		contenedor = e;
 		vidaMaxima = contenedor.getVida();
 		
-		contenedor.setInteligencia(new IAKamikaze(contenedor.getMapa()));
+		contenedor.setIA(new IAKamikaze(contenedor.getMapa()));
 		contenedor.setExplosionDmg(100*contenedor.getDificultad());
 		contenedor.setColisionador(new ColisionadorKamikaze(contenedor.getExplosionDmg()));
 		contenedor.getPanel().setBackground(new Color(100, 0, 0));
@@ -29,21 +29,20 @@ public class EstadoGuiado extends EstadoKamikazeFragil {
 	}
 	
 	@Override
-	protected void transformar() {
-		contenedor.setInteligencia(new IABorracho(contenedor.getMapa()));
-		contenedor.setEstado(new EstadoBorracho(contenedor));
-	}
-
-	@Override
 	public void controlarTransformacion() {
 		if(contenedor.getVida() <= vidaMaxima*PORCENTAJE_TRANSFORMACION/100 ) {
-			transformar();
+			contenedor.transformar();
 		}
 	}
 
 	@Override
-	public void choque() {
+	public void explotar() {
 		contenedor.setVida(0);
+	}
+
+	@Override
+	public Estado transformar() {
+		return new EstadoBorracho(contenedor);
 	}
 
 }
