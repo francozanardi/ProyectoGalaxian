@@ -10,6 +10,7 @@ import Enemigo.Comun;
 import Enemigo.Guiado;
 import Enemigo.KamikazeFragil;
 import Entidad.Entidad;
+import Escudo.EscudoAbsoluto;
 import Grafica.FondoGenerico;
 import Jugador.Jugador;
 import Logica.Juego;
@@ -59,23 +60,29 @@ public class MapaGenerico extends Mapa
 
 	public void establecerJugador( )
 	{
+		// Vincular al jugador con el mapa
+		player.setMapa( this );
+		player.getArma().setMapa( this );
+		
 		// Centrar al jugador
 		player.setPos( (Juego.GAME_WIDTH / 2) - (player.getSize().getWidth() / 2) );
 				
 		// Agregarlo al panel principal
 		juego.getPanel().add( player.getPanel() );
+		
+		player.addEscudo( new EscudoAbsoluto(player, 5) );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void crearEnemigos( )
 	{
-		int cantComun		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.60),
+		int cantComun		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.80),
 			cantGuiado		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.10),
 			cantBorracho	= CANTIDAD_TOTAL_ENEMIGOS - cantGuiado - cantComun,
 			i;
 		
-		/*for (i = 0; i < cantComun; i ++)
+		for (i = 0; i < cantComun; i ++)
 			addEntity( new Comun( this, dificultad ) );
 		
 		for (i = 0; i < cantGuiado; i ++)
@@ -84,11 +91,12 @@ public class MapaGenerico extends Mapa
 		for (i = 0; i < cantBorracho; i ++)
 			addEntity( new Borracho( this, dificultad ) );
 			
-		*/
 		
+		/*
 		for(i = 0; i < 10; i++) {
 			addEntity( new Camuflado(this, dificultad));
 		}
+		*/
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

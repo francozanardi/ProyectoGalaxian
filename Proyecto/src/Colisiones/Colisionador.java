@@ -32,11 +32,7 @@ public abstract class Colisionador
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(Disparo disparo, Jugador tirador)
-	{
-	}
-	
-	public void afectar(Disparo disparo, Enemigo tirador)
+	public void afectar(Disparo disparo)
 	{
 	}
 

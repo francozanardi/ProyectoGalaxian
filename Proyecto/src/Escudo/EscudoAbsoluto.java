@@ -28,7 +28,6 @@ public class EscudoAbsoluto extends Escudo
 		this.holder				= holder;
 
 		this.actualizarPanel(true, Color.yellow);
-		holder.getPanel().add( panel );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +35,7 @@ public class EscudoAbsoluto extends Escudo
 	public double modificarDmg( double dmg )
 	{
 		disparosMitigados --;
-				
+		
 		if (disparosMitigados == 0)
 			remove( );
 		

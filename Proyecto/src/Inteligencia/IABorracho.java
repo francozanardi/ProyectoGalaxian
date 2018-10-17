@@ -2,6 +2,7 @@ package Inteligencia;
 
 import java.awt.Color;
 
+import Arma.Arma;
 import Curva.Curva;
 import Curva.OscilacionBorracho;
 import Disparo.Disparo;
@@ -33,8 +34,10 @@ public class IABorracho extends Inteligencia
 	
 	public void disparar( Enemigo me )
 	{
+		Arma arma = me.getArma();
+		
 		// 10% de chance de disparar
-		if (rand.nextDouble() <= 0.1)
+		if (arma != null && rand.nextDouble() <= 0.1)
 			me.getArma().lanzarDisparo( me );
 	}
 	

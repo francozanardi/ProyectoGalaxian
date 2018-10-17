@@ -1,5 +1,6 @@
 package Inteligencia;
 
+import Arma.Arma;
 import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Logica.Juego;
@@ -23,8 +24,10 @@ public class IAKamikaze extends Inteligencia
 	
 	public void disparar( Enemigo me )
 	{
+		Arma arma = me.getArma();
+		
 		// 20% de chance de disparar
-		if (rand.nextDouble() <= 0.2)
+		if (arma != null && rand.nextDouble() <= 0.2)
 			me.getArma().lanzarDisparo( me );
 	}
 	

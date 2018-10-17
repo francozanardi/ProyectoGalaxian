@@ -15,7 +15,7 @@ public class ColisionadorJugador extends Colisionador
 	
 	public void afectar(Borracho kamikaze)
 	{
-		kamikaze.recibirDMG(kamikaze.getVida());
+		kamikaze.recibirDMG( kamikaze.getVida() );
 	}
 	
 	public void afectar(Guiado kamikaze)
@@ -32,13 +32,6 @@ public class ColisionadorJugador extends Colisionador
 		camuflado.choque();
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void afectar(Disparo disparo, Enemigo tirador)
-	{
-		disparo.remove();
-	}
-
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 }
