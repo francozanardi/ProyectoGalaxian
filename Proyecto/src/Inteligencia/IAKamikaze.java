@@ -1,5 +1,7 @@
 package Inteligencia;
 
+import java.util.List;
+
 import Arma.Arma;
 import Disparo.Disparo;
 import Enemigo.Enemigo;
@@ -24,11 +26,11 @@ public class IAKamikaze extends Inteligencia
 	
 	public void disparar( Enemigo me )
 	{
-		Arma arma = me.getArma();
+		List<Disparo> disparos = me.getArma().lanzarDisparo( me );
 		
-		// 20% de chance de disparar
-		if (arma != null && rand.nextDouble() <= 0.2)
-			me.getArma().lanzarDisparo( me );
+		// Añadir disparos al mapa
+		for (Disparo d : disparos)
+			map.addEntity(d);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

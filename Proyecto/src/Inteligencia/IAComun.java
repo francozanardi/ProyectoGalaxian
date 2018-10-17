@@ -1,5 +1,7 @@
 package Inteligencia;
 
+import java.util.List;
+
 import Arma.Arma;
 import Curva.Curva;
 import Curva.OscilacionComun;
@@ -32,11 +34,11 @@ public class IAComun extends Inteligencia
 	
 	public void disparar( Enemigo me )
 	{
-		Arma arma = me.getArma();
+		List<Disparo> disparos = me.getArma().lanzarDisparo( me );
 		
-		// 50% de chance de disparar
-		if (arma != null && rand.nextDouble() <= 0.5)
-			me.getArma().lanzarDisparo( me );
+		// Añadir disparos al mapa
+		for (Disparo d : disparos)
+			map.addEntity(d);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

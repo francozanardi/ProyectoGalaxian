@@ -26,7 +26,7 @@ public class MapaGenerico extends Mapa
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final int CANTIDAD_TOTAL_ENEMIGOS = 30;
+	private final int CANTIDAD_TOTAL_ENEMIGOS = 20;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -36,12 +36,12 @@ public class MapaGenerico extends Mapa
 		this.fondo = new FondoGenerico( juego.getPanel() );
 		
 		// Inicializar objetos
-		this.juego		= juego;
-		this.player		= player;
-		this.rand		= new Randomizador( );
-		this.entidades	= new LinkedList<Entidad>();
-		this.entidadesParaEliminar = new LinkedList<Entidad>();
-		this.entidadesParaAgregar = new LinkedList<Entidad>();
+		this.juego					= juego;
+		this.player					= player;
+		this.rand					= new Randomizador( );
+		this.entidades				= new LinkedList<Entidad>();
+		this.entidadesParaEliminar	= new LinkedList<Entidad>();
+		this.entidadesParaAgregar	= new LinkedList<Entidad>();
 		this.entidades.add(player);
 		
 		this.nombre		= nombre;
@@ -77,12 +77,13 @@ public class MapaGenerico extends Mapa
 	
 	public void crearEnemigos( )
 	{
-		int cantComun		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.80),
+		int cantComun		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.60),
 			cantGuiado		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.10),
-			cantBorracho	= CANTIDAD_TOTAL_ENEMIGOS - cantGuiado - cantComun,
+			cantCamuflado	= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.10),
+			cantFragil		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.10),
+			cantBorracho	= CANTIDAD_TOTAL_ENEMIGOS - cantGuiado - cantComun - cantCamuflado - cantFragil,
 			i;
-		
-		/*
+
 		for (i = 0; i < cantComun; i ++)
 			addEntity( new Comun( this, dificultad ) );
 		
@@ -91,17 +92,12 @@ public class MapaGenerico extends Mapa
 		
 		for (i = 0; i < cantBorracho; i ++)
 			addEntity( new Borracho( this, dificultad ) );
-		*/
 		
+		for (i = 0; i < cantCamuflado; i ++)
+			addEntity( new Camuflado(this, dificultad) );
 		
-		for(i = 0; i < 5; i++) {
-			addEntity( new Camuflado(this, dificultad));
-		}
-		
-		for(i = 0; i < 5; i++) {
-			addEntity( new KamikazeFragil(this, dificultad));
-		}
-		
+		for (i = 0; i < cantFragil; i ++)
+			addEntity( new KamikazeFragil(this, dificultad) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

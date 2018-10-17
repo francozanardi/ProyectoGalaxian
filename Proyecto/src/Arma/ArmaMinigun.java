@@ -1,6 +1,8 @@
 package Arma;
 
 import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -25,14 +27,14 @@ public class ArmaMinigun extends Arma
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
-	public ArmaMinigun( Mapa map, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
+	public ArmaMinigun( Mapa mapa, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
 	{
 		inicializar(
+			mapa,
 			new Posicion(3, 3),
 			new Size(8, 20),
 			tirador,
 			miColisionador,
-			map,
 			anguloDelDisparo,
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
@@ -43,12 +45,14 @@ public class ArmaMinigun extends Arma
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected void crearDisparo(Personaje p)
+	protected List<Disparo> crearDisparo(Personaje p)
 	{
+		List<Disparo> lista = new LinkedList<Disparo>( );
+		
 		Vector v = new Vector();
 		v.setEnPolares( corregirAngulo( 0.0 ), VELOCIDAD_MOVIMIENTO );
 
-		map.addEntity(
+		lista.add(
 			new DisparoMinigun(
 				map,
 				colisionador.clone(),
@@ -57,6 +61,8 @@ public class ArmaMinigun extends Arma
 				v
 			)
 		);
+		
+		return lista;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

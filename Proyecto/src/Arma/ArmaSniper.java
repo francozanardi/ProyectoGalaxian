@@ -1,6 +1,9 @@
 package Arma;
 
 import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JPanel;
 
 import Colisiones.ColisionadorDisparo;
@@ -24,14 +27,16 @@ public class ArmaSniper extends Arma
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
-	public ArmaSniper( Mapa map, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
+	public ArmaSniper( Mapa mapa, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
 	{
+		this.map = mapa;
+		
 		inicializar(
+			mapa,
 			new Posicion(5, 5),
 			new Size(5, 15),
 			tirador,
 			miColisionador,
-			map,
 			anguloDelDisparo,
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
@@ -42,8 +47,10 @@ public class ArmaSniper extends Arma
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected void crearDisparo( Personaje p )
+	protected List<Disparo> crearDisparo( Personaje p )
 	{
+		List<Disparo> lista = new LinkedList<Disparo>( );
+		
 		Posicion comienzoDisparo =	new Posicion(
 										p.getPos().getX() + this.pos.getX(),
 										p.getPos().getY() + p.getSize().getHeight() + 5
@@ -54,7 +61,7 @@ public class ArmaSniper extends Arma
 		v.setEnCartesianas( posJugador.getX() - comienzoDisparo.getX(), posJugador.getY() - comienzoDisparo.getY() );
 		v.setNorma( VELOCIDAD_MOVIMIENTO );
 
-		map.addEntity(
+		lista.add(
 			new DisparoSniper(
 				map,
 				colisionador.clone(),
@@ -62,7 +69,9 @@ public class ArmaSniper extends Arma
 				getPosicionLanzamiento( p ),
 				v
 			)
-		);	
+		);
+		
+		return lista;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

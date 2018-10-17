@@ -14,6 +14,7 @@ import Escudo.Escudo;
 import Inteligencia.IAComun;
 import Logica.Juego;
 import Mapa.Mapa;
+import PowerUp.PowerUpHeal;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -36,6 +37,7 @@ public class Camuflado extends Transformable
 		this.puntaje		= (int) (dificultad * 30);
 
 		actualizarPanel( true, new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ) );
+		setPowerUp( new PowerUpHeal(map) );
 		
 		this.estado 		= new EstadoComun(this);
 	}

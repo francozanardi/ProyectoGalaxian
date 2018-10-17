@@ -1,6 +1,8 @@
 package Arma;
 
 import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 import Colisiones.ColisionadorDisparo;
 import Disparo.*;
@@ -22,14 +24,14 @@ public class ArmaComun extends Arma
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
-	public ArmaComun( Mapa map, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
+	public ArmaComun( Mapa mapa, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
 	{
 		inicializar(
+			mapa,
 			new Posicion(3, 3),
 			new Size(10, 20),
 			tirador,
 			miColisionador,
-			map,
 			anguloDelDisparo,
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
@@ -40,12 +42,13 @@ public class ArmaComun extends Arma
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected void crearDisparo(Personaje p)
+	protected List<Disparo> crearDisparo(Personaje p)
 	{
+		List<Disparo> disparos = new LinkedList<Disparo>( );
 		Vector v = new Vector();
 		v.setEnPolares( corregirAngulo( 0.0 ), VELOCIDAD_MOVIMIENTO );
 
-		map.addEntity(
+		disparos.add(
 			new DisparoComun(
 				map,
 				colisionador.clone(),
@@ -54,6 +57,8 @@ public class ArmaComun extends Arma
 				v
 			)
 		);
+		
+		return disparos;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

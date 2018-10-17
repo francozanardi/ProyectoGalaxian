@@ -20,6 +20,7 @@ import Inteligencia.IAKamikaze;
 import Logica.Juego;
 import Mapa.Mapa;
 import PowerUp.PowerUpHeal;
+import PowerUp.PowerUpMultiplicador;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -28,8 +29,6 @@ import Utils.Size;
 
 public class KamikazeFragil extends Transformable
 {
-	
-	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public KamikazeFragil( Mapa map, double dificultad )
@@ -47,6 +46,8 @@ public class KamikazeFragil extends Transformable
 		this.vida			= 400 * dificultad;
 		this.estado			= new EstadoGuiado(this);
 
+		setArma( new ArmaSniper(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		setPowerUp( new PowerUpMultiplicador(map) );
 		
 		actualizarPanel( true, new Color( 100, 100, 100 ) );	
 	}

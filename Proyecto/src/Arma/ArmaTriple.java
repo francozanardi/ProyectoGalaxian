@@ -1,6 +1,9 @@
 package Arma;
 
 import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JPanel;
 
 import Colisiones.ColisionadorDisparo;
@@ -25,14 +28,14 @@ public class ArmaTriple extends Arma
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
-	public ArmaTriple( Mapa map, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
+	public ArmaTriple( Mapa mapa, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo )
 	{
 		inicializar(
+			mapa,
 			new Posicion(5, 5),
 			new Size(5, 15),
 			tirador,
 			miColisionador,
-			map,
 			anguloDelDisparo,
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
@@ -43,49 +46,55 @@ public class ArmaTriple extends Arma
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected void crearDisparo( Personaje p )
+	protected List<Disparo> crearDisparo( Personaje p )
 	{
+		List<Disparo> lista = new LinkedList<Disparo>( );
 		Vector v;
-		Disparo d;
 		
 		
 		// disparo 1
 		v = new Vector();
-		v.setEnPolares( corregirAngulo( -AMPLITUD_DISPARO ), VELOCIDAD_DISPARO );	
-		d = new DisparoPerdigon(
+		v.setEnPolares( corregirAngulo( -AMPLITUD_DISPARO ), VELOCIDAD_DISPARO );
+		lista.add(
+			new DisparoPerdigon(
 				map,
 				colisionador.clone(),
 				this,
 				getPosicionLanzamiento( p ),
 				v
-			);		
-		map.addEntity( d );
+			)
+		);
 		
 		
 		// disparo 2
 		v = new Vector();
 		v.setEnPolares( corregirAngulo( 0.0 ), VELOCIDAD_DISPARO );	
-		d = new DisparoPerdigon(
+		lista.add(
+			new DisparoPerdigon(
 				map,
 				colisionador.clone(),
 				this,
 				getPosicionLanzamiento( p ),
 				v
-			);
-		map.addEntity( d );
+			)
+		);
 		
 		
 		// disparo 3
 		v = new Vector();
 		v.setEnPolares( corregirAngulo( AMPLITUD_DISPARO ), VELOCIDAD_DISPARO );	
-		d = new DisparoPerdigon(
+		lista.add(
+			new DisparoPerdigon(
 				map,
 				colisionador.clone(),
 				this,
 				getPosicionLanzamiento( p ),
 				v
-			);
-		map.addEntity( d );
+			)
+		);
+		
+		
+		return lista;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

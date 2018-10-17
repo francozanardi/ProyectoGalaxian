@@ -83,27 +83,40 @@ public abstract class EntidadConVida extends Entidad
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected void actualizarEscudos( double msDesdeUltActualizacion )
+	private void controlarEscudosABorrar( )
 	{
 		if (!escudosABorrar.isEmpty())
-		{
 			for (Escudo e: escudosABorrar)
 				escudo.remove( e );
-		}
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected void actualizarEscudos( double msDesdeUltActualizacion )
+	{
+		controlarEscudosABorrar( );
 		
 		for (Escudo e: escudo)
 			e.actualizar(msDesdeUltActualizacion);
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected double utilizarEscudosExplosion( double dmg )
+	{
+		controlarEscudosABorrar( );
+		
+		for (Escudo e: escudo)
+			dmg = e.modificarDmgExplosion( dmg );
+		
+		return dmg;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	protected double utilizarEscudos( double dmg )
 	{
-		if (!escudosABorrar.isEmpty())
-		{
-			for (Escudo e: escudosABorrar)
-				escudo.remove( e );
-		}
+		controlarEscudosABorrar( );
 		
 		for (Escudo e: escudo)
 			dmg = e.modificarDmg( dmg );

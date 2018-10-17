@@ -43,7 +43,6 @@ public class Comun extends Enemigo
 		this.puntaje		= (int) (dificultad * 30);
 
 		setArma( new ArmaDefaultEnemigo(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
-		setPowerUp( new PowerUpMultiplicador(map) );
 		
 		actualizarPanel( true, new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ) );
 	}

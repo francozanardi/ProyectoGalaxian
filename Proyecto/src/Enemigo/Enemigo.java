@@ -73,7 +73,8 @@ public abstract class Enemigo extends Personaje
 	
 	public void disparar( )
 	{
-		ia.disparar( this );
+		if (this.arma != null)
+			ia.disparar( this );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

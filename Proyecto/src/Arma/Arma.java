@@ -1,5 +1,8 @@
 package Arma;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JPanel;
 
 import Colisiones.Colisionador;
@@ -28,7 +31,7 @@ public abstract class Arma extends Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	protected abstract void crearDisparo( Personaje p );
+	protected abstract List<Disparo> crearDisparo( Personaje p );
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -72,13 +75,13 @@ public abstract class Arma extends Entidad
 	 * Este método inicializa la variable tiempoUltimoDisparo con un delay aleatorio entre 0 y 1000 miliegundos,
 	 * de esta forma nos aseguramos de que los enemigos no disparen todos a la vez.
 	 */
-	protected void inicializar( Posicion posicion, Size size, Personaje tirador, ColisionadorDisparo miColisionador, Mapa mapa, double anguloDelDisparo, double cadenciaDeDisparo, double dmgMult )
+	protected void inicializar( Mapa mapa, Posicion posicion, Size size, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo, double cadenciaDeDisparo, double dmgMult )
 	{
 		owner				= tirador;
 		colisionador		= miColisionador;
 		anguloDisparo		= anguloDelDisparo;
-		
 		map					= mapa;
+		
 		rand				= new Randomizador( );
 		panel				= new JPanel();
 		tamano				= size;
@@ -108,8 +111,10 @@ public abstract class Arma extends Entidad
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void lanzarDisparo(Personaje p)
+	public List<Disparo> lanzarDisparo(Personaje p)
 	{
+		List<Disparo> lista = new LinkedList<Disparo>();
+		
 		long	tiempoActual	= System.nanoTime(),
 				tiempoFinal		= tiempoUltimoDisparo + (cadenciaDisparo * 1000000L);
 		
@@ -118,8 +123,10 @@ public abstract class Arma extends Entidad
 		{
 			tiempoUltimoDisparo = System.nanoTime();
 			
-			crearDisparo( p );
+			lista = crearDisparo( p );
 		}
+		
+		return lista;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

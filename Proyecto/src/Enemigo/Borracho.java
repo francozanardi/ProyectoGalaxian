@@ -14,6 +14,8 @@ import Escudo.Escudo;
 import Inteligencia.IABorracho;
 import Logica.Juego;
 import Mapa.Mapa;
+import PowerUp.PowerUpEscudoExplosion;
+import PowerUp.PowerUpHeal;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -49,6 +51,7 @@ public class Borracho extends Enemigo
 		actualizarPanel( true, new Color( 0, 100, 0 ) );
 		
 		setArma( new ArmaTriple(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );
+		setPowerUp( new PowerUpEscudoExplosion(map) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

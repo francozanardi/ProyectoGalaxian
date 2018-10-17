@@ -2,6 +2,7 @@ package Jugador;
 
 import java.awt.Color;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -43,13 +44,21 @@ public class Jugador extends Personaje
 		this.panel			= new JPanel( );
 		this.pos			= new Posicion((Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2), Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30);
 		this.tamano			= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
-		this.vida			= 2000;
+		this.vida			= 5000;
 		this.escudo			= new LinkedList<Escudo>( );
 		this.colisionador	= new ColisionadorJugador();
 		
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
 		
 		setArma( new ArmaComun(map, this, new ColDispJugador(), 0.5 * Math.PI) );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void explosionKamikaze( double dmg )
+	{
+		dmg = utilizarEscudosExplosion( dmg );
+		recibirDMG( dmg );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,8 +91,14 @@ public class Jugador extends Personaje
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void disparar( )
-	{		
-		arma.lanzarDisparo(this);
+	{
+		if (arma != null)
+		{
+			List<Disparo> lista = arma.lanzarDisparo(this);
+			
+			for (Disparo d : lista)
+				map.addEntity( d );
+		}
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
