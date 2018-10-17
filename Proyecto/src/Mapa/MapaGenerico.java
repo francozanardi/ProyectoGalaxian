@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import Controladores.ContEnemMapaGenerico;
 import Enemigo.Borracho;
 import Enemigo.Camuflado;
 import Enemigo.Comun;
@@ -26,19 +27,20 @@ public class MapaGenerico extends Mapa
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private final int CANTIDAD_TOTAL_ENEMIGOS = 20;
+	private final int CANT_MAX_ENEM_PANTALLA = 15;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public MapaGenerico( Juego juego, Jugador player, String nombre, double dificultad )
 	{
-		// Seleccionar un tipo de fondo especÃ­fico
+		// Seleccionar un tipo de fondo especifico
 		this.fondo = new FondoGenerico( juego.getPanel() );
 		
 		// Inicializar objetos
 		this.juego					= juego;
 		this.player					= player;
 		this.rand					= new Randomizador( );
+		this.controlEnemigos		= new ContEnemMapaGenerico( this, CANT_MAX_ENEM_PANTALLA, dificultad );
 		this.entidades				= new LinkedList<Entidad>();
 		this.entidadesParaEliminar	= new LinkedList<Entidad>();
 		this.entidadesParaAgregar	= new LinkedList<Entidad>();
@@ -72,33 +74,6 @@ public class MapaGenerico extends Mapa
 		
 		player.addEscudo( new EscudoAbsoluto(player, 5) );
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void crearEnemigos( )
-	{
-		int cantComun		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.60),
-			cantGuiado		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.10),
-			cantCamuflado	= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.10),
-			cantFragil		= (int) (CANTIDAD_TOTAL_ENEMIGOS * 0.10),
-			cantBorracho	= CANTIDAD_TOTAL_ENEMIGOS - cantGuiado - cantComun - cantCamuflado - cantFragil,
-			i;
-
-		for (i = 0; i < cantComun; i ++)
-			addEntity( new Comun( this, dificultad ) );
-		
-		for (i = 0; i < cantGuiado; i ++)
-			addEntity( new Guiado( this, dificultad ) );
-		
-		for (i = 0; i < cantBorracho; i ++)
-			addEntity( new Borracho( this, dificultad ) );
-		
-		for (i = 0; i < cantCamuflado; i ++)
-			addEntity( new Camuflado(this, dificultad) );
-		
-		for (i = 0; i < cantFragil; i ++)
-			addEntity( new KamikazeFragil(this, dificultad) );
-	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -113,36 +88,20 @@ public class MapaGenerico extends Mapa
 	
 	public void actualizar( double msDesdeUltActualizacion )
 	{
-		if (player.getVida() > 0)
-		{
-			actualizarJugador( msDesdeUltActualizacion );
-			
-			fondo.actualizar( msDesdeUltActualizacion );
-			
-			actualizarLabelInformacion( msDesdeUltActualizacion );
-	
-			actualizarEntidades( msDesdeUltActualizacion );//si esto estuviera abajo de controlarColisiones lo que podría suceder es que
-			//colisionaría el jugador con un kamikaze, se le quitaría la vida al jugador, y si este muere, queda null.
-			//entonces luego en actualizar entidades, al momento de mover los kamikazes restantes, tendrían que obtener
-			//la pos del jugador, la cual es nula, entonces provocaría error en tiempo de ejecución.
-			
-			
-			controlarColisiones();
-			borrarEntidades();
-			agregarEntidades();
-			
-			
-			for(Component c: juego.getPanel().getComponents()) {
-				if(c==null) {
-					System.out.println("HAY NULOOOOOOO");
-				}
-			}
-			
-			//juego.getPanel().repaint();
-			
-		} else {
-			juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja.");
-		}
+		actualizarJugador( msDesdeUltActualizacion );
+		
+		fondo.actualizar( msDesdeUltActualizacion );
+		
+		actualizarLabelInformacion( msDesdeUltActualizacion );
+
+		actualizarEntidades( msDesdeUltActualizacion );//si esto estuviera abajo de controlarColisiones lo que podría suceder es que
+		//colisionaría el jugador con un kamikaze, se le quitaría la vida al jugador, y si este muere, queda null.
+		//entonces luego en actualizar entidades, al momento de mover los kamikazes restantes, tendrían que obtener
+		//la pos del jugador, la cual es nula, entonces provocaría error en tiempo de ejecución.		
+		
+		controlarColisiones();
+		borrarEntidades();
+		agregarEntidades();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

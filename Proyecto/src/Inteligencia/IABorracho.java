@@ -50,7 +50,7 @@ public class IABorracho extends Inteligencia
 						VELOCIDAD_VERTICAL		= 30.0;
 		
 		Posicion	pos			= me.getPos(),
-					posPlayer	= map.coordenadasDelJugador( ),
+					posPlayer	= map.getPlayerPos( ),
 					movCurva	= curvaMovimiento.obtenerCambio( msDesdeUltActualizacion );
 		
 		double	x = pos.getX(),

@@ -55,7 +55,7 @@ public class ArmaSniper extends Arma
 										p.getPos().getX() + this.pos.getX(),
 										p.getPos().getY() + p.getSize().getHeight() + 5
 									);
-		Posicion posJugador = map.coordenadasDelJugador();
+		Posicion posJugador = map.getPlayerPos();
 		
 		Vector v = new Vector();
 		v.setEnCartesianas( posJugador.getX() - comienzoDisparo.getX(), posJugador.getY() - comienzoDisparo.getY() );

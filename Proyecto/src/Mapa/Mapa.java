@@ -4,12 +4,15 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JPanel;
 
+import Controladores.ControladorEnemigos;
 import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Enemigo.Comun;
@@ -42,13 +45,29 @@ public abstract class Mapa
 	protected Collection<Entidad>	entidadesParaAgregar;
 	protected double				dificultad;
 	protected String				nombre;
+	protected ControladorEnemigos	controlEnemigos;
 		
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void setDificultad( double dif )
+	public void ganar( )
 	{
-		this.dificultad = dif;
+		juego.mapVictory();
 	}
+	
+	public void perder( )
+	{
+		juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja.");
+		juego.mapDefeat();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void crearEnemigos( )
+	{
+		controlEnemigos.crearEnemigos( );
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public double getDificultad( )
 	{
@@ -56,11 +75,6 @@ public abstract class Mapa
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void setNombre( String nombre )
-	{
-		this.nombre = nombre;
-	}
 	
 	public String getNombre( )
 	{
@@ -74,10 +88,6 @@ public abstract class Mapa
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public abstract void establecerJugador( );
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public abstract void crearEnemigos( );
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -135,6 +145,8 @@ public abstract class Mapa
 			//juego.getPanel().remove(e.getPanel());
 			e.getPanel().setVisible(false);
 			entidades.remove(e);
+			
+			controlEnemigos.notificarMuerteEntidad( e );
 		}
 				
 		entidadesParaEliminar.clear();
@@ -177,14 +189,21 @@ public abstract class Mapa
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Posicion coordenadasDelJugador( )
+	public List<Entidad> enemigosEnJuego( )
+	{
+		return controlEnemigos.obtenerEnemigosVivos();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Posicion getPlayerPos( )
 	{
 		return player.getPos();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Randomizador obtenerRandomizador( )
+	public Randomizador getRandomizador( )
 	{
 		return rand;
 	}

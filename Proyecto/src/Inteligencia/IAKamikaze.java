@@ -41,7 +41,7 @@ public class IAKamikaze extends Inteligencia
 						VELOCIDAD_VERTICAL		= 25.0;
 		
 		Posicion	pos			= me.getPos(),
-					posPlayer	= map.coordenadasDelJugador( );
+					posPlayer	= map.getPlayerPos( );
 		
 		double	x = pos.getX(),
 				y = pos.getY(),

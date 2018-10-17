@@ -10,15 +10,24 @@ public class MainThread extends Thread
 	
 	private Mapa	mapa;
 	private int		fps;
+	private boolean ejecutando;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public MainThread( Mapa mapa, int fps )
 	{
-		this.mapa	= mapa;
-		this.fps	= fps;
+		this.ejecutando	= true;
+		this.mapa		= mapa;
+		this.fps		= fps;
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void terminar( )
+	{
+		ejecutando = false;
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public int getFPS( )
@@ -39,7 +48,7 @@ public class MainThread extends Thread
 				tiempoFinal		= tiempoActual + (1000000L * 1000L / fps),
 				tiempoUltima	= tiempoActual;
 		
-		while (true)
+		while (ejecutando)
 		{
 			tiempoActual = System.nanoTime();
 			
@@ -54,11 +63,11 @@ public class MainThread extends Thread
 				
 				try
 				{
-					tiempoActual = (tiempoFinal - System.nanoTime() - 1000);
+					tiempoActual = (tiempoFinal - System.nanoTime());
 					long	sleepTimeMS = (tiempoActual) / 1000000L,
 							sleepTimeNS = (tiempoActual) % 1000000L;
 					
-					if (sleepTimeMS >= 0 && sleepTimeNS > 0)
+					if (sleepTimeMS >= 0 && sleepTimeNS >= 0)
 						Thread.sleep( sleepTimeMS, (int) sleepTimeNS );
 				}
 				catch (InterruptedException e)

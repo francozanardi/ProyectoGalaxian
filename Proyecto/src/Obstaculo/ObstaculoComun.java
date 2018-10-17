@@ -9,6 +9,9 @@ import Colisiones.ColisionadorObstaculo;
 import Escudo.Escudo;
 import Escudo.EscudoBasico;
 import Mapa.Mapa;
+import PowerUp.PowerUp;
+import PowerUp.PowerUpCongelar;
+import PowerUp.PowerUpMinigun;
 import Utils.Posicion;
 import Utils.Size;
 
@@ -38,6 +41,9 @@ public class ObstaculoComun extends ObstaculoDestructible
 	public void morir( )
 	{
 		System.out.println("Obstaculo comun destruido");
+		
+		PowerUp drop = new PowerUpCongelar(map);
+		drop.caer( pos.clone() );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

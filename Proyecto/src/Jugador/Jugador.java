@@ -44,13 +44,20 @@ public class Jugador extends Personaje
 		this.panel			= new JPanel( );
 		this.pos			= new Posicion((Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2), Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30);
 		this.tamano			= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
-		this.vida			= 5000;
+		this.vida			= 1000;
 		this.escudo			= new LinkedList<Escudo>( );
 		this.colisionador	= new ColisionadorJugador();
 		
 		actualizarPanel( true, new Color( 255, 255, 255 ) );
 		
 		setArma( new ArmaComun(map, this, new ColDispJugador(), 0.5 * Math.PI) );
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void morir( )
+	{
+		map.perder();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

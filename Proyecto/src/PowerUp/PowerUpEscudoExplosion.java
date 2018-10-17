@@ -27,7 +27,7 @@ public class PowerUpEscudoExplosion extends PowerUp
 		this.vida			= 1000;
 		this.colisionador	= new ColisionadorPowerup( this );
 		
-		this.actualizarPanel(true, Color.green);
+		this.actualizarPanel(true, Color.orange );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

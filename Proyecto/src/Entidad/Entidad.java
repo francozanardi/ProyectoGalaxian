@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import Colisiones.Colisionador;
 import Colisiones.ColisionadorEntidad;
+import Inteligencia.Inteligencia;
 import Mapa.Mapa;
 import PowerUp.PowerUp;
 import Utils.Posicion;
@@ -24,12 +25,25 @@ public abstract class Entidad
 	protected Mapa			map;
 	protected Randomizador	rand;
 	protected Colisionador	colisionador = new ColisionadorEntidad();
+	protected Inteligencia	ia;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public JPanel getPanel( )
 	{
 		return panel;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Inteligencia getIA( )
+	{
+		return ia;
+	}
+	
+	public void setIA( Inteligencia ia )
+	{
+		this.ia = ia;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

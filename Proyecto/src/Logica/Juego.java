@@ -25,9 +25,9 @@ public class Juego extends JFrame
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static final int		GAME_WIDTH	= 500,
+	public static final int		GAME_WIDTH	= 450,
 								GAME_HEIGHT	= (int) (GAME_WIDTH * 1.5),
-								GAME_FPS	= 100;
+								GAME_FPS	= 300;
 	public static final String	GAME_TITLE = "Galaxian Trucho";
 
 	////////////////////////////////////////////////w///////////////////////////////////////////////
@@ -82,11 +82,42 @@ public class Juego extends JFrame
 		Jugador p = new Jugador();
 		mapa = new MapaGenerico( this, p, "MAPA GENÉRICO LVL.1", 1.0 );
 		
-		tiempo = new MainThread( mapa, GAME_FPS );
-		tiempo.start( );
-		
+		empezarNivel( mapa );
 	}
-
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private void empezarNivel( Mapa map )
+	{
+		tiempo = new MainThread( map, GAME_FPS );
+		tiempo.start();
+	}
+	
+	private void terminarNivel( )
+	{
+		if (tiempo != null && tiempo.isAlive())
+		{
+			tiempo.terminar();
+			tiempo = null;
+		}
+		
+		mapa = null;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void mapVictory( )
+	{
+		terminarNivel( );
+		System.out.println("MAPA GANADO!");
+	}
+	
+	public void mapDefeat( )
+	{
+		terminarNivel( );
+		System.out.println("MAPA PERDIDO!");
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	private void crearPanel( )
