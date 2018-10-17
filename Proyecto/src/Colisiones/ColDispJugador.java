@@ -2,6 +2,7 @@ package Colisiones;
 
 import Disparo.Disparo;
 import Enemigo.Borracho;
+import Enemigo.Camuflado;
 import Enemigo.Enemigo;
 import Enemigo.Guiado;
 import Enemigo.KamikazeFragil;
@@ -43,6 +44,24 @@ public class ColDispJugador extends ColisionadorDisparo
 	public void afectar(Enemigo enemigo)
 	{
 		afectarAEnemigo( enemigo );
+	}
+
+	public void afectar(Borracho kamikaze)
+	{
+		afectarAEnemigo( kamikaze );
+	}
+	
+	public void afectar(Guiado kamikaze)
+	{
+		afectarAEnemigo( kamikaze );
+	}
+	
+	public void afectar(KamikazeFragil kamikaze) {
+		afectarAEnemigo( kamikaze );
+	}
+	
+	public void afectar(Camuflado c) {
+		afectarAEnemigo(c);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
