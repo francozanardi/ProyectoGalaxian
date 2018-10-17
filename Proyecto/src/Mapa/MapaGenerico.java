@@ -82,6 +82,7 @@ public class MapaGenerico extends Mapa
 			cantBorracho	= CANTIDAD_TOTAL_ENEMIGOS - cantGuiado - cantComun,
 			i;
 		
+		/*
 		for (i = 0; i < cantComun; i ++)
 			addEntity( new Comun( this, dificultad ) );
 		
@@ -90,13 +91,17 @@ public class MapaGenerico extends Mapa
 		
 		for (i = 0; i < cantBorracho; i ++)
 			addEntity( new Borracho( this, dificultad ) );
-			
+		*/
 		
-		/*
-		for(i = 0; i < 10; i++) {
+		
+		for(i = 0; i < 5; i++) {
 			addEntity( new Camuflado(this, dificultad));
 		}
-		*/
+		
+		for(i = 0; i < 5; i++) {
+			addEntity( new KamikazeFragil(this, dificultad));
+		}
+		
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

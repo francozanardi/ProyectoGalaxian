@@ -45,16 +45,6 @@ public class ColDispJugador extends ColisionadorDisparo
 		afectarAEnemigo( enemigo );
 	}
 
-	public void afectar(Borracho kamikaze)
-	{
-		afectarAEnemigo( kamikaze );
-	}
-	
-	public void afectar(Guiado kamikaze)
-	{
-		afectarAEnemigo( kamikaze );
-	}
-
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void afectar(PowerUp powerup)
