@@ -9,7 +9,7 @@ import Enemigo.Borracho;
 import Enemigo.Camuflado;
 import Enemigo.Comun;
 import Enemigo.Guiado;
-import Enemigo.KamikazeFragil;
+import Enemigo.Fragil;
 import Entidad.Entidad;
 import Escudo.EscudoAbsoluto;
 import Grafica.FondoGenerico;

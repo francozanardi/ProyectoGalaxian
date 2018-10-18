@@ -5,7 +5,8 @@ import Enemigo.Borracho;
 import Enemigo.Camuflado;
 import Enemigo.Enemigo;
 import Enemigo.Guiado;
-import Enemigo.KamikazeFragil;
+import Enemigo.Kamikaze;
+import Enemigo.Fragil;
 import Jugador.Jugador;
 import Obstaculo.Barricada;
 import Obstaculo.Obstaculo;
@@ -46,22 +47,9 @@ public class ColDispJugador extends ColisionadorDisparo
 		afectarAEnemigo( enemigo );
 	}
 
-	public void afectar(Borracho kamikaze)
+	public void afectar(Kamikaze kamikaze)
 	{
 		afectarAEnemigo( kamikaze );
-	}
-	
-	public void afectar(Guiado kamikaze)
-	{
-		afectarAEnemigo( kamikaze );
-	}
-	
-	public void afectar(KamikazeFragil kamikaze) {
-		afectarAEnemigo( kamikaze );
-	}
-	
-	public void afectar(Camuflado c) {
-		afectarAEnemigo(c);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

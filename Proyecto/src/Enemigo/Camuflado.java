@@ -44,11 +44,6 @@ public class Camuflado extends Transformable
 
 	}
 
-	public void serChocado(Colisionador col)
-	{
-		col.afectar(this);
-	}
-
 	@Override
 	public void explotar() {
 		estado.explotar();

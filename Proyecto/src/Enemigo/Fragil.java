@@ -28,11 +28,11 @@ import Utils.Size;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class KamikazeFragil extends Transformable
+public class Fragil extends Transformable
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public KamikazeFragil( Mapa map, double dificultad )
+	public Fragil( Mapa map, double dificultad )
 	{	
 		this.map			= map;
 		this.dificultad		= dificultad;
@@ -53,11 +53,6 @@ public class KamikazeFragil extends Transformable
 		actualizarPanel( true, new Color( 100, 100, 100 ) );	
 	}
 	
-
-	public void serChocado(Colisionador col)
-	{
-		col.afectar(this);
-	}
 
 	public void recibirDMG(double dmg) {
 		super.recibirDMG(dmg);

@@ -6,7 +6,8 @@ import Enemigo.Borracho;
 import Enemigo.Camuflado;
 import Enemigo.Enemigo;
 import Enemigo.Guiado;
-import Enemigo.KamikazeFragil;
+import Enemigo.Kamikaze;
+import Enemigo.Fragil;
 import Escudo.Escudo;
 import Jugador.Jugador;
 import Obstaculo.Barricada;
@@ -29,19 +30,8 @@ public abstract class Colisionador
 	{
 	}
 
-	public void afectar(Borracho kamikaze)
+	public void afectar(Kamikaze kamikaze)
 	{
-	}
-	
-	public void afectar(Guiado kamikaze)
-	{
-	}
-	
-	public void afectar(KamikazeFragil kamikaze) {
-		
-	}
-	
-	public void afectar(Camuflado c) {
 		
 	}
 	

@@ -4,7 +4,7 @@ import Enemigo.Borracho;
 import Enemigo.Camuflado;
 import Enemigo.Comun;
 import Enemigo.Guiado;
-import Enemigo.KamikazeFragil;
+import Enemigo.Fragil;
 import Entidad.Entidad;
 import Mapa.Mapa;
 import Utils.Posicion;
@@ -81,7 +81,7 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 			enemigosFueraDeJuego.add( new Camuflado(map, dificultad) );
 		
 		for (i = 0; i < cantFragil; i ++)
-			enemigosFueraDeJuego.add( new KamikazeFragil(map, dificultad) );
+			enemigosFueraDeJuego.add( new Fragil(map, dificultad) );
 		
 		agregarEnemigosIniciales( );
 	}
