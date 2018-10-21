@@ -46,15 +46,14 @@ public class IABorracho extends Inteligencia
 	
 	public void mover( Enemigo me, double msDesdeUltActualizacion )
 	{
-		final double	VELOCIDAD_HORIZONTAL	= 7.5,
-						VELOCIDAD_VERTICAL		= 30.0;
+		final double	VELOCIDAD_HORIZONTAL	= 7.5;
 		
 		Posicion	pos			= me.getPos(),
 					posPlayer	= map.getPlayerPos( ),
 					movCurva	= curvaMovimiento.obtenerCambio( msDesdeUltActualizacion );
 		
 		double	x = pos.getX(),
-				y = pos.getY(),
+				y = pos.getY() + movCurva.getY(),
 				px = posPlayer.getX();
 		
 		// Moverse hacia la posición del jugador
@@ -65,9 +64,6 @@ public class IABorracho extends Inteligencia
 		
 		// Agregar el movimiento extra de la parametrización
 		x += movCurva.getX();
-		
-		// Descender obligatoriamente
-		y += calcularVelocidad( VELOCIDAD_VERTICAL, msDesdeUltActualizacion ); 
 		
 		// No permitir que se vaya por los costados de la pantalla
 		if (x < 0)

@@ -10,35 +10,22 @@ public class OscilacionBorracho extends Curva
 	
 	public OscilacionBorracho( double tiempoInicial )
 	{
-		time = tiempoInicial;
-		oldX = 0;
-		oldY = 0;
+		tiempoMS = tiempoInicial;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Posicion obtenerCambio(double tiempoTranscurridoMS)
+	protected Posicion parametrizar( double t )
 	{
-		double x, y, t;
-		Posicion pos;
-		time += tiempoTranscurridoMS;
+		final double ESCALA = 1.0 / 15.0;
+		double x, y;
 		
-		t = time / 15000.0;
+		t *= ESCALA;
 		
-		x = 40.0 * (Math.cos(t) + Math.cos(7*t) + Math.cos(13*t) + Math.cos(17*t));
-		y = 0.0;
+		x = 50.0 * (Math.cos(t) + Math.cos(7*t) + Math.cos(13*t) + Math.cos(17*t));
+		y = 20 * (t / ESCALA);
 		
-		if(oldX == 0 && oldY == 0) {
-			oldX = x;
-			oldY = y;
-		}
-		
-		pos = new Posicion( x - oldX, y - oldY );
-		
-		oldX = x;
-		oldY = y;
-		
-		return pos;
+		return new Posicion(x, y);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

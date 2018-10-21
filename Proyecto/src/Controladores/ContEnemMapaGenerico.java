@@ -60,11 +60,11 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 	
 	public void crearEnemigos()
 	{
-		int cantTotal		= (int) (20 + (dificultad * 4));
-		int cantComun		= (int) (cantTotal * 0.60),
-			cantGuiado		= (int) (cantTotal * 0.10),
-			cantCamuflado	= (int) (cantTotal * 0.10),
-			cantFragil		= (int) (cantTotal * 0.10),
+		int cantTotal		= (int) (5 + (dificultad * 1));
+		int cantComun		= (int) (cantTotal * 60 / 100),
+			cantGuiado		= (int) (cantTotal * 10 / 100),
+			cantCamuflado	= (int) (cantTotal * 10 / 100),
+			cantFragil		= (int) (cantTotal * 10 / 100),
 			cantBorracho	= cantTotal - cantGuiado - cantComun - cantCamuflado - cantFragil,
 			i;
 

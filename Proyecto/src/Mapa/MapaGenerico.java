@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import Controladores.ContEnemMapaGenerico;
+import Controladores.ControladorNiveles;
 import Enemigo.Borracho;
 import Enemigo.Camuflado;
 import Enemigo.Comun;
@@ -31,7 +32,7 @@ public class MapaGenerico extends Mapa
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public MapaGenerico( Juego juego, Jugador player, String nombre, double dificultad )
+	public MapaGenerico( Juego juego, ControladorNiveles control, Jugador player, String nombre, double dificultad )
 	{
 		// Seleccionar un tipo de fondo especifico
 		this.fondo = new FondoGenerico( juego.getPanel() );
@@ -39,6 +40,7 @@ public class MapaGenerico extends Mapa
 		// Inicializar objetos
 		this.juego					= juego;
 		this.player					= player;
+		this.controlJuego			= control;
 		this.rand					= new Randomizador( );
 		this.controlEnemigos		= new ContEnemMapaGenerico( this, CANT_MAX_ENEM_PANTALLA, dificultad );
 		this.entidades				= new LinkedList<Entidad>();

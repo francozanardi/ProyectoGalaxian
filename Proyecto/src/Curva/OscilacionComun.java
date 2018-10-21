@@ -10,29 +10,25 @@ public class OscilacionComun extends Curva
 	
 	public OscilacionComun( double tiempoInicial )
 	{
-		time = tiempoInicial;
+		tiempoMS = tiempoInicial;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Posicion obtenerCambio(double tiempoTranscurridoMS)
+	protected Posicion parametrizar( double t )
 	{
+		final double ESCALA = 2.0;// / 15.0;
 		double x, y;
-		Posicion pos;
-		time += tiempoTranscurridoMS;
 		
-		x = 10.0 * Math.sin(time / 300.0);
-		y = time / 50.0;
+		t *= ESCALA;
 		
-		pos = new Posicion( x - oldX, y - oldY );
+		x = 20 * Math.sin( t );
+		y = 10.0 * t;
 		
-		oldX = x;
-		oldY = y;
-		
-		return pos;
+		return new Posicion(x, y);
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

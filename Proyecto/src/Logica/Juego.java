@@ -7,6 +7,8 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Controladores.ContNivelesGenerico;
+import Controladores.ControladorNiveles;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Mapa.MapaGenerico;
@@ -27,16 +29,17 @@ public class Juego extends JFrame
 	
 	public static final int		GAME_WIDTH	= 450,
 								GAME_HEIGHT	= (int) (GAME_WIDTH * 1.5),
-								GAME_FPS	= 300;
+								GAME_FPS	= 30;
 	public static final String	GAME_TITLE = "Galaxian Trucho";
 
 	////////////////////////////////////////////////w///////////////////////////////////////////////
 	
-	private JPanel		panel;
-	private JLabel		labelPuntaje;
-	private MainThread	tiempo;
-	private Mapa		mapa;
-	private Teclado		teclado;
+	private JPanel				panel;
+	private JLabel				labelPuntaje;
+	private MainThread			tiempo;
+	private Mapa				mapa;
+	private Teclado				teclado;
+	private ControladorNiveles	control;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -61,7 +64,7 @@ public class Juego extends JFrame
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
-	public Juego()
+	private Juego()
 	{
 		super( GAME_TITLE );
 		
@@ -80,42 +83,20 @@ public class Juego extends JFrame
 		teclado = new Teclado( );
 		
 		Jugador p = new Jugador();
-		mapa = new MapaGenerico( this, p, "MAPA GENÉRICO LVL.1", 1.0 );
 		
-		empezarNivel( mapa );
+		startGame( p );
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private void empezarNivel( Mapa map )
+	private void startGame( Jugador p )
 	{
-		tiempo = new MainThread( map, GAME_FPS );
-		tiempo.start();
+		control = new ContNivelesGenerico( this, p );
+		control.gameStart();
 	}
 	
-	private void terminarNivel( )
+	public void endGame( )
 	{
-		if (tiempo != null && tiempo.isAlive())
-		{
-			tiempo.terminar();
-			tiempo = null;
-		}
-		
-		mapa = null;
-	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void mapVictory( )
-	{
-		terminarNivel( );
-		System.out.println("MAPA GANADO!");
-	}
-	
-	public void mapDefeat( )
-	{
-		terminarNivel( );
-		System.out.println("MAPA PERDIDO!");
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,6 +106,12 @@ public class Juego extends JFrame
 		panel = new JPanel();
 		panel.setLayout( null );
 		setContentPane( panel );
+	}
+	
+	public void resetPanel( )
+	{
+		panel.removeAll();
+		panel.add(labelPuntaje);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

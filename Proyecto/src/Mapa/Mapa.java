@@ -13,6 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JPanel;
 
 import Controladores.ControladorEnemigos;
+import Controladores.ControladorNiveles;
 import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Enemigo.Comun;
@@ -38,6 +39,7 @@ public abstract class Mapa
 	
 	protected Randomizador			rand;
 	protected Juego					juego;
+	protected ControladorNiveles	controlJuego;
 	protected Jugador				player;
 	protected Fondo					fondo;
 	protected Collection<Entidad>	entidades;
@@ -51,13 +53,25 @@ public abstract class Mapa
 	
 	public void ganar( )
 	{
-		juego.mapVictory();
+		controlJuego.mapVictory( player );
+		
+		//juego.mapVictory();
 	}
 	
 	public void perder( )
 	{
 		juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja.");
-		juego.mapDefeat();
+		
+		
+		borrarEntidades( );
+		for (Entidad e : entidades)
+		{
+			juego.getPanel().remove( e.getPanel() );
+		}
+		
+		controlJuego.mapDefeat( player );
+		
+		//juego.mapDefeat();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
