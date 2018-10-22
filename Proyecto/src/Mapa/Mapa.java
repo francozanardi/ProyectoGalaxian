@@ -62,13 +62,6 @@ public abstract class Mapa
 	{
 		juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja.");
 		
-		
-		borrarEntidades( );
-		for (Entidad e : entidades)
-		{
-			juego.getPanel().remove( e.getPanel() );
-		}
-		
 		controlJuego.mapDefeat( player );
 		
 		//juego.mapDefeat();

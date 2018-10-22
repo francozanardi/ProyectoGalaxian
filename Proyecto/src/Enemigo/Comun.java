@@ -39,8 +39,8 @@ public class Comun extends Enemigo
 		this.tamano			= new Size(15, 15);
 		this.escudo			= new LinkedList<Escudo>( );
 		
-		this.vida			= 200.0 * dificultad;
-		this.puntaje		= (int) (dificultad * 30);
+		this.vida			= 200.0 + (50.0 * dificultad);
+		this.puntaje		= (int) (30 + (10 * dificultad));
 
 		setArma( new ArmaDefaultEnemigo(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		

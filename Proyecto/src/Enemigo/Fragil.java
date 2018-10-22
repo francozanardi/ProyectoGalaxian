@@ -43,8 +43,8 @@ public class Fragil extends Transformable
 		this.tamano			= new Size(30, 15);
 		this.escudo			= new LinkedList<Escudo>( );
 		
-		this.puntaje		= (int) (dificultad * 50);
-		this.vida			= 400 * dificultad;
+		this.puntaje		= (int) (50 + (dificultad * 10));
+		this.vida			= 400 + (66.6 * dificultad);
 		this.estado			= new EstadoGuiado(this); //la inteligencia y demás caracteristicas faltantes las determina su estado.
 
 		setArma( new ArmaSniper(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
