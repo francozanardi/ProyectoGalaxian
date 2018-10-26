@@ -3,6 +3,7 @@ package Controladores;
 import Enemigo.Borracho;
 import Enemigo.Camuflado;
 import Enemigo.Comun;
+import Enemigo.Enemigo;
 import Enemigo.Guiado;
 import Enemigo.Fragil;
 import Entidad.Entidad;
@@ -17,6 +18,13 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	protected double dificultad;
+	
+	protected int CHANCE_CREAR_COMUN = 1;
+	protected int CHANCE_CREAR_GUIADO = 1;
+	protected int CHANCE_CREAR_BORRACHO = 500;
+	protected int CHANCE_CREAR_FRAGIL = 1;
+	protected int CHANCE_CREAR_CAMUFLADO = 1;
+	protected int CHANCE_TOTAL = CHANCE_CREAR_COMUN + CHANCE_CREAR_GUIADO + CHANCE_CREAR_BORRACHO + CHANCE_CREAR_FRAGIL + CHANCE_CREAR_CAMUFLADO;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -55,13 +63,44 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 			map.addEntity( enemigo );
 		}
 	}
+	
+	private Enemigo crearEnemigo() {
+		int valorAleatorio = rand.nextInt(CHANCE_TOTAL);
+		
+		if(valorAleatorio < CHANCE_CREAR_GUIADO)
+			return new Guiado(map, dificultad);
+		valorAleatorio -= CHANCE_CREAR_GUIADO;
+		
+		if(valorAleatorio < CHANCE_CREAR_BORRACHO)
+			return new Borracho(map, dificultad);
+		valorAleatorio -= CHANCE_CREAR_BORRACHO;
+		
+		if(valorAleatorio < CHANCE_CREAR_FRAGIL)
+			return new Fragil(map, dificultad);
+		valorAleatorio -= CHANCE_CREAR_FRAGIL;
+		
+		if(valorAleatorio < CHANCE_CREAR_CAMUFLADO)
+			return new Camuflado(map, dificultad);
+		
+		return new Comun(map, dificultad);
+	}
+	
+	public void crearEnemigos() {
+		int cantTotal = (int) (30 + (dificultad * 1));
+		
+		for(int i = 0; i < cantTotal; i++) {
+			enemigosFueraDeJuego.add(crearEnemigo());
+		}
+		
+		agregarEnemigosIniciales();
+	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
-	
+	/*
 	public void crearEnemigos()
 	{
 		int cantTotal		= (int) (5 + (dificultad * 1));
-		int cantComun		= (int) (cantTotal * 60 / 100),
+		int cantComun		= (int) (cantTotal * 60 / 100), //para que salga un comun cantTotal deber ser al menos 10. Por lo que se debe estar en nivel 5.
 			cantGuiado		= (int) (cantTotal * 10 / 100),
 			cantCamuflado	= (int) (cantTotal * 10 / 100),
 			cantFragil		= (int) (cantTotal * 10 / 100),
@@ -85,7 +124,7 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 		
 		agregarEnemigosIniciales( );
 	}
-
+	*/
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void liberarEnemigo()

@@ -29,7 +29,7 @@ public class Juego extends JFrame
 	
 	public static final int		GAME_WIDTH	= 450,
 								GAME_HEIGHT	= (int) (GAME_WIDTH * 1.5),
-								GAME_FPS	= 30;
+								GAME_FPS	= 60;
 	public static final String	GAME_TITLE = "Galaxian Trucho";
 
 	////////////////////////////////////////////////w///////////////////////////////////////////////

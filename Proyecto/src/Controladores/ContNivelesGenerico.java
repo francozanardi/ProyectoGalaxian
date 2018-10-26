@@ -53,6 +53,7 @@ public class ContNivelesGenerico extends ControladorNiveles
 	public void gameEnd()
 	{
 		juego.endGame();
+		stopMap(); //provisioria
 		
 		System.out.println("GAME OVER!!");
 	}

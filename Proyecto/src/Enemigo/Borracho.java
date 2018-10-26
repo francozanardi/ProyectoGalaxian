@@ -44,7 +44,7 @@ public class Borracho extends Kamikaze
 		
 		this.puntaje		= (int) (dificultad * 50);
 		this.explosionDmg	= 100 * dificultad;
-		this.vida			= 1000.0 * dificultad;
+		this.vida			= 100.0 * dificultad;
 		
 		this.colisionador	= new ColisionadorKamikaze( explosionDmg );
 		

@@ -58,17 +58,19 @@ public abstract class Mapa
 		//juego.mapVictory();
 	}
 	
+	public void limpiarMapa() {
+		for(Entidad e: entidades) {
+			e.getPanel().setVisible(false);
+		}
+		entidades.clear();
+		entidadesParaEliminar.clear();
+		entidadesParaAgregar.clear();
+	}
+	
 	public void perder( )
 	{
-		juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja.");
-		
-		
-		borrarEntidades( );
-		for (Entidad e : entidades)
-		{
-			juego.getPanel().remove( e.getPanel() );
-		}
-		
+		juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja.");		
+
 		controlJuego.mapDefeat( player );
 		
 		//juego.mapDefeat();
