@@ -99,12 +99,10 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 	/*
 	public void crearEnemigos()
 	{
-		int cantTotal		= (int) (5 + (dificultad * 1));
-		int cantComun		= (int) (cantTotal * 60 / 100), //para que salga un comun cantTotal deber ser al menos 10. Por lo que se debe estar en nivel 5.
-			cantGuiado		= (int) (cantTotal * 10 / 100),
-			cantCamuflado	= (int) (cantTotal * 10 / 100),
-			cantFragil		= (int) (cantTotal * 10 / 100),
-			cantBorracho	= cantTotal - cantGuiado - cantComun - cantCamuflado - cantFragil,
+		int cantComun		= Math.min( (int) (cantTotal * 60 / 100), cantTotal - 4 ),
+			cantGuiado		= Math.max( (int) (cantTotal * 10 / 100), 1 ),
+			cantCamuflado	= Math.max( (int) (cantTotal * 10 / 100), 1 ), //para que salga un comun cantTotal deber ser al menos 10. Por lo que se debe estar en nivel 5.
+			cantFragil		= Math.max( (int) (cantTotal * 10 / 100), 1 ),
 			i;
 
 		for (i = 0; i < cantComun; i ++)

@@ -34,8 +34,8 @@ public class Camuflado extends Transformable
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 3) );
 		this.tamano 		= new Size(15, 15);
 		this.escudo			= new LinkedList<Escudo>( );
-		this.vida			= 400.0 * dificultad; //tiene más vida que un común normal.
-		this.puntaje		= (int) (dificultad * 30);
+		this.vida			= 400.0 + (100.0 * dificultad); //tiene más vida que un común normal.
+		this.puntaje		= (int) (30 + (10.0 * dificultad));
 
 		actualizarPanel( true, new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ) );
 		setPowerUp( new PowerUpHeal(map) );

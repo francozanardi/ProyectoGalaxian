@@ -40,9 +40,9 @@ public class Guiado extends Kamikaze
 		this.tamano			= new Size(30, 15);
 		this.escudo			= new LinkedList<Escudo>( );
 		
-		this.puntaje		= (int) (dificultad * 50);
-		this.explosionDmg	= 100 * dificultad;
-		this.vida			= 400 * dificultad;
+		this.puntaje		= (int) (50 + (10.0 * dificultad));
+		this.explosionDmg	= 100 + (12.5 * dificultad);
+		this.vida			= 400 + (66.6 * dificultad);
 
 		this.colisionador	= new ColisionadorKamikaze( explosionDmg );
 		

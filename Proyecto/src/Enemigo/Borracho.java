@@ -42,15 +42,15 @@ public class Borracho extends Kamikaze
 		this.tamano			= new Size(30, 15);
 		this.escudo			= new LinkedList<Escudo>( );
 		
-		this.puntaje		= (int) (dificultad * 50);
-		this.explosionDmg	= 100 * dificultad;
-		this.vida			= 100.0 * dificultad;
+		this.puntaje		= (int) (50 + (10 * dificultad));
+		this.explosionDmg	= 100 + (10.0 * dificultad);
+		this.vida			= 600.0 + (100.0 * dificultad);
 		
 		this.colisionador	= new ColisionadorKamikaze( explosionDmg );
 		
 		actualizarPanel( true, new Color( 0, 100, 0 ) );
 		
-		setArma( new ArmaTriple(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );
+		setArma( new ArmaDefaultEnemigo(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );
 		setPowerUp( new PowerUpEscudoExplosion(map) );
 	}
 

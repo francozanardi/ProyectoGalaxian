@@ -70,7 +70,6 @@ public abstract class Mapa
 	public void perder( )
 	{
 		juego.obtenerLabelPuntaje( ).setText("Perdiste en un juego que no está listo, jaja.");		
-
 		controlJuego.mapDefeat( player );
 		
 		//juego.mapDefeat();

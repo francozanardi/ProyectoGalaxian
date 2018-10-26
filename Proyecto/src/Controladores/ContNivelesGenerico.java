@@ -36,6 +36,7 @@ public class ContNivelesGenerico extends ControladorNiveles
 
 	public void mapDefeat( Jugador player )
 	{
+		stopMap( );
 		gameEnd();
 		
 		System.out.println("DEFEAT!!");
