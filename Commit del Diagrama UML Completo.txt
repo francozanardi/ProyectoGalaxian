@@ -1,0 +1,104 @@
+General:
+- El proyecto ahora compila sin ningún warning.
+- Se añadió un diagrama UML completo de todo el proyecto.
+- Se removieron los comentarios "separadores de métodos".
+
+
+
+Utils.Position:
+- Se quitó el método copy( Posicion p), no se usó nunca.
+- Se quitó un constructor que recibe enteros, ya que el que recibe doubles funciona para ese caso.
+
+Utils.Randomizador:
+- Ahora implementa el patrón de diseño 'Singleton'.
+  + Todas las clases que lo utilizan fueron reacomodadas ("new Randomizador()" -> "Randomizador.create()").
+
+Utils.Vector
+- Se añadó un breve Javadoc sobre algunos métodos.
+- Se renombraron los siguientes métodos:
+  + setEnCartesianas(double x, double y) -> setCartesianas(double x, double y)
+  + setEnPolares(double theta, double r) -> setPolares(double ang, double dist)
+
+
+
+Paquete PowerUp:
+- Se renombraron todas las clases:
+  + 'PowerUpCongelar'        -> 'PUCongelar'
+  + 'PowerUpEscudoExplosion' -> 'PUEscudoExplosion'
+  + 'PowerUpHeal'            -> 'PUHeal'
+  + 'PowerUpMinigun'         -> 'PUMinigun'
+  + 'PowerUpMultiplicador'   -> 'PUMultiplicador'
+
+PowerUp.PUMultiplicador
+- Ahora no sólo da un multiplicador de daño, sino que también aumenta la cadencia del arma temporalmente.
+
+
+
+Obstaculo.ObstaculoDesctrutible
+- Se renombró a 'Destructible'
+
+Obstaculo.ObstaculoComun
+- Ahora da 10 puntos al destruirlo.
+
+Obstaculo.BarricadaComun
+- Ahora da 10 puntos al destruirlo.
+
+
+
+Mapa.Mapa
+- Se añadió un método "mostrarAnuncio( String texto )" en el cual delegarán las clases para mostrarle mensaje por pantalla al jugador.
+  + De momento no hay interfaz gráfica para los anuncios, son un println.
+
+
+
+Escudo.EscudoHealer
+- Ahora la curación máxima y la velocidad de curación son establecidos en el constructor (antes eran constantes).
+
+
+
+Entidad.Entidad
+- Se añadió el método 'getMapa()'
+- El método morir() ahora es protegido.
+
+Entidad.EntidadConVida
+- Ahora todas las entidades con vida tienen un puntaje (antes estaba en 'Personaje')
+  + Se incorporaron los métodos 'getScore' (antes llamado 'getPuntaje') y 'giveScore'.
+  + Se removió el método 'setPuntaje'.
+- Ahora todas las EntidadConVida pueden disparar.
+- El método 'changeArma' ahora también mantiene el multiplicador de cadencia.
+
+
+
+Paquete Colisionador:
+- Se renombraron las siguientes clases:
+  + 'ColisionadorBarricada' -> 'ColBarricada'
+  + 'ColisionadorObstaculo' -> 'ColObstaculo'
+  + 'ColisionadorPowerup'   -> 'ColPowerUp'
+  + 'ColisionadorJugador'   -> 'ColJugador'
+  + 'ColisionadorEntidad'   -> 'ColEntidad'
+  + 'ColisionadorDisparo'   -> 'ColDisparo'
+  + 'ColisionadorKamikaze'  -> 'ColKamikaze'
+  + 'ColisionadorEnemigo'   -> 'ColEnemigo'
+  
+Colisionador.Colisionador
+- Se removieron los métodos 'afectar(Escudo escudo)' y 'afectar(Arma arma)' ya que no tenían sentido.
+
+
+
+Arma.Arma
+- Ahora las armas tienen un atributo 'multCadencia' que es un multiplicador de cadencia.
+  + Se incorporaron sus respectivos métodos 'getMultCadencia' y 'setMultCadencia'
+  + Se eliminó el método 'setCadencia'
+- Ahora las armas son funcionales para cualquier EntidadConVida (antes sólo para Personaje)
+
+
+
+Paquete Inteligencia:
+* Inteligencia.Inteligencia:
+  - Se removió el método 'disparar'.
+  - El método 'mover' ya no recibe por parámetro una entidad, no es necesario, ya que las inteligencias conocen a su usuario.
+* Inteligencia.IAEnemigo:
+  - Clase nueva para hacer (pronto) una jerarquia de inteligencias, la idea es que cada entidad se mueva según una inteligencia
+    (y no sólo los enemigos).
+  - Contiene el método 'disparar()'
+* Las clases 'IAKamikaze', 'IAComun', y 'IABorracho' ahora reciben por constructor un Enemigo (su usuario).
