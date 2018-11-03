@@ -1,36 +1,26 @@
 package Mapa;
 
-import java.awt.Component;
 import java.util.LinkedList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import Controladores.ContEnemMapaGenerico;
 import Controladores.ControladorNiveles;
-import Enemigo.Borracho;
-import Enemigo.Camuflado;
-import Enemigo.Comun;
-import Enemigo.Guiado;
-import Enemigo.Fragil;
 import Entidad.Entidad;
 import Escudo.EscudoAbsoluto;
 import Grafica.FondoGenerico;
 import Jugador.Jugador;
 import Logica.Juego;
-import Logica.Teclado;
 import Obstaculo.BarricadaComun;
 import Obstaculo.ObstaculoComun;
 import Utils.Posicion;
 import Utils.Randomizador;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 public class MapaGenerico extends Mapa
 {
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
 	private final int CANT_MAX_ENEM_PANTALLA = 15;
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	public MapaGenerico( Juego juego, ControladorNiveles control, Jugador player, String nombre, double dificultad )
 	{
@@ -41,7 +31,7 @@ public class MapaGenerico extends Mapa
 		this.juego					= juego;
 		this.player					= player;
 		this.controlJuego			= control;
-		this.rand					= new Randomizador( );
+		this.rand					= Randomizador.create( );
 		this.controlEnemigos		= new ContEnemMapaGenerico( this, CANT_MAX_ENEM_PANTALLA, dificultad );
 		this.entidades				= new LinkedList<Entidad>();
 		this.entidadesParaEliminar	= new LinkedList<Entidad>();
@@ -60,8 +50,8 @@ public class MapaGenerico extends Mapa
 		agregarEntidades();
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-
+	
+	
 	public void establecerJugador( )
 	{
 		// Vincular al jugador con el mapa
@@ -77,8 +67,8 @@ public class MapaGenerico extends Mapa
 		player.addEscudo( new EscudoAbsoluto(player, 5) );
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
-
+	
+	
 	public void crearObjetos( )
 	{
 		addEntity( new BarricadaComun( this, new Posicion( 20, Juego.GAME_HEIGHT / 2 ) ) );
@@ -86,8 +76,8 @@ public class MapaGenerico extends Mapa
 		addEntity( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH / 2, Juego.GAME_HEIGHT / 2 ) ) );
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+		
 	public void actualizar( double msDesdeUltActualizacion )
 	{
 		actualizarJugador( msDesdeUltActualizacion );
@@ -106,7 +96,4 @@ public class MapaGenerico extends Mapa
 		agregarEntidades();
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

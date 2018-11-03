@@ -2,17 +2,19 @@ package Controladores;
 
 import Jugador.Jugador;
 import Logica.Juego;
-import Mapa.Mapa;
 import Mapa.MapaGenerico;
+
+
 
 public class ContNivelesGenerico extends ControladorNiveles
 {
-	
 	public ContNivelesGenerico( Juego game, Jugador player )
 	{
 		jugador = player;
 		juego = game;
 	}
+	
+	
 	
 	private void establecerNivel( int nivelID )
 	{
@@ -25,6 +27,8 @@ public class ContNivelesGenerico extends ControladorNiveles
 		System.out.println( "COMIENZA EL NIVEL " + nivelID );
 	}
 
+	
+	
 	
 	public void mapVictory( Jugador player )
 	{
@@ -43,6 +47,7 @@ public class ContNivelesGenerico extends ControladorNiveles
 	}
 
 	
+	
 	public void gameStart()
 	{
 		nivel = 1;
@@ -58,5 +63,4 @@ public class ContNivelesGenerico extends ControladorNiveles
 		
 		System.out.println("GAME OVER!!");
 	}
-
 }

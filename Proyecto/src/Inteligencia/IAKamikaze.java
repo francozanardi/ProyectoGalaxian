@@ -1,47 +1,29 @@
 package Inteligencia;
 
-import java.util.List;
-
-import Arma.Arma;
-import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Logica.Juego;
-import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class IAKamikaze extends Inteligencia
+
+public class IAKamikaze extends IAEnemigo
 {	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public IAKamikaze( Mapa map )
+	public IAKamikaze( Enemigo me )
 	{
-		this.rand 	= new Randomizador( );
-		this.map	= map;
+		this.entidad	= me;
+		this.rand		= Randomizador.create( );
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void disparar( Enemigo me )
-	{
-		List<Disparo> disparos = me.getArma().lanzarDisparo( me );
-		
-		// Añadir disparos al mapa
-		for (Disparo d : disparos)
-			map.addEntity(d);
-	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void mover( Enemigo me, double msDesdeUltActualizacion )
+	public void mover( double msDesdeUltActualizacion )
 	{
 		final double	VELOCIDAD_HORIZONTAL	= 25.0,
 						VELOCIDAD_VERTICAL		= 25.0;
 		
-		Posicion	pos			= me.getPos(),
-					posPlayer	= map.getPlayerPos( );
+		Posicion	pos			= entidad.getPos(),
+					posPlayer	= entidad.getMapa().getPlayerPos( );
 		
 		double	x = pos.getX(),
 				y = pos.getY(),
@@ -79,8 +61,4 @@ public class IAKamikaze extends Inteligencia
 		pos.setX( x );
 		pos.setY( y );
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

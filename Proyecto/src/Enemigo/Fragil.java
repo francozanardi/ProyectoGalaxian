@@ -5,39 +5,27 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
-import Arma.ArmaDefaultEnemigo;
 import Arma.ArmaSniper;
 import Colisiones.ColDispEnemigo;
-import Colisiones.Colisionador;
-import Colisiones.ColisionadorEnemigo;
-import Colisiones.ColisionadorKamikaze;
-import Enemigo.Estados.Estado;
-import Enemigo.Estados.EstadoBorracho;
 import Enemigo.Estados.EstadoGuiado;
-import Enemigo.Estados.EstadoKamikazeFragil;
 import Escudo.Escudo;
-import Inteligencia.IAComun;
-import Inteligencia.IAKamikaze;
 import Logica.Juego;
 import Mapa.Mapa;
-import PowerUp.PowerUpHeal;
-import PowerUp.PowerUpMultiplicador;
+import PowerUp.PUMultiplicador;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 public class Fragil extends Transformable
-{
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
+{	
 	public Fragil( Mapa map, double dificultad )
 	{	
 		this.map			= map;
 		this.dificultad		= dificultad;
 		
-		this.rand			= new Randomizador();
+		this.rand			= Randomizador.create( );
 		this.panel			= new JPanel( );
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 8) );
 		this.tamano			= new Size(30, 15);
@@ -47,28 +35,27 @@ public class Fragil extends Transformable
 		this.vida			= 400 + (66.6 * dificultad);
 		this.estado			= new EstadoGuiado(this); //la inteligencia y demás caracteristicas faltantes las determina su estado.
 
-		setArma( new ArmaSniper(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
-		setPowerUp( new PowerUpMultiplicador(map) );
+		setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		setPowerUp( new PUMultiplicador(map) );
 		
 		actualizarPanel( true, new Color( 100, 100, 100 ) );	
 	}
 	
+	
 
-	public void recibirDMG(double dmg) {
+	public void recibirDMG(double dmg)
+	{
 		super.recibirDMG(dmg);
 		estado.controlarTransformacion();
 	}
 
-
-	@Override
-	public void explotar() {
+	public void explotar()
+	{
 		estado.explotar();		
 	}
 
-	@Override
-	public void transformar() {
+	public void transformar()
+	{
 		estado = estado.transformar();
 	}
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

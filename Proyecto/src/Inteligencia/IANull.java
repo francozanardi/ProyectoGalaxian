@@ -1,19 +1,19 @@
 package Inteligencia;
 
-import Enemigo.Enemigo;
 
-public class IANull extends Inteligencia
+
+public class IANull extends IAEnemigo
 {
 
 	public IANull( )
 	{
 	}
 	
-	public void mover(Enemigo me, double msDesdeUltActualizacion)
+	public void mover( double msDesdeUltActualizacion )
 	{
 	}
 
-	public void disparar(Enemigo me)
+	public void disparar( )
 	{
 	}
 

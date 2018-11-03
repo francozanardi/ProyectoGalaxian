@@ -1,51 +1,28 @@
 package Inteligencia;
 
-import java.util.List;
-
-import Arma.Arma;
-import Curva.Curva;
 import Curva.OscilacionComun;
-import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Logica.Juego;
-import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class IAComun extends Inteligencia
+
+public class IAComun extends IAEnemigo
 {
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	protected Curva curvaMovimiento;
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public IAComun( Mapa map )
+	public IAComun( Enemigo me )
 	{
-		this.map	= map;
-		this.rand	= new Randomizador( );
+		this.entidad	= me;
+		this.rand		= Randomizador.create( );
 		
 		this.curvaMovimiento = new OscilacionComun( rand.nextDouble(0.0, 1000.0) );
 	}
+
+
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void disparar( Enemigo me )
+	public void mover( double msDesdeUltActualizacion )
 	{
-		List<Disparo> disparos = me.getArma().lanzarDisparo( me );
-		
-		// Añadir disparos al mapa
-		for (Disparo d : disparos)
-			map.addEntity(d);
-	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void mover( Enemigo me, double msDesdeUltActualizacion )
-	{
-		Posicion	pos			= me.getPos(),
+		Posicion	pos			= entidad.getPos(),
 					movimiento	= curvaMovimiento.obtenerCambio( msDesdeUltActualizacion );
 				
 		double	x = pos.getX() + movimiento.getX(),
@@ -59,13 +36,13 @@ public class IAComun extends Inteligencia
 		*/
 		
 		// No permitir que se vaya por los costados de la pantalla
-		if (x < me.getPanel().getBounds().getWidth()/2)  
-			x = me.getPanel().getBounds().getWidth()/2;
+		if (x < entidad.getPanel().getBounds().getWidth()/2)  
+			x = entidad.getPanel().getBounds().getWidth()/2;
 		
 		// Esto de dividirlo por 2 y multiplicarlo por 2 lo agregué porque el enemigo se iba al borde de la pantalla,
 		// un lugar donde el jugador no puede disparar.
-		else if (x > Juego.GAME_WIDTH - me.getPanel().getBounds().getWidth()*2)
-			x = Juego.GAME_WIDTH - me.getPanel().getBounds().getWidth()*2;
+		else if (x > Juego.GAME_WIDTH - entidad.getPanel().getBounds().getWidth()*2)
+			x = Juego.GAME_WIDTH - entidad.getPanel().getBounds().getWidth()*2;
 		
 		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba
 		if (y > Juego.GAME_HEIGHT)
@@ -75,8 +52,4 @@ public class IAComun extends Inteligencia
 		pos.setX( x );
 		pos.setY( y );
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

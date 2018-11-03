@@ -1,85 +1,86 @@
 package Disparo;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 import Arma.Arma;
 import Colisiones.Colisionador;
-import Colisiones.ColisionadorDisparo;
+import Colisiones.ColDisparo;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
-import Entidad.Personaje;
 import Logica.Juego;
-import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
 import Utils.Vector;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 public abstract class Disparo extends Entidad
 {
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
 	protected double				dmg;
-	protected Vector				vecDireccion;
-	protected ColisionadorDisparo	colisionador;
+	protected Vector				dir;
+	protected ColDisparo	colisionador;
+
+
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	protected void inicializar( Size size, Mapa mapa, ColisionadorDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion, double dmgBase )
+	protected void inicializar( Size size, ColDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion, double dmgBase )
 	{
 		colisionador	= col;
-		map				= mapa;
+		map				= arma.getMapa();
 		panel			= new JPanel();
 		pos				= posInicial;
 		tamano			= size;
-		dmg				= dmgBase * arma.getMultiplicadorDmg( );
-		vecDireccion	= vectorDireccion;
+		dmg				= dmgBase * arma.getMultDmg( );
+		dir				= vectorDireccion;
 		
 		inicializarColisionador( arma.getOwner() );
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 	public void colisionar(Entidad e)
 	{		
 		e.serChocado(colisionador);
 	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void serChocado(Colisionador col)
 	{
 		colisionador.afectar( this );
 	}
+
+
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
+	public double getDmg( )
+	{
+		return dmg;
+	}
 	
-	protected void inicializarColisionador( Personaje tirador )
+	
+	
+	protected void inicializarColisionador( EntidadConVida tirador )
 	{
 		this.colisionador.setDisparo( this );
 		this.colisionador.setLanzador( tirador );
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	
 	public void avanzar( double msDesdeUltActualizacion )
 	{
-		pos.setX( pos.getX() + conversionEnTiempo( vecDireccion.getX(), msDesdeUltActualizacion) );
+		pos.setX( pos.getX() + conversionEnTiempo( dir.getX(), msDesdeUltActualizacion) );
 		
-		pos.setY( pos.getY() + conversionEnTiempo( vecDireccion.getY(), msDesdeUltActualizacion) );
+		pos.setY( pos.getY() + conversionEnTiempo( dir.getY(), msDesdeUltActualizacion) );
 		
 		actualizarPosicion();
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	
 	public void actualizar( double msDesdeUltActualizacion )
 	{
-		avanzar( msDesdeUltActualizacion );
 		final int offset = 100;
+		
+		
+		avanzar( msDesdeUltActualizacion );
 		
 		// eliminar el disparo si se fue de la pantalla
 		if ((pos.getY() < (0 - offset)) ||
@@ -90,20 +91,4 @@ public abstract class Disparo extends Entidad
 			remove();
 		}
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public double getDmg( )
-	{
-		return dmg;
-	}
-	
-	public void setDmg( double dmg )
-	{
-		this.dmg = dmg;
-	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
