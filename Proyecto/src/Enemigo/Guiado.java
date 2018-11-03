@@ -7,27 +7,34 @@ import javax.swing.JPanel;
 
 import Arma.ArmaSniper;
 import Colisiones.ColDispEnemigo;
-import Colisiones.ColKamikaze;
+import Colisiones.Colisionador;
+import Colisiones.ColisionadorKamikaze;
 import Escudo.Escudo;
 import Inteligencia.IAKamikaze;
 import Logica.Juego;
 import Mapa.Mapa;
-import PowerUp.PUHeal;
+import PowerUp.PowerUpHeal;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class Guiado extends Kamikaze
-{	
+{
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected double explosionDmg;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public Guiado(Mapa map, double dificultad)
 	{
 		this.map			= map;
-		this.ia				= new IAKamikaze( this );
+		this.ia				= new IAKamikaze( map );
 		this.dificultad		= dificultad;
 		
-		this.rand			= Randomizador.create( );
+		this.rand			= new Randomizador();
 		this.panel			= new JPanel( );
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 8) );
 		this.tamano			= new Size(30, 15);
@@ -37,12 +44,16 @@ public class Guiado extends Kamikaze
 		this.explosionDmg	= 100 + (12.5 * dificultad);
 		this.vida			= 400 + (66.6 * dificultad);
 
-		this.colisionador	= new ColKamikaze( explosionDmg );
+		this.colisionador	= new ColisionadorKamikaze( explosionDmg );
 		
-		setPowerUp( new PUHeal(map) );
+		setPowerUp( new PowerUpHeal(map) );
 		
 		actualizarPanel( true, new Color( 100, 0, 0 ) );
 		
-		setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		setArma( new ArmaSniper(map, this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 	}
+
+
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

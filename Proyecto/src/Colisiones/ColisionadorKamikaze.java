@@ -1,47 +1,31 @@
-package Escudo;
+package Colisiones;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
-import Entidad.EntidadConVida;
-import Utils.Posicion;
-import Utils.Size;
+import Disparo.Disparo;
+import Enemigo.Enemigo;
+import Jugador.Jugador;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class EscudoAbsoluto extends Escudo
+public class ColisionadorKamikaze extends Colisionador
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private int disparosMitigados;
+	private double dmgExplosion;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public EscudoAbsoluto( EntidadConVida holder, int duracionEnDisparos )
+	public ColisionadorKamikaze( double danoExplosion )
 	{
-		this.pos				= new Posicion(2, 2);
-		this.tamano				= new Size(10, 30);
-		this.panel				= new JPanel();
-		this.disparosMitigados	= duracionEnDisparos;
-		
-		this.holder				= holder;
-
-		this.actualizarPanel(true, Color.yellow);
+		this.dmgExplosion = danoExplosion;
 	}
-
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public double modificarDmg( double dmg )
+	public void afectar(Jugador jugador)
 	{
-		disparosMitigados --;
-		
-		if (disparosMitigados == 0)
-			remove( );
-		
-		return 0.0;
+		jugador.explosionKamikaze( dmgExplosion );
 	}
-
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 }
 

@@ -1,45 +1,41 @@
-package Escudo;
+package PowerUp;
 
 import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import Entidad.EntidadConVida;
+import Arma.ArmaMinigun;
+import Colisiones.ColDispJugador;
+import Colisiones.ColisionadorPowerup;
+import Jugador.Jugador;
+import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class EscudoAbsoluto extends Escudo
+public class PowerUpMinigun extends PowerUp
 {
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private int disparosMitigados;
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public EscudoAbsoluto( EntidadConVida holder, int duracionEnDisparos )
+	public PowerUpMinigun( Mapa map )
 	{
-		this.pos				= new Posicion(2, 2);
-		this.tamano				= new Size(10, 30);
-		this.panel				= new JPanel();
-		this.disparosMitigados	= duracionEnDisparos;
+		this.map			= map;
+		this.pos			= new Posicion( 0, 0 );
+		this.panel			= new JPanel( );
+		this.tamano			= new Size( 30, 30 );
+		this.vida			= 1000;
+		this.colisionador	= new ColisionadorPowerup( this );
 		
-		this.holder				= holder;
-
-		this.actualizarPanel(true, Color.yellow);
+		this.actualizarPanel(true, Color.cyan);
 	}
-
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public double modificarDmg( double dmg )
+	public void afectar(Jugador player)
 	{
-		disparosMitigados --;
-		
-		if (disparosMitigados == 0)
-			remove( );
-		
-		return 0.0;
+		System.out.println("Has agarrado el PowerUpMinigun, tu arma ha sido cambiada por una minigun!");
+		player.changeArma( new ArmaMinigun(map, player, new ColDispJugador(), 0.5 * Math.PI) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

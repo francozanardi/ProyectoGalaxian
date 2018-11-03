@@ -6,132 +6,143 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import Colisiones.Colisionador;
-import Colisiones.ColDisparo;
+import Colisiones.ColisionadorDisparo;
 import Disparo.Disparo;
 import Entidad.Entidad;
-import Entidad.EntidadConVida;
+import Entidad.Personaje;
+import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
+import Utils.Vector;
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public abstract class Arma extends Entidad
-{	
-	protected double				cadenciaDisparo,	// determina cada cuantos MILISEGUNDOS se puede disparar.
-									multDmg,
-									multCadencia,
-									anguloDisparo;
+{
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected int					cadenciaDisparo; // determina cada cuantos MILISEGUNDOS se puede disparar.
+	protected double				multiplicadorDmg;
 	protected long					tiempoUltimoDisparo;
-	protected EntidadConVida 		owner;
-	protected ColDisparo	colisionador;
-
-
+	protected Personaje 			owner;
+	protected ColisionadorDisparo	colisionador;
+	protected double				anguloDisparo;
 	
-	protected abstract List<Disparo> crearDisparo( );
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void serChocado( Colisionador col )
-	{
-	}
+	protected abstract List<Disparo> crearDisparo( Personaje p );
 	
-	public void actualizar( double msDesdeUltActualizacion )
-	{
-	}
-
-
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public EntidadConVida getOwner( )
+	public Personaje getOwner( )
 	{
 		return this.owner;
 	}
-
-
 	
-	public double getCadencia( )
+	public void setOwner( Personaje p )
+	{
+		this.owner = p;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public int getCadenciaDisparo( )
 	{
 		return cadenciaDisparo;
 	}
 	
-	public void setMultCadencia( double mult )
+	public void setCadenciaDisparo( int tiempoEntreDisparosMS )
 	{
-		multCadencia = mult;
+		cadenciaDisparo = tiempoEntreDisparosMS;
 	}
 	
-	public double getMultCadencia( )
-	{
-		return multCadencia;
-	}
-
-
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void setMultDmg( double mult )
+	public void setMultiplicadorDmg( double mult )
 	{
-		multDmg = mult;
+		multiplicadorDmg = mult;
 	}
 	
-	public double getMultDmg( )
+	public double getMultiplicadorDmg( )
 	{
-		return multDmg;
+		return multiplicadorDmg;
 	}
-
-
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Este método inicializa la variable tiempoUltimoDisparo con un delay aleatorio entre 0 y 1000 miliegundos,
 	 * de esta forma nos aseguramos de que los enemigos no disparen todos a la vez.
 	 */
-	protected void inicializar( Posicion posicion, Size size, EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo, double cadenciaDeDisparo, double dmgMult )
+	protected void inicializar( Mapa mapa, Posicion posicion, Size size, Personaje tirador, ColisionadorDisparo miColisionador, double anguloDelDisparo, double cadenciaDeDisparo, double dmgMult )
 	{
 		owner				= tirador;
 		colisionador		= miColisionador;
 		anguloDisparo		= anguloDelDisparo;
-		map					= tirador.getMapa();
+		map					= mapa;
 		
-		rand				= Randomizador.create( );
+		rand				= new Randomizador( );
 		panel				= new JPanel();
 		tamano				= size;
 		pos					= posicion;
-		cadenciaDisparo		= (1000.0 / cadenciaDeDisparo);
-		multDmg				= dmgMult;
-		multCadencia		= 1.0;
+		cadenciaDisparo		= (int) (1000.0 / cadenciaDeDisparo);
+		multiplicadorDmg	= dmgMult;
 		tiempoUltimoDisparo = System.nanoTime() + (rand.nextInt(1000) * 1000000L);
 	}
-
-
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	protected double corregirAngulo( double angulo )
 	{
 		return -(angulo + anguloDisparo);
 	}
-
-
 	
-	protected Posicion getPosicionLanzamiento( )
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected Posicion getPosicionLanzamiento( Personaje p )
 	{
 		return
 			new	Posicion(
-				owner.getPos().getX() + this.pos.getX(),
-				owner.getPos().getY() + this.pos.getY() + (this.tamano.getHeight() / 2)
+				p.getPos().getX() + this.pos.getX(),
+				p.getPos().getY() + this.pos.getY() + (this.tamano.getHeight() / 2)
 			);
 	}
-
-
 	
-	public List<Disparo> lanzarDisparo( )
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public List<Disparo> lanzarDisparo(Personaje p)
 	{
 		List<Disparo> lista = new LinkedList<Disparo>();
 		
 		long	tiempoActual	= System.nanoTime(),
-				tiempoFinal		= (long) (tiempoUltimoDisparo + ((cadenciaDisparo * multCadencia) * 1000000));
+				tiempoFinal		= tiempoUltimoDisparo + (cadenciaDisparo * 1000000L);
 		
 		// Si entre el último disparo y este intento pasó el tiempo mínimo establecido por la cadencia de disparo, entonces disparar.
 		if (tiempoActual >= tiempoFinal)
 		{
 			tiempoUltimoDisparo = System.nanoTime();
 			
-			lista = crearDisparo( );
+			lista = crearDisparo( p );
 		}
 		
 		return lista;
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void serChocado( Colisionador col )
+	{
+		col.afectar(this);
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void actualizar( double msDesdeUltActualizacion )
+	{
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

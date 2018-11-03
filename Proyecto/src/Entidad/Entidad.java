@@ -3,44 +3,87 @@ package Entidad;
 import javax.swing.JPanel;
 
 import Colisiones.Colisionador;
-import Colisiones.ColEntidad;
+import Colisiones.ColisionadorEntidad;
 import Inteligencia.Inteligencia;
 import Mapa.Mapa;
+import PowerUp.PowerUp;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
 
 import java.awt.Color;
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public abstract class Entidad
-{	
+{
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	protected JPanel		panel;
 	protected Posicion		pos;
 	protected Size			tamano;
 	protected Mapa			map;
 	protected Randomizador	rand;
-	protected Colisionador	colisionador = new ColEntidad();
+	protected Colisionador	colisionador = new ColisionadorEntidad();
 	protected Inteligencia	ia;
-
-
-
-	public abstract void serChocado(Colisionador col);
 	
-	public abstract void actualizar( double msDesdeUltActualizacion );
-
-	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public JPanel getPanel( )
 	{
 		return panel;
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public Inteligencia getIA( )
 	{
 		return ia;
 	}
+	
+	public void setIA( Inteligencia ia )
+	{
+		this.ia = ia;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected void actualizarPanel( boolean esOpaco, Color colorFondo )
+	{
+		actualizarPosicion( );
+		panel.setLayout( null );
+		panel.setOpaque( esOpaco );
+		panel.setBackground( colorFondo );
+		panel.setVisible( true );
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected void actualizarPosicion()
+	{
+		panel.setBounds(
+			(int) Math.round( pos.getX() ),
+			(int) Math.round( pos.getY() ),
+			tamano.getWidth(),
+			tamano.getHeight()
+		);
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	protected double conversionEnTiempo( double unidadesPorSegundo, double tiempoTranscurrido )
+	{
+		return tiempoTranscurrido * (unidadesPorSegundo / 1000.0);
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void remove()
+	{
+		map.removeEntity(this);
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public Posicion getPos( )
 	{
@@ -53,58 +96,36 @@ public abstract class Entidad
 		pos.setY( newPos.getY() );
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public Size getSize( )
 	{
 		return tamano;
 	}
-		
-	public Mapa getMapa( )
-	{
-		return this.map;
-	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void setMapa( Mapa map )
 	{
 		this.map = map;
 	}
-
-
 	
-	protected void actualizarPanel( boolean esOpaco, Color colorFondo )
-	{
-		actualizarPosicion( );
-		panel.setLayout( null );
-		panel.setOpaque( esOpaco );
-		panel.setBackground( colorFondo );
-		panel.setVisible( true );
-	}
-	
-	protected void actualizarPosicion()
-	{
-		panel.setBounds(
-			(int) Math.round( pos.getX() ),
-			(int) Math.round( pos.getY() ),
-			tamano.getWidth(),
-			tamano.getHeight()
-		);
-	}
-
-
-
-	protected double conversionEnTiempo( double unidadesPorSegundo, double tiempoTranscurrido )
-	{
-		return tiempoTranscurrido * (unidadesPorSegundo / 1000.0);
-	}
-
-
-	
-	public void remove()
-	{
-		map.removeEntity(this);
-	}
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void colisionar(Entidad e)
 	{
 		e.serChocado(colisionador);
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public abstract void serChocado(Colisionador col);
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	public abstract void actualizar( double msDesdeUltActualizacion );
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

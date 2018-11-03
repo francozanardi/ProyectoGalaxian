@@ -1,7 +1,5 @@
 package Enemigo.Estados;
 
+public abstract class EstadoKamikazeFragil extends Estado {
 
-
-public abstract class EstadoKamikazeFragil extends Estado
-{
 }

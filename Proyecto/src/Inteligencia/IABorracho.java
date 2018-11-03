@@ -1,31 +1,55 @@
 package Inteligencia;
 
+import java.awt.Color;
+import java.util.List;
+
+import Arma.Arma;
+import Curva.Curva;
 import Curva.OscilacionBorracho;
+import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Logica.Juego;
+import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-public class IABorracho extends IAEnemigo
-{
-	public IABorracho( Enemigo me )
+public class IABorracho extends Inteligencia
+{	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	protected Curva curvaMovimiento;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public IABorracho( Mapa map )
 	{
-		this.entidad	= me;
-		this.rand 		= Randomizador.create( );
+		this.rand 	= new Randomizador( );
+		this.map	= map;
 		
 		this.curvaMovimiento = new OscilacionBorracho( rand.nextDouble(0.0, 100000.0) );
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
+	public void disparar( Enemigo me )
+	{
+		List<Disparo> disparos = me.getArma().lanzarDisparo( me );
+		
+		// Añadir disparos al mapa
+		for (Disparo d : disparos)
+			map.addEntity(d);
+	}
 	
-	public void mover( double msDesdeUltActualizacion )
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void mover( Enemigo me, double msDesdeUltActualizacion )
 	{
 		final double	VELOCIDAD_HORIZONTAL	= 7.5;
 		
-		Posicion	pos			= entidad.getPos(),
-					posPlayer	= entidad.getMapa().getPlayerPos( ),
+		Posicion	pos			= me.getPos(),
+					posPlayer	= map.getPlayerPos( ),
 					movCurva	= curvaMovimiento.obtenerCambio( msDesdeUltActualizacion );
 		
 		double	x = pos.getX(),
@@ -58,4 +82,8 @@ public class IABorracho extends IAEnemigo
 		pos.setX( x );
 		pos.setY( y );
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

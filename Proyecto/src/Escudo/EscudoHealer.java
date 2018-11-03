@@ -8,17 +8,22 @@ import Entidad.EntidadConVida;
 import Utils.Posicion;
 import Utils.Size;
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class EscudoHealer extends Escudo
-{	
-	private double	totalHPRegenerado,
-					healPorSeg,
-					healTotal;
-
-
+{
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public EscudoHealer( EntidadConVida holder, double healSeg, double maxHeal )
+	private final double	HEAL_POR_SEG = 10.0,
+							HEAL_TOTAL = 200.0;
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private double totalHPRegenerado;
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public EscudoHealer( EntidadConVida holder )
 	{
 		this.pos	= new Posicion(2, 2);
 		this.tamano	= new Size(10, 10);
@@ -26,32 +31,34 @@ public class EscudoHealer extends Escudo
 		
 		this.holder = holder;
 
-		this.totalHPRegenerado	= 0;
-		this.healPorSeg			= healSeg;
-		this.healTotal			= maxHeal;
+		this.totalHPRegenerado = 0;
 		
 		this.actualizarPanel(true, Color.green);
 	}
 
-
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void actualizar(double msDesdeUltActualizacion)
 	{
-		double curacion = conversionEnTiempo( healPorSeg, msDesdeUltActualizacion );
+		double curacion = conversionEnTiempo( HEAL_POR_SEG, msDesdeUltActualizacion );
 		
 		// Verificar que no curemos de más
-		if ((curacion + totalHPRegenerado) > healTotal)
-			curacion = healTotal - totalHPRegenerado;
+		if ((curacion + totalHPRegenerado) > HEAL_TOTAL)
+			curacion = HEAL_TOTAL - totalHPRegenerado;
 		
 		totalHPRegenerado += curacion;
 		
 		holder.setVida( holder.getVida() + curacion );
 		
 		// Al haber curado toda la vida, destruir el escudo
-		if (totalHPRegenerado == healTotal)
+		if (totalHPRegenerado == HEAL_TOTAL)
 		{
 			System.out.println("Escudo regeneracion: off!");
 			remove();
 		}
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
