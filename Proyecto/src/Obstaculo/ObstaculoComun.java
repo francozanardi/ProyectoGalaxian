@@ -5,21 +5,19 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
-import Colisiones.ColisionadorObstaculo;
+import Colisiones.ColObstaculo;
 import Escudo.Escudo;
 import Escudo.EscudoBasico;
 import Mapa.Mapa;
 import PowerUp.PowerUp;
-import PowerUp.PowerUpCongelar;
-import PowerUp.PowerUpMinigun;
+import PowerUp.PUCongelar;
 import Utils.Posicion;
 import Utils.Size;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class ObstaculoComun extends ObstaculoDestructible
+
+public class ObstaculoComun extends Destructible
 {
-	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public ObstaculoComun( Mapa map, Posicion posicionInicial )
 	{
@@ -29,24 +27,20 @@ public class ObstaculoComun extends ObstaculoDestructible
 		this.escudo 		= new LinkedList<Escudo>( );
 		this.pos			= posicionInicial.clone();
 		this.tamano			= new Size(100, 20);
-		this.colisionador	= new ColisionadorObstaculo( );
+		this.colisionador	= new ColObstaculo( );
+		this.puntaje		= 10;
 		
 		this.actualizarPanel(true, Color.orange);
 		
 		this.addEscudo( new EscudoBasico(this, 2.0) );
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	public void morir( )
-	{
-		System.out.println("Obstaculo comun destruido");
-		
-		PowerUp drop = new PowerUpCongelar(map);
+	{		
+		PowerUp drop = new PUCongelar(map);
 		drop.caer( pos.clone() );
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -2,37 +2,29 @@ package Controladores;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Random;
 
+import Enemigo.Enemigo;
 import Entidad.Entidad;
 import Mapa.Mapa;
-import Utils.Randomizador;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 public abstract class ControladorEnemigos
-{
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
-	protected Collection<Entidad>	enemigosEnJuego			= new HashSet<Entidad>( );
-	protected List<Entidad>			enemigosFueraDeJuego	= new LinkedList<Entidad>( );
+{	
+	protected Collection<Enemigo>	enemigosEnJuego			= new HashSet<Enemigo>( );
+	protected List<Enemigo>			enemigosFueraDeJuego	= new LinkedList<Enemigo>( );
 	protected Mapa					map;
 	protected int					maxCantEnem;
-	protected Randomizador			rand;
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	
 	public abstract void crearEnemigos( );
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public abstract void liberarEnemigo( );
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	
 	public void notificarMuerteEntidad( Entidad e )
 	{
@@ -55,19 +47,15 @@ public abstract class ControladorEnemigos
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	
-	public List<Entidad> obtenerEnemigosVivos( )
+	public List<Enemigo> obtenerEnemigosVivos( )
 	{
-		List<Entidad> lista = new LinkedList<Entidad>( );
+		List<Enemigo> lista = new LinkedList<Enemigo>( );
 		
-		for (Entidad e : enemigosEnJuego)
+		for (Enemigo e : enemigosEnJuego)
 			lista.add( e );
 		
 		return lista;
 	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

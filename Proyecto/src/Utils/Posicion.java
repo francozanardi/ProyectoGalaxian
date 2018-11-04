@@ -10,37 +10,29 @@ public class Posicion
 		this.x = x;
 		this.y = y;
 	}
-
-	public Posicion( int x, int y )
+	
+	public void setX( double x )
 	{
 		this.x = x;
+	}
+	
+	public void setY( double y )
+	{
 		this.y = y;
 	}
 	
-	public void setX( double x ) {
-		this.x = x;
-	}
-	
-	public void setY( double y ) {
-		this.y = y;
-	}
-	
-	public double getX() {
+	public double getX()
+	{
 		return x;
 	}
 	
-	public double getY() {
-		return y;
-	}
-	
-	public void copy( Posicion src )
+	public double getY()
 	{
-		this.x = src.getX();
-		this.y = src.getY();
+		return y;
 	}
 	
 	public Posicion clone( )
 	{
 		return new Posicion( this.x, this.y );
-	}
+	}	
 }

@@ -1,43 +1,42 @@
 package Enemigo.Estados;
 
-import java.awt.Color;
-
-import Arma.ArmaSniper;
 import Arma.ArmaTriple;
 import Colisiones.ColDispEnemigo;
-import Colisiones.ColisionadorKamikaze;
+import Colisiones.ColKamikaze;
 import Enemigo.Transformable;
 import Inteligencia.IABorracho;
 
-public class EstadoBorracho extends EstadoKamikazeFragil {
 
-	public EstadoBorracho(Transformable e) {
+
+public class EstadoBorracho extends EstadoKamikazeFragil
+{
+	public EstadoBorracho(Transformable e)
+	{
 		contenedor = e;
 		vidaMaxima = contenedor.getVida();
 		
-		contenedor.setIA(new IABorracho(contenedor.getMapa()));
+		contenedor.setIA( new IABorracho( contenedor ) );
 		contenedor.setExplosionDmg(100*contenedor.getDificultad());
-		contenedor.setColisionador(new ColisionadorKamikaze(contenedor.getExplosionDmg()));
+		contenedor.setColisionador(new ColKamikaze(contenedor.getExplosionDmg()));
 		//contenedor.getPanel().setBackground(new Color(0, 100, 0));
-		contenedor.setArma(new ArmaTriple(contenedor.getMapa(), contenedor, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI));
+		contenedor.setArma(new ArmaTriple(contenedor, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI));
 		contenedor.getSize().setHeight(15);
 		contenedor.getSize().setWidth(30);
 	}
 
-	@Override
-	public void controlarTransformacion() {
-		// TODO Auto-generated method stub
-		
+	
+	
+	public void controlarTransformacion()
+	{		
 	}
 
-	@Override
-	public void explotar() {
+	public void explotar()
+	{
 		contenedor.setVida(0);
 	}
 
-	@Override
-	public Estado transformar() {
+	public Estado transformar()
+	{
 		return null; //no tiene siguiente estado, deberíamos crear una excepcion
 	}
-	
 }

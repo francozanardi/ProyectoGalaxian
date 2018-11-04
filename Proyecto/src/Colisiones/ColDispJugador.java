@@ -1,31 +1,23 @@
 package Colisiones;
 
-import Disparo.Disparo;
-import Enemigo.Borracho;
-import Enemigo.Camuflado;
 import Enemigo.Enemigo;
-import Enemigo.Guiado;
 import Enemigo.Kamikaze;
-import Enemigo.Fragil;
-import Jugador.Jugador;
 import Obstaculo.Barricada;
 import Obstaculo.Obstaculo;
-import Obstaculo.ObstaculoDestructible;
+import Obstaculo.Destructible;
 import PowerUp.PowerUp;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class ColDispJugador extends ColisionadorDisparo
-{
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
+
+public class ColDispJugador extends ColDisparo
+{	
 	public ColDispJugador( )
 	{
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	
-	public ColisionadorDisparo clone( )
+	public ColDisparo clone( )
 	{
 		return new ColDispJugador( );
 	}
@@ -37,10 +29,10 @@ public class ColDispJugador extends ColisionadorDisparo
 		
 		// Si el enemigo murió, transferirle su puntaje al jugador
 		if (e.getVida() <= 0)
-			tirador.setPuntaje(tirador.getPuntaje() + e.getPuntaje());
+			tirador.givePuntaje( e.getPuntaje() );
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	
 	public void afectar(Enemigo enemigo)
 	{
@@ -52,15 +44,15 @@ public class ColDispJugador extends ColisionadorDisparo
 		afectarAEnemigo( kamikaze );
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	
 	public void afectar(PowerUp powerup)
 	{
 		powerup.recibirDMG( disparo.getDmg() );
 		disparo.remove();
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	
 	private void afectarAObstaculo( Obstaculo obj )
 	{
@@ -69,14 +61,11 @@ public class ColDispJugador extends ColisionadorDisparo
 		
 		if (obj.getVida() <= 0.0)
 		{
-			tirador.setPuntaje( tirador.getPuntaje() + 10 );
-			System.out.println("Destruiste un obstaculo! +10 puntos");
+			tirador.givePuntaje( obj.getPuntaje() );
 		}
 	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void afectar(ObstaculoDestructible obstaculo)
+	public void afectar(Destructible obstaculo)
 	{
 		afectarAObstaculo( obstaculo );
 	}
@@ -85,8 +74,4 @@ public class ColDispJugador extends ColisionadorDisparo
 	{
 		afectarAObstaculo( barricada );
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
