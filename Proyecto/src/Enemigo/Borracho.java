@@ -8,11 +8,12 @@ import javax.swing.JPanel;
 import Arma.ArmaDefaultEnemigo;
 import Colisiones.ColDispEnemigo;
 import Colisiones.ColKamikaze;
+import DropPowerUP.CreadorPowerUP;
+import DropPowerUP.CreadorPowerUPEnemigo;
 import Escudo.Escudo;
 import Inteligencia.IABorracho;
 import Logica.Juego;
 import Mapa.Mapa;
-import PowerUp.PUEscudoExplosion;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -39,9 +40,11 @@ public class Borracho extends Kamikaze
 		
 		this.colisionador	= new ColKamikaze( explosionDmg );
 		
-		actualizarPanel( true, new Color( 0, 100, 0 ) );
+		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
+		powerUp = drop.crearDrop();
 		
+		actualizarPanel( true, new Color( 0, 100, 0 ) );
 		setArma( new ArmaDefaultEnemigo(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );
-		setPowerUp( new PUEscudoExplosion(map) );
+
 	}
 }

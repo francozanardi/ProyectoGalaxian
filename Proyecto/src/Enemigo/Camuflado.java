@@ -5,11 +5,12 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
+import DropPowerUP.CreadorPowerUP;
+import DropPowerUP.CreadorPowerUPEnemigo;
 import Enemigo.Estados.EstadoComun;
 import Escudo.Escudo;
 import Logica.Juego;
 import Mapa.Mapa;
-import PowerUp.PUHeal;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -32,10 +33,11 @@ public class Camuflado extends Transformable
 		this.puntaje		= (int) (30 + (10.0 * dificultad));
 
 		actualizarPanel( true, new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ) );
-		setPowerUp( new PUHeal(map) );
 		
 		this.estado 		= new EstadoComun(this); //la inteligencia y demás caracteristicas faltantes las determina su estado.
 
+		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
+		powerUp = drop.crearDrop();
 	}
 
 

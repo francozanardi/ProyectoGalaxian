@@ -1,5 +1,6 @@
 package Enemigo;
 
+
 import Entidad.Personaje;
 import Inteligencia.IAEnemigo;
 import PowerUp.PowerUp;

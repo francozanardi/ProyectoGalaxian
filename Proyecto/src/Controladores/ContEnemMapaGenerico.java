@@ -1,5 +1,7 @@
 package Controladores;
 
+import Balance.BalanceEnemigo;
+import Balance.BalanceEnemigoDefault;
 import Enemigo.Borracho;
 import Enemigo.Camuflado;
 import Enemigo.Comun;
@@ -66,25 +68,26 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 	
 	
 	
-	private Enemigo crearEnemigo()
+	private Enemigo crearEnemigo() //Estaría bueno que cada chance vaya modificandose según x función que tenga como parámetro la dificultad y el nivel.
 	{
 		Randomizador rand = Randomizador.create();
+		BalanceEnemigo balance = new BalanceEnemigoDefault(dificultad);
+
+		int valorAleatorio = rand.nextInt(1, 100);
 		
-		int valorAleatorio = rand.nextInt(CHANCE_TOTAL);
-		
-		if(valorAleatorio < CHANCE_CREAR_GUIADO)
+		if(valorAleatorio < balance.porcentajeGuiado())
 			return new Guiado(map, dificultad);
-		valorAleatorio -= CHANCE_CREAR_GUIADO;
+		valorAleatorio -= balance.porcentajeGuiado();
 		
-		if(valorAleatorio < CHANCE_CREAR_BORRACHO)
+		if(valorAleatorio < balance.porcentajeBorracho())
 			return new Borracho(map, dificultad);
-		valorAleatorio -= CHANCE_CREAR_BORRACHO;
+		valorAleatorio -= balance.porcentajeBorracho();
 		
-		if(valorAleatorio < CHANCE_CREAR_FRAGIL)
+		if(valorAleatorio < balance.porcentajeFragil())
 			return new Fragil(map, dificultad);
-		valorAleatorio -= CHANCE_CREAR_FRAGIL;
+		valorAleatorio -= balance.porcentajeFragil();
 		
-		if(valorAleatorio < CHANCE_CREAR_CAMUFLADO)
+		if(valorAleatorio < balance.porcentajeCamuflado())
 			return new Camuflado(map, dificultad);
 		
 		return new Comun(map, dificultad);

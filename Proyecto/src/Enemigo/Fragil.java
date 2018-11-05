@@ -7,11 +7,12 @@ import javax.swing.JPanel;
 
 import Arma.ArmaSniper;
 import Colisiones.ColDispEnemigo;
+import DropPowerUP.CreadorPowerUP;
+import DropPowerUP.CreadorPowerUPEnemigo;
 import Enemigo.Estados.EstadoGuiado;
 import Escudo.Escudo;
 import Logica.Juego;
 import Mapa.Mapa;
-import PowerUp.PUMultiplicador;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -36,9 +37,10 @@ public class Fragil extends Transformable
 		this.estado			= new EstadoGuiado(this); //la inteligencia y demás caracteristicas faltantes las determina su estado.
 
 		setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
-		setPowerUp( new PUMultiplicador(map) );
+		actualizarPanel( true, new Color( 100, 100, 100 ) );
 		
-		actualizarPanel( true, new Color( 100, 100, 100 ) );	
+		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
+		powerUp = drop.crearDrop();
 	}
 	
 	

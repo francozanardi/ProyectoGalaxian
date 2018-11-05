@@ -8,11 +8,12 @@ import javax.swing.JPanel;
 import Arma.ArmaSniper;
 import Colisiones.ColDispEnemigo;
 import Colisiones.ColKamikaze;
+import DropPowerUP.CreadorPowerUP;
+import DropPowerUP.CreadorPowerUPGuiado;
 import Escudo.Escudo;
 import Inteligencia.IAKamikaze;
 import Logica.Juego;
 import Mapa.Mapa;
-import PowerUp.PUHeal;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -38,11 +39,11 @@ public class Guiado extends Kamikaze
 		this.vida			= 400 + (66.6 * dificultad);
 
 		this.colisionador	= new ColKamikaze( explosionDmg );
-		
-		setPowerUp( new PUHeal(map) );
-		
+			
 		actualizarPanel( true, new Color( 100, 0, 0 ) );
-		
 		setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		
+		CreadorPowerUP drop = new CreadorPowerUPGuiado(map, dificultad);
+		powerUp = drop.crearDrop();
 	}
 }

@@ -19,9 +19,14 @@ public class ContNivelesGenerico extends ControladorNiveles
 	private void establecerNivel( int nivelID )
 	{
 		stopMap( );
+		//acá está el error del powerup en la esquina superior izquierda. 
+		//se le envía el mensaje al thread de no avance más, pero se termina esa última 'vuelta' que está haciendo.
 		
+		//por este otro hilo se llama al método resetPanel(), donde se borra todo los paneles.
 		juego.resetPanel();
-		   
+		
+		//sin embargo el thread aún sigue corriendo, y agrega todas las entidades a agregar que tenía en el panel.
+		//finalmente el panel queda con entidades que no debería tener.
 		startMap( new MapaGenerico( juego, this, jugador, "MAPA GENÉRICO LVL." + nivelID, (1.0 * nivelID) ) );
 		
 		System.out.println( "COMIENZA EL NIVEL " + nivelID );

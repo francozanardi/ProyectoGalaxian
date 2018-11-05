@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import Arma.ArmaDefaultEnemigo;
 import Colisiones.ColDispEnemigo;
 import Colisiones.Colisionador;
+import DropPowerUP.CreadorPowerUP;
+import DropPowerUP.CreadorPowerUPEnemigo;
 import Colisiones.ColEnemigo;
 import Escudo.Escudo;
 import Mapa.Mapa;
@@ -40,6 +42,9 @@ public class Comun extends Enemigo
 		setArma( new ArmaDefaultEnemigo(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		
 		actualizarPanel( true, new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ) );
+		
+		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
+		powerUp = drop.crearDrop();
 	}
 
 

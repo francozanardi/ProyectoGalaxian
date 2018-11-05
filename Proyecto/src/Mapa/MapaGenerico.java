@@ -86,10 +86,7 @@ public class MapaGenerico extends Mapa
 		
 		actualizarLabelInformacion( msDesdeUltActualizacion );
 
-		actualizarEntidades( msDesdeUltActualizacion );//si esto estuviera abajo de controlarColisiones lo que podría suceder es que
-		//colisionaría el jugador con un kamikaze, se le quitaría la vida al jugador, y si este muere, queda null.
-		//entonces luego en actualizar entidades, al momento de mover los kamikazes restantes, tendrían que obtener
-		//la pos del jugador, la cual es nula, entonces provocaría error en tiempo de ejecución.		
+		actualizarEntidades( msDesdeUltActualizacion );		
 		
 		controlarColisiones();
 		borrarEntidades();
