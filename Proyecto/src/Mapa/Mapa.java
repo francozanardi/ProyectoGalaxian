@@ -172,7 +172,7 @@ public abstract class Mapa
 
 	public void mostrarAnuncio( String texto )
 	{
-		System.out.println( texto );
+		juego.mostrarAnuncio(texto, 4000);
 	}
 		
 	protected void actualizarLabelInformacion( double msDesdeUltActualizacion )

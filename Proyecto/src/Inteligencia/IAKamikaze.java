@@ -1,8 +1,5 @@
 package Inteligencia;
 
-import java.util.List;
-
-import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Logica.Juego;
 import Utils.Posicion;

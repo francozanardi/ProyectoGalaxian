@@ -39,7 +39,8 @@ public class EscudoExplosion extends Escudo
 			
 			if (contExplosiones == 0)
 			{
-				System.out.println("Escudo de explosiones: off!");
+				holder.getMapa().mostrarAnuncio("Se destruyó el escudo anti-kamikaze");
+
 				remove();
 			}
 		}

@@ -22,6 +22,7 @@ import Utils.Size;
 public class Jugador extends Personaje
 {	
 	private int dir;
+	private double velHorizontal = 40.0;
 
 
 	
@@ -100,10 +101,8 @@ public class Jugador extends Personaje
 
 	
 	public void mover( double msDesdeUltActualizacion )
-	{
-		final double VELOCIDAD_HORIZONTAL = 40.0;
-		
-		double futuraPosX = pos.getX() + dir * conversionEnTiempo(VELOCIDAD_HORIZONTAL, msDesdeUltActualizacion);
+	{		
+		double futuraPosX = pos.getX() + dir * conversionEnTiempo(velHorizontal, msDesdeUltActualizacion);
 		
 		if(futuraPosX > 5 && futuraPosX < Juego.GAME_WIDTH - tamano.getWidth()-10) {
 			pos.setX(futuraPosX);

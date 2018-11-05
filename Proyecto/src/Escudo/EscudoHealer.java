@@ -50,7 +50,8 @@ public class EscudoHealer extends Escudo
 		// Al haber curado toda la vida, destruir el escudo
 		if (totalHPRegenerado == healTotal)
 		{
-			System.out.println("Escudo regeneracion: off!");
+			holder.getMapa().mostrarAnuncio( "Se terminó el escudo de regeneración" );
+			
 			remove();
 		}
 	}
