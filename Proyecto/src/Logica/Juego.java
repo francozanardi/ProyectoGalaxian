@@ -6,6 +6,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import Controladores.ContNivelesGenerico;
 import Controladores.ControladorNiveles;
@@ -18,6 +19,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 
@@ -28,13 +31,16 @@ public class Juego extends JFrame
 								GAME_HEIGHT	= (int) (GAME_WIDTH * 1.5),
 								GAME_FPS	= 60;
 	public static final String	GAME_TITLE = "Galaxian Trucho";
-
+	
 
 	
 	private JPanel				panel;
 	private JLabel				labelPuntaje;
+	private JLabel				labelMensaje;
 	private Teclado				teclado;
 	private ControladorNiveles	control;
+	private MenuPrincipal		menu;
+	private Timer				timerAnuncio;
 
 
 	
@@ -66,7 +72,7 @@ public class Juego extends JFrame
 		addKeyListener( new OyenteTeclado() );
 		addMouseListener( new OyenteMouse() );
 		addMouseMotionListener( new OyenteMouse() );
-				
+		
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		setBounds( 0, 0, GAME_WIDTH, GAME_HEIGHT );
 		setLocationRelativeTo( null );
@@ -75,23 +81,41 @@ public class Juego extends JFrame
 		crearPanel( );
 		crearLabel( );
 		
+		inicializarObjetos( );
+		
+		//startGame( );
+	}
+	
+	
+	
+	private void inicializarObjetos( )
+	{
 		teclado = new Teclado( );
-		
-		Jugador p = new Jugador();
-		
-		startGame( p );
+				
+		menu = new MenuPrincipal( this );
 	}
 
 
 	
-	private void startGame( Jugador p )
+	public void startGame( )
 	{
+		// Esta método hace que el panel de fondo reciba el "foco", de lo contrario no se
+		// registrarán apropiadamente los inputs del teclado.
+		requestFocus();
+
+		Jugador p = new Jugador();
 		control = new ContNivelesGenerico( this, p );
+		
 		control.gameStart();
 	}
 	
 	public void endGame( )
 	{
+		System.out.println("mostrar menu");
+		
+		resetPanel();
+		
+		menu.gameFinished();
 	}
 
 
@@ -106,7 +130,12 @@ public class Juego extends JFrame
 	public void resetPanel( )
 	{
 		panel.removeAll();
+		
+		labelPuntaje.setText("");
+		labelMensaje.setText("");
+		
 		panel.add(labelPuntaje);
+		panel.add(labelMensaje);
 	}
 
 
@@ -120,6 +149,18 @@ public class Juego extends JFrame
 		labelPuntaje.setVisible(true);
 		
 		panel.add(labelPuntaje);
+		
+		
+		
+		labelMensaje = new JLabel( );
+		labelMensaje.setBounds(5, 30, GAME_WIDTH, 300);
+		labelMensaje.setHorizontalAlignment( SwingConstants.CENTER );
+		labelMensaje.setVerticalAlignment( SwingConstants.TOP );
+		labelMensaje.setFont( new Font("Consolas", Font.BOLD, 16) );
+		labelMensaje.setForeground( new Color(255, 255, 255) );
+		labelMensaje.setVisible(true);
+		
+		panel.add(labelMensaje);
 	}
 
 
@@ -134,6 +175,37 @@ public class Juego extends JFrame
 	public void updateScoreLabel( String texto )
 	{
 		labelPuntaje.setText( texto );
+	}
+
+	public void mostrarAnuncio( String texto, int duracionMS )
+	{
+		final boolean USAR_MAYUSCULAS = true;
+		
+		
+		
+		if (USAR_MAYUSCULAS)
+			texto = texto.toUpperCase();
+		
+		labelMensaje.setText( texto );
+
+		if (timerAnuncio != null)
+		{
+			timerAnuncio.cancel();
+			timerAnuncio = null;
+		}
+		
+		timerAnuncio = new Timer(); 
+		timerAnuncio.schedule( new TimerQuitarAnuncio(), duracionMS );
+	}
+	
+	
+
+	private class TimerQuitarAnuncio extends TimerTask
+	{
+		public void run()
+		{
+			labelMensaje.setText("");
+		}
 	}
 
 

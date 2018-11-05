@@ -109,6 +109,7 @@ public abstract class Mapa
 	
 	public void limpiarMapa()
 	{
+		
 		for(Entidad e: entidades) {
 			if(e != player) {
 				juego.getPanel().remove(e.getPanel());
@@ -182,7 +183,7 @@ public abstract class Mapa
 
 	public void mostrarAnuncio( String texto )
 	{
-		System.out.println( texto );
+		juego.mostrarAnuncio(texto, 4000);
 	}
 		
 	protected void actualizarLabelInformacion( double msDesdeUltActualizacion )
