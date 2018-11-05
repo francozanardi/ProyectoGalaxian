@@ -1,5 +1,6 @@
 package Mapa;
 
+import java.awt.Color;
 import java.util.LinkedList;
 
 import Controladores.ContEnemMapaGenerico;
@@ -25,7 +26,7 @@ public class MapaGenerico extends Mapa
 	public MapaGenerico( Juego juego, ControladorNiveles control, Jugador player, String nombre, double dificultad )
 	{
 		// Seleccionar un tipo de fondo especifico
-		this.fondo = new FondoGenerico( juego.getPanel() );
+		this.fondo = new FondoGenerico( juego.getPanel(), 1000, new Color(0, 0, 0), new Color(50, 50, 50) );
 		
 		// Inicializar objetos
 		this.juego					= juego;

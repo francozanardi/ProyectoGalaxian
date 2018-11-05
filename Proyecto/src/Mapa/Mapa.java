@@ -112,9 +112,10 @@ public abstract class Mapa
 		/*
 		for(Entidad e: entidades)
 		{
-			e.getPanel(
+			juego.getPanel().remove( e.getPanel() );
 		}
 		*/
+
 		entidades.clear();
 		entidadesParaEliminar.clear();
 		entidadesParaAgregar.clear();

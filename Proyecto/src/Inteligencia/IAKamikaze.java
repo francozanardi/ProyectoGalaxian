@@ -1,5 +1,8 @@
 package Inteligencia;
 
+import java.util.List;
+
+import Disparo.Disparo;
 import Enemigo.Enemigo;
 import Logica.Juego;
 import Utils.Posicion;
@@ -13,6 +16,19 @@ public class IAKamikaze extends IAEnemigo
 	{
 		this.entidad	= me;
 		this.rand		= Randomizador.create( );
+	}
+	
+	
+
+	public void disparar( )
+	{
+		final double LIMIT = (Juego.GAME_HEIGHT * 0.8);
+		
+		// Solo puede disparar si está en el 70% superior de la pantalla
+		if (entidad.getPos().getY() <= LIMIT)
+		{
+			super.disparar();
+		}
 	}
 	
 	

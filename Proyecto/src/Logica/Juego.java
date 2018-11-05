@@ -35,6 +35,7 @@ public class Juego extends JFrame
 	private JLabel				labelPuntaje;
 	private Teclado				teclado;
 	private ControladorNiveles	control;
+	private MenuPrincipal		menu;
 
 
 	
@@ -75,23 +76,41 @@ public class Juego extends JFrame
 		crearPanel( );
 		crearLabel( );
 		
+		inicializarObjetos( );
+		
+		//startGame( );
+	}
+	
+	
+	
+	private void inicializarObjetos( )
+	{
 		teclado = new Teclado( );
 		
-		Jugador p = new Jugador();
-		
-		startGame( p );
+		menu = new MenuPrincipal( this );
 	}
 
 
 	
-	private void startGame( Jugador p )
+	public void startGame( )
 	{
+		// Esta método hace que el panel de fondo reciba el "foco", de lo contrario no se
+		// registrarán apropiadamente los inputs del teclado.
+		requestFocus();
+
+		Jugador p = new Jugador();
 		control = new ContNivelesGenerico( this, p );
+		
 		control.gameStart();
 	}
 	
 	public void endGame( )
 	{
+		System.out.println("mostrar menu");
+		
+		resetPanel();
+		
+		menu.gameFinished();
 	}
 
 
@@ -106,6 +125,7 @@ public class Juego extends JFrame
 	public void resetPanel( )
 	{
 		panel.removeAll();
+		labelPuntaje.setText("");
 		panel.add(labelPuntaje);
 	}
 

@@ -41,6 +41,7 @@ public class ContNivelesGenerico extends ControladorNiveles
 	public void mapDefeat( Jugador player )
 	{
 		stopMap( );
+		
 		gameEnd();
 		
 		System.out.println("DEFEAT!!");
@@ -58,8 +59,9 @@ public class ContNivelesGenerico extends ControladorNiveles
 
 	public void gameEnd()
 	{
-		juego.endGame();
 		stopMap(); //provisioria
+
+		juego.endGame();
 		
 		System.out.println("GAME OVER!!");
 	}
