@@ -8,7 +8,7 @@ public class BalanceDropPUEnemigo extends BalanceDropPU {
 	
 	@Override
 	public int porcentajePUCongelar() {
-		return 100;
+		return 2;
 	}
 
 	@Override
