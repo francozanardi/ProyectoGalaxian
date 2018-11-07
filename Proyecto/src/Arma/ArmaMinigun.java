@@ -1,6 +1,5 @@
 package Arma;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,8 +7,8 @@ import Colisiones.ColDisparo;
 import Disparo.Disparo;
 import Disparo.DisparoMinigun;
 import Entidad.EntidadConVida;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 import Utils.Vector;
 
 
@@ -25,16 +24,14 @@ public class ArmaMinigun extends Arma
 	public ArmaMinigun( EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo )
 	{
 		inicializar(
-			new Posicion(3, 3),
-			new Size(8, 20),
+			new Sprite( "/GameSprites/Arma.PNG" ),
+			new Posicion(0, 0),
 			tirador,
 			miColisionador,
 			anguloDelDisparo,
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
 		);
-		
-		actualizarPanel( true, Color.red );
 	}
 
 

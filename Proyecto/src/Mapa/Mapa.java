@@ -96,8 +96,8 @@ public abstract class Mapa
 	
 	private boolean hayColision( Entidad a, Entidad b )
 	{
-		Rectangle boundsA = a.getPanel().getBounds();
-		Rectangle boundsB = b.getPanel().getBounds();
+		Rectangle boundsA = a.getSprite().getBounds();
+		Rectangle boundsB = b.getSprite().getBounds();
 		
 		return	boundsA.contains(boundsB.getMinX(), boundsB.getMinY()) ||
 				boundsA.contains(boundsB.getMinX(), boundsB.getMaxY()) ||
@@ -112,19 +112,19 @@ public abstract class Mapa
 		
 		for(Entidad e: entidades) {
 			if(e != player) {
-				juego.getPanel().remove(e.getPanel());
-				e.getPanel().setVisible(false);
+				juego.getPanel().remove(e.getSprite());
+				e.getSprite().setVisible(false);
 			}
 		}
 		
 		for(Entidad e: entidadesParaEliminar) {
-			juego.getPanel().remove(e.getPanel());
-			e.getPanel().setVisible(false);
+			juego.getPanel().remove(e.getSprite());
+			e.getSprite().setVisible(false);
 		}
 		
 		for(Entidad e: entidadesParaAgregar) {
-			juego.getPanel().remove(e.getPanel());
-			e.getPanel().setVisible(false);
+			juego.getPanel().remove(e.getSprite());
+			e.getSprite().setVisible(false);
 		}
 		
 		entidades.clear();
@@ -160,7 +160,7 @@ public abstract class Mapa
 	{
 		for(Entidad e: entidadesParaEliminar) {
 			//juego.getPanel().remove(e.getPanel());
-			e.getPanel().setVisible(false);
+			e.getSprite().setVisible(false);
 			entidades.remove(e);
 			
 			controlEnemigos.notificarMuerteEntidad( e );
@@ -173,7 +173,7 @@ public abstract class Mapa
 	{
 		for(Entidad e: entidadesParaAgregar) {
 			entidades.add(e);
-			juego.getPanel().add(e.getPanel());
+			juego.getPanel().add(e.getSprite());
 		}
 		
 		entidadesParaAgregar.clear();

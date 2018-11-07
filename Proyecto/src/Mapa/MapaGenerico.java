@@ -63,7 +63,7 @@ public class MapaGenerico extends Mapa
 		player.setPos( (Juego.GAME_WIDTH / 2) - (player.getSize().getWidth() / 2) );
 				
 		// Agregarlo al panel principal
-		juego.getPanel().add( player.getPanel() );
+		juego.getPanel().add( player.getSprite() );
 		
 		player.addEscudo( new EscudoAbsoluto(player, 5) );
 	}
@@ -74,7 +74,7 @@ public class MapaGenerico extends Mapa
 	{
 		addEntity( new BarricadaComun( this, new Posicion( 20, Juego.GAME_HEIGHT / 2 ) ) );
 		
-		addEntity( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH / 2, Juego.GAME_HEIGHT / 2 ) ) );
+		addEntity( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH - 100, Juego.GAME_HEIGHT / 2 ) ) );
 	}
 	
 	

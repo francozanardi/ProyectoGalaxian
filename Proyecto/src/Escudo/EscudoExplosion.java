@@ -1,12 +1,8 @@
 package Escudo;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
 import Entidad.EntidadConVida;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 
 
 
@@ -18,14 +14,12 @@ public class EscudoExplosion extends Escudo
 	
 	public EscudoExplosion( EntidadConVida holder, int cantExplosiones )
 	{
-		this.pos				= new Posicion(2, 2);
-		this.tamano				= new Size(10, 20);
-		this.panel				= new JPanel();
-		this.contExplosiones	= cantExplosiones;
+		cargarSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
 		
-		this.holder	 = holder;
+		this.pos				= new Posicion(2, 2);
+		this.contExplosiones	= cantExplosiones;
+		this.holder				= holder;
 
-		this.actualizarPanel(true, Color.pink);
 	}
 
 

@@ -1,16 +1,12 @@
 package PowerUp;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
 import Arma.ArmaMinigun;
 import Colisiones.ColDispJugador;
 import Colisiones.ColPowerUp;
 import Jugador.Jugador;
 import Mapa.Mapa;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 
 
 
@@ -20,12 +16,9 @@ public class PUMinigun extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		this.panel			= new JPanel( );
-		this.tamano			= new Size( 30, 30 );
+		cargarSprite( new Sprite( "/GameSprites/puArma.PNG" ) );
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
-		
-		this.actualizarPanel(true, Color.cyan);
 	}
 	
 	

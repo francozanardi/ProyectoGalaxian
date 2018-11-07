@@ -8,6 +8,7 @@ import javax.swing.SwingConstants;
 
 
 
+@SuppressWarnings("serial")
 public class MenuButton extends JButton
 {
 	private final Font 	BOTON_FONT	= new Font("Ubuntu", Font.BOLD, 16);

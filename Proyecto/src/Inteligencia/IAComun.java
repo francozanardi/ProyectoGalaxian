@@ -36,13 +36,13 @@ public class IAComun extends IAEnemigo
 		*/
 		
 		// No permitir que se vaya por los costados de la pantalla
-		if (x < entidad.getPanel().getBounds().getWidth()/2)  
-			x = entidad.getPanel().getBounds().getWidth()/2;
+		if (x < entidad.getSprite().getBounds().getWidth()/2)  
+			x = entidad.getSprite().getBounds().getWidth()/2;
 		
 		// Esto de dividirlo por 2 y multiplicarlo por 2 lo agregué porque el enemigo se iba al borde de la pantalla,
 		// un lugar donde el jugador no puede disparar.
-		else if (x > Juego.GAME_WIDTH - entidad.getPanel().getBounds().getWidth()*2)
-			x = Juego.GAME_WIDTH - entidad.getPanel().getBounds().getWidth()*2;
+		else if (x > Juego.GAME_WIDTH - entidad.getSprite().getBounds().getWidth()*2)
+			x = Juego.GAME_WIDTH - entidad.getSprite().getBounds().getWidth()*2;
 		
 		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba
 		if (y > Juego.GAME_HEIGHT)

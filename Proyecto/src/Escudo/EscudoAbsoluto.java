@@ -1,12 +1,8 @@
 package Escudo;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
 import Entidad.EntidadConVida;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 
 
 
@@ -18,14 +14,11 @@ public class EscudoAbsoluto extends Escudo
 	
 	public EscudoAbsoluto( EntidadConVida holder, int duracionEnDisparos )
 	{
-		this.pos				= new Posicion(2, 2);
-		this.tamano				= new Size(10, 30);
-		this.panel				= new JPanel();
-		this.disparosMitigados	= duracionEnDisparos;
+		cargarSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
 		
+		this.pos				= new Posicion(2, 2);
+		this.disparosMitigados	= duracionEnDisparos;
 		this.holder				= holder;
-
-		this.actualizarPanel(true, Color.yellow);
 	}
 
 

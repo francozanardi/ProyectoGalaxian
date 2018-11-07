@@ -1,22 +1,22 @@
 package Entidad;
 
-import javax.swing.JPanel;
-
 import Colisiones.Colisionador;
+
+import javax.swing.ImageIcon;
+
 import Colisiones.ColEntidad;
 import Inteligencia.Inteligencia;
 import Mapa.Mapa;
+import Sprite.Sprite;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
-
-import java.awt.Color;
 
 
 
 public abstract class Entidad
 {	
-	protected JPanel		panel;
+	protected Sprite		sprite;
 	protected Posicion		pos;
 	protected Size			tamano;
 	protected Mapa			map;
@@ -32,9 +32,21 @@ public abstract class Entidad
 
 	
 	
-	public JPanel getPanel( )
+	public void setSprite( Sprite spr )
 	{
-		return panel;
+		/*
+		 * Es necesario que hagamos setImage de getImage, debemos recordar que Sprite extiende a JPanel,
+		 * el método este recibe un Sprite, por lo que si trabajacemos con el sprite recibido por parámetro,
+		 * deberíamos añadirlo al JPanel del juego y remover el viejo, lo cual no es conveniente.
+		 * De esta forma, sólo le cambiamos la imagen al que ya está añadido al juego y le ajustamos su tamaño.
+		 */
+		sprite.setImage( spr.getImage() );
+		cargarSprite( sprite );
+	}
+	
+	public Sprite getSprite( )
+	{
+		return sprite;
 	}
 	
 	public Inteligencia getIA( )
@@ -70,23 +82,24 @@ public abstract class Entidad
 
 
 	
-	protected void actualizarPanel( boolean esOpaco, Color colorFondo )
+	protected void cargarSprite( Sprite spr )
 	{
-		actualizarPosicion( );
-		panel.setLayout( null );
-		panel.setOpaque( esOpaco );
-		panel.setBackground( colorFondo );
-		panel.setVisible( true );
+		this.sprite = spr;
+		this.tamano = new Size( spr.getWidth(), spr.getHeight() );
+		
+		//actualizarPosicion( );
 	}
 	
 	protected void actualizarPosicion()
 	{
-		panel.setBounds(
+		sprite.setBounds(
 			(int) Math.round( pos.getX() ),
 			(int) Math.round( pos.getY() ),
 			tamano.getWidth(),
 			tamano.getHeight()
 		);
+		
+		sprite.repaint();
 	}
 
 

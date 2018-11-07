@@ -1,15 +1,13 @@
 package Disparo;
 
-import javax.swing.JPanel;
-
 import Arma.Arma;
 import Colisiones.Colisionador;
 import Colisiones.ColDisparo;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
 import Logica.Juego;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 import Utils.Vector;
 
 
@@ -22,13 +20,13 @@ public abstract class Disparo extends Entidad
 
 
 	
-	protected void inicializar( Size size, ColDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion, double dmgBase )
+	protected void inicializar( Sprite spr, ColDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion, double dmgBase )
 	{
 		colisionador	= col;
 		map				= arma.getMapa();
-		panel			= new JPanel();
+		
+		cargarSprite( spr );
 		pos				= posInicial;
-		tamano			= size;
 		dmg				= dmgBase * arma.getMultDmg( );
 		dir				= vectorDireccion;
 		
