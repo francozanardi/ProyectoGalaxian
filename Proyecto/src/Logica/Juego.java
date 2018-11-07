@@ -3,6 +3,7 @@ package Logica;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,6 +11,8 @@ import javax.swing.SwingConstants;
 
 import Controladores.ContNivelesGenerico;
 import Controladores.ControladorNiveles;
+import Grafica.GUI;
+import Grafica.GUISimple;
 import Jugador.Jugador;
 import Menu.MediadorMenu;
 
@@ -36,13 +39,11 @@ public class Juego extends JFrame
 	
 
 	
-	private JPanel				panel;
-	private JLabel				labelPuntaje;
-	private JLabel				labelMensaje;
+	private PanelMapa			panel;
 	private Teclado				teclado;
 	private ControladorNiveles	control;
 	private MediadorMenu		mediadorMenu;
-	private Timer				timerAnuncio;
+	private GUI					gui;
 
 
 	
@@ -76,12 +77,13 @@ public class Juego extends JFrame
 		addMouseMotionListener( new OyenteMouse() );
 		
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		setBounds( 0, 0, GAME_WIDTH, GAME_HEIGHT );
+		//setBounds( 0, 0, GAME_WIDTH, GAME_HEIGHT );
+		setPreferredSize( new Dimension(GAME_WIDTH, GAME_HEIGHT) );
+		pack();
 		setLocationRelativeTo( null );
 		setResizable( false );
 
 		crearPanel( );
-		crearLabel( );
 		
 		inicializarObjetos( );
 		
@@ -92,11 +94,12 @@ public class Juego extends JFrame
 	
 	private void inicializarObjetos( )
 	{
-		teclado = new Teclado( );
-		
-		mediadorMenu = new MediadorMenu( this );
+		teclado			= new Teclado( );
+		mediadorMenu	= new MediadorMenu( this );
+		gui				= new GUISimple( getPanel() );
 		
 		mediadorMenu.menuPrincipal().show( true );
+		gui.show( false );
 	}
 
 
@@ -117,7 +120,8 @@ public class Juego extends JFrame
 	{
 		System.out.println("mostrar menu");
 		
-		resetPanel();
+		panel.removeAllEntities();
+		
 		mediadorMenu = new MediadorMenu( this ); // SOLUCION TEMPORAL, NO SE DEBERIAN BORRAR LOS OBJETOS GRAFICOS YA CREADOS.
 
 		mediadorMenu.menuPrincipal().show( true );
@@ -127,93 +131,24 @@ public class Juego extends JFrame
 	
 	private void crearPanel( )
 	{
-		panel = new JPanel();
+		panel = new PanelMapa();
 		panel.setLayout( null );
 		setContentPane( panel );
 	}
-	
-	public void resetPanel( )
-	{
-		panel.removeAll();
-		
-		labelPuntaje.setText("");
-		labelMensaje.setText("");
-		
-		panel.add(labelPuntaje);
-		panel.add(labelMensaje);
-	}
 
 
 	
-	private void crearLabel( )
-	{
-		labelPuntaje = new JLabel( );
-		labelPuntaje.setBounds(5, 5, GAME_WIDTH, 30);
-		labelPuntaje.setFont( new Font("Consolas", Font.BOLD, 12) );
-		labelPuntaje.setForeground( new Color(255, 255, 255) );
-		labelPuntaje.setVisible(true);
-		
-		panel.add(labelPuntaje);
-		
-		
-		
-		labelMensaje = new JLabel( );
-		labelMensaje.setBounds(5, 30, GAME_WIDTH, 300);
-		labelMensaje.setHorizontalAlignment( SwingConstants.CENTER );
-		labelMensaje.setVerticalAlignment( SwingConstants.TOP );
-		labelMensaje.setFont( new Font("Consolas", Font.BOLD, 16) );
-		labelMensaje.setForeground( new Color(255, 255, 255) );
-		labelMensaje.setVisible(true);
-		
-		panel.add(labelMensaje);
-	}
-
-
-	
-	public JPanel getPanel( )
+	public PanelMapa getPanel( )
 	{
 		return panel;
 	}
-
-
 	
-	public void updateScoreLabel( String texto )
+	public GUI getGUI( )
 	{
-		labelPuntaje.setText( texto );
-	}
-
-	public void mostrarAnuncio( String texto, int duracionMS )
-	{
-		final boolean USAR_MAYUSCULAS = true;
-		
-		
-		
-		if (USAR_MAYUSCULAS)
-			texto = texto.toUpperCase();
-		
-		labelMensaje.setText( texto );
-
-		if (timerAnuncio != null)
-		{
-			timerAnuncio.cancel();
-			timerAnuncio = null;
-		}
-		
-		timerAnuncio = new Timer(); 
-		timerAnuncio.schedule( new TimerQuitarAnuncio(), duracionMS );
+		return gui;
 	}
 	
 	
-
-	private class TimerQuitarAnuncio extends TimerTask
-	{
-		public void run()
-		{
-			labelMensaje.setText("");
-		}
-	}
-
-
 	
 	public Teclado getTeclado( )
 	{

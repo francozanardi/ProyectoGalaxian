@@ -86,7 +86,7 @@ public abstract class Arma extends Entidad
 		map					= tirador.getMapa();
 		rand				= Randomizador.create( );
 		
-		cargarSprite( spr );
+		setSprite( spr );
 		
 		pos =	new Posicion(
 					(tirador.getSize().getWidth() / 2) - (spr.getSize().getWidth() / 2) + offset.getX(),

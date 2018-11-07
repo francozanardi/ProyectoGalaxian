@@ -25,7 +25,7 @@ public abstract class Disparo extends Entidad
 		colisionador	= col;
 		map				= arma.getMapa();
 		
-		cargarSprite( spr );
+		setSprite( spr );
 		pos				= posInicial;
 		dmg				= dmgBase * arma.getMultDmg( );
 		dir				= vectorDireccion;

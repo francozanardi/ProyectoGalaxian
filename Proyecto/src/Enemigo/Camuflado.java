@@ -22,7 +22,7 @@ public class Camuflado extends Transformable
 		this.dificultad		= dificultad;
 		this.rand			= Randomizador.create( );
 
-		cargarSprite( new Sprite( "/GameSprites/Comun.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Comun.PNG" ) );
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 3) );
 		this.escudo			= new LinkedList<Escudo>( );
 		this.vida			= 400.0 + (100.0 * dificultad); //tiene más vida que un común normal.

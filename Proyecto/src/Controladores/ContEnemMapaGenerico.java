@@ -91,8 +91,7 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 			return new Camuflado(map, dificultad);
 		
 
-		return new Camuflado(map, dificultad);
-		//return new Comun(map, dificultad);
+		return new Comun(map, dificultad);
 	}
 	
 	

@@ -9,6 +9,7 @@ import Controladores.ControladorNiveles;
 import Enemigo.Enemigo;
 import Entidad.Entidad;
 import Grafica.Fondo;
+import Grafica.GUI;
 import Jugador.Jugador;
 import Logica.Juego;
 import Logica.Teclado;
@@ -30,6 +31,7 @@ public abstract class Mapa
 	protected double				dificultad;
 	protected String				nombre;
 	protected ControladorEnemigos	controlEnemigos;
+	protected GUI					gui;
 		
 	
 
@@ -41,6 +43,8 @@ public abstract class Mapa
 	
 	public void ganar( )
 	{
+		gui.show( false );
+		
 		controlJuego.mapVictory( player );
 		
 		//juego.mapVictory();
@@ -48,7 +52,7 @@ public abstract class Mapa
 	
 	public void perder( )
 	{
-		juego.updateScoreLabel("Perdiste en un juego que no está listo, jaja.");
+		gui.show( false );
 		
 		controlJuego.mapDefeat( player );
 		
@@ -112,18 +116,18 @@ public abstract class Mapa
 		
 		for(Entidad e: entidades) {
 			if(e != player) {
-				juego.getPanel().remove(e.getSprite());
+				juego.getPanel().removeEntity(e.getSprite());
 				e.getSprite().setVisible(false);
 			}
 		}
 		
 		for(Entidad e: entidadesParaEliminar) {
-			juego.getPanel().remove(e.getSprite());
+			juego.getPanel().removeEntity(e.getSprite());
 			e.getSprite().setVisible(false);
 		}
 		
 		for(Entidad e: entidadesParaAgregar) {
-			juego.getPanel().remove(e.getSprite());
+			juego.getPanel().removeEntity(e.getSprite());
 			e.getSprite().setVisible(false);
 		}
 		
@@ -173,7 +177,7 @@ public abstract class Mapa
 	{
 		for(Entidad e: entidadesParaAgregar) {
 			entidades.add(e);
-			juego.getPanel().add(e.getSprite());
+			juego.getPanel().addEntity(e.getSprite());
 		}
 		
 		entidadesParaAgregar.clear();
@@ -183,18 +187,14 @@ public abstract class Mapa
 
 	public void mostrarAnuncio( String texto )
 	{
-		juego.mostrarAnuncio(texto, 4000);
+		gui.announce(texto, 4000);
 	}
 		
-	protected void actualizarLabelInformacion( double msDesdeUltActualizacion )
+	protected void actualizarInformacion( double msDesdeUltActualizacion )
 	{
-		juego.updateScoreLabel(
-			String.format( "Puntaje: %d   |   Vida: %.1f   |   FPS: %.0f",
-				player.getPuntaje(),
-				player.getVida(),
-				1000.0 / msDesdeUltActualizacion
-			)
-		);
+		gui.updateFPS( 1000.0 / msDesdeUltActualizacion );
+		gui.updateScore( player.getPuntaje() );
+		gui.updateHP( player.getVida(), 1000.0 );
 	}
 	
 	

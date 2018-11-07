@@ -24,7 +24,7 @@ public class BarricadaComun extends Barricada
 		this.colisionador	= new ColBarricada( );
 		this.puntaje		= 10;
 		
-		cargarSprite( new Sprite( "/GameSprites/Saturno.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Saturno.PNG" ) );
 		
 		this.addEscudo( new EscudoBasico(this, 2.0) );
 		

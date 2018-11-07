@@ -26,7 +26,7 @@ public class Guiado extends Kamikaze
 		this.dificultad		= dificultad;
 		this.rand			= Randomizador.create( );
 
-		cargarSprite( new Sprite( "/GameSprites/Guiado.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Guiado.PNG" ) );
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 8) );
 		this.escudo			= new LinkedList<Escudo>( );
 		

@@ -30,6 +30,7 @@ public class MapaGenerico extends Mapa
 		
 		// Inicializar objetos
 		this.juego					= juego;
+		this.gui					= juego.getGUI();
 		this.player					= player;
 		this.controlJuego			= control;
 		this.rand					= Randomizador.create( );
@@ -49,6 +50,8 @@ public class MapaGenerico extends Mapa
 		crearObjetos( );
 		
 		agregarEntidades();
+		
+		gui.show(true);
 	}
 	
 	
@@ -85,7 +88,7 @@ public class MapaGenerico extends Mapa
 		
 		fondo.actualizar( msDesdeUltActualizacion );
 		
-		actualizarLabelInformacion( msDesdeUltActualizacion );
+		actualizarInformacion( msDesdeUltActualizacion );
 
 		actualizarEntidades( msDesdeUltActualizacion );		
 		

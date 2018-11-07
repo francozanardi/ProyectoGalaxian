@@ -26,7 +26,7 @@ public class Borracho extends Kamikaze
 		this.dificultad		= dificultad;
 		this.rand			= Randomizador.create( );
 
-		cargarSprite( new Sprite( "/GameSprites/Kamikaze.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Kamikaze.PNG" ) );
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 6) );
 		this.escudo			= new LinkedList<Escudo>( );
 		

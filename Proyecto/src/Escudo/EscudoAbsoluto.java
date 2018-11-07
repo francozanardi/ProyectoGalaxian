@@ -14,7 +14,7 @@ public class EscudoAbsoluto extends Escudo
 	
 	public EscudoAbsoluto( EntidadConVida holder, int duracionEnDisparos )
 	{
-		cargarSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
 		
 		this.pos				= new Posicion(2, 2);
 		this.disparosMitigados	= duracionEnDisparos;

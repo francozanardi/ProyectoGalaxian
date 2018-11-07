@@ -16,7 +16,7 @@ public class PUMinigun extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		cargarSprite( new Sprite( "/GameSprites/puArma.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/puArma.PNG" ) );
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}

@@ -26,7 +26,7 @@ public class Jefe extends Enemigo
 		this.colisionador	= new ColEnemigo();
 		this.rand			= Randomizador.create( );
 
-		cargarSprite( new Sprite( "/GameSprites/Boss.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Boss.PNG" ) );
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 3) );
 		this.escudo			= new LinkedList<Escudo>( );
 		

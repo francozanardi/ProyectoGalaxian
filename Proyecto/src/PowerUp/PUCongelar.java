@@ -30,7 +30,7 @@ public class PUCongelar extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		cargarSprite( new Sprite( "/GameSprites/PUCongelar.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/PUCongelar.PNG" ) );
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 		this.inteligencias	= new Hashtable<Entidad, IAEnemigo>( );

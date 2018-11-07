@@ -16,7 +16,7 @@ public class EscudoHealer extends Escudo
 	
 	public EscudoHealer( EntidadConVida holder, double healSeg, double maxHeal )
 	{
-		cargarSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
 		
 		this.pos	= new Posicion(2, 2);
 		this.holder = holder;

@@ -14,7 +14,7 @@ public class EscudoExplosion extends Escudo
 	
 	public EscudoExplosion( EntidadConVida holder, int cantExplosiones )
 	{
-		cargarSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
 		
 		this.pos				= new Posicion(2, 2);
 		this.contExplosiones	= cantExplosiones;

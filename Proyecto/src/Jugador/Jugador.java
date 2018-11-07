@@ -29,7 +29,8 @@ public class Jugador extends Personaje
 		this.escudo			= new LinkedList<Escudo>( );
 		this.colisionador	= new ColJugador();
 		
-		cargarSprite( new Sprite( "/GameSprites/Personaje.PNG" ) );
+		Sprite s = new Sprite( "/GameSprites/Personaje.PNG" );
+		setSprite( s );
 		
 		this.pos = new Posicion((Juego.GAME_WIDTH / 2) - (tamano.getWidth() / 2), Juego.GAME_HEIGHT - tamano.getHeight() - 30);
 		

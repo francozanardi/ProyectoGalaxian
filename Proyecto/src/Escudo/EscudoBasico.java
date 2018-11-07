@@ -14,7 +14,7 @@ public class EscudoBasico extends Escudo
 	
 	public EscudoBasico( EntidadConVida holder, double reduccion )
 	{
-		cargarSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
 		
 		this.pos		= new Posicion(2, 2);
 		this.reduccion	= reduccion;

@@ -25,7 +25,7 @@ public class ObstaculoComun extends Destructible
 		this.colisionador	= new ColObstaculo( );
 		this.puntaje		= 10;
 		
-		cargarSprite( new Sprite( "/GameSprites/Destructible.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Destructible.PNG" ) );
 		
 		this.addEscudo( new EscudoBasico(this, 2.0) );
 		

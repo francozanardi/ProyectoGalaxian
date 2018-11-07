@@ -15,7 +15,7 @@ public class PUHeal extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		cargarSprite( new Sprite( "/GameSprites/puHeal.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/puHeal.PNG" ) );
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}

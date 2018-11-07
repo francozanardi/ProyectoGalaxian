@@ -28,7 +28,7 @@ public class Comun extends Enemigo
 		this.colisionador	= new ColEnemigo();
 		this.rand			= Randomizador.create( );
 
-		cargarSprite( new Sprite( "/GameSprites/Comun.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/Comun.PNG" ) );
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 3) );
 		this.escudo			= new LinkedList<Escudo>( );
 		

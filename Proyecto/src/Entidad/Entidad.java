@@ -2,8 +2,6 @@ package Entidad;
 
 import Colisiones.Colisionador;
 
-import javax.swing.ImageIcon;
-
 import Colisiones.ColEntidad;
 import Inteligencia.Inteligencia;
 import Mapa.Mapa;
@@ -34,14 +32,18 @@ public abstract class Entidad
 	
 	public void setSprite( Sprite spr )
 	{
+		if (this.sprite == null)
+			this.sprite = spr;
+		else
+			this.sprite.setImage( spr.getImage() );
 		/*
 		 * Es necesario que hagamos setImage de getImage, debemos recordar que Sprite extiende a JPanel,
 		 * el método este recibe un Sprite, por lo que si trabajacemos con el sprite recibido por parámetro,
 		 * deberíamos añadirlo al JPanel del juego y remover el viejo, lo cual no es conveniente.
 		 * De esta forma, sólo le cambiamos la imagen al que ya está añadido al juego y le ajustamos su tamaño.
 		 */
-		sprite.setImage( spr.getImage() );
-		cargarSprite( sprite );
+
+		this.tamano = new Size( spr.getWidth(), spr.getHeight() );
 	}
 	
 	public Sprite getSprite( )
@@ -81,14 +83,6 @@ public abstract class Entidad
 	}
 
 
-	
-	protected void cargarSprite( Sprite spr )
-	{
-		this.sprite = spr;
-		this.tamano = new Size( spr.getWidth(), spr.getHeight() );
-		
-		//actualizarPosicion( );
-	}
 	
 	protected void actualizarPosicion()
 	{
