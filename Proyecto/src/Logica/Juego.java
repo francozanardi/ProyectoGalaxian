@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import Controladores.ContNivelesGenerico;
 import Controladores.ControladorNiveles;
 import Jugador.Jugador;
+import Menu.MediadorMenu;
 
 import javax.swing.JLabel;
 
@@ -27,9 +28,10 @@ import java.util.TimerTask;
 @SuppressWarnings("serial")
 public class Juego extends JFrame
 {	
-	public static final int		GAME_WIDTH	= 450,
-								GAME_HEIGHT	= (int) (GAME_WIDTH * 1.5),
-								GAME_FPS	= 60;
+	public static final int		GAME_WIDTH			= 450,
+								GAME_HEIGHT			= (int) (GAME_WIDTH * 1.5),
+								GAME_FPS			= 60,
+								GAME_BEST_SCORES	= 20;
 	public static final String	GAME_TITLE = "Galaxian Trucho";
 	
 
@@ -39,7 +41,7 @@ public class Juego extends JFrame
 	private JLabel				labelMensaje;
 	private Teclado				teclado;
 	private ControladorNiveles	control;
-	private MenuPrincipal		menu;
+	private MediadorMenu		mediadorMenu;
 	private Timer				timerAnuncio;
 
 
@@ -91,8 +93,10 @@ public class Juego extends JFrame
 	private void inicializarObjetos( )
 	{
 		teclado = new Teclado( );
-				
-		menu = new MenuPrincipal( this );
+		
+		mediadorMenu = new MediadorMenu( this );
+		
+		mediadorMenu.menuPrincipal().show( true );
 	}
 
 
@@ -114,8 +118,9 @@ public class Juego extends JFrame
 		System.out.println("mostrar menu");
 		
 		resetPanel();
-		
-		menu.gameFinished();
+		mediadorMenu = new MediadorMenu( this ); // SOLUCION TEMPORAL, NO SE DEBERIAN BORRAR LOS OBJETOS GRAFICOS YA CREADOS.
+
+		mediadorMenu.menuPrincipal().show( true );
 	}
 
 
