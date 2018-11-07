@@ -1,9 +1,8 @@
 package Entidad;
 
-import javax.swing.JPanel;
-
 import Inteligencia.Inteligencia;
 import Mapa.Mapa;
+import Sprite.Sprite;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
@@ -11,13 +10,11 @@ import visitor.ColEntidad;
 import visitor.Colisionador;
 import visitor.Visitor;
 
-import java.awt.Color;
-
 
 
 public abstract class Entidad
 {	
-	protected JPanel		panel;
+	protected Sprite		sprite;
 	protected Posicion		pos;
 	protected Size			tamano;
 	protected Mapa			map;
@@ -31,14 +28,30 @@ public abstract class Entidad
 	
 	public abstract void actualizar( double msDesdeUltActualizacion );
 
-	
-	public JPanel getPanel() {
-		return panel;
+
+	public Inteligencia getIA() {
+		return this.ia;
+	}
+
+	public void setSprite( Sprite spr )
+	{
+		if (this.sprite == null)
+			this.sprite = spr;
+		else
+			this.sprite.setImage( spr.getImage() );
+		/*
+		 * Es necesario que hagamos setImage de getImage, debemos recordar que Sprite extiende a JPanel,
+		 * el método este recibe un Sprite, por lo que si trabajacemos con el sprite recibido por parámetro,
+		 * deberíamos añadirlo al JPanel del juego y remover el viejo, lo cual no es conveniente.
+		 * De esta forma, sólo le cambiamos la imagen al que ya está añadido al juego y le ajustamos su tamaño.
+		 */
+
+		this.tamano = new Size( spr.getWidth(), spr.getHeight() );
 	}
 	
-	public Inteligencia getIA()
+	public Sprite getSprite( )
 	{
-		return this.ia;
+		return sprite;
 	}
 	
 	public void setIA(Inteligencia ia)
@@ -72,36 +85,23 @@ public abstract class Entidad
 		this.map = map;
 	}
 
-
-	
-	protected void actualizarPanel( boolean esOpaco, Color colorFondo )
-	{
-		actualizarPosicion( );
-		panel.setLayout( null );
-		panel.setOpaque( esOpaco );
-		panel.setBackground( colorFondo );
-		panel.setVisible( true );
-	}
-	
 	protected void actualizarPosicion()
 	{
-		panel.setBounds(
+		sprite.setBounds(
 			(int) Math.round( pos.getX() ),
 			(int) Math.round( pos.getY() ),
 			tamano.getWidth(),
 			tamano.getHeight()
 		);
+		
+		sprite.repaint();
 	}
-
-
 
 	protected double conversionEnTiempo( double unidadesPorSegundo, double tiempoTranscurrido )
 	{
 		return tiempoTranscurrido * (unidadesPorSegundo / 1000.0);
 	}
 
-
-	
 	public void remove()
 	{
 		map.removeEntity(this);

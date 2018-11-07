@@ -31,7 +31,8 @@ public abstract class EntidadConVida extends Entidad
 	public void setArma( Arma arma )
 	{
 		this.arma = arma;
-		this.panel.add( arma.getPanel() );
+		this.sprite.add( arma.getSprite() );
+		arma.getSprite().setBounds( (int) arma.getPos().getX(), (int) arma.getPos().getY(), arma.getSize().getWidth(), arma.getSize().getHeight() );
 	}
 	
 	public void changeArma( Arma nuevaArma )
@@ -61,12 +62,12 @@ public abstract class EntidadConVida extends Entidad
 	{
 		escudo.add( e );
 		
-		this.panel.add( e.getPanel() );
+		this.sprite.add( e.getSprite() );
 	}
 	
 	public void removeEscudo( Escudo e )
 	{
-		this.panel.remove( e.getPanel() );
+		this.sprite.remove( e.getSprite() );
 		
 		// Lo quitamos de la lista de escudos
 		escudosABorrar.add( e );

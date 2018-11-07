@@ -1,12 +1,8 @@
 package Escudo;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
 import Entidad.EntidadConVida;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 
 
 
@@ -18,14 +14,11 @@ public class EscudoBasico extends Escudo
 	
 	public EscudoBasico( EntidadConVida holder, double reduccion )
 	{
-		this.pos		= new Posicion(2, 2);
-		this.tamano		= new Size(10, 20);
-		this.panel		= new JPanel();
-		this.reduccion	= reduccion;
+		setSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
 		
-		this.holder	 = holder;
-
-		this.actualizarPanel(true, Color.pink);
+		this.pos		= new Posicion(2, 2);
+		this.reduccion	= reduccion;
+		this.holder		= holder;
 	}
 
 

@@ -1,9 +1,6 @@
 package Enemigo;
 
-import java.awt.Color;
 import java.util.LinkedList;
-
-import javax.swing.JPanel;
 
 import Arma.ArmaDefaultEnemigo;
 import DropPowerUP.CreadorPowerUP;
@@ -12,9 +9,9 @@ import Escudo.Escudo;
 import Inteligencia.IABorracho;
 import Logica.Juego;
 import Mapa.Mapa;
+import Sprite.Sprite;
 import Utils.Posicion;
 import Utils.Randomizador;
-import Utils.Size;
 import visitor.ColDispEnemigo;
 import visitor.ColKamikaze;
 
@@ -27,11 +24,10 @@ public class Borracho extends Kamikaze
 		this.map			= map;
 		this.ia				= new IABorracho( this );
 		this.dificultad		= dificultad;
-		
 		this.rand			= Randomizador.create( );
-		this.panel			= new JPanel( );
+
+		setSprite( new Sprite( "/GameSprites/Kamikaze.PNG" ) );
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 6) );
-		this.tamano			= new Size(30, 15);
 		this.escudo			= new LinkedList<Escudo>( );
 		
 		this.puntaje		= (int) (50 + (10 * dificultad));
@@ -43,8 +39,6 @@ public class Borracho extends Kamikaze
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
 		powerUp = drop.crearPowerUP();
 		
-		actualizarPanel( true, new Color( 0, 100, 0 ) );
 		setArma( new ArmaDefaultEnemigo(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );
-
 	}
 }

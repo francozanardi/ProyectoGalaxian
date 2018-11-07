@@ -1,10 +1,8 @@
 package Disparo;
 
-import java.awt.Color;
-
 import Arma.Arma;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 import Utils.Vector;
 import visitor.ColDisparo;
 
@@ -18,8 +16,6 @@ public class DisparoPerdigon extends Disparo
 	
 	public DisparoPerdigon( ColDisparo col, Arma arma, Posicion posInicial, Vector vectorDireccion )
 	{
-		inicializar( new Size(4, 4), col, arma, posInicial, vectorDireccion, DMG_BASE );
-		
-		actualizarPanel( true, Color.pink );
+		inicializar( new Sprite( "/GameSprites/Disparo4.PNG" ), col, arma, posInicial, vectorDireccion, DMG_BASE );
 	}
 }

@@ -1,18 +1,15 @@
 package Jugador;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.swing.JPanel;
 
 import Arma.*;
 import Disparo.Disparo;
 import Entidad.Personaje;
 import Escudo.*;
 import Logica.Juego;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 import visitor.ColDispJugador;
 import visitor.ColJugador;
 import visitor.Visitor;
@@ -28,17 +25,14 @@ public class Jugador extends Personaje
 	
 	public Jugador()
 	{
-		final int	PLAYER_WIDTH	= 20,
-					PLAYER_HEIGHT	= 40;
-		
-		this.panel			= new JPanel( );
-		this.pos			= new Posicion((Juego.GAME_WIDTH / 2) - (PLAYER_WIDTH / 2), Juego.GAME_HEIGHT - PLAYER_HEIGHT - 30);
-		this.tamano			= new Size(PLAYER_WIDTH, PLAYER_HEIGHT);
 		this.vida			= 1000;
 		this.escudo			= new LinkedList<Escudo>( );
 		this.colisionador	= new ColJugador();
 		
-		actualizarPanel( true, new Color( 255, 255, 255 ) );
+		Sprite s = new Sprite( "/GameSprites/Personaje.PNG" );
+		setSprite( s );
+		
+		this.pos = new Posicion((Juego.GAME_WIDTH / 2) - (tamano.getWidth() / 2), Juego.GAME_HEIGHT - tamano.getHeight() - 30);
 		
 		setArma( new ArmaComun(this, new ColDispJugador(), 0.5 * Math.PI) );
 	}

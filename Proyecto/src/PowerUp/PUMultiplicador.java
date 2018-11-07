@@ -1,15 +1,11 @@
 package PowerUp;
 
-import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.JPanel;
-
 import Jugador.Jugador;
 import Mapa.Mapa;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 import visitor.ColPowerUp;
 
 
@@ -30,12 +26,9 @@ public class PUMultiplicador extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		this.panel			= new JPanel( );
-		this.tamano			= new Size( 25, 25 );
+		setSprite( new Sprite( "/GameSprites/puDmg.PNG" ) );
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
-		
-		this.actualizarPanel(true, Color.pink);
 	}
 	
 	

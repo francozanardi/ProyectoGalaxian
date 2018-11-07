@@ -3,16 +3,19 @@ package Arma;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JPanel;
+
 
 import Disparo.Disparo;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
+import Sprite.Sprite;
 import Utils.Posicion;
 import Utils.Randomizador;
-import Utils.Size;
+
+
 import visitor.ColDisparo;
 import visitor.Visitor;
+
 
 
 
@@ -24,7 +27,7 @@ public abstract class Arma extends Entidad
 									anguloDisparo;
 	protected long					tiempoUltimoDisparo;
 	protected EntidadConVida 		owner;
-	protected ColDisparo	colisionador;
+	protected ColDisparo			colisionador;
 
 
 	
@@ -86,17 +89,21 @@ public abstract class Arma extends Entidad
 	 * Este método inicializa la variable tiempoUltimoDisparo con un delay aleatorio entre 0 y 1000 miliegundos,
 	 * de esta forma nos aseguramos de que los enemigos no disparen todos a la vez.
 	 */
-	protected void inicializar( Posicion posicion, Size size, EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo, double cadenciaDeDisparo, double dmgMult )
+	protected void inicializar( Sprite spr, Posicion offset, EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo, double cadenciaDeDisparo, double dmgMult )
 	{
 		owner				= tirador;
 		colisionador		= miColisionador;
 		anguloDisparo		= anguloDelDisparo;
 		map					= tirador.getMapa();
-		
 		rand				= Randomizador.create( );
-		panel				= new JPanel();
-		tamano				= size;
-		pos					= posicion;
+		
+		setSprite( spr );
+		
+		pos =	new Posicion(
+					(tirador.getSize().getWidth() / 2) - (spr.getSize().getWidth() / 2) + offset.getX(),
+					(tirador.getSize().getHeight() / 2) - (spr.getSize().getHeight() / 2) + offset.getY()
+				);
+		
 		cadenciaDisparo		= (1000.0 / cadenciaDeDisparo);
 		multDmg				= dmgMult;
 		multCadencia		= 1.0;
@@ -116,8 +123,8 @@ public abstract class Arma extends Entidad
 	{
 		return
 			new	Posicion(
-				owner.getPos().getX() + this.pos.getX(),
-				owner.getPos().getY() + this.pos.getY() + (this.tamano.getHeight() / 2)
+				owner.getPos().getX() + this.pos.getX() + (this.tamano.getWidth() / 2),		// El disparo debe salir aproximadamente del centro del arma (horizontalmente).
+				owner.getPos().getY() + this.pos.getY() + (this.tamano.getHeight() / 2)		// El dispará saldra aproximadamente desde la mitad del arma (verticalmente).
 			);
 	}
 

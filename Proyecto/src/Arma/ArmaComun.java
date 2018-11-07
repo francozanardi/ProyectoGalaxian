@@ -1,14 +1,13 @@
 package Arma;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
 import Disparo.Disparo;
 import Disparo.DisparoComun;
 import Entidad.EntidadConVida;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 import Utils.Vector;
 import visitor.ColDisparo;
 
@@ -24,16 +23,14 @@ public class ArmaComun extends Arma
 	public ArmaComun( EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo )
 	{
 		inicializar(
-			new Posicion(3, 3),
-			new Size(10, 20),
+			new Sprite( "/GameSprites/Arma.PNG" ),
+			new Posicion(0, 0),
 			tirador,
 			miColisionador,
 			anguloDelDisparo,
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
 		);
-
-		actualizarPanel( true, new Color(0, 0, 105) );
 	}
 
 

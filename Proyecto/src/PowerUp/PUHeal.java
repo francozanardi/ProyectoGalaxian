@@ -1,17 +1,11 @@
 package PowerUp;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
 import Escudo.EscudoHealer;
 import Jugador.Jugador;
 import Mapa.Mapa;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 import visitor.ColPowerUp;
-
-
 
 public class PUHeal extends PowerUp
 {
@@ -19,12 +13,9 @@ public class PUHeal extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		this.panel			= new JPanel( );
-		this.tamano			= new Size( 30, 30 );
+		setSprite( new Sprite( "/GameSprites/puHeal.PNG" ) );
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
-		
-		this.actualizarPanel(true, Color.green);
 	}
 	
 	

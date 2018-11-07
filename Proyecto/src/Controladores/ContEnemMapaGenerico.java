@@ -79,6 +79,7 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 		if(valorAleatorio < balance.porcentajeCamuflado())
 			return new Camuflado(map, dificultad);
 		
+
 		return new Comun(map, dificultad);
 	}
 	

@@ -1,12 +1,8 @@
 package Escudo;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
 import Entidad.EntidadConVida;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 
 
 
@@ -20,17 +16,14 @@ public class EscudoHealer extends Escudo
 	
 	public EscudoHealer( EntidadConVida holder, double healSeg, double maxHeal )
 	{
-		this.pos	= new Posicion(2, 2);
-		this.tamano	= new Size(10, 10);
-		this.panel	= new JPanel();
+		setSprite( new Sprite( "/GameSprites/Escudo.PNG" ) );
 		
+		this.pos	= new Posicion(2, 2);
 		this.holder = holder;
 
 		this.totalHPRegenerado	= 0;
 		this.healPorSeg			= healSeg;
 		this.healTotal			= maxHeal;
-		
-		this.actualizarPanel(true, Color.green);
 	}
 
 

@@ -1,15 +1,11 @@
 package Enemigo.Estados;
 
-import java.awt.Color;
-
 import Arma.ArmaDefaultEnemigo;
 import Enemigo.Transformable;
 import Inteligencia.IAComun;
-import Utils.Randomizador;
 import visitor.ColDispEnemigo;
 import visitor.ColEnemigo;
-
-
+import Sprite.Sprite;
 
 public class EstadoComun extends EstadoCamuflado
 {
@@ -23,12 +19,9 @@ public class EstadoComun extends EstadoCamuflado
 		vidaMaxima = contenedor.getVida();
 		contenedor.setIA( new IAComun(contenedor) );
 		contenedor.setColisionador(new ColEnemigo());
-	
-		Randomizador rand = Randomizador.create( );
-		contenedor.getPanel().setBackground(new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ));
+		
+		contenedor.setSprite( new Sprite( "/GameSprites/Comun.PNG" ) );
 		contenedor.setArma(new ArmaDefaultEnemigo(contenedor, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI));
-		contenedor.getSize().setHeight(15);
-		contenedor.getSize().setWidth(15);
 		contenedor.setExplosionDmg(0);
 	}
 
@@ -47,6 +40,7 @@ public class EstadoComun extends EstadoCamuflado
 
 	public Estado transformar()
 	{
+		System.out.println("CAMUFLADO: COMUN -> KAMIKAZE");
 		return new EstadoKamikaze(contenedor);
 	}
 }

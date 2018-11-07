@@ -1,14 +1,13 @@
 package Arma;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
 import Disparo.Disparo;
 import Disparo.DisparoPerdigon;
 import Entidad.EntidadConVida;
+import Sprite.Sprite;
 import Utils.Posicion;
-import Utils.Size;
 import Utils.Vector;
 import visitor.ColDisparo;
 
@@ -26,16 +25,14 @@ public class ArmaTriple extends Arma
 	public ArmaTriple( EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo )
 	{
 		inicializar(
-			new Posicion(5, 5),
-			new Size(5, 15),
+			new Sprite( "/GameSprites/Arma.PNG" ),
+			new Posicion(0, 0),
 			tirador,
 			miColisionador,
 			anguloDelDisparo,
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
 		);
-				
-		actualizarPanel( true, new Color(255, 255, 255) );
 	}
 
 

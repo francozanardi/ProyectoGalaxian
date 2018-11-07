@@ -1,12 +1,12 @@
 package Enemigo.Estados;
 
-import java.awt.Color;
-
 import Arma.ArmaSniper;
 import Enemigo.Transformable;
 import Inteligencia.IAKamikaze;
 import visitor.ColDispEnemigo;
 import visitor.ColKamikaze;
+import Sprite.Sprite;
+
 
 public class EstadoKamikaze extends EstadoCamuflado
 {
@@ -14,14 +14,12 @@ public class EstadoKamikaze extends EstadoCamuflado
 	{
 		contenedor = e;
 		vidaMaxima = contenedor.getVida();
-		
+
+		contenedor.setSprite( new Sprite( "/GameSprites/Kamikaze.PNG" ) );
 		contenedor.setIA( new IAKamikaze(contenedor) );
 		contenedor.setExplosionDmg(100*contenedor.getDificultad());
 		contenedor.setColisionador(new ColKamikaze(contenedor.getExplosionDmg()));
-		contenedor.getPanel().setBackground(new Color(100, 0, 0));
 		contenedor.setArma(new ArmaSniper( contenedor, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI));
-		contenedor.getSize().setHeight(15);
-		contenedor.getSize().setWidth(30);
 	}
 
 	

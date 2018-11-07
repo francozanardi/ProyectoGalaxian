@@ -23,7 +23,7 @@ public class ContNivelesGenerico extends ControladorNiveles
 		//se le envía el mensaje al thread de no avance más, pero se termina esa última 'vuelta' que está haciendo.
 		
 		//por este otro hilo se llama al método resetPanel(), donde se borra todo los paneles.
-		juego.resetPanel();
+		juego.getPanel().removeAllEntities();
 		
 		//sin embargo el thread aún sigue corriendo, y agrega todas las entidades a agregar que tenía en el panel.
 		//finalmente el panel queda con entidades que no debería tener.

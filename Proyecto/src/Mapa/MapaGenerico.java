@@ -30,6 +30,7 @@ public class MapaGenerico extends Mapa
 		
 		// Inicializar objetos
 		this.juego					= juego;
+		this.gui					= juego.getGUI();
 		this.player					= player;
 		this.controlJuego			= control;
 		this.rand					= Randomizador.create( );
@@ -49,6 +50,8 @@ public class MapaGenerico extends Mapa
 		crearObjetos( );
 		
 		agregarEntidades();
+		
+		gui.show(true);
 	}
 	
 	
@@ -63,7 +66,7 @@ public class MapaGenerico extends Mapa
 		player.setPos( (Juego.GAME_WIDTH / 2) - (player.getSize().getWidth() / 2) );
 				
 		// Agregarlo al panel principal
-		juego.getPanel().add( player.getPanel() );
+		juego.getPanel().add( player.getSprite() );
 		
 		player.addEscudo( new EscudoAbsoluto(player, 5) );
 	}
@@ -74,7 +77,7 @@ public class MapaGenerico extends Mapa
 	{
 		addEntity( new BarricadaComun( this, new Posicion( 20, Juego.GAME_HEIGHT / 2 ) ) );
 		
-		addEntity( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH / 2, Juego.GAME_HEIGHT / 2 ) ) );
+		addEntity( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH - 100, Juego.GAME_HEIGHT / 2 ) ) );
 	}
 	
 	
@@ -85,7 +88,7 @@ public class MapaGenerico extends Mapa
 		
 		fondo.actualizar( msDesdeUltActualizacion );
 		
-		actualizarLabelInformacion( msDesdeUltActualizacion );
+		actualizarInformacion( msDesdeUltActualizacion );
 
 		actualizarEntidades( msDesdeUltActualizacion );		
 		

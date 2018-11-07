@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Disparo.Disparo;
+import Utils.Posicion;
 
 
 public class ArmaCongelada extends Arma {
@@ -11,7 +12,10 @@ public class ArmaCongelada extends Arma {
 	public ArmaCongelada(Arma arma) {
 		//recibe el arma a copiar	
 		armaAntigua = arma;
-		inicializar(arma.getPos(), arma.getSize(), arma.getOwner(), arma.getColisionadorDisparo(), arma.getAnguloDisparo(), arma.getCadencia(), arma.getMultDmg());
+		
+		//la posicion que se crea es el offset, debería de obtenerlo del arma, pero el arma no lo tiene como atributo
+		//de manera temporal queda así.
+		inicializar(arma.getSprite(), new Posicion(0, 0), arma.getOwner(), arma.getColisionadorDisparo(), arma.getAnguloDisparo(), arma.getCadencia(), arma.getMultDmg());
 	}
 
 	@Override
