@@ -4,14 +4,13 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
-import Colisiones.ColDisparo;
 import Disparo.Disparo;
 import Disparo.DisparoComun;
 import Entidad.EntidadConVida;
 import Utils.Posicion;
 import Utils.Size;
 import Utils.Vector;
-
+import visitor.ColDisparo;
 
 
 public class ArmaComun extends Arma
@@ -56,4 +55,5 @@ public class ArmaComun extends Arma
 		
 		return disparos;
 	}
+	
 }

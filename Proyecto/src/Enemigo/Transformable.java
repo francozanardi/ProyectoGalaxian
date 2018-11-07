@@ -1,7 +1,7 @@
 package Enemigo;
 
-import Colisiones.Colisionador;
 import Enemigo.Estados.Estado;
+import visitor.Colisionador;
 
 
 
@@ -9,11 +9,7 @@ public abstract class Transformable extends Kamikaze
 {
 	protected Estado estado;
 	
-	
-
 	public abstract void transformar();
-	
-	
 	
 	public void setColisionador(Colisionador col)
 	{

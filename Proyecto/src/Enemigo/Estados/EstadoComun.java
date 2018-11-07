@@ -3,11 +3,11 @@ package Enemigo.Estados;
 import java.awt.Color;
 
 import Arma.ArmaDefaultEnemigo;
-import Colisiones.ColDispEnemigo;
-import Colisiones.ColEnemigo;
 import Enemigo.Transformable;
 import Inteligencia.IAComun;
 import Utils.Randomizador;
+import visitor.ColDispEnemigo;
+import visitor.ColEnemigo;
 
 
 

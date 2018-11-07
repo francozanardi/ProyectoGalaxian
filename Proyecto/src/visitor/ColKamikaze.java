@@ -1,4 +1,4 @@
-package Colisiones;
+package visitor;
 
 import Jugador.Jugador;
 
@@ -17,7 +17,7 @@ public class ColKamikaze extends Colisionador
 	
 	
 	
-	public void afectar(Jugador jugador)
+	public void visit(Jugador jugador)
 	{
 		jugador.explosionKamikaze( dmgExplosion );
 	}

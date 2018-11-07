@@ -16,7 +16,7 @@ public abstract class CreadorPowerUP {
 	protected Mapa mapa;
 	protected BalanceDropPU balance;
 
-	public PowerUp crearDrop() {
+	public PowerUp crearPowerUP() {
 		Randomizador rand = Randomizador.create();
 		
 		int valorAleatorio = rand.nextInt(1, 100);

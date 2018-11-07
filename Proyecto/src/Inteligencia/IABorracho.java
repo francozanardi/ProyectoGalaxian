@@ -8,7 +8,7 @@ import Utils.Randomizador;
 
 
 
-public class IABorracho extends IAEnemigo
+public class IABorracho extends Inteligencia
 {
 	public IABorracho( Enemigo me )
 	{

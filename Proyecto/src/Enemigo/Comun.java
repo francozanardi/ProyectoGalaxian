@@ -6,16 +6,16 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import Arma.ArmaDefaultEnemigo;
-import Colisiones.ColDispEnemigo;
-import Colisiones.Colisionador;
 import DropPowerUP.CreadorPowerUP;
 import DropPowerUP.CreadorPowerUPEnemigo;
-import Colisiones.ColEnemigo;
 import Escudo.Escudo;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
+import visitor.ColDispEnemigo;
+import visitor.ColEnemigo;
+import visitor.Visitor;
 import Inteligencia.IAComun;
 import Logica.Juego;
 
@@ -44,13 +44,13 @@ public class Comun extends Enemigo
 		actualizarPanel( true, new Color( rand.nextInt(128, 255), rand.nextInt(128, 255), rand.nextInt(128, 255) ) );
 		
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
-		powerUp = drop.crearDrop();
+		powerUp = drop.crearPowerUP();
 	}
 
 
 	
-	public void serChocado(Colisionador col)
+	public void accept(Visitor col)
 	{
-		col.afectar(this);
+		col.visit(this);
 	}
 }

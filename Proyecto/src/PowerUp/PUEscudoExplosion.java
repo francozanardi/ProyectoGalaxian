@@ -4,12 +4,12 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import Colisiones.ColPowerUp;
 import Escudo.EscudoExplosion;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
+import visitor.ColPowerUp;
 
 
 

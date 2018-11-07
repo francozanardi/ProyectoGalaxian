@@ -1,10 +1,10 @@
 package Enemigo.Estados;
 
 import Arma.ArmaTriple;
-import Colisiones.ColDispEnemigo;
-import Colisiones.ColKamikaze;
 import Enemigo.Transformable;
 import Inteligencia.IABorracho;
+import visitor.ColDispEnemigo;
+import visitor.ColKamikaze;
 
 
 

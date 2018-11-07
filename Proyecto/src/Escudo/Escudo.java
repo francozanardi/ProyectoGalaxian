@@ -1,15 +1,14 @@
 package Escudo;
 
-import Colisiones.Colisionador;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
+import visitor.Visitor;
 
 
 
 public abstract class Escudo extends Entidad
 {	
 	protected EntidadConVida holder;
-
 
 
 	public double modificarDmgExplosion( double dmg )
@@ -27,7 +26,7 @@ public abstract class Escudo extends Entidad
 		holder.removeEscudo( this );
 	}
 
-	public void serChocado( Colisionador col )
+	public void accept(Visitor col)
 	{
 	}
 	

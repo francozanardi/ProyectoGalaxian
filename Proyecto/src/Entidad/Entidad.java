@@ -2,13 +2,14 @@ package Entidad;
 
 import javax.swing.JPanel;
 
-import Colisiones.Colisionador;
-import Colisiones.ColEntidad;
 import Inteligencia.Inteligencia;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
+import visitor.ColEntidad;
+import visitor.Colisionador;
+import visitor.Visitor;
 
 import java.awt.Color;
 
@@ -26,20 +27,23 @@ public abstract class Entidad
 
 
 
-	public abstract void serChocado(Colisionador col);
+	public abstract void accept(Visitor col);
 	
 	public abstract void actualizar( double msDesdeUltActualizacion );
 
 	
-	
-	public JPanel getPanel( )
-	{
+	public JPanel getPanel() {
 		return panel;
 	}
 	
-	public Inteligencia getIA( )
+	public Inteligencia getIA()
 	{
-		return ia;
+		return this.ia;
+	}
+	
+	public void setIA(Inteligencia ia)
+	{
+		this.ia = ia;
 	}
 	
 	public Posicion getPos( )
@@ -105,6 +109,6 @@ public abstract class Entidad
 	
 	public void colisionar(Entidad e)
 	{
-		e.serChocado(colisionador);
+		e.accept(colisionador);
 	}
 }

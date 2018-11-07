@@ -1,4 +1,4 @@
-package Colisiones;
+package visitor;
 
 import Disparo.Disparo;
 import Entidad.EntidadConVida;

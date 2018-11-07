@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import Arma.ArmaSniper;
-import Colisiones.ColDispEnemigo;
 import DropPowerUP.CreadorPowerUP;
 import DropPowerUP.CreadorPowerUPEnemigo;
 import Enemigo.Estados.EstadoGuiado;
@@ -16,6 +15,7 @@ import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
+import visitor.ColDispEnemigo;
 
 
 
@@ -40,7 +40,7 @@ public class Fragil extends Transformable
 		actualizarPanel( true, new Color( 100, 100, 100 ) );
 		
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
-		powerUp = drop.crearDrop();
+		powerUp = drop.crearPowerUP();
 	}
 	
 	

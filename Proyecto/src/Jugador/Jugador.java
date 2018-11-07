@@ -7,15 +7,15 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import Arma.*;
-import Colisiones.Colisionador;
-import Colisiones.ColDispJugador;
-import Colisiones.ColJugador;
 import Disparo.Disparo;
 import Entidad.Personaje;
 import Escudo.*;
 import Logica.Juego;
 import Utils.Posicion;
 import Utils.Size;
+import visitor.ColDispJugador;
+import visitor.ColJugador;
+import visitor.Visitor;
 
 
 
@@ -72,9 +72,9 @@ public class Jugador extends Personaje
 
 
 	
-	public void serChocado(Colisionador col)
+	public void accept(Visitor col)
 	{
-		col.afectar(this);
+		col.visit(this);
 	}
 
 

@@ -6,9 +6,6 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import Arma.ArmaMinigun;
-import Colisiones.ColDispEnemigo;
-import Colisiones.Colisionador;
-import Colisiones.ColEnemigo;
 import Escudo.Escudo;
 import Inteligencia.IAComun;
 import Logica.Juego;
@@ -16,6 +13,9 @@ import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
+import visitor.ColDispEnemigo;
+import visitor.ColEnemigo;
+import visitor.Visitor;
 
 
 
@@ -44,8 +44,8 @@ public class Jefe extends Enemigo
 	
 	
 	
-	public void serChocado( Colisionador col )
+	public void accept(Visitor col)
 	{
-		col.afectar(this);
+		col.visit(this);
 	}
 }

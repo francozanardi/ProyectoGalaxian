@@ -1,4 +1,4 @@
-package Colisiones;
+package visitor;
 
 import Enemigo.Enemigo;
 import Enemigo.Kamikaze;
@@ -34,19 +34,19 @@ public class ColDispJugador extends ColDisparo
 
 
 	
-	public void afectar(Enemigo enemigo)
+	public void visit(Enemigo enemigo)
 	{
 		afectarAEnemigo( enemigo );
 	}
 
-	public void afectar(Kamikaze kamikaze)
+	public void visit(Kamikaze kamikaze)
 	{
 		afectarAEnemigo( kamikaze );
 	}
 
 
 	
-	public void afectar(PowerUp powerup)
+	public void visit(PowerUp powerup)
 	{
 		powerup.recibirDMG( disparo.getDmg() );
 		disparo.remove();
@@ -65,12 +65,12 @@ public class ColDispJugador extends ColDisparo
 		}
 	}
 	
-	public void afectar(Destructible obstaculo)
+	public void visit(Destructible obstaculo)
 	{
 		afectarAObstaculo( obstaculo );
 	}
 
-	public void afectar(Barricada barricada)
+	public void visit(Barricada barricada)
 	{
 		afectarAObstaculo( barricada );
 	}

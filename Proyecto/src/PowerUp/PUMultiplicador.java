@@ -6,11 +6,11 @@ import java.util.TimerTask;
 
 import javax.swing.JPanel;
 
-import Colisiones.ColPowerUp;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
+import visitor.ColPowerUp;
 
 
 

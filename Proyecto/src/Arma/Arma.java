@@ -5,14 +5,14 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import Colisiones.Colisionador;
-import Colisiones.ColDisparo;
 import Disparo.Disparo;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
+import visitor.ColDisparo;
+import visitor.Visitor;
 
 
 
@@ -30,7 +30,7 @@ public abstract class Arma extends Entidad
 	
 	protected abstract List<Disparo> crearDisparo( );
 	
-	public void serChocado( Colisionador col )
+	public void accept(Visitor col)
 	{
 	}
 	
@@ -39,6 +39,9 @@ public abstract class Arma extends Entidad
 	}
 
 
+	public double getAnguloDisparo() {
+		return anguloDisparo;
+	}
 	
 	public EntidadConVida getOwner( )
 	{
@@ -46,6 +49,9 @@ public abstract class Arma extends Entidad
 	}
 
 
+	public ColDisparo getColisionadorDisparo() {
+		return colisionador;
+	}
 	
 	public double getCadencia( )
 	{

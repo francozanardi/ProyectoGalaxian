@@ -1,15 +1,15 @@
 package Obstaculo;
 
-import Colisiones.Colisionador;
+import visitor.Visitor;
 
 
 
 public abstract class Destructible extends Obstaculo
 {
 	
-	public void serChocado(Colisionador col)
+	public void accept(Visitor col)
 	{
-		col.afectar(this);
+		col.visit(this);
 	}
 	
 }

@@ -199,9 +199,9 @@ public abstract class Mapa
 	
 	
 	
-	public List<Enemigo> enemigosEnJuego( )
+	public Collection<Entidad> getEntidades( )
 	{
-		return controlEnemigos.obtenerEnemigosVivos();
+		return entidades;
 	}
 	
 	public Posicion getPlayerPos( )

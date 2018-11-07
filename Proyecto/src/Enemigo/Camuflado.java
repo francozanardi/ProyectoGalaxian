@@ -37,7 +37,7 @@ public class Camuflado extends Transformable
 		this.estado 		= new EstadoComun(this); //la inteligencia y demás caracteristicas faltantes las determina su estado.
 
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
-		powerUp = drop.crearDrop();
+		powerUp = drop.crearPowerUP();
 	}
 
 

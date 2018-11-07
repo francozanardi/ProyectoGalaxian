@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import Arma.ArmaSniper;
-import Colisiones.ColDispEnemigo;
-import Colisiones.ColKamikaze;
 import DropPowerUP.CreadorPowerUP;
 import DropPowerUP.CreadorPowerUPGuiado;
 import Escudo.Escudo;
@@ -17,6 +15,8 @@ import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
+import visitor.ColDispEnemigo;
+import visitor.ColKamikaze;
 
 
 
@@ -44,6 +44,6 @@ public class Guiado extends Kamikaze
 		setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		
 		CreadorPowerUP drop = new CreadorPowerUPGuiado(map, dificultad);
-		powerUp = drop.crearDrop();
+		powerUp = drop.crearPowerUP();
 	}
 }

@@ -16,18 +16,8 @@ import Utils.Randomizador;
 
 public class ContEnemMapaGenerico extends ControladorEnemigos
 {
-	protected final int CHANCE_CREAR_COMUN		= 20,
-						CHANCE_CREAR_GUIADO		= 20,
-						CHANCE_CREAR_BORRACHO	= 20,
-						CHANCE_CREAR_FRAGIL		= 20,
-						CHANCE_CREAR_CAMUFLADO	= 20,
-						CHANCE_TOTAL			= CHANCE_CREAR_COMUN + CHANCE_CREAR_GUIADO + CHANCE_CREAR_BORRACHO + CHANCE_CREAR_FRAGIL + CHANCE_CREAR_CAMUFLADO;
-
-	
 	
 	protected double dificultad;
-
-	
 	
 	public ContEnemMapaGenerico( Mapa mapa, int cantMaximaEnemigosEnPantalla, double dificultad )
 	{
@@ -68,8 +58,7 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 	
 	
 	
-	private Enemigo crearEnemigo() //Estaría bueno que cada chance vaya modificandose según x función que tenga como parámetro la dificultad y el nivel.
-	{
+	private Enemigo crearEnemigo() {
 		Randomizador rand = Randomizador.create();
 		BalanceEnemigo balance = new BalanceEnemigoDefault(dificultad);
 

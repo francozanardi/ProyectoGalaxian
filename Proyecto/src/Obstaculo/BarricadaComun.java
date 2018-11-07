@@ -5,7 +5,6 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
-import Colisiones.ColBarricada;
 import Escudo.Escudo;
 import Escudo.EscudoBasico;
 import Mapa.Mapa;
@@ -13,6 +12,7 @@ import PowerUp.PowerUp;
 import PowerUp.PUMinigun;
 import Utils.Posicion;
 import Utils.Size;
+import visitor.ColBarricada;
 
 
 

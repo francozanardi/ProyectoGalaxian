@@ -3,14 +3,14 @@ package Disparo;
 import javax.swing.JPanel;
 
 import Arma.Arma;
-import Colisiones.Colisionador;
-import Colisiones.ColDisparo;
 import Entidad.Entidad;
 import Entidad.EntidadConVida;
 import Logica.Juego;
 import Utils.Posicion;
 import Utils.Size;
 import Utils.Vector;
+import visitor.ColDisparo;
+import visitor.Visitor;
 
 
 
@@ -39,12 +39,12 @@ public abstract class Disparo extends Entidad
 
 	public void colisionar(Entidad e)
 	{		
-		e.serChocado(colisionador);
+		e.accept(colisionador);
 	}
 	
-	public void serChocado(Colisionador col)
+	public void accept(Visitor col)
 	{
-		colisionador.afectar( this );
+		colisionador.visit( this );
 	}
 
 

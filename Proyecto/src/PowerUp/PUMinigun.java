@@ -5,12 +5,12 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import Arma.ArmaMinigun;
-import Colisiones.ColDispJugador;
-import Colisiones.ColPowerUp;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Size;
+import visitor.ColDispJugador;
+import visitor.ColPowerUp;
 
 
 

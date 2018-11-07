@@ -8,7 +8,7 @@ import Utils.Randomizador;
 
 
 
-public class IAComun extends IAEnemigo
+public class IAComun extends Inteligencia
 {
 	public IAComun( Enemigo me )
 	{

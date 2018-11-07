@@ -1,8 +1,10 @@
 package Enemigo;
 
 
+import java.util.List;
+
+import Disparo.Disparo;
 import Entidad.Personaje;
-import Inteligencia.IAEnemigo;
 import PowerUp.PowerUp;
 import Utils.Posicion;
 
@@ -10,33 +12,18 @@ import Utils.Posicion;
 
 public abstract class Enemigo extends Personaje
 {
-	protected IAEnemigo ia;
 	protected double	dificultad;
 	protected PowerUp	powerUp;
-
-
 			
 	public double getDificultad( )
 	{
 		return dificultad;
 	}
-	
-	public IAEnemigo getIA( )
-	{
-		return this.ia;
-	}
-	
-	public void setIA( IAEnemigo ia )
-	{
-		this.ia = ia;
-	}
-	
+		
 	public void setPowerUp( PowerUp powerUp )
 	{
 		this.powerUp = powerUp;
 	}
-
-
 
 	private void dropearPowerUp( )
 	{
@@ -47,13 +34,17 @@ public abstract class Enemigo extends Personaje
 			powerUp.caer( posInicial );
 		}
 	}
-
-
 	
 	public void disparar( )
 	{
-		if (this.arma != null && ia != null)
-			ia.disparar( );
+		if (this.arma != null && ia != null) {
+			List<Disparo> disparos = arma.lanzarDisparo( );
+			
+			// Añadir disparos al mapa
+			for (Disparo d : disparos)
+				map.addEntity(d);
+		}
+			
 	}
 	
 	public void actualizar( double msDesdeUltAct )

@@ -1,4 +1,4 @@
-package Colisiones;
+package visitor;
 
 import Jugador.Jugador;
 import Obstaculo.Destructible;
@@ -20,7 +20,7 @@ public class ColDispEnemigo extends ColDisparo
 
 
 	
-	public void afectar(Jugador jugador)
+	public void visit(Jugador jugador)
 	{
 		jugador.recibirDMG( disparo.getDmg() );
 		disparo.remove();
@@ -28,7 +28,7 @@ public class ColDispEnemigo extends ColDisparo
 	
 	
 	
-	public void afectar(Destructible obstaculo)
+	public void visit(Destructible obstaculo)
 	{
 		obstaculo.recibirDMG( disparo.getDmg() );
 		disparo.remove();

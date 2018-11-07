@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import Arma.ArmaDefaultEnemigo;
-import Colisiones.ColDispEnemigo;
-import Colisiones.ColKamikaze;
 import DropPowerUP.CreadorPowerUP;
 import DropPowerUP.CreadorPowerUPEnemigo;
 import Escudo.Escudo;
@@ -17,6 +15,8 @@ import Mapa.Mapa;
 import Utils.Posicion;
 import Utils.Randomizador;
 import Utils.Size;
+import visitor.ColDispEnemigo;
+import visitor.ColKamikaze;
 
 
 
@@ -41,7 +41,7 @@ public class Borracho extends Kamikaze
 		this.colisionador	= new ColKamikaze( explosionDmg );
 		
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
-		powerUp = drop.crearDrop();
+		powerUp = drop.crearPowerUP();
 		
 		actualizarPanel( true, new Color( 0, 100, 0 ) );
 		setArma( new ArmaDefaultEnemigo(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );

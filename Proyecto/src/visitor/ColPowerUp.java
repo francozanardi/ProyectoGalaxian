@@ -1,4 +1,4 @@
-package Colisiones;
+package visitor;
 
 import Jugador.Jugador;
 import PowerUp.PowerUp;
@@ -18,7 +18,7 @@ public class ColPowerUp extends Colisionador
 
 
 	
-	public void afectar(Jugador jugador)
+	public void visit(Jugador jugador)
 	{
 		powerup.afectar( jugador );
 		

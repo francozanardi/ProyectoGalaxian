@@ -3,10 +3,10 @@ package Enemigo.Estados;
 import java.awt.Color;
 
 import Arma.ArmaSniper;
-import Colisiones.ColDispEnemigo;
-import Colisiones.ColKamikaze;
 import Enemigo.Transformable;
 import Inteligencia.IAKamikaze;
+import visitor.ColDispEnemigo;
+import visitor.ColKamikaze;
 
 public class EstadoKamikaze extends EstadoCamuflado
 {

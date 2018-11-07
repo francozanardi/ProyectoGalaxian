@@ -7,7 +7,7 @@ import Utils.Randomizador;
 
 
 
-public class IAKamikaze extends IAEnemigo
+public class IAKamikaze extends Inteligencia
 {	
 	public IAKamikaze( Enemigo me )
 	{
@@ -19,13 +19,7 @@ public class IAKamikaze extends IAEnemigo
 
 	public void disparar( )
 	{
-		final double LIMIT = (Juego.GAME_HEIGHT * 0.8);
-		
-		// Solo puede disparar si está en el 70% superior de la pantalla
-		if (entidad.getPos().getY() <= LIMIT)
-		{
-			super.disparar();
-		}
+
 	}
 	
 	

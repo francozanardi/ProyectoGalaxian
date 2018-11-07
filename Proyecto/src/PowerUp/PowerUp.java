@@ -1,11 +1,11 @@
 package PowerUp;
 
-import Colisiones.Colisionador;
 import Entidad.EntidadConVida;
 import Jugador.Jugador;
 import Logica.Juego;
 import Utils.Posicion;
 import Utils.Vector;
+import visitor.Visitor;
 
 
 
@@ -54,8 +54,8 @@ public abstract class PowerUp extends EntidadConVida
 			remove( );
 	}
 	
-	public void serChocado( Colisionador col )
+	public void accept(Visitor col)
 	{
-		col.afectar(this);
+		col.visit(this);
 	}
 }

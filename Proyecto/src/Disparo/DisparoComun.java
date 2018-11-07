@@ -3,10 +3,10 @@ package Disparo;
 import java.awt.Color;
 
 import Arma.Arma;
-import Colisiones.ColDisparo;
 import Utils.Posicion;
 import Utils.Size;
 import Utils.Vector;
+import visitor.ColDisparo;
 
 
 
