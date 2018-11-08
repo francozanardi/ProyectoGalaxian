@@ -7,6 +7,7 @@ import Disparo.Disparo;
 import Utils.Posicion;
 
 
+
 public class ArmaCongelada extends Arma {
 	protected Arma armaAntigua;
 	public ArmaCongelada(Arma arma) {

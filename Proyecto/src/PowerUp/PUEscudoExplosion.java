@@ -1,12 +1,17 @@
 package PowerUp;
 
 
+import java.awt.Color;
+
 import Escudo.EscudoExplosion;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Sprite.Sprite;
+import Sprite.SpriteEditor;
 import Utils.Posicion;
 import visitor.ColPowerUp;
+
+
 
 public class PUEscudoExplosion extends PowerUp
 {	
@@ -15,6 +20,8 @@ public class PUEscudoExplosion extends PowerUp
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
 		setSprite( new Sprite( "/GameSprites/puShield.PNG" ) );
+		SpriteEditor editor = SpriteEditor.create();
+		editor.colorToAlpha(sprite, Color.white, 5, 255);
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}

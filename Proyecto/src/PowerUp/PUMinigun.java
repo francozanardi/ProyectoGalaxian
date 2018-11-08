@@ -1,12 +1,16 @@
 package PowerUp;
 
+import java.awt.Color;
+
 import Arma.ArmaMinigun;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Sprite.Sprite;
+import Sprite.SpriteEditor;
 import Utils.Posicion;
 import visitor.ColDispJugador;
 import visitor.ColPowerUp;
+
 
 
 public class PUMinigun extends PowerUp
@@ -16,6 +20,8 @@ public class PUMinigun extends PowerUp
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
 		setSprite( new Sprite( "/GameSprites/puArma.PNG" ) );
+		SpriteEditor editor = SpriteEditor.create();
+		editor.colorToAlpha(sprite, Color.white, 50, 255);
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}

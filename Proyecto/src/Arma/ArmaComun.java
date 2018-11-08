@@ -12,6 +12,7 @@ import Utils.Vector;
 import visitor.ColDisparo;
 
 
+
 public class ArmaComun extends Arma
 {
 	private final double	VELOCIDAD_MOVIMIENTO = 150.0,
