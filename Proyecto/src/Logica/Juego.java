@@ -108,13 +108,14 @@ public class Juego extends JFrame
 		control.gameStart();
 	}
 	
-	public void endGame( )
+	public void endGame( Jugador p )
 	{		
 		panel.removeAllEntities();
 		
-		mediadorMenu = new MediadorMenu( this ); // SOLUCION TEMPORAL, NO SE DEBERIAN BORRAR LOS OBJETOS GRAFICOS YA CREADOS.
+		//mediadorMenu = new MediadorMenu( this ); // SOLUCION TEMPORAL, NO SE DEBERIAN BORRAR LOS OBJETOS GRAFICOS YA CREADOS.
 
-		mediadorMenu.menuPrincipal().show( true );
+		mediadorMenu.menuGameOver().update( p.getPuntaje() );
+		mediadorMenu.menuGameOver().show( true );
 	}
 	
 	public void pauseGame( boolean pause )

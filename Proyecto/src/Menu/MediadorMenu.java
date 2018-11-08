@@ -11,7 +11,8 @@ public class MediadorMenu
 	private Menu	menuPrincipal,
 					menuAbout,
 					menuBestScores,
-					menuPausa;
+					menuPausa,
+					menuGameOver;
 	
 	
 	
@@ -32,6 +33,9 @@ public class MediadorMenu
 		
 		menuPausa = new MenuPausa( canvas, juego );
 		menuPausa.setMediator( this );
+		
+		menuGameOver = new MenuGameOver( canvas );
+		menuGameOver.setMediator( this );
 	}
 	
 	
@@ -54,5 +58,10 @@ public class MediadorMenu
 	public Menu menuPausa()
 	{
 		return menuPausa;
+	}
+	
+	public MenuGameOver menuGameOver()
+	{
+		return (MenuGameOver) menuGameOver;
 	}
 }
