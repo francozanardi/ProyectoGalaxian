@@ -22,7 +22,7 @@ public class PUCongelar extends PowerUp
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
 		
-		setSprite( new Sprite( "/GameSprites/PUCongelar.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/powerUpCongelar.PNG" ) );
 		SpriteEditor editor = SpriteEditor.create();
 		editor.colorToAlpha(sprite, Color.white, 5, 255);
 		

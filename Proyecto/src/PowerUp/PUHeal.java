@@ -18,7 +18,7 @@ public class PUHeal extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		setSprite( new Sprite( "/GameSprites/puHeal.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/powerUpHeal.PNG" ) );
 		SpriteEditor editor = SpriteEditor.create();
 		editor.colorToAlpha(sprite, Color.white, 50, 255);
 		this.vida			= 1000;

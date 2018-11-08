@@ -7,27 +7,20 @@ import Utils.Randomizador;
 
 
 
-public class IAKamikaze extends Inteligencia
+public class IAGuiado extends Inteligencia
 {	
-	public IAKamikaze( Enemigo me )
+	public IAGuiado( Enemigo me )
 	{
 		this.entidad	= me;
 		this.rand		= Randomizador.create( );
 	}
 	
 	
-
-	public void disparar( )
-	{
-
-	}
-	
-	
 	
 	public void mover( double msDesdeUltActualizacion )
 	{
-		final double	VELOCIDAD_HORIZONTAL	= 25.0,
-						VELOCIDAD_VERTICAL		= 25.0;
+		final double	VELOCIDAD_HORIZONTAL	= 40.0,
+						VELOCIDAD_VERTICAL		= 100.0;
 		
 		Posicion	pos			= entidad.getPos(),
 					posPlayer	= entidad.getMapa().getPlayerPos( );

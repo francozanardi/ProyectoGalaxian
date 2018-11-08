@@ -4,7 +4,6 @@ import Enemigo.Comun;
 import Enemigo.Enemigo;
 import Enemigo.Jefe;
 import Mapa.Mapa;
-import Utils.Posicion;
 
 
 
@@ -26,7 +25,7 @@ public class ContEnemBossGenerico extends ControladorEnemigos
 	{
 		Enemigo e;
 		
-		for (int i = 0, j = (int) dificultad / 5; i < j; i ++)
+		for (int i = 0, j = (int) dificultad / 3; i < j; i ++)
 		{
 			e = new Comun(map, dificultad);
 			map.addEntity( e );

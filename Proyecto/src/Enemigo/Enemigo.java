@@ -46,7 +46,8 @@ public abstract class Enemigo extends Personaje
 	
 	public void disparar( )
 	{
-		if (this.arma != null && ia != null) {
+		if (this.arma != null && ia != null)
+		{
 			List<Disparo> disparos = arma.lanzarDisparo( );
 			
 			// Añadir disparos al mapa

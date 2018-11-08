@@ -7,6 +7,7 @@ import Enemigo.Camuflado;
 import Enemigo.Comun;
 import Enemigo.Enemigo;
 import Enemigo.Guiado;
+import Enemigo.Sniper;
 import Enemigo.Fragil;
 import Mapa.Mapa;
 import Utils.Posicion;
@@ -75,6 +76,10 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 		if(valorAleatorio < balance.chanceFragil())
 			return new Fragil(map, dificultad);
 		valorAleatorio -= balance.chanceFragil();
+		
+		if(valorAleatorio < balance.chanceSniper())
+			return new Sniper(map, dificultad);
+		valorAleatorio -= balance.chanceSniper();
 		
 		if(valorAleatorio < balance.chanceCamuflado())
 			return new Camuflado(map, dificultad);

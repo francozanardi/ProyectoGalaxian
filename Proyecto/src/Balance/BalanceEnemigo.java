@@ -8,7 +8,8 @@ public abstract class BalanceEnemigo {
 	public abstract int chanceBorracho();
 	public abstract int chanceFragil();
 	public abstract int chanceCamuflado();
+	public abstract int chanceSniper();
 	public int getChanceTotal() {
-		return chanceComun()+chanceGuiado()+chanceBorracho()+chanceFragil()+chanceCamuflado();
+		return chanceComun()+chanceGuiado()+chanceBorracho()+chanceFragil()+chanceCamuflado()+chanceSniper();
 	}
 }
