@@ -7,6 +7,7 @@ import java.util.List;
 
 import Enemigo.Enemigo;
 import Entidad.Entidad;
+import Logica.Juego;
 import Mapa.Mapa;
 
 
@@ -32,7 +33,8 @@ public abstract class ControladorEnemigos
 		{
 			enemigosEnJuego.remove( e );
 			
-			System.out.printf("ingame: %d, waiting: %d\n", enemigosEnJuego.size(), enemigosFueraDeJuego.size() );
+			if (Juego.DEBUG)
+				System.out.printf("ingame: %d, waiting: %d\n", enemigosEnJuego.size(), enemigosFueraDeJuego.size() );
 			
 			if (enemigosEnJuego.size() > 0)
 			{

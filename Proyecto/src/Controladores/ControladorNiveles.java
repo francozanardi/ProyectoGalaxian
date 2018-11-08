@@ -5,6 +5,8 @@ import Logica.Juego;
 import Logica.MainThread;
 import Mapa.Mapa;
 
+
+
 public abstract class ControladorNiveles
 {
 	protected MainThread	thread;
@@ -19,6 +21,13 @@ public abstract class ControladorNiveles
 	
 	public abstract void gameStart( );
 	public abstract void gameEnd( );
+	
+	
+	
+	public final void togglePause( boolean pause )
+	{
+		thread.togglePause( pause );
+	}
 	
 	
 	

@@ -10,7 +10,8 @@ public class MediadorMenu
 {
 	private Menu	menuPrincipal,
 					menuAbout,
-					menuBestScores;
+					menuBestScores,
+					menuPausa;
 	
 	
 	
@@ -28,6 +29,9 @@ public class MediadorMenu
 		
 		menuBestScores = new MenuBestScores( canvas );
 		menuBestScores.setMediator( this );
+		
+		menuPausa = new MenuPausa( canvas, juego );
+		menuPausa.setMediator( this );
 	}
 	
 	
@@ -45,5 +49,10 @@ public class MediadorMenu
 	public Menu menuBestScores( )
 	{
 		return menuBestScores;
+	}
+	
+	public Menu menuPausa()
+	{
+		return menuPausa;
 	}
 }

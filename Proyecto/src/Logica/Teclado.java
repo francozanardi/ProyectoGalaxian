@@ -10,19 +10,28 @@ public class Teclado
 {
 	private int teclaIzquierda,
 				teclaDerecha,
-				teclaDisparo;
+				teclaDisparo,
+				teclaPausa;
 	
-	private Set<Integer> teclasApretadas;
+	private boolean pausa;
+	
+	private Set<Integer>	teclasApretadas;
+	private Juego			juego;
 
 
 
-	public Teclado( )
-	{		
+	public Teclado( Juego juego )
+	{
+		this.juego		= juego;
+		
 		teclaIzquierda	= KeyEvent.VK_LEFT;
 		teclaDerecha	= KeyEvent.VK_RIGHT;
 		teclaDisparo	= KeyEvent.VK_SPACE;
+		teclaPausa		= KeyEvent.VK_ESCAPE;
 		
-		teclasApretadas = new HashSet<Integer>(); //necesitamos una estructura que no pueda tener elementos repetidos, por eso set
+		pausa			= false;
+		
+		teclasApretadas = new HashSet<Integer>();
 	}
 
 
@@ -52,6 +61,13 @@ public class Teclado
 	public void press( int keyCode )
 	{
 		teclasApretadas.add( keyCode );
+		
+		if (keyCode == teclaPausa)
+		{
+			pausa = !pausa;
+			
+			juego.pauseGame( pausa );
+		}
 	}
 
 

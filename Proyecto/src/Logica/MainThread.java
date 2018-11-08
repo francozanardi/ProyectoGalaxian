@@ -9,12 +9,14 @@ public class MainThread extends Thread
 	private Mapa	mapa;
 	private int		fps;
 	private boolean ejecutando;
+	private boolean pausa;
 
 
 	
 	public MainThread( Mapa mapa, int fps )
 	{
 		this.ejecutando	= true;
+		this.pausa		= false;
 		this.mapa		= mapa;
 		this.fps		= fps;
 	}
@@ -37,6 +39,13 @@ public class MainThread extends Thread
 	{
 		this.fps = fps;
 	}
+	
+	
+	
+	public void togglePause( boolean toggle )
+	{
+		pausa = toggle;
+	}
 
 
 	
@@ -55,7 +64,8 @@ public class MainThread extends Thread
 				tiempoFinal = tiempoActual + (1000000L * 1000L / fps);
 									
 				// Actualizaciones del juego, le pasamos la cantidad de MS transcurridos desde la última actualización
-				cicloDelJuego( (tiempoActual - tiempoUltima) / 1000000.0 );
+				if (!pausa)
+					cicloDelJuego( (tiempoActual - tiempoUltima) / 1000000.0 );
 
 				tiempoUltima = tiempoActual;
 				

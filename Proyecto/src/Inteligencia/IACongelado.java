@@ -1,9 +1,10 @@
 package Inteligencia;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 import Arma.ArmaCongelada;
+
+
 
 public class IACongelado extends Inteligencia
 {

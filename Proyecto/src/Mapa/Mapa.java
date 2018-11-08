@@ -2,11 +2,9 @@ package Mapa;
 
 import java.awt.Rectangle;
 import java.util.Collection;
-import java.util.List;
 
 import Controladores.ControladorEnemigos;
 import Controladores.ControladorNiveles;
-import Enemigo.Enemigo;
 import Entidad.Entidad;
 import Grafica.Fondo;
 import Grafica.GUI;
@@ -113,24 +111,27 @@ public abstract class Mapa
 	
 	public void limpiarMapa()
 	{
-		
-		for(Entidad e: entidades) {
-			if(e != player) {
+		for(Entidad e: entidades)
+		{
+			if(e != player)
+			{
 				juego.getPanel().removeEntity(e.getSprite());
 				e.getSprite().setVisible(false);
 			}
 		}
 		
-		for(Entidad e: entidadesParaEliminar) {
+		for(Entidad e: entidadesParaEliminar)
+		{
 			juego.getPanel().removeEntity(e.getSprite());
 			e.getSprite().setVisible(false);
 		}
 		
-		for(Entidad e: entidadesParaAgregar) {
+		for(Entidad e: entidadesParaAgregar)
+		{
 			juego.getPanel().removeEntity(e.getSprite());
 			e.getSprite().setVisible(false);
 		}
-		
+				
 		entidades.clear();
 		entidadesParaEliminar.clear();
 		entidadesParaAgregar.clear();
@@ -162,8 +163,8 @@ public abstract class Mapa
 	
 	protected void borrarEntidades()
 	{
-		for(Entidad e: entidadesParaEliminar) {
-			//juego.getPanel().remove(e.getPanel());
+		for(Entidad e: entidadesParaEliminar)
+		{
 			e.getSprite().setVisible(false);
 			entidades.remove(e);
 			
@@ -175,9 +176,10 @@ public abstract class Mapa
 	
 	protected void agregarEntidades()
 	{
-		for(Entidad e: entidadesParaAgregar) {
+		for(Entidad e: entidadesParaAgregar)
+		{
 			entidades.add(e);
-			juego.getPanel().addEntity(e.getSprite());
+			juego.getPanel().addEntity( e.getSprite() );
 		}
 		
 		entidadesParaAgregar.clear();

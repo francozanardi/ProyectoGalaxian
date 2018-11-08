@@ -1,13 +1,9 @@
 package Logica;
 
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import Controladores.ContNivelesGenerico;
 import Controladores.ControladorNiveles;
@@ -16,26 +12,23 @@ import Grafica.GUISimple;
 import Jugador.Jugador;
 import Menu.MediadorMenu;
 
-import javax.swing.JLabel;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 
 @SuppressWarnings("serial")
 public class Juego extends JFrame
-{	
+{
 	public static final int		GAME_WIDTH			= 450,
 								GAME_HEIGHT			= (int) (GAME_WIDTH * 1.5),
 								GAME_FPS			= 60,
 								GAME_BEST_SCORES	= 20;
-	public static final String	GAME_TITLE = "Galaxian Trucho";
+	public static final String	GAME_TITLE			= "HyperSpaceX";
+	public static final boolean DEBUG				= false;
 	
 
 	
@@ -77,7 +70,6 @@ public class Juego extends JFrame
 		addMouseMotionListener( new OyenteMouse() );
 		
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		//setBounds( 0, 0, GAME_WIDTH, GAME_HEIGHT );
 		setPreferredSize( new Dimension(GAME_WIDTH, GAME_HEIGHT) );
 		pack();
 		setLocationRelativeTo( null );
@@ -94,7 +86,7 @@ public class Juego extends JFrame
 	
 	private void inicializarObjetos( )
 	{
-		teclado			= new Teclado( );
+		teclado			= new Teclado( this );
 		mediadorMenu	= new MediadorMenu( this );
 		gui				= new GUISimple( getPanel() );
 		
@@ -117,14 +109,19 @@ public class Juego extends JFrame
 	}
 	
 	public void endGame( )
-	{
-		System.out.println("mostrar menu");
-		
+	{		
 		panel.removeAllEntities();
 		
 		mediadorMenu = new MediadorMenu( this ); // SOLUCION TEMPORAL, NO SE DEBERIAN BORRAR LOS OBJETOS GRAFICOS YA CREADOS.
 
 		mediadorMenu.menuPrincipal().show( true );
+	}
+	
+	public void pauseGame( boolean pause )
+	{
+		control.togglePause( pause );
+		
+		mediadorMenu.menuPausa().show( pause );
 	}
 
 

@@ -46,8 +46,10 @@ public class GUISimple extends GUI
 					lblHPChange,
 					lblScore,
 					lblScoreChange;
-	private double	lastHP = Double.MIN_VALUE;
-	private int		lastScore = Integer.MIN_VALUE;
+	private double	lastHP = Double.MIN_VALUE,
+					dmgAcumulado = 0;
+	private int		lastScore = Integer.MIN_VALUE,
+					scoreAcumulado = 0;
 	
 	
 	
@@ -118,13 +120,15 @@ public class GUISimple extends GUI
 		lblScore.setOpaque(false);
 		lblScore.setFont( SCORE_FONT );
 		lblScore.setForeground( SCORE_COLOR );
-		lblScore.setBounds( (Juego.GAME_WIDTH / 2), 5, 100, 20 );
+		lblScore.setHorizontalAlignment( SwingConstants.CENTER );
+		lblScore.setBounds( (Juego.GAME_WIDTH / 2) - 50, 5, 100, 20 );
 		
 		lblScoreChange = new JLabel();
 		lblScoreChange.setOpaque(false);
 		lblScoreChange.setFont( SCOREC_FONT );
 		lblScoreChange.setForeground( SCOREC_COLOR );
-		lblScoreChange.setBounds( Juego.GAME_WIDTH / 2, 30, 100, 20 );
+		lblScoreChange.setHorizontalAlignment( SwingConstants.CENTER );
+		lblScoreChange.setBounds( (Juego.GAME_WIDTH / 2) - 50, 30, 100, 20 );
 		
 		canvas.add(lblScore);
 		canvas.add(lblScoreChange);
@@ -151,17 +155,23 @@ public class GUISimple extends GUI
 		if (lastHP != Double.MIN_VALUE)
 		{
 			double change = hp - lastHP;
+			dmgAcumulado += change;
 			
-			if (change > 0)
+			
+			if (change != 0)
 			{
-				lblHPChange.setText( String.format("+%.0f", change) );
-				lblHPChange.setForeground( Color.green );
+				if (dmgAcumulado > 0)
+				{
+					lblHPChange.setText( String.format("+%.0f", dmgAcumulado) );
+					lblHPChange.setForeground( Color.green );
+				}
+				else
+				{
+					lblHPChange.setText( String.format("%.0f", dmgAcumulado) );
+					lblHPChange.setForeground( Color.red );
+				}
 			}
-			else if (change < 0)
-			{
-				lblHPChange.setText( String.format("%.0f", change) );
-				lblHPChange.setForeground( Color.red );
-			}
+			
 			
 			if (change != 0)
 			{
@@ -188,16 +198,21 @@ public class GUISimple extends GUI
 		if (lastScore != Integer.MIN_VALUE)
 		{
 			int change = score - lastScore;
+			scoreAcumulado += change;
 			
-			if (change > 0)
+			
+			if (change != 0)
 			{
-				lblScoreChange.setText( "+" + change );
-				lblScoreChange.setForeground( Color.green );
-			}
-			else if (change < 0)
-			{
-				lblScoreChange.setText( "" + change );
-				lblScoreChange.setForeground( Color.red );
+				if (scoreAcumulado > 0)
+				{
+					lblScoreChange.setText( "+" + scoreAcumulado );
+					lblScoreChange.setForeground( Color.green );
+				}
+				else
+				{
+					lblScoreChange.setText( "" + scoreAcumulado );
+					lblScoreChange.setForeground( Color.red );
+				}
 			}
 			
 			if (change != 0)
@@ -256,6 +271,7 @@ public class GUISimple extends GUI
 	{
 		public void run()
 		{
+			dmgAcumulado = 0;
 			lblHPChange.setText("");
 		}
 	}
@@ -264,6 +280,7 @@ public class GUISimple extends GUI
 	{
 		public void run()
 		{
+			scoreAcumulado = 0;
 			lblScoreChange.setText("");
 		}
 	}

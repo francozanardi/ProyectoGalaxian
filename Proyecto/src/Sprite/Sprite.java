@@ -69,7 +69,7 @@ public class Sprite extends JPanel
 		
 		this.sprite = image;
 		
-		setBounds( 0, 0, image.getWidth(null), image.getHeight(null) );
+		setSize( image.getWidth(null), image.getHeight(null) );
 	}
 	
 	public Image getImage( )

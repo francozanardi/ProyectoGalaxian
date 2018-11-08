@@ -104,6 +104,7 @@ public abstract class Entidad
 
 	public void remove()
 	{
+		sprite.setVisible(false);
 		map.removeEntity(this);
 	}
 	

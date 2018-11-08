@@ -14,8 +14,8 @@ import visitor.Visitor;
 
 public abstract class Disparo extends Entidad
 {
-	protected double				dmg;
-	protected Vector				dir;
+	protected double		dmg;
+	protected Vector		dir;
 	protected ColDisparo	colisionador;
 
 

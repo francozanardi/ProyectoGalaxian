@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 
 
+@SuppressWarnings("serial")
 public class PanelMapa extends JPanel
 {
 	private Collection<Component> entidadesJuego;

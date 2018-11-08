@@ -1,5 +1,6 @@
 package Enemigo;
 
+import java.awt.Color;
 import java.util.LinkedList;
 
 import Arma.ArmaDefaultEnemigo;
@@ -8,6 +9,7 @@ import DropPowerUP.CreadorPowerUPEnemigo;
 import Escudo.Escudo;
 import Mapa.Mapa;
 import Sprite.Sprite;
+import Sprite.SpriteEditor;
 import Utils.Posicion;
 import Utils.Randomizador;
 import visitor.ColDispEnemigo;
@@ -28,7 +30,11 @@ public class Comun extends Enemigo
 		this.colisionador	= new ColEnemigo();
 		this.rand			= Randomizador.create( );
 
-		setSprite( new Sprite( "/GameSprites/Comun.PNG" ) );
+		Sprite			spr		= new Sprite( "/GameSprites/Comun.PNG" );
+		SpriteEditor	editor	= SpriteEditor.create();
+		editor.tintura( spr, new Color(rand.nextInt(64, 255), rand.nextInt(64, 255), rand.nextInt(64, 255)) );
+		setSprite( spr );
+		
 		this.pos			= new Posicion( rand.nextInt(Juego.GAME_WIDTH), (rand.nextInt( Juego.GAME_HEIGHT ) / 3) );
 		this.escudo			= new LinkedList<Escudo>( );
 		

@@ -27,9 +27,10 @@ public class ContNivelesGenerico extends ControladorNiveles
 		
 		//sin embargo el thread aún sigue corriendo, y agrega todas las entidades a agregar que tenía en el panel.
 		//finalmente el panel queda con entidades que no debería tener.
-		startMap( new MapaGenerico( juego, this, jugador, "MAPA GENÉRICO LVL." + nivelID, (1.0 * nivelID) ) );
+		startMap( new MapaGenerico( juego, this, jugador, "LEVEL " + nivelID, (1.0 * nivelID) ) );
 		
-		System.out.println( "COMIENZA EL NIVEL " + nivelID );
+		if (Juego.DEBUG)
+			System.out.println( "COMIENZA EL NIVEL " + nivelID );
 	}
 
 	
@@ -40,7 +41,8 @@ public class ContNivelesGenerico extends ControladorNiveles
 		nivel ++;
 		establecerNivel( nivel );
 		
-		System.out.println("VICTORY!!");
+		if (Juego.DEBUG)
+			System.out.println("MAP VICTORY");
 	}
 
 	public void mapDefeat( Jugador player )
@@ -48,8 +50,9 @@ public class ContNivelesGenerico extends ControladorNiveles
 		stopMap( );
 		
 		gameEnd();
-		
-		System.out.println("DEFEAT!!");
+
+		if (Juego.DEBUG)
+			System.out.println("MAP DEFEAT");
 	}
 
 	
@@ -58,8 +61,9 @@ public class ContNivelesGenerico extends ControladorNiveles
 	{
 		nivel = 1;
 		establecerNivel( 1 );
-		
-		System.out.println("GAME START!!");
+
+		if (Juego.DEBUG)
+			System.out.println("GAME START");
 	}
 
 	public void gameEnd()
@@ -67,7 +71,8 @@ public class ContNivelesGenerico extends ControladorNiveles
 		stopMap(); //provisioria
 
 		juego.endGame();
-		
-		System.out.println("GAME OVER!!");
+
+		if (Juego.DEBUG)
+			System.out.println("GAME END");
 	}
 }

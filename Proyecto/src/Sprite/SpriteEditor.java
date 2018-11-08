@@ -1,5 +1,6 @@
 package Sprite;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
@@ -58,6 +59,38 @@ public class SpriteEditor
 		spr.setImage( b );
 	}
 	
+	
+	
+	public void tintura( Sprite spr, Color mascara )
+	{
+		BufferedImage b = imageToBufferedImage( spr.getImage() );
+		
+		int w = b.getWidth(),
+			h = b.getHeight(),
+			x,
+			y;
+		int[] pixel;
+		
+		for (x = 0; x < w; x ++)
+		{
+			for (y = 0; y < h; y ++)
+			{
+				pixel = getRGBA( b.getRGB(x, y) );
+				
+				b.setRGB(x, y,
+					setRGBA(
+						(pixel[CRED]   + mascara.getRed())   / 2,
+						(pixel[CBLUE]  + mascara.getBlue())  / 2,
+						(pixel[CGREEN] + mascara.getGreen()) / 2,
+						pixel[CALPHA]
+					)
+				);
+			}
+		}
+		
+		spr.setImage( b );
+	}
+
 	
 	
 	public void amplifyColor( Sprite spr, double redMult, double greenMult, double blueMult, double alphaMult )
