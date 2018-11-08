@@ -3,6 +3,7 @@ package Mapa;
 import java.awt.Color;
 import java.util.LinkedList;
 
+import Controladores.ContEnemBossGenerico;
 import Controladores.ContEnemMapaGenerico;
 import Controladores.ControladorNiveles;
 import Entidad.Entidad;
@@ -19,14 +20,24 @@ import Utils.Randomizador;
 
 public class MapaGenerico extends Mapa
 {
-	private final int CANT_MAX_ENEM_PANTALLA = 15;
+	private final int	CANT_MAX_ENEM_PANTALLA = 15,
+						NIVELES_BOSS = 2;
 	
 	
 	
-	public MapaGenerico( Juego juego, ControladorNiveles control, Jugador player, String nombre, double dificultad )
+	public MapaGenerico( Juego juego, ControladorNiveles control, Jugador player, String nombre, int nivel, double dificultad )
 	{
 		// Seleccionar un tipo de fondo especifico
-		this.fondo = new FondoGenerico( juego.getPanel(), 1000, new Color(0, 0, 0), new Color(50, 50, 50) );
+		if (nivel % NIVELES_BOSS == 0)
+		{
+			this.fondo			 = new FondoGenerico( juego.getPanel(), 1000, new Color(0, 0, 0), new Color(128, 0, 0) );
+			this.controlEnemigos = new ContEnemBossGenerico( this, dificultad );
+		}
+		else
+		{
+			this.fondo			 = new FondoGenerico( juego.getPanel(), 1000, new Color(0, 0, 0), new Color(50, 50, 50) );
+			this.controlEnemigos = new ContEnemMapaGenerico( this, CANT_MAX_ENEM_PANTALLA, dificultad );
+		}
 		
 		// Inicializar objetos
 		this.juego					= juego;
@@ -34,7 +45,7 @@ public class MapaGenerico extends Mapa
 		this.player					= player;
 		this.controlJuego			= control;
 		this.rand					= Randomizador.create( );
-		this.controlEnemigos		= new ContEnemMapaGenerico( this, CANT_MAX_ENEM_PANTALLA, dificultad );
+		
 		this.entidades				= new LinkedList<Entidad>();
 		this.entidadesParaEliminar	= new LinkedList<Entidad>();
 		this.entidadesParaAgregar	= new LinkedList<Entidad>();

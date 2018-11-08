@@ -7,31 +7,28 @@ public class BalanceEnemigoDefault extends BalanceEnemigo {
 	}
 
 	@Override
-	public int porcentajeComun() {
-		return 100-porcentajeGuiado()-porcentajeBorracho()-porcentajeCamuflado()-porcentajeFragil();
+	public int chanceComun() {
+		return 100-chanceGuiado()-chanceBorracho()-chanceCamuflado()-chanceFragil();
 	}
 
 	@Override
-	public int porcentajeGuiado() {
+	public int chanceGuiado() {
 		return (int)Math.min(Math.floor(Math.sqrt(Math.PI*2*(dificultad+10))), 15);
 	}
 
 	@Override
-	public int porcentajeBorracho() {
+	public int chanceBorracho() {
 		return (int)Math.min(Math.floor(2*Math.sqrt(2*(dificultad+10))), 20);
 	}
 
 	@Override
-	public int porcentajeFragil() {
+	public int chanceFragil() {
 		return (int)Math.min(Math.floor(2.25*Math.sqrt(dificultad)), 25);
 	}
 
 	@Override
-	public int porcentajeCamuflado() {
-		return (int)Math.min(Math.floor(2.25*Math.sqrt(dificultad)), 25);
+	public int chanceCamuflado() {
+		return (int)Math.min(Math.floor(3.25*Math.sqrt(dificultad)), 25);
 	}
 	
-	//me gustaría en vez de manejarnos por porcentajes, internamente utilizar chances y ahí recién calcular el porcentaje. Ya que 
-	//de esta forma, agregar un nuevo enemigo implica balancear todos los demás.
-
 }

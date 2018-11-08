@@ -30,6 +30,7 @@ public abstract class Disparo extends Entidad
 		dmg				= dmgBase * arma.getMultDmg( );
 		dir				= vectorDireccion;
 		
+		actualizarPosicion();
 		inicializarColisionador( arma.getOwner() );
 	}
 

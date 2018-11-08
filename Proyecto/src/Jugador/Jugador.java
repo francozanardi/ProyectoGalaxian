@@ -19,7 +19,7 @@ import visitor.Visitor;
 public class Jugador extends Personaje
 {	
 	private int dir;
-	private double velHorizontal = 40.0;
+	private double velHorizontal = 80.0;
 
 
 	

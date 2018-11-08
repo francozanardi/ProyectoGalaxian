@@ -36,7 +36,7 @@ public class Guiado extends Kamikaze
 
 		this.colisionador	= new ColKamikaze( explosionDmg );
 
-		setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		//setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		
 		CreadorPowerUP drop = new CreadorPowerUPGuiado(map, dificultad);
 		powerUp = drop.crearPowerUP();

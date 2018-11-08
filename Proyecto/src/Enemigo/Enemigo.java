@@ -3,6 +3,7 @@ package Enemigo;
 
 import java.util.List;
 
+import Arma.Arma;
 import Disparo.Disparo;
 import Entidad.Personaje;
 import PowerUp.PowerUp;
@@ -14,7 +15,9 @@ public abstract class Enemigo extends Personaje
 {
 	protected double	dificultad;
 	protected PowerUp	powerUp;
-			
+	
+	
+	
 	public double getDificultad( )
 	{
 		return dificultad;
@@ -24,7 +27,13 @@ public abstract class Enemigo extends Personaje
 	{
 		this.powerUp = powerUp;
 	}
-
+	
+	public void setArma( Arma arma )
+	{
+		super.setArma( arma );
+		arma.setMultCadencia( 10 );
+	}
+	
 	private void dropearPowerUp( )
 	{
 		if (powerUp != null)

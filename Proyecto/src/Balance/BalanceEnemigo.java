@@ -3,9 +3,12 @@ package Balance;
 public abstract class BalanceEnemigo {
 	protected double dificultad;
 	
-	public abstract int porcentajeComun();
-	public abstract int porcentajeGuiado();
-	public abstract int porcentajeBorracho();
-	public abstract int porcentajeFragil();
-	public abstract int porcentajeCamuflado();
+	public abstract int chanceComun();
+	public abstract int chanceGuiado();
+	public abstract int chanceBorracho();
+	public abstract int chanceFragil();
+	public abstract int chanceCamuflado();
+	public int getChanceTotal() {
+		return chanceComun()+chanceGuiado()+chanceBorracho()+chanceFragil()+chanceCamuflado();
+	}
 }

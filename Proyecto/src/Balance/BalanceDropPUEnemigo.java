@@ -7,33 +7,33 @@ public class BalanceDropPUEnemigo extends BalanceDropPU {
 	}
 	
 	@Override
-	public int porcentajePUCongelar() {
+	public int chancePUCongelar() {
 		return 2;
 	}
 
 	@Override
-	public int porcentajePUEscudoExplosion() {
+	public int chancePUEscudoExplosion() {
 		return 5;
 	}
 
 	@Override
-	public int porcentajePUHeal() {
+	public int chancePUHeal() {
 		return 7;
 	}
 
 	@Override
-	public int porcentajePUMinigun() {
+	public int chancePUMinigun() {
 		return 6;
 	}
 
 	@Override
-	public int porcentajePUMultiplicador() {
+	public int chancePUMultiplicador() {
 		return 2;
 	}
 
 	@Override
-	public int porcentajeNoPowerUP() {
-		return 100-porcentajePUCongelar()-porcentajePUEscudoExplosion()-porcentajePUHeal()-porcentajePUMinigun()-porcentajePUMultiplicador();
+	public int chanceNoPowerUP() {
+		return 100-chancePUCongelar()-chancePUEscudoExplosion()-chancePUHeal()-chancePUMinigun()-chancePUMultiplicador();
 	}
 
 }

@@ -19,25 +19,25 @@ public abstract class CreadorPowerUP {
 	public PowerUp crearPowerUP() {
 		Randomizador rand = Randomizador.create();
 		
-		int valorAleatorio = rand.nextInt(1, 100);
+		int valorAleatorio = rand.nextInt(balance.getChanceTotal());
 		
-		if(valorAleatorio < balance.porcentajePUCongelar())
+		if(valorAleatorio < balance.chancePUCongelar())
 			return new PUCongelar(mapa);
-		valorAleatorio -= balance.porcentajePUCongelar();
+		valorAleatorio -= balance.chancePUCongelar();
 		
-		if(valorAleatorio < balance.porcentajePUEscudoExplosion())
+		if(valorAleatorio < balance.chancePUEscudoExplosion())
 			return new PUEscudoExplosion(mapa);
-		valorAleatorio -= balance.porcentajePUEscudoExplosion();
+		valorAleatorio -= balance.chancePUEscudoExplosion();
 		
-		if(valorAleatorio < balance.porcentajePUHeal())
+		if(valorAleatorio < balance.chancePUHeal())
 			return new PUHeal(mapa);
-		valorAleatorio -= balance.porcentajePUHeal();
+		valorAleatorio -= balance.chancePUHeal();
 		
-		if(valorAleatorio < balance.porcentajePUMinigun())
+		if(valorAleatorio < balance.chancePUMinigun())
 			return new PUMinigun(mapa);
-		valorAleatorio -= balance.porcentajePUMinigun();
+		valorAleatorio -= balance.chancePUMinigun();
 		
-		if(valorAleatorio < balance.porcentajePUMultiplicador())
+		if(valorAleatorio < balance.chancePUMultiplicador())
 			return new PUMultiplicador(mapa);
 		
 		return null;

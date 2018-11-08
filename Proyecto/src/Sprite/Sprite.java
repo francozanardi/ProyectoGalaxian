@@ -40,7 +40,7 @@ public class Sprite extends JPanel
 		
 		setImage( sprite );
 		
-		repaint();
+		//repaint();
 	}
 	
 	

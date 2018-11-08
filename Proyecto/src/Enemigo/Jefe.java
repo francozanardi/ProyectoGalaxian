@@ -33,6 +33,7 @@ public class Jefe extends Enemigo
 		this.puntaje		= (int) (200 + (10 * dificultad));
 
 		setArma( new ArmaMinigun(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		arma.setMultCadencia( 5 );
 	}
 	
 	

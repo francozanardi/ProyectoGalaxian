@@ -62,21 +62,21 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 		Randomizador rand = Randomizador.create();
 		BalanceEnemigo balance = new BalanceEnemigoDefault(dificultad);
 
-		int valorAleatorio = rand.nextInt(1, 100);
+		int valorAleatorio = rand.nextInt(balance.getChanceTotal());
 		
-		if(valorAleatorio < balance.porcentajeGuiado())
+		if(valorAleatorio < balance.chanceGuiado())
 			return new Guiado(map, dificultad);
-		valorAleatorio -= balance.porcentajeGuiado();
+		valorAleatorio -= balance.chanceGuiado();
 		
-		if(valorAleatorio < balance.porcentajeBorracho())
+		if(valorAleatorio < balance.chanceBorracho())
 			return new Borracho(map, dificultad);
-		valorAleatorio -= balance.porcentajeBorracho();
+		valorAleatorio -= balance.chanceBorracho();
 		
-		if(valorAleatorio < balance.porcentajeFragil())
+		if(valorAleatorio < balance.chanceFragil())
 			return new Fragil(map, dificultad);
-		valorAleatorio -= balance.porcentajeFragil();
+		valorAleatorio -= balance.chanceFragil();
 		
-		if(valorAleatorio < balance.porcentajeCamuflado())
+		if(valorAleatorio < balance.chanceCamuflado())
 			return new Camuflado(map, dificultad);
 		
 

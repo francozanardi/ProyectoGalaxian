@@ -27,7 +27,7 @@ public class ContNivelesGenerico extends ControladorNiveles
 		
 		//sin embargo el thread aún sigue corriendo, y agrega todas las entidades a agregar que tenía en el panel.
 		//finalmente el panel queda con entidades que no debería tener.
-		startMap( new MapaGenerico( juego, this, jugador, "LEVEL " + nivelID, (1.0 * nivelID) ) );
+		startMap( new MapaGenerico( juego, this, jugador, "LEVEL " + nivelID, nivelID, (1.0 * nivelID) ) );
 		
 		if (Juego.DEBUG)
 			System.out.println( "COMIENZA EL NIVEL " + nivelID );
