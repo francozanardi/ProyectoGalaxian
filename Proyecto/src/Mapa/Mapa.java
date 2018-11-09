@@ -118,30 +118,26 @@ public abstract class Mapa
 	
 	public void limpiarMapa()
 	{
-		for(Entidad e: entidades)
-		{
-			if(e != player)
-			{
-				juego.getPanel().removeEntity(e.getSprite());
-				e.getSprite().setVisible(false);
-			}
+		for(Entidad e: entidades) {
+			e.getSprite().setVisible(false);
+//			juego.getPanel().removeEntity(e.getSprite());
 		}
 		
-		for(Entidad e: entidadesParaEliminar)
-		{
-			juego.getPanel().removeEntity(e.getSprite());
+		for(Entidad e: entidadesParaEliminar) {
 			e.getSprite().setVisible(false);
+//			juego.getPanel().removeEntity(e.getSprite());
 		}
 		
-		for(Entidad e: entidadesParaAgregar)
-		{
-			juego.getPanel().removeEntity(e.getSprite());
+		for(Entidad e: entidadesParaAgregar) {
 			e.getSprite().setVisible(false);
+//			juego.getPanel().removeEntity(e.getSprite());
 		}
 				
 		entidades.clear();
 		entidadesParaEliminar.clear();
 		entidadesParaAgregar.clear();
+		
+//		juego.getPanel().repaint();
 	}
 
 	

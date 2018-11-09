@@ -2,44 +2,56 @@ package Controladores;
 
 import Jugador.Jugador;
 import Logica.Juego;
+import Mapa.Mapa;
 import Mapa.MapaGenerico;
+import Menu.MediadorMenu;
+import Menu.Menu;
+import Menu.MenuNextLevel;
+import PowerUp.PowerUp;
+import Tienda.Item;
+import Utils.Posicion;
 
 
 
 public class ContNivelesGenerico extends ControladorNiveles
 {
-	public ContNivelesGenerico( Juego game, Jugador player )
-	{
+
+	public ContNivelesGenerico( Juego game, Jugador player ) {
 		jugador = player;
 		juego = game;
 	}
 	
 	
 	
-	private void establecerNivel( int nivelID )
+	private Mapa establecerNivel( int nivelID )
 	{
-		stopMap( );
-		//acá está el error del powerup en la esquina superior izquierda. 
-		//se le envía el mensaje al thread de no avance más, pero se termina esa última 'vuelta' que está haciendo.
-		
-		//por este otro hilo se llama al método resetPanel(), donde se borra todo los paneles.
-		juego.getPanel().removeAllEntities();
-		
-		//sin embargo el thread aún sigue corriendo, y agrega todas las entidades a agregar que tenía en el panel.
-		//finalmente el panel queda con entidades que no debería tener.
-		startMap( new MapaGenerico( juego, this, jugador, "LEVEL " + nivelID, nivelID, (1.0 * nivelID) ) );
+		juego.requestFocus();
+		Mapa mapa = new MapaGenerico( juego, this, jugador, "LEVEL " + nivelID, nivelID, (1.0 * nivelID) );
+		startMap(mapa);
 		
 		if (Juego.DEBUG)
 			System.out.println( "COMIENZA EL NIVEL " + nivelID );
+		
+		return mapa;
 	}
 
 	
+	public void siguienteNivel(Item compra) {
+		nivel ++;
+		Mapa mapa = establecerNivel( nivel );
+		
+		if(compra != null)
+			compra.darContenido(mapa);
+	}
 	
 	
 	public void mapVictory( Jugador player )
 	{
-		nivel ++;
-		establecerNivel( nivel );
+		stopMap();
+		juego.getPanel().removeAllEntities();
+
+		MediadorMenu mediador = juego.getMediadorMenu();
+		mediador.iniciarNuevoMenu(mediador.menuNextLevel());
 		
 		if (Juego.DEBUG)
 			System.out.println("MAP VICTORY");
@@ -47,8 +59,6 @@ public class ContNivelesGenerico extends ControladorNiveles
 
 	public void mapDefeat( Jugador player )
 	{
-		stopMap( );
-		
 		gameEnd();
 
 		if (Juego.DEBUG)
@@ -60,7 +70,7 @@ public class ContNivelesGenerico extends ControladorNiveles
 	public void gameStart()
 	{
 		nivel = 1;
-		establecerNivel( 1 );
+		establecerNivel( nivel );
 
 		if (Juego.DEBUG)
 			System.out.println("GAME START");
@@ -68,8 +78,7 @@ public class ContNivelesGenerico extends ControladorNiveles
 
 	public void gameEnd()
 	{
-		stopMap(); //provisioria
-
+		stopMap();
 		juego.endGame( jugador );
 
 		if (Juego.DEBUG)

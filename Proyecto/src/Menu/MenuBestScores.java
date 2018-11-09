@@ -20,25 +20,20 @@ public class MenuBestScores extends Menu
 	private String[]	score;
 	
 	
-	public MenuBestScores( JPanel canvas )
+	public MenuBestScores( Juego juego, MediadorMenu med )
 	{
-		this.canvas	= canvas;
+		this.canvas	= juego.getPanel();
+		this.mediador = med;
 		this.score	= new String[ Juego.GAME_BEST_SCORES ];
 		
-		crear( );
-	}
-	
-	
-	
-	public void crear( )
-	{
 		crearBotones( );
 		crearLabels( );
+		inicializar();
+		labelScores.setText( cargarPuntajes( ) );
 	}
+
 	
-	
-	
-	public void inicializar( )
+	private void inicializar( )
 	{
 		String	nombre	= "Unknown";
 		int		puntaje	= 9999;
@@ -47,6 +42,12 @@ public class MenuBestScores extends Menu
 			score[i] = String.format("%d. '%s' - Score: %d", i + 1, nombre, puntaje);
 	}
 	
+	protected void eliminar() {
+		show(false);
+		canvas.remove(botonSalir);
+		canvas.remove(labelScores);
+		canvas.repaint();
+	}
 	
 	
 	public void show( boolean toggle )
@@ -112,7 +113,7 @@ public class MenuBestScores extends Menu
 	{
 		public void actionPerformed(ActionEvent arg0)
 		{
-			nextMenu( mediador.menuPrincipal() );
+			mediador.retrocederMenu();
 		}
 	}
 }

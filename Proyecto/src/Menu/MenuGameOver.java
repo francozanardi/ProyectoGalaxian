@@ -21,28 +21,21 @@ public class MenuGameOver extends Menu
 	
 	
 	
-	public MenuGameOver( JPanel canvas )
+	public MenuGameOver( Juego juego, MediadorMenu m )
 	{
-		this.canvas	= canvas;
+		this.canvas	= juego.getPanel();
+		this.mediador = m;
 		
-		crear( );
-	}
-	
-	
-	
-	public void crear( )
-	{
 		crearBotones( );
 		crearLabels( );
 	}
 	
-	
-	
-	public void inicializar( )
-	{
+	protected void eliminar() {
+		show(false);
+		canvas.remove(botonMenuPrincipal);
+		canvas.remove(label);
+		canvas.repaint();
 	}
-	
-	
 	
 	public void show( boolean toggle )
 	{
@@ -98,7 +91,7 @@ public class MenuGameOver extends Menu
 	{
 		public void actionPerformed(ActionEvent arg0)
 		{
-			nextMenu( mediador.menuPrincipal() );
+			mediador.iniciarNuevoMenu( mediador.menuPrincipal() );
 		}
 	}
 }

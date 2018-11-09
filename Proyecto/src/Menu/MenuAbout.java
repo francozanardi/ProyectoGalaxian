@@ -20,39 +20,32 @@ public class MenuAbout extends Menu
 	
 	
 	
-	public MenuAbout( JPanel canvas )
+	public MenuAbout(Juego juego, MediadorMenu med)
 	{
-		this.canvas	= canvas;
+		this.canvas	= juego.getPanel();
+		this.mediador = med;
 		
-		crear( );
-	}
-	
-	
-	
-	public void crear( )
-	{
 		crearBotones( );
 		crearLabels( );
 	}
 	
-	
-	
-	public void inicializar( )
-	{
+
+	@Override
+	protected void eliminar() {
+		show(false);
+		canvas.remove(botonSalirAbout);
+		canvas.remove(labelCreditos);
+		canvas.repaint();
 	}
-	
-	
 	
 	public void show( boolean toggle )
 	{
 		if (toggle)
 			canvas.setBackground( Color.black );
 		
-		
 		botonSalirAbout.setVisible( toggle );
 		labelCreditos.setVisible( toggle );
 	}
-
 
 		
 	private void crearBotones( )
@@ -99,7 +92,8 @@ public class MenuAbout extends Menu
 	{
 		public void actionPerformed(ActionEvent arg0)
 		{
-			nextMenu( mediador.menuPrincipal() );
+			mediador.retrocederMenu();
 		}
 	}
+
 }

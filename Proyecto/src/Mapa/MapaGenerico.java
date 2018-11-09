@@ -53,6 +53,7 @@ public class MapaGenerico extends Mapa
 		this.entidadesParaAgregar	= new LinkedList<Entidad>();
 		this.entidades.add(player);
 		
+		
 		this.nombre		= nombre;
 		this.dificultad	= dificultad;
 		
@@ -80,8 +81,7 @@ public class MapaGenerico extends Mapa
 				
 		// Agregarlo al panel principal
 		juego.getPanel().add( player.getSprite() );
-		
-		player.addEscudo( new EscudoAbsoluto(player, 5) );
+		player.getSprite().setVisible(true);
 	}
 	
 	

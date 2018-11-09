@@ -1,6 +1,7 @@
 package Menu;
 
 import java.awt.event.ActionListener;
+import java.util.Stack;
 
 import javax.swing.JPanel;
 
@@ -18,27 +19,9 @@ public abstract class Menu
 	protected MediadorMenu	mediador;
 	
 	
-	
-	public abstract void crear( );
-	
+	protected abstract void eliminar();
 	public abstract void show( boolean toggle );
-	
-	public abstract void inicializar( );
-	
-	
-	
-	protected void nextMenu( Menu menu )
-	{
-		this.show( false );
-		
-		if (menu != null)
-		{
-			menu.inicializar();
-			menu.show( true );
-		}
-	}
-	
-	
+
 	
 	protected final void setMediator( MediadorMenu mediador )
 	{

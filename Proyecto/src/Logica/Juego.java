@@ -11,6 +11,8 @@ import Grafica.GUI;
 import Grafica.GUISimple;
 import Jugador.Jugador;
 import Menu.MediadorMenu;
+import Menu.MenuGameOver;
+import Menu.MenuPausa;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -37,6 +39,7 @@ public class Juego extends JFrame
 	private ControladorNiveles	control;
 	private MediadorMenu		mediadorMenu;
 	private GUI					gui;
+	private Jugador 			player;
 
 
 	
@@ -87,10 +90,11 @@ public class Juego extends JFrame
 	private void inicializarObjetos( )
 	{
 		teclado			= new Teclado( this );
-		mediadorMenu	= new MediadorMenu( this );
+		player			= new Jugador();
+		mediadorMenu	= new MediadorMenu( this, player );
 		gui				= new GUISimple( getPanel() );
 		
-		mediadorMenu.menuPrincipal().show( true );
+		mediadorMenu.iniciarNuevoMenu(mediadorMenu.menuPrincipal());
 		gui.show( false );
 	}
 
@@ -102,8 +106,7 @@ public class Juego extends JFrame
 		// registrarán apropiadamente los inputs del teclado.
 		requestFocus();
 
-		Jugador p = new Jugador();
-		control = new ContNivelesGenerico( this, p );
+		control = new ContNivelesGenerico( this, player );
 		
 		control.gameStart();
 	}
@@ -114,15 +117,19 @@ public class Juego extends JFrame
 		
 		//mediadorMenu = new MediadorMenu( this ); // SOLUCION TEMPORAL, NO SE DEBERIAN BORRAR LOS OBJETOS GRAFICOS YA CREADOS.
 
-		mediadorMenu.menuGameOver().update( p.getPuntaje() );
-		mediadorMenu.menuGameOver().show( true );
+		MenuGameOver menu = mediadorMenu.menuGameOver();
+		menu.update( p.getPuntaje() );
+		mediadorMenu.iniciarNuevoMenu(menu);
 	}
 	
 	public void pauseGame( boolean pause )
 	{
 		control.togglePause( pause );
-		
-		mediadorMenu.menuPausa().show( pause );
+		if(pause) {
+			mediadorMenu.iniciarNuevoMenu(mediadorMenu.menuPausa());
+		} else {
+			mediadorMenu.eliminarPilaMenues();
+		}
 	}
 
 
@@ -146,8 +153,14 @@ public class Juego extends JFrame
 		return gui;
 	}
 	
+	public ControladorNiveles getControladorNiveles() {
+		return control;
+	}
 	
-	
+	public MediadorMenu getMediadorMenu() {
+		return mediadorMenu;
+	}
+		
 	public Teclado getTeclado( )
 	{
 		return teclado;

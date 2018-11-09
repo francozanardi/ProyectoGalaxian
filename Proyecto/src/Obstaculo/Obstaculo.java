@@ -15,8 +15,9 @@ public abstract class Obstaculo extends EntidadConVida
 		actualizarEscudos( msDesdeUltAct );
 	}
 	
-	public void morir( ) {		
-		powerup.caer( pos.clone() );
+	public void morir( ) {
+		if(powerup != null)
+			powerup.caer( pos.clone() );
 	}
 	
 }

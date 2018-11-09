@@ -1,67 +1,98 @@
 package Menu;
 
-import javax.swing.JPanel;
-
+import java.util.Stack;
+import Jugador.Jugador;
 import Logica.Juego;
 
 
 
 public class MediadorMenu
 {
-	private Menu	menuPrincipal,
-					menuAbout,
-					menuBestScores,
-					menuPausa,
-					menuGameOver;
+	protected Juego juego;
+	protected Jugador jugador;
+	protected Stack<Menu> pilaDeMenues;
 	
-	
-	
-	public MediadorMenu( Juego juego )
+	public MediadorMenu( Juego juego, Jugador jugador)
 	{
-		JPanel canvas = juego.getPanel();
-		
-		
-		
-		menuPrincipal = new MenuPrincipal( juego, canvas );
-		menuPrincipal.setMediator( this );
-		
-		menuAbout = new MenuAbout( canvas );
-		menuAbout.setMediator( this );
-		
-		menuBestScores = new MenuBestScores( canvas );
-		menuBestScores.setMediator( this );
-		
-		menuPausa = new MenuPausa( canvas, juego );
-		menuPausa.setMediator( this );
-		
-		menuGameOver = new MenuGameOver( canvas );
-		menuGameOver.setMediator( this );
+		this.juego = juego;		
+		this.jugador = jugador;
+		this.pilaDeMenues = new Stack<Menu>();
 	}
 	
 	
-	
-	public Menu menuPrincipal( )
+	public void eliminarPilaMenues() {
+		for(Menu p: pilaDeMenues) {
+			p.eliminar();
+		}
+		
+		pilaDeMenues.clear();
+	}
+	/*
+	 * Si no hay menues en la pila, simplemente lo agrega y lo muestra. Si ya ha menues en la pila, oculta el último menú y muestra éste.
+	 */
+	public void avanzarMenu( Menu menu )
 	{
-		return menuPrincipal;
+		if(!pilaDeMenues.isEmpty()) {
+			pilaDeMenues.lastElement().show(false);
+		}
+			
+		pilaDeMenues.push(menu);
+		menu.show(true);
 	}
 	
-	public Menu menuAbout( )
-	{
-		return menuAbout;
+	public void retrocederMenu() {
+		Menu menuAnterior = null;
+		Menu menuActual = pilaDeMenues.pop(); //saco el menu actual de la pila
+
+		if(!pilaDeMenues.isEmpty()) {
+			menuAnterior = pilaDeMenues.lastElement();
+			menuAnterior.show(true);
+		}
+		
+		menuActual.eliminar();
 	}
 	
-	public Menu menuBestScores( )
-	{
-		return menuBestScores;
+	public void iniciarNuevoMenu(Menu m) {
+		eliminarPilaMenues();
+		pilaDeMenues.push(m);
+		m.show(true);
 	}
 	
-	public Menu menuPausa()
+	protected Menu getMenuAnterior() {
+		return pilaDeMenues.get(pilaDeMenues.size()-2);
+	}
+
+	
+	public MenuPrincipal menuPrincipal( )
 	{
-		return menuPausa;
+		return new MenuPrincipal(juego, this);
+	}
+	
+	public MenuAbout menuAbout( )
+	{
+		return new MenuAbout(juego, this);
+	}
+	
+	public MenuBestScores menuBestScores( )
+	{
+		return new MenuBestScores(juego, this);
+	}
+	
+	public MenuPausa menuPausa()
+	{
+		return new MenuPausa(juego, this);
 	}
 	
 	public MenuGameOver menuGameOver()
 	{
-		return (MenuGameOver) menuGameOver;
+		return new MenuGameOver(juego, this);
+	}
+	
+	public MenuNextLevel menuNextLevel() {
+		return new MenuNextLevel(juego, this);
+	}
+	
+	public MenuTienda menuTienda() {
+		return new MenuTienda(juego, this, jugador);
 	}
 }

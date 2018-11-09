@@ -16,27 +16,19 @@ public class MenuPausa extends Menu
 	private JLabel labelPausa;
 	
 	
-	public MenuPausa( JPanel canvas, Juego juego )
+	public MenuPausa(Juego juego, MediadorMenu m)
 	{
-		this.canvas	= canvas;
+		this.canvas	= juego.getPanel();
+		this.mediador = m;
 		
-		crear( );
-	}
-	
-	
-	
-	public void crear( )
-	{
 		crearLabels( );
 	}
 	
-	
-	
-	public void inicializar( )
-	{
+	protected void eliminar() {
+		show(false);
+		canvas.remove(labelPausa);
+		canvas.repaint();
 	}
-	
-	
 	
 	public void show( boolean toggle )
 	{		

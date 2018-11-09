@@ -20,28 +20,23 @@ public class MenuPrincipal extends Menu
 	
 	
 	
-	public MenuPrincipal( Juego juego, JPanel canvas )
+	public MenuPrincipal(Juego juego, MediadorMenu m)
 	{
 		this.juego	= juego;
-		this.canvas	= canvas;
+		this.canvas	= juego.getPanel();
+		this.mediador = m;
 		
-		crear( );
+		crearBotones();
 	}
 	
-	
-	
-	public void crear( )
-	{
-		crearBotones( );
+	protected void eliminar() {
+		show(false);
+		canvas.remove(botonAbout);
+		canvas.remove(botonNewGame);
+		canvas.remove(botonMaxScore);
+		canvas.remove(botonExit);
+		canvas.repaint();
 	}
-	
-	
-	
-	public void inicializar( )
-	{
-	}
-	
-	
 	
 	public void show( boolean toggle )
 	{
@@ -80,16 +75,15 @@ public class MenuPrincipal extends Menu
 	{
 		public void actionPerformed(ActionEvent arg0)
 		{
-			nextMenu( null );
+			mediador.eliminarPilaMenues();
 			juego.startGame();
 		}
 	}
 	
 	private class OyenteBotonBestScores implements ActionListener
 	{
-		public void actionPerformed(ActionEvent arg0)
-		{
-			nextMenu( mediador.menuBestScores() );
+		public void actionPerformed(ActionEvent arg0) {
+			mediador.avanzarMenu(mediador.menuBestScores());
 		}
 	}
 	
@@ -105,7 +99,7 @@ public class MenuPrincipal extends Menu
 	{
 		public void actionPerformed(ActionEvent arg0)
 		{
-			nextMenu( mediador.menuAbout() );
+			mediador.avanzarMenu(mediador.menuAbout());
 		}
 	}
 }

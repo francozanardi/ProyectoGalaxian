@@ -92,7 +92,7 @@ public class ContEnemMapaGenerico extends ControladorEnemigos
 	
 	public void crearEnemigos()
 	{
-		int cantTotal = (int) (8 + (dificultad * 2));
+		int cantTotal = (int)(8 + (dificultad * 2));
 		
 		for(int i = 0; i < cantTotal; i++)
 		{
