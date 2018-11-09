@@ -2,13 +2,12 @@ package Obstaculo;
 
 import java.util.LinkedList;
 
+import DropPowerUP.CreadorPowerUP;
+import DropPowerUP.CreadorPowerUPObstaculo;
 import Escudo.Escudo;
 import Escudo.EscudoBasico;
 import Mapa.Mapa;
-import PowerUp.PowerUp;
 import Sprite.Sprite;
-import PowerUp.PUMinigun;
-import PowerUp.PUVelocidadMovimiento;
 import Utils.Posicion;
 import visitor.ColBarricada;
 
@@ -23,6 +22,9 @@ public class BarricadaComun extends Barricada
 		this.colisionador	= new ColBarricada( );
 		this.puntaje		= 10;
 		
+		CreadorPowerUP creadorPowerUp = new CreadorPowerUPObstaculo(map, map.getDificultad());
+		this.powerup 		= creadorPowerUp.crearPowerUP();
+		
 		setSprite( new Sprite( "/GameSprites/Destructible2.PNG" ) );
 		
 		this.addEscudo( new EscudoBasico(this, 2.0) );
@@ -30,11 +32,4 @@ public class BarricadaComun extends Barricada
 		actualizarPosicion( );
 	}
 
-	
-	
-	public void morir( )
-	{		
-		PowerUp drop = new PUVelocidadMovimiento(map);
-		drop.caer( pos.clone() );
-	}
 }

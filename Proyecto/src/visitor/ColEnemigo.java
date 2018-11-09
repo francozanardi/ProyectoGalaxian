@@ -10,8 +10,6 @@ public class ColEnemigo extends Colisionador
 	{
 	}
 	
-	
-	
 	public void visit( Disparo disparo )
 	{
 		disparo.remove();

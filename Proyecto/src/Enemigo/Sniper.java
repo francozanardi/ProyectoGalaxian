@@ -48,4 +48,14 @@ public class Sniper extends Enemigo
 	{
 		col.visit(this);
 	}
+	
+	public void disparar() {
+		final double LIMIT = (Juego.GAME_HEIGHT * 0.8);
+		
+		// Solo puede disparar si está en el 80% superior de la pantalla
+		if (pos.getY() <= LIMIT)
+		{
+			super.disparar();
+		}
+	}
 }

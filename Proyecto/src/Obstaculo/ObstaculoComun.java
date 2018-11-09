@@ -1,6 +1,9 @@
 package Obstaculo;
 
 import java.util.LinkedList;
+
+import DropPowerUP.CreadorPowerUP;
+import DropPowerUP.CreadorPowerUPObstaculo;
 import Escudo.Escudo;
 import Escudo.EscudoBasico;
 import Mapa.Mapa;
@@ -24,19 +27,14 @@ public class ObstaculoComun extends Destructible
 		this.colisionador	= new ColObstaculo( );
 		this.puntaje		= 10;
 		
+		CreadorPowerUP creadorPowerUp = new CreadorPowerUPObstaculo(map, map.getDificultad());
+		this.powerup 		= creadorPowerUp.crearPowerUP();
+		
 		setSprite( new Sprite( "/GameSprites/Destructible.PNG" ) );
 		
 		this.addEscudo( new EscudoBasico(this, 2.0) );
 		
 		actualizarPosicion( );
-	}
-	
-	
-	
-	public void morir( )
-	{		
-		PowerUp drop = new PUArmaTriple(map);
-		drop.caer( pos.clone() );
 	}
 	
 }

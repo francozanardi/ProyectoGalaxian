@@ -10,8 +10,6 @@ public class ColJugador extends Colisionador
 	{
 	}
 	
-	
-	
 	public void visit(Kamikaze kamikaze)
 	{
 		kamikaze.explotar();
