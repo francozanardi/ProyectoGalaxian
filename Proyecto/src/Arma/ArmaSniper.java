@@ -16,7 +16,7 @@ import visitor.ColDisparo;
 public class ArmaSniper extends Arma
 {	
 	private final double	VELOCIDAD_MOVIMIENTO = 200.0,
-							DISPAROS_POR_SEGUNDO = 0.33,
+							DISPAROS_POR_SEGUNDO = 4,
 							MULTIPLICADOR_DMG = 1.0;
 
 

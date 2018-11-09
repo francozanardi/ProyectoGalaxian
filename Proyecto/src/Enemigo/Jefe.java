@@ -2,9 +2,9 @@ package Enemigo;
 
 import java.util.LinkedList;
 
-import Arma.ArmaMinigun;
+import Arma.ArmaBoss;
 import Escudo.Escudo;
-import Inteligencia.IAComun;
+import Inteligencia.IABoss;
 import Logica.Juego;
 import Mapa.Mapa;
 import Sprite.Sprite;
@@ -15,12 +15,13 @@ import visitor.ColEnemigo;
 import visitor.Visitor;
 
 
+
 public class Jefe extends Enemigo
 {	
 	public Jefe( Mapa map, double dificultad )
 	{	
 		this.map			= map;
-		this.ia				= new IAComun( this );
+		this.ia				= new IABoss( this );
 		this.dificultad		= dificultad;
 		this.colisionador	= new ColEnemigo();
 		this.rand			= Randomizador.create( );
@@ -32,8 +33,8 @@ public class Jefe extends Enemigo
 		this.vida			= 2000.0 + (100.0 * dificultad);
 		this.puntaje		= (int) (200 + (10 * dificultad));
 
-		setArma( new ArmaMinigun(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
-		arma.setMultCadencia( 5 );
+		setArma( new ArmaBoss(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		arma.setMultCadencia( 2 );
 	}
 	
 	

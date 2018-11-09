@@ -30,5 +30,10 @@ public class BalanceEnemigoDefault extends BalanceEnemigo {
 	public int chanceCamuflado() {
 		return (int)Math.floor(3.25*Math.sqrt(dificultad));
 	}
+
+	@Override
+	public int chanceSniper() {
+		return (int)Math.floor(2*Math.sqrt(2*(dificultad+10)));
+	}
 	
 }

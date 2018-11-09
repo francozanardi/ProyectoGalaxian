@@ -42,11 +42,15 @@ public abstract class EntidadConVida extends Entidad
 	public void changeArma( Arma nuevaArma )
 	{
 		double	multViejo = nuevaArma.getMultDmg();
+		double 	multCadenciaViejo = nuevaArma.getMultCadencia();
 		
-		if (arma != null)
+		if (arma != null) {
 			multViejo = arma.getMultDmg();
+			multCadenciaViejo = arma.getMultCadencia();
+		}
 		
 		nuevaArma.setMultDmg( multViejo );
+		nuevaArma.setMultCadencia(multCadenciaViejo);
 		setArma( nuevaArma );
 	}
 	

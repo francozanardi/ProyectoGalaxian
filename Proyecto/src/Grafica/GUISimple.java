@@ -77,6 +77,7 @@ public class GUISimple extends GUI
 		lblFPS = new JLabel();
 		lblFPS.setOpaque(false);
 		lblFPS.setHorizontalAlignment( SwingConstants.RIGHT );
+		lblFPS.setVerticalAlignment( SwingConstants.TOP );
 		lblFPS.setFont( FPS_FONT );
 		lblFPS.setForeground( FPS_COLOR );
 		lblFPS.setBounds( Juego.GAME_WIDTH - 100, 5, 90, 20 );
@@ -90,12 +91,14 @@ public class GUISimple extends GUI
 		lblHP.setOpaque(false);
 		lblHP.setFont( HP_FONT );
 		lblHP.setForeground( HP_COLOR );
+		lblHP.setVerticalAlignment( SwingConstants.TOP );
 		lblHP.setBounds( 5, 5, 100, 20 );
 		
 		lblHPChange = new JLabel();
 		lblHPChange.setOpaque(false);
 		lblHPChange.setFont( HPC_FONT );
 		lblHPChange.setForeground( HPC_COLOR );
+		lblHPChange.setVerticalAlignment( SwingConstants.TOP );
 		lblHPChange.setBounds( 5, 30, 100, 20 );
 		
 		canvas.add(lblHP);
@@ -120,6 +123,7 @@ public class GUISimple extends GUI
 		lblScore.setOpaque(false);
 		lblScore.setFont( SCORE_FONT );
 		lblScore.setForeground( SCORE_COLOR );
+		lblScore.setVerticalAlignment( SwingConstants.TOP );
 		lblScore.setHorizontalAlignment( SwingConstants.CENTER );
 		lblScore.setBounds( (Juego.GAME_WIDTH / 2) - 50, 5, 100, 20 );
 		
@@ -127,6 +131,7 @@ public class GUISimple extends GUI
 		lblScoreChange.setOpaque(false);
 		lblScoreChange.setFont( SCOREC_FONT );
 		lblScoreChange.setForeground( SCOREC_COLOR );
+		lblScoreChange.setVerticalAlignment( SwingConstants.TOP );
 		lblScoreChange.setHorizontalAlignment( SwingConstants.CENTER );
 		lblScoreChange.setBounds( (Juego.GAME_WIDTH / 2) - 50, 30, 100, 20 );
 		
@@ -193,7 +198,7 @@ public class GUISimple extends GUI
 	
 	public void updateScore( int score )
 	{
-		lblScore.setText( "Puntaje: " + score );
+		lblScore.setText( String.format("<html>%06d</html>", score) );
 		
 		if (lastScore != Integer.MIN_VALUE)
 		{
@@ -235,7 +240,7 @@ public class GUISimple extends GUI
 	
 	public void updateFPS(double fps)
 	{
-		lblFPS.setText( String.format("FPS: %.2f", fps) );
+		lblFPS.setText( String.format("FPS: %.0f", fps) );
 	}
 
 

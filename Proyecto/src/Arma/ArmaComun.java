@@ -12,10 +12,11 @@ import Utils.Vector;
 import visitor.ColDisparo;
 
 
+
 public class ArmaComun extends Arma
 {
 	private final double	VELOCIDAD_MOVIMIENTO = 150.0,
-							DISPAROS_POR_SEGUNDO = 5,
+							DISPAROS_POR_SEGUNDO = 3.5,
 							MULTIPLICADOR_DMG = 1.0;
 
 

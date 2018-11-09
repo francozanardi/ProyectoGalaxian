@@ -8,14 +8,14 @@ import Utils.Randomizador;
 
 
 
-public class IAComun extends Inteligencia
+public class IASniper extends Inteligencia
 {
-	public IAComun( Enemigo me )
+	public IASniper( Enemigo me )
 	{
 		this.entidad	= me;
 		this.rand		= Randomizador.create( );
-		
-		this.curvaMovimiento = new CurvaSinusoidal( rand.nextDouble(0.0, 1000.0), 40.0, 20.0, 2.5 );
+
+		this.curvaMovimiento = new CurvaSinusoidal( rand.nextDouble(0.0, 1000.0), 100.0, 10.0, 0.5 );
 	}
 
 

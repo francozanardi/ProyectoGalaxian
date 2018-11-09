@@ -1,10 +1,12 @@
 package PowerUp;
 
+import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Sprite.Sprite;
+import Sprite.SpriteEditor;
 import Utils.Posicion;
 import visitor.ColPowerUp;
 
@@ -26,7 +28,9 @@ public class PUMultiplicador extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		setSprite( new Sprite( "/GameSprites/puDmg.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/powerUpDmg.PNG" ) );
+		SpriteEditor editor = SpriteEditor.create();
+		editor.colorToAlpha(sprite, Color.white, 5, 255);
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}

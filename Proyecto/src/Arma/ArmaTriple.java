@@ -17,7 +17,7 @@ public class ArmaTriple extends Arma
 {	
 	private final double	AMPLITUD_DISPARO		= Math.PI / 8,
 							VELOCIDAD_DISPARO		= 100.0,
-							DISPAROS_POR_SEGUNDO	= 0.33,
+							DISPAROS_POR_SEGUNDO	= 2,
 							MULTIPLICADOR_DMG 		= 1.0;
 
 	protected int cantidadDeMuniciones;

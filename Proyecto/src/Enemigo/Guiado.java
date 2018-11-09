@@ -3,7 +3,6 @@ package Enemigo;
 import java.util.LinkedList;
 
 import Arma.ArmaNula;
-import Arma.ArmaSniper;
 import DropPowerUP.CreadorPowerUP;
 import DropPowerUP.CreadorPowerUPGuiado;
 import Escudo.Escudo;
@@ -13,7 +12,6 @@ import Mapa.Mapa;
 import Sprite.Sprite;
 import Utils.Posicion;
 import Utils.Randomizador;
-import visitor.ColDispEnemigo;
 import visitor.ColKamikaze;
 
 

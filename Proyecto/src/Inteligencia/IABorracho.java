@@ -1,6 +1,6 @@
 package Inteligencia;
 
-import Curva.OscilacionBorracho;
+import Curva.CurvaBorracho;
 import Enemigo.Enemigo;
 import Logica.Juego;
 import Utils.Posicion;
@@ -15,7 +15,7 @@ public class IABorracho extends Inteligencia
 		this.entidad	= me;
 		this.rand 		= Randomizador.create( );
 		
-		this.curvaMovimiento = new OscilacionBorracho( rand.nextDouble(0.0, 100000.0) );
+		this.curvaMovimiento = new CurvaBorracho( rand.nextDouble(0.0, 100000.0) );
 	}
 	
 	

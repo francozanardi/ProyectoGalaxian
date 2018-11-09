@@ -4,9 +4,9 @@ import Utils.Posicion;
 
 
 
-public class OscilacionBorracho extends Curva
+public class CurvaBorracho extends Curva
 {	
-	public OscilacionBorracho( double tiempoInicial )
+	public CurvaBorracho( double tiempoInicial )
 	{
 		tiempoMS = tiempoInicial;
 	}
@@ -20,8 +20,8 @@ public class OscilacionBorracho extends Curva
 		
 		t *= ESCALA;
 		
-		x = 50.0 * (Math.cos(t) + Math.cos(7*t) + Math.cos(13*t) + Math.cos(17*t));
-		y = 20 * (t / ESCALA);
+		x = 40.0 * (Math.cos(t) + Math.cos(7*t) + Math.cos(13*t) + Math.cos(17*t));
+		y = 30 * (t / ESCALA);
 		
 		return new Posicion(x, y);
 	}

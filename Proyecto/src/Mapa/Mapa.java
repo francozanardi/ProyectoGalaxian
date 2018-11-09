@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import Controladores.ControladorEnemigos;
 import Controladores.ControladorNiveles;
+import Controladores.ControladorObstaculos;
 import Entidad.Entidad;
 import Grafica.Fondo;
 import Grafica.GUI;
@@ -21,6 +22,8 @@ public abstract class Mapa
 	protected Randomizador			rand;
 	protected Juego					juego;
 	protected ControladorNiveles	controlJuego;
+	protected ControladorEnemigos	controlEnemigos;
+	protected ControladorObstaculos	controlObstaculos;
 	protected Jugador				player;
 	protected Fondo					fondo;
 	protected Collection<Entidad>	entidades;
@@ -28,7 +31,6 @@ public abstract class Mapa
 	protected Collection<Entidad>	entidadesParaAgregar;
 	protected double				dificultad;
 	protected String				nombre;
-	protected ControladorEnemigos	controlEnemigos;
 	protected GUI					gui;
 		
 	
@@ -75,6 +77,11 @@ public abstract class Mapa
 	protected void crearEnemigos( )
 	{
 		controlEnemigos.crearEnemigos( );
+	}
+	
+	protected void crearObstaculos( )
+	{
+		controlObstaculos.crearObstaculos();
 	}
 	
 	public void removeEntity(Entidad e)

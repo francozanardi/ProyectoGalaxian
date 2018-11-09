@@ -10,7 +10,7 @@ import Utils.Randomizador;
 public class IAGuiado extends Inteligencia
 {
 	final double	VELOCIDAD_HORIZONTAL	= 40.0,
-					VELOCIDAD_VERTICAL		= 120.0;
+					VELOCIDAD_VERTICAL		= 110.0;
 	
 	public IAGuiado( Enemigo me )
 	{
@@ -18,8 +18,10 @@ public class IAGuiado extends Inteligencia
 		this.rand		= Randomizador.create( );
 	}
 	
+
 	public void mover( double msDesdeUltActualizacion )
 	{
+		
 		Posicion	pos			= entidad.getPos(),
 					posPlayer	= entidad.getMapa().getPlayerPos( );
 		

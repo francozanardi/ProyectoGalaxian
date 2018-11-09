@@ -15,7 +15,7 @@ public class PUArmaTriple extends PowerUp
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		setSprite( new Sprite( "/GameSprites/puArma.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/powerUpArma.PNG" ) );
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}
@@ -24,6 +24,5 @@ public class PUArmaTriple extends PowerUp
 	{
 		map.mostrarAnuncio( "Has agarrado el \"arma triple\"!" );
 		player.changeArma( new ArmaTriple(player, new ColDispJugador(), 0.5 * Math.PI) );
-		player.getArma().setMultCadencia(0.2);
 	}
 }

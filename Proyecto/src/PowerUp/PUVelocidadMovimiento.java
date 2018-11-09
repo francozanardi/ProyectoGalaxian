@@ -17,7 +17,7 @@ public class PUVelocidadMovimiento extends PowerUp {
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
-		setSprite( new Sprite( "/GameSprites/puShield.PNG" ) );
+		setSprite( new Sprite( "/GameSprites/powerUpShield.PNG" ) );
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}

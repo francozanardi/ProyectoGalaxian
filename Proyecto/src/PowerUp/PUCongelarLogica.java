@@ -8,6 +8,8 @@ import Arma.ArmaCongelada;
 import Entidad.EntidadConVida;
 import Inteligencia.IACongelado;
 
+
+
 public class PUCongelarLogica {
 	private static PUCongelarLogica instanciaUnica = null;
 	private Hashtable<EntidadConVida, IACongelado> entidadesCongeladas;

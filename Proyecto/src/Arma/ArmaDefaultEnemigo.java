@@ -17,7 +17,7 @@ public class ArmaDefaultEnemigo extends Arma
 {
 	private final double	AMPLITUD_DISPARO		= Math.PI / 12,
 							VELOCIDAD_MOVIMIENTO	= 100.0,
-							DISPAROS_POR_SEGUNDO	= 0.5,
+							DISPAROS_POR_SEGUNDO	= 3,
 							MULTIPLICADOR_DMG		= 1.0;
 
 
