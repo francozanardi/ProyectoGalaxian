@@ -19,9 +19,7 @@ import visitor.Visitor;
 public class Jugador extends Personaje
 {	
 	private int dir;
-	private double velHorizontal = 80.0;
-
-
+	private double velHorizontal = 70.0;
 	
 	public Jugador()
 	{
@@ -37,14 +35,18 @@ public class Jugador extends Personaje
 		setArma( new ArmaComun(this, new ColDispJugador(), 0.5 * Math.PI) );
 	}
 
-
+	public double getVelocidadMovimiento() {
+		return velHorizontal;
+	}
+	
+	public void setVelocidadMovimiento(double v) {
+		velHorizontal = v;
+	}
 
 	protected void morir( )
 	{
 		map.perder();
 	}
-
-
 
 	public void explosionKamikaze( double dmg )
 	{
@@ -52,8 +54,6 @@ public class Jugador extends Personaje
 		recibirDMG( dmg );
 	}
 
-
-	
 	public void setPos( int posX )
 	{
 		pos.setX(posX);
@@ -64,22 +64,16 @@ public class Jugador extends Personaje
 		this.dir = dir;
 	}
 
-
-	
 	public void accept(Visitor col)
 	{
 		col.visit(this);
 	}
-
-
 	
 	public void actualizar( double msDesdeUltAct )
 	{
 		actualizarEscudos( msDesdeUltAct );
 		mover( msDesdeUltAct );
 	}
-
-
 	
 	public void disparar( )
 	{
@@ -91,8 +85,6 @@ public class Jugador extends Personaje
 				map.addEntity( d );
 		}
 	}
-
-
 	
 	public void mover( double msDesdeUltActualizacion )
 	{		

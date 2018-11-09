@@ -31,6 +31,7 @@ public class ArmaComun extends Arma
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
 		);
+		
 	}
 
 

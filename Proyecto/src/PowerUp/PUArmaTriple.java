@@ -1,6 +1,6 @@
 package PowerUp;
 
-import Arma.ArmaMinigun;
+import Arma.ArmaTriple;
 import Jugador.Jugador;
 import Mapa.Mapa;
 import Sprite.Sprite;
@@ -9,9 +9,9 @@ import visitor.ColDispJugador;
 import visitor.ColPowerUp;
 
 
-public class PUMinigun extends PowerUp
+public class PUArmaTriple extends PowerUp
 {	
-	public PUMinigun( Mapa map )
+	public PUArmaTriple( Mapa map )
 	{
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
@@ -19,12 +19,11 @@ public class PUMinigun extends PowerUp
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}
-	
-	
-	
+		
 	public void afectar(Jugador player)
 	{
-		map.mostrarAnuncio( "Has agarrado el arma \"Minigun\"!" );
-		player.changeArma( new ArmaMinigun( player, new ColDispJugador(), 0.5 * Math.PI) );
+		map.mostrarAnuncio( "Has agarrado el \"arma triple\"!" );
+		player.changeArma( new ArmaTriple(player, new ColDispJugador(), 0.5 * Math.PI) );
+		player.getArma().setMultCadencia(0.2);
 	}
 }

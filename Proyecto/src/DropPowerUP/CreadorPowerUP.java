@@ -2,11 +2,13 @@ package DropPowerUP;
 
 import Balance.BalanceDropPU;
 import Mapa.Mapa;
+import PowerUp.PUArmaTriple;
 import PowerUp.PUCongelar;
 import PowerUp.PUEscudoExplosion;
 import PowerUp.PUHeal;
 import PowerUp.PUMinigun;
 import PowerUp.PUMultiplicador;
+import PowerUp.PUVelocidadMovimiento;
 import PowerUp.PowerUp;
 import Utils.Randomizador;
 
@@ -39,6 +41,14 @@ public abstract class CreadorPowerUP {
 		
 		if(valorAleatorio < balance.chancePUMultiplicador())
 			return new PUMultiplicador(mapa);
+		valorAleatorio -= balance.chancePUMultiplicador();
+		
+		if(valorAleatorio < balance.chancePUVelocidad())
+			return new PUVelocidadMovimiento(mapa);
+		valorAleatorio -= balance.chancePUVelocidad();
+		
+		if(valorAleatorio < balance.chancePUArmaTriple())
+			return new PUArmaTriple(mapa);
 		
 		return null;
 	}

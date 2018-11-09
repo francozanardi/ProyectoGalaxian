@@ -8,6 +8,7 @@ import Mapa.Mapa;
 import PowerUp.PowerUp;
 import Sprite.Sprite;
 import PowerUp.PUMinigun;
+import PowerUp.PUVelocidadMovimiento;
 import Utils.Posicion;
 import visitor.ColBarricada;
 
@@ -33,7 +34,7 @@ public class BarricadaComun extends Barricada
 	
 	public void morir( )
 	{		
-		PowerUp drop = new PUMinigun(map);
+		PowerUp drop = new PUVelocidadMovimiento(map);
 		drop.caer( pos.clone() );
 	}
 }

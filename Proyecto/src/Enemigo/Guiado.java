@@ -2,11 +2,12 @@ package Enemigo;
 
 import java.util.LinkedList;
 
+import Arma.ArmaNula;
 import Arma.ArmaSniper;
 import DropPowerUP.CreadorPowerUP;
 import DropPowerUP.CreadorPowerUPGuiado;
 import Escudo.Escudo;
-import Inteligencia.IAKamikaze;
+import Inteligencia.IAGuiado;
 import Logica.Juego;
 import Mapa.Mapa;
 import Sprite.Sprite;
@@ -22,7 +23,7 @@ public class Guiado extends Kamikaze
 	public Guiado(Mapa map, double dificultad)
 	{
 		this.map			= map;
-		this.ia				= new IAKamikaze( this );
+		this.ia				= new IAGuiado( this );
 		this.dificultad		= dificultad;
 		this.rand			= Randomizador.create( );
 
@@ -36,6 +37,7 @@ public class Guiado extends Kamikaze
 
 		this.colisionador	= new ColKamikaze( explosionDmg );
 
+		setArma(new ArmaNula());
 		//setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		
 		CreadorPowerUP drop = new CreadorPowerUPGuiado(map, dificultad);

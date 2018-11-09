@@ -20,7 +20,7 @@ public class ArmaTriple extends Arma
 							DISPAROS_POR_SEGUNDO	= 0.33,
 							MULTIPLICADOR_DMG 		= 1.0;
 
-
+	protected int cantidadDeMuniciones;
 
 	public ArmaTriple( EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo )
 	{
@@ -33,6 +33,8 @@ public class ArmaTriple extends Arma
 			DISPAROS_POR_SEGUNDO,
 			MULTIPLICADOR_DMG
 		);
+		
+		cantidadDeMuniciones = 500;
 	}
 
 
@@ -42,45 +44,51 @@ public class ArmaTriple extends Arma
 		List<Disparo> lista = new LinkedList<Disparo>( );
 		Vector v;
 		
-		
-		// disparo 1
-		v = new Vector();
-		v.setPolares( corregirAngulo( -AMPLITUD_DISPARO ), VELOCIDAD_DISPARO );
-		lista.add(
-			new DisparoPerdigon(
-				colisionador.clone(),
-				this,
-				getPosicionLanzamiento( ),
-				v
-			)
-		);
-		
-		
-		// disparo 2
-		v = new Vector();
-		v.setPolares( corregirAngulo( 0.0 ), VELOCIDAD_DISPARO );	
-		lista.add(
-			new DisparoPerdigon(
-				colisionador.clone(),
-				this,
-				getPosicionLanzamiento( ),
-				v
-			)
-		);
-		
-		
-		// disparo 3
-		v = new Vector();
-		v.setPolares( corregirAngulo( AMPLITUD_DISPARO ), VELOCIDAD_DISPARO );	
-		lista.add(
-			new DisparoPerdigon(
-				colisionador.clone(),
-				this,
-				getPosicionLanzamiento( ),
-				v
-			)
-		);
-		
+		if(cantidadDeMuniciones > 0) {	
+			// disparo 1
+			v = new Vector();
+			v.setPolares( corregirAngulo( -AMPLITUD_DISPARO ), VELOCIDAD_DISPARO );
+			lista.add(
+				new DisparoPerdigon(
+					colisionador.clone(),
+					this,
+					getPosicionLanzamiento( ),
+					v
+				)
+			);
+			
+			
+			// disparo 2
+			v = new Vector();
+			v.setPolares( corregirAngulo( 0.0 ), VELOCIDAD_DISPARO );	
+			lista.add(
+				new DisparoPerdigon(
+					colisionador.clone(),
+					this,
+					getPosicionLanzamiento( ),
+					v
+				)
+			);
+			
+			
+			// disparo 3
+			v = new Vector();
+			v.setPolares( corregirAngulo( AMPLITUD_DISPARO ), VELOCIDAD_DISPARO );	
+			lista.add(
+				new DisparoPerdigon(
+					colisionador.clone(),
+					this,
+					getPosicionLanzamiento( ),
+					v
+				)
+			);
+			
+			cantidadDeMuniciones--;
+			
+		} else {
+			owner.changeArma(new ArmaComun(owner, colisionador, anguloDisparo));
+		}
+			
 		
 		return lista;
 	}

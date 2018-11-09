@@ -33,7 +33,17 @@ public class BalanceDropPUGuiado extends BalanceDropPU {
 
 	@Override
 	public int chanceNoPowerUP() {
-		return 100-chancePUCongelar()-chancePUEscudoExplosion()-chancePUHeal()-chancePUMinigun()-chancePUMultiplicador();
+		return 60;
+	}
+
+	@Override
+	public int chancePUVelocidad() {
+		return 5;
+	}
+
+	@Override
+	public int chancePUArmaTriple() {
+		return 7;
 	}
 
 }

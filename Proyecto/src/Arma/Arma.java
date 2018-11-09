@@ -33,12 +33,12 @@ public abstract class Arma extends Entidad
 	
 	protected abstract List<Disparo> crearDisparo( );
 	
-	public void accept(Visitor col)
-	{
+	public void accept(Visitor col) {
+		
 	}
 	
-	public void actualizar( double msDesdeUltActualizacion )
-	{
+	public void actualizar( double msDesdeUltActualizacion ){
+	
 	}
 
 
@@ -51,10 +51,6 @@ public abstract class Arma extends Entidad
 		return this.owner;
 	}
 
-
-	public ColDisparo getColisionadorDisparo() {
-		return colisionador;
-	}
 	
 	public double getCadencia( )
 	{

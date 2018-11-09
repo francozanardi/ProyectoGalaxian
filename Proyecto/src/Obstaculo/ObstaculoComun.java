@@ -6,6 +6,7 @@ import Escudo.EscudoBasico;
 import Mapa.Mapa;
 import PowerUp.PowerUp;
 import Sprite.Sprite;
+import PowerUp.PUArmaTriple;
 import PowerUp.PUCongelar;
 import Utils.Posicion;
 import visitor.ColObstaculo;
@@ -34,7 +35,7 @@ public class ObstaculoComun extends Destructible
 	
 	public void morir( )
 	{		
-		PowerUp drop = new PUCongelar(map);
+		PowerUp drop = new PUArmaTriple(map);
 		drop.caer( pos.clone() );
 	}
 	

@@ -31,23 +31,22 @@ public abstract class EntidadConVida extends Entidad
 	public void setArma( Arma arma )
 	{
 		this.arma = arma;
+		if(arma != null) {
+			arma.getSprite().setVisible(false);
+			sprite.remove(arma.getSprite());
+		}
 		this.sprite.add( arma.getSprite() );
 		arma.getSprite().setBounds( (int) arma.getPos().getX(), (int) arma.getPos().getY(), arma.getSize().getWidth(), arma.getSize().getHeight() );
 	}
 	
 	public void changeArma( Arma nuevaArma )
 	{
-		double	multViejo		= nuevaArma.getMultDmg(),
-				cadenciaVieja	= nuevaArma.getMultCadencia();
+		double	multViejo = nuevaArma.getMultDmg();
 		
 		if (arma != null)
-		{
-			multViejo		= arma.getMultDmg();
-			cadenciaVieja	= arma.getMultCadencia();
-		}
+			multViejo = arma.getMultDmg();
 		
 		nuevaArma.setMultDmg( multViejo );
-		nuevaArma.setMultCadencia( cadenciaVieja );
 		setArma( nuevaArma );
 	}
 	

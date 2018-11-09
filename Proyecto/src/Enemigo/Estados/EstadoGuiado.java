@@ -1,9 +1,8 @@
 package Enemigo.Estados;
 
-import Arma.ArmaSniper;
+import Arma.ArmaNula;
 import Enemigo.Transformable;
-import Inteligencia.IAKamikaze;
-import visitor.ColDispEnemigo;
+import Inteligencia.IAGuiado;
 import visitor.ColKamikaze;
 import Sprite.Sprite;
 
@@ -19,10 +18,10 @@ public class EstadoGuiado extends EstadoKamikazeFragil
 		vidaMaxima = contenedor.getVida();
 
 		contenedor.setSprite( new Sprite( "/GameSprites/Guiado.PNG" ) );
-		contenedor.setIA( new IAKamikaze(contenedor) );
+		contenedor.setIA( new IAGuiado(contenedor) );
 		contenedor.setExplosionDmg(100*contenedor.getDificultad());
 		contenedor.setColisionador(new ColKamikaze(contenedor.getExplosionDmg()));
-		contenedor.setArma(new ArmaSniper( contenedor, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI));
+		contenedor.setArma(new ArmaNula());
 	}
 
 

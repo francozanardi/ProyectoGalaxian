@@ -2,7 +2,7 @@ package Enemigo;
 
 import java.util.LinkedList;
 
-import Arma.ArmaSniper;
+import Arma.ArmaNula;
 import DropPowerUP.CreadorPowerUP;
 import DropPowerUP.CreadorPowerUPEnemigo;
 import Enemigo.Estados.EstadoGuiado;
@@ -12,8 +12,6 @@ import Mapa.Mapa;
 import Sprite.Sprite;
 import Utils.Posicion;
 import Utils.Randomizador;
-import visitor.ColDispEnemigo;
-
 
 
 public class Fragil extends Transformable
@@ -32,7 +30,7 @@ public class Fragil extends Transformable
 		this.vida			= 400 + (66.6 * dificultad);
 		this.estado			= new EstadoGuiado(this); //la inteligencia y demás caracteristicas faltantes las determina su estado.
 
-		setArma( new ArmaSniper(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		setArma(new ArmaNula());
 		
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
 		powerUp = drop.crearPowerUP();

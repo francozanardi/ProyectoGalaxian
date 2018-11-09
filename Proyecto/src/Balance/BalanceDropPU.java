@@ -8,9 +8,13 @@ public abstract class BalanceDropPU {
 	public abstract int chancePUHeal();
 	public abstract int chancePUMinigun();
 	public abstract int chancePUMultiplicador();
+	public abstract int chancePUVelocidad();
+	public abstract int chancePUArmaTriple();
 	public abstract int chanceNoPowerUP();
 	public int getChanceTotal() {
-		return chancePUCongelar()+chancePUEscudoExplosion()+chancePUHeal()+chancePUMinigun()+chancePUMultiplicador()+chanceNoPowerUP();
+		return 	chancePUCongelar()+chancePUEscudoExplosion()+chancePUHeal()+
+				chancePUMinigun()+chancePUMultiplicador()+chanceNoPowerUP()+
+				chancePUVelocidad()+chancePUArmaTriple();
 	}
 
 }
