@@ -4,9 +4,9 @@ import Utils.Posicion;
 
 
 
-public class OscilacionBorracho extends Curva
+public class CurvaBorracho extends Curva
 {	
-	public OscilacionBorracho( double tiempoInicial )
+	public CurvaBorracho( double tiempoInicial )
 	{
 		tiempoMS = tiempoInicial;
 	}

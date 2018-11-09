@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import Controladores.ContEnemBossGenerico;
 import Controladores.ContEnemMapaGenerico;
+import Controladores.ContObstaculosGenerico;
 import Controladores.ControladorNiveles;
 import Entidad.Entidad;
 import Escudo.EscudoAbsoluto;
@@ -45,6 +46,7 @@ public class MapaGenerico extends Mapa
 		this.player					= player;
 		this.controlJuego			= control;
 		this.rand					= Randomizador.create( );
+		this.controlObstaculos		= new ContObstaculosGenerico( this, dificultad );
 		
 		this.entidades				= new LinkedList<Entidad>();
 		this.entidadesParaEliminar	= new LinkedList<Entidad>();
@@ -58,7 +60,7 @@ public class MapaGenerico extends Mapa
 		
 		establecerJugador( );
 		crearEnemigos( );
-		crearObjetos( );
+		crearObstaculos( );
 		
 		agregarEntidades();
 		
@@ -80,15 +82,6 @@ public class MapaGenerico extends Mapa
 		juego.getPanel().add( player.getSprite() );
 		
 		player.addEscudo( new EscudoAbsoluto(player, 5) );
-	}
-
-	
-	
-	public void crearObjetos( )
-	{
-		addEntity( new BarricadaComun( this, new Posicion( 20, Juego.GAME_HEIGHT / 2 ) ) );
-		
-		addEntity( new ObstaculoComun( this, new Posicion( Juego.GAME_WIDTH - 100, Juego.GAME_HEIGHT / 2 ) ) );
 	}
 	
 	
