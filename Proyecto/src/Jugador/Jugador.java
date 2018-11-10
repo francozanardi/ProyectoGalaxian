@@ -34,6 +34,16 @@ public class Jugador extends Personaje
 		
 		setArma( new ArmaComun(this, new ColDispJugador(), 0.5 * Math.PI) );
 	}
+	
+	public void restaurarValores() {
+		vida = 1000;
+		puntaje = 0;
+		setArma(new ArmaComun(this, new ColDispJugador(), 0.5 * Math.PI));
+		this.pos = new Posicion((Juego.GAME_WIDTH / 2) - (tamano.getWidth() / 2), Juego.GAME_HEIGHT - tamano.getHeight() - 30);
+		this.escudo	= new LinkedList<Escudo>();
+		
+		actualizarPosicion();
+	}
 
 	public double getVelocidadMovimiento() {
 		return velHorizontal;

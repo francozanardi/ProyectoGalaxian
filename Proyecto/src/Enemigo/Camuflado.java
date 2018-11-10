@@ -32,6 +32,8 @@ public class Camuflado extends Transformable
 
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
 		powerUp = drop.crearPowerUP();
+		
+		actualizarPosicion();
 	}
 
 

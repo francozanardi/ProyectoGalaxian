@@ -45,7 +45,7 @@ public class IASniper extends Inteligencia
 		
 		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba
 		if (y > Juego.GAME_HEIGHT)
-			y = 0;
+			y = -entidad.getSize().getHeight()-10;
 		
 		// Finalmente actualizar posicion
 		pos.setX( x );

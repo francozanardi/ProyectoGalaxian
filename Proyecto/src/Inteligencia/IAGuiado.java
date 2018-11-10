@@ -55,7 +55,7 @@ public class IAGuiado extends Inteligencia
 		if (y > Juego.GAME_HEIGHT)
 		{
 			x = rand.nextInt( Juego.GAME_WIDTH - entidad.getSize().getWidth() );
-			y = 0;
+			y = -entidad.getSize().getHeight()-10;;
 		}
 		
 		// Finalmente actualizar posicion

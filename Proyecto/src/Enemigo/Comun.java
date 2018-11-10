@@ -45,6 +45,8 @@ public class Comun extends Enemigo
 		
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
 		powerUp = drop.crearPowerUP();
+		
+		actualizarPosicion();
 	}
 
 

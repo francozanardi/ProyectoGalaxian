@@ -40,5 +40,7 @@ public class Guiado extends Kamikaze
 		
 		CreadorPowerUP drop = new CreadorPowerUPGuiado(map, dificultad);
 		powerUp = drop.crearPowerUP();
+		
+		actualizarPosicion();
 	}
 }

@@ -53,7 +53,7 @@ public class IABorracho extends Inteligencia
 		if (y > Juego.GAME_HEIGHT)
 		{
 			x = rand.nextInt( Juego.GAME_WIDTH );
-			y = 0;
+			y = -entidad.getSize().getHeight()-10;
 		}
 		
 		// Finalmente actualizar posicion

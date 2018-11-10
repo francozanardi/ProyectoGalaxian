@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Jugador.Jugador;
 import Logica.Juego;
 
 
@@ -18,13 +19,15 @@ public class MenuGameOver extends Menu
 	private MenuButton	botonMenuPrincipal;
 	private JLabel		label;
 	private int			score;
+	private Jugador 	jugador;
 	
 	
 	
-	public MenuGameOver( Juego juego, MediadorMenu m )
+	public MenuGameOver( Juego juego, MediadorMenu m, Jugador jugador )
 	{
 		this.canvas	= juego.getPanel();
 		this.mediador = m;
+		this.jugador = jugador;
 		
 		crearBotones( );
 		crearLabels( );
@@ -92,6 +95,7 @@ public class MenuGameOver extends Menu
 		public void actionPerformed(ActionEvent arg0)
 		{
 			mediador.iniciarNuevoMenu( mediador.menuPrincipal() );
+			jugador.restaurarValores();
 		}
 	}
 }

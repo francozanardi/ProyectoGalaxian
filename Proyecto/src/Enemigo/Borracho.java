@@ -36,9 +36,10 @@ public class Borracho extends Kamikaze
 		
 		this.colisionador	= new ColKamikaze( explosionDmg );
 		
+		setArma( new ArmaDefaultEnemigo(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
 		powerUp = drop.crearPowerUP();
 		
-		setArma( new ArmaDefaultEnemigo(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI ) );
+		actualizarPosicion();
 	}
 }

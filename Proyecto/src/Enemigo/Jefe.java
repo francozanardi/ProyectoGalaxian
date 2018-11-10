@@ -35,6 +35,8 @@ public class Jefe extends Enemigo
 
 		setArma( new ArmaBoss(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		arma.setMultCadencia( 2 );
+		
+		actualizarPosicion();
 	}
 	
 	

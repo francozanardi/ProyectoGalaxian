@@ -34,6 +34,8 @@ public class Fragil extends Transformable
 		
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
 		powerUp = drop.crearPowerUP();
+		
+		actualizarPosicion();
 	}
 	
 	

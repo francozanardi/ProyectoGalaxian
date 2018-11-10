@@ -40,6 +40,8 @@ public class Sniper extends Enemigo
 		
 		CreadorPowerUP drop = new CreadorPowerUPEnemigo(map, dificultad);
 		powerUp = drop.crearPowerUP();
+		
+		actualizarPosicion();
 	}
 
 

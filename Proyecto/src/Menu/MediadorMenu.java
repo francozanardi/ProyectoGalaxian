@@ -85,7 +85,7 @@ public class MediadorMenu
 	
 	public MenuGameOver menuGameOver()
 	{
-		return new MenuGameOver(juego, this);
+		return new MenuGameOver(juego, this, jugador);
 	}
 	
 	public MenuNextLevel menuNextLevel() {
