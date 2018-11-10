@@ -137,7 +137,7 @@ public abstract class Mapa
 		entidadesParaEliminar.clear();
 		entidadesParaAgregar.clear();
 		
-//		juego.getPanel().repaint();
+		juego.getPanel().repaint();
 	}
 
 	
