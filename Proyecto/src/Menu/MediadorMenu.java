@@ -12,6 +12,8 @@ public class MediadorMenu
 	protected Jugador jugador;
 	protected Stack<Menu> pilaDeMenues;
 	
+	
+	
 	public MediadorMenu( Juego juego, Jugador jugador)
 	{
 		this.juego = juego;		
