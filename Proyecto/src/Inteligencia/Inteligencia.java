@@ -10,8 +10,7 @@ public abstract class Inteligencia
 {	
 	protected Entidad		entidad;
 	protected Curva			curvaMovimiento;
-	protected Randomizador	rand;
-
+	
 
 	
 	public abstract void mover( double msDesdeUltAct );

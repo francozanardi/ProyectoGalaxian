@@ -13,9 +13,8 @@ public class IAComun extends Inteligencia
 	public IAComun( Enemigo me )
 	{
 		this.entidad	= me;
-		this.rand		= Randomizador.create( );
 		
-		this.curvaMovimiento = new CurvaSinusoidal( rand.nextDouble(0.0, 1000.0), 40.0, 20.0, 2.5 );
+		this.curvaMovimiento = new CurvaSinusoidal( Randomizador.create().nextDouble(0.0, 1000.0), 40.0, 20.0, 2.5 );
 	}
 
 

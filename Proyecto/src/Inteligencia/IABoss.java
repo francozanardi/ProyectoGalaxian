@@ -13,9 +13,8 @@ public class IABoss extends Inteligencia
 	public IABoss( Enemigo me )
 	{
 		this.entidad	= me;
-		this.rand		= Randomizador.create( );
 		
-		this.curvaMovimiento = new CurvaSinusoidal( rand.nextDouble(0.0, 1000.0), Juego.GAME_WIDTH - 100.0, 30.0, 0.75 );
+		this.curvaMovimiento = new CurvaSinusoidal( Randomizador.create( ).nextDouble(0.0, 1000.0), Juego.GAME_WIDTH - 100.0, 30.0, 0.75 );
 	}
 
 

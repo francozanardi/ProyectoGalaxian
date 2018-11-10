@@ -134,36 +134,6 @@ public class SpriteEditor
 	
 	
 	
-	public void colorToAlpha( Sprite spr, Color color, double tolerancia, int alpha )
-	{
-		BufferedImage b = imageToBufferedImage( spr.getImage() );
-		
-		int w = b.getWidth(),
-			h = b.getHeight(),
-			x,
-			y;
-		int[] pixel;
-		int cr = color.getRed(), cg = color.getGreen(), cb = color.getBlue();
-		double diferencia;
-		
-		for (x = 0; x < w; x ++)
-		{
-			for (y = 0; y < h; y ++)
-			{
-				pixel = getRGBA( b.getRGB(x, y) );
-				
-				diferencia = Math.abs(cr - pixel[CRED]) + Math.abs(cb - pixel[CBLUE]) + Math.abs(cg - pixel[CGREEN]);
-				
-				if (diferencia <= tolerancia)
-					b.setRGB(x, y, setRGBA(pixel[CRED], pixel[CBLUE], pixel[CGREEN], alpha));
-			}
-		}
-		
-		spr.setImage( b );
-	}
-	
-	
-	
 	public void negative( Sprite spr )
 	{
 		BufferedImage b = imageToBufferedImage( spr.getImage() );
@@ -186,19 +156,6 @@ public class SpriteEditor
 		
 		spr.setImage( b );
 	}
-	
-	
-	
-	/*
-	public void resize( Sprite spr, double escale )
-	{
-		Image img = spr.getImage();
-		int newWidth	= (int) (img.getWidth(null) * escale),
-			newHeight	= (int) (img.getHeight(null) * escale);
-		
-	    spr.setImage( img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH) );
-	}
-	*/
 	
 	
 	
