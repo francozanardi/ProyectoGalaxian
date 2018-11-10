@@ -20,8 +20,6 @@ public class PUEscudoExplosion extends PowerUp
 		this.map			= map;
 		this.pos			= new Posicion( 0, 0 );
 		setSprite( new Sprite( "/GameSprites/powerUpShield.PNG" ) );
-		SpriteEditor editor = SpriteEditor.create();
-		editor.colorToAlpha(sprite, Color.white, 5, 255);
 		this.vida			= 1000;
 		this.colisionador	= new ColPowerUp( this );
 	}

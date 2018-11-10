@@ -1,5 +1,7 @@
 package Inteligencia;
 
+import java.util.Random;
+
 import Curva.CurvaBorracho;
 import Enemigo.Enemigo;
 import Logica.Juego;
@@ -13,9 +15,8 @@ public class IABorracho extends Inteligencia
 	public IABorracho( Enemigo me )
 	{
 		this.entidad	= me;
-		this.rand 		= Randomizador.create( );
 		
-		this.curvaMovimiento = new CurvaBorracho( rand.nextDouble(0.0, 100000.0) );
+		this.curvaMovimiento = new CurvaBorracho( Randomizador.create( ).nextDouble(0.0, 100000.0) );
 	}
 	
 	
@@ -24,6 +25,7 @@ public class IABorracho extends Inteligencia
 	{
 		final double	VELOCIDAD_HORIZONTAL	= 7.5;
 		
+		Random		rand		= new Random();
 		Posicion	pos			= entidad.getPos(),
 					posPlayer	= entidad.getMapa().getPlayerPos( ),
 					movCurva	= curvaMovimiento.obtenerCambio( msDesdeUltActualizacion );

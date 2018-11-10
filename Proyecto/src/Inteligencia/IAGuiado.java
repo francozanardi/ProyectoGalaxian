@@ -1,5 +1,7 @@
 package Inteligencia;
 
+import java.util.Random;
+
 import Enemigo.Enemigo;
 import Logica.Juego;
 import Utils.Posicion;
@@ -15,13 +17,12 @@ public class IAGuiado extends Inteligencia
 	public IAGuiado( Enemigo me )
 	{
 		this.entidad	= me;
-		this.rand		= Randomizador.create( );
 	}
 	
 
 	public void mover( double msDesdeUltActualizacion )
 	{
-		
+		Random		rand		= new Random();
 		Posicion	pos			= entidad.getPos(),
 					posPlayer	= entidad.getMapa().getPlayerPos( );
 		
@@ -53,7 +54,7 @@ public class IAGuiado extends Inteligencia
 		// Si nos pasamos de la parte de abajo de la pantalla, volvemos arriba, pero deben volver a aparecer en una coordenada X aleatoria
 		if (y > Juego.GAME_HEIGHT)
 		{
-			x = rand.nextInt( Juego.GAME_WIDTH );
+			x = rand.nextInt( Juego.GAME_WIDTH - entidad.getSize().getWidth() );
 			y = 0;
 		}
 		
