@@ -24,7 +24,7 @@ public class TiendaDefault extends Tienda {
 		this.colum = 0;
 		this.fila = 0;
 		
-		inicializar(5, 3);
+		inicializar(4, 3);
 		
 		show(false);
 		colocarItems();

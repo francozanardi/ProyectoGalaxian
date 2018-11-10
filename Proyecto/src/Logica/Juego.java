@@ -29,7 +29,7 @@ public class Juego extends JFrame
 								GAME_HEIGHT			= (int) (GAME_WIDTH * 1.5),
 								GAME_FPS			= 60,
 								GAME_BEST_SCORES	= 20;
-	public static final String	GAME_TITLE			= "HyperSpaceX";
+	public static final String	GAME_TITLE			= "Null Space v1.0";
 	public static final boolean DEBUG				= false;
 	
 
