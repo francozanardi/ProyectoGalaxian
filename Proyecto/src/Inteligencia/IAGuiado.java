@@ -14,6 +14,8 @@ public class IAGuiado extends Inteligencia
 	final double	VELOCIDAD_HORIZONTAL	= 40.0,
 					VELOCIDAD_VERTICAL		= 110.0;
 	
+	
+	
 	public IAGuiado( Enemigo me )
 	{
 		this.entidad	= me;

@@ -1,4 +1,4 @@
-package Menu;
+	package Menu;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -30,7 +30,7 @@ public class MenuTienda extends Menu
 		this.mediador = m;
 		this.compra = null;
 		
-		tienda = new TiendaDefault(juego, jugador);
+		tienda = new TiendaDefault(juego.getPanel(), jugador);
 		canvas = tienda.getPanel();
 		crearBotones();
 	}

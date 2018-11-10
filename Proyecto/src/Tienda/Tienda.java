@@ -16,7 +16,7 @@ import Logica.Juego;
 public abstract class Tienda {
 	protected JPanel tienda;
 	protected JPanel contenedorItems;
-	protected Juego juego;
+	protected JPanel canvas;
 	protected Item ultimoItemSeleccionado;
 	protected JLabel precioItem;
 	
@@ -42,7 +42,7 @@ public abstract class Tienda {
 		contenedorItems.removeAll();
 		tienda.removeAll();
 		
-		juego.getPanel().repaint();
+		canvas.repaint();
 	}
 	
 	protected void inicializar(int c, int f) {
@@ -60,7 +60,7 @@ public abstract class Tienda {
 		tienda.setBackground(Color.WHITE);
 		tienda.setVisible(true);
 		
-		juego.getPanel().add(tienda);
+		canvas.add(tienda);
 	}
 	
 	private void crearContenedorItems(int colum, int fila) {

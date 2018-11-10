@@ -1,5 +1,7 @@
 package Tienda;
 
+import javax.swing.JPanel;
+
 import Jugador.Jugador;
 import Logica.Juego;
 import PowerUp.PUArmaTriple;
@@ -16,8 +18,8 @@ public class TiendaDefault extends Tienda {
 	private int colum;
 	private int fila;
 	
-	public TiendaDefault(Juego juego, Jugador jugador) {
-		this.juego = juego;
+	public TiendaDefault(JPanel canvas, Jugador jugador) {
+		this.canvas = canvas;
 		this.jugador = jugador;
 		this.colum = 0;
 		this.fila = 0;
@@ -26,7 +28,7 @@ public class TiendaDefault extends Tienda {
 		
 		show(false);
 		colocarItems();
-		juego.getPanel().repaint();
+		canvas.repaint();
 	}
 	
 	private void colocarItems() {
