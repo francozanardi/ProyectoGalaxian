@@ -20,8 +20,11 @@ public class Sprite extends JPanel
 	public Sprite( String url )
 	{
 		super();
-
-		initialize( new ImageIcon( getClass().getResource(url) ).getImage() );
+		String u = url.toLowerCase();
+		//esto se agregó porque había problemas de coincidencias de mayúsculas y minúsculas que generaba inconvenientes en el jar
+		//por convencion todos los nombres de las imágenes son en minúscula, para no cambiar todos los llamados a Sprite
+		//cambiamos lo que recibimos a minúscula.
+		initialize( new ImageIcon( getClass().getResource(u) ).getImage() );
 	}
 		
 	public Sprite( Image sprite )
