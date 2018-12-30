@@ -13,7 +13,7 @@ import visitor.ColDisparo;
 
 
 
-public class ArmaBoss extends Arma
+public class ArmaQuintuple extends Arma
 {	
 	private final double	AMPLITUD_DISPARO		= Math.PI / 8,
 							VELOCIDAD_DISPARO		= 100.0,
@@ -22,7 +22,7 @@ public class ArmaBoss extends Arma
 
 
 
-	public ArmaBoss( EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo )
+	public ArmaQuintuple( EntidadConVida tirador, ColDisparo miColisionador, double anguloDelDisparo )
 	{
 		inicializar(
 			new Sprite( "/GameSprites/Arma.PNG" ),

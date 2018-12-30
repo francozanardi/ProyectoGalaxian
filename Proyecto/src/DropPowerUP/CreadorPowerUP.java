@@ -8,6 +8,7 @@ import PowerUp.PUEscudoExplosion;
 import PowerUp.PUHeal;
 import PowerUp.PUMinigun;
 import PowerUp.PUMultiplicador;
+import PowerUp.PUVelocidadAtaque;
 import PowerUp.PUVelocidadMovimiento;
 import PowerUp.PowerUp;
 import Utils.Randomizador;
@@ -49,6 +50,9 @@ public abstract class CreadorPowerUP {
 		
 		if(valorAleatorio < balance.chancePUArmaTriple())
 			return new PUArmaTriple(mapa);
+		
+		if(valorAleatorio < balance.chancePUVelocidadAtaque())
+			return new PUVelocidadAtaque(mapa);
 		
 		return null;
 	}

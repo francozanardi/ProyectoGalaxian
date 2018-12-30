@@ -45,5 +45,10 @@ public class BalanceDropPUGuiado extends BalanceDropPU {
 	public int chancePUArmaTriple() {
 		return 7;
 	}
+	
+	public int chancePUVelocidadAtaque() {
+		return 8;
+	}
+
 
 }

@@ -2,7 +2,7 @@ package Enemigo;
 
 import java.util.LinkedList;
 
-import Arma.ArmaBoss;
+import Arma.ArmaQuintuple;
 import Escudo.Escudo;
 import Inteligencia.IABoss;
 import Logica.Juego;
@@ -33,7 +33,7 @@ public class Jefe extends Enemigo
 		this.vida			= 2000.0 + (100.0 * dificultad);
 		this.puntaje		= (int) (200 + (10 * dificultad));
 
-		setArma( new ArmaBoss(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
+		setArma( new ArmaQuintuple(this, new ColDispEnemigo(), 3.0 / 2.0 * Math.PI) );
 		arma.setMultCadencia( 2 );
 		
 		actualizarPosicion();

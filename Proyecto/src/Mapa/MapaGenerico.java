@@ -21,15 +21,15 @@ import Utils.Randomizador;
 
 public class MapaGenerico extends Mapa
 {
-	private final int	CANT_MAX_ENEM_PANTALLA = 15,
-						NIVELES_BOSS = 2;
+	private final int	CANT_MAX_ENEM_PANTALLA = 15;
+
 	
 	
 	
-	public MapaGenerico( Juego juego, ControladorNiveles control, Jugador player, String nombre, int nivel, double dificultad )
+	public MapaGenerico( Juego juego, ControladorNiveles control, Jugador player, String nombre, double dificultad, boolean boss )
 	{
 		// Seleccionar un tipo de fondo especifico
-		if (nivel % NIVELES_BOSS == 0)
+		if (boss)
 		{
 			this.fondo			 = new FondoGenerico( juego.getPanel(), 1000, new Color(0, 0, 0), new Color(128, 0, 0) );
 			this.controlEnemigos = new ContEnemBossGenerico( this, dificultad );

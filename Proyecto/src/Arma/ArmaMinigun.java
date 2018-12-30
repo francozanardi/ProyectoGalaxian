@@ -33,7 +33,7 @@ public class ArmaMinigun extends Arma
 			MULTIPLICADOR_DMG
 		);
 		
-		cantidadDeMuniciones = 500;
+		cantidadDeMuniciones = 300;
 	}
 
 

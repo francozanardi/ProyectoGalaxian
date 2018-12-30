@@ -37,9 +37,15 @@ public class BalanceDropPUObstaculo extends BalanceDropPU {
 		return 18;
 	}
 
+	public int chancePUVelocidadAtaque() {
+		return 15;
+	}
+	
 	@Override
 	public int chanceNoPowerUP() {
 		return 10;
 	}
+	
+
 
 }

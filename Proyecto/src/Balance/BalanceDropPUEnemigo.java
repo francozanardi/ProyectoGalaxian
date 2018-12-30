@@ -18,17 +18,17 @@ public class BalanceDropPUEnemigo extends BalanceDropPU {
 
 	@Override
 	public int chancePUHeal() {
-		return 6;
+		return 4;
 	}
 
 	@Override
 	public int chancePUMinigun() {
-		return 6;
+		return 2;
 	}
 
 	@Override
 	public int chancePUMultiplicador() {
-		return 2;
+		return 3;
 	}
 
 	@Override
@@ -38,11 +38,15 @@ public class BalanceDropPUEnemigo extends BalanceDropPU {
 
 	@Override
 	public int chancePUVelocidad() {
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public int chancePUArmaTriple() {
+		return 2;
+	}
+	
+	public int chancePUVelocidadAtaque() {
 		return 3;
 	}
 

@@ -1,32 +1,51 @@
 package Controladores;
 
+import java.util.Random;
+
 import Jugador.Jugador;
 import Logica.Juego;
 import Mapa.Mapa;
 import Mapa.MapaGenerico;
 import Menu.MediadorMenu;
-import Menu.Menu;
-import Menu.MenuNextLevel;
-import PowerUp.PowerUp;
 import Tienda.Item;
-import Utils.Posicion;
 
 
 
 public class ContNivelesGenerico extends ControladorNiveles
 {
 
+	private final int PORCENTAJE_BASE_BOSS = 8;
+	private int nivelesSinJefe;
+	
 	public ContNivelesGenerico( Juego game, Jugador player ) {
 		jugador = player;
 		juego = game;
+		nivelesSinJefe = 0;
 	}
 	
+	private int funcionPorcentajeBoss(int n) {
+		return PORCENTAJE_BASE_BOSS + (int) Math.pow(n, 2);
+	}
+	
+	private boolean nivelBoss() {
+		int porcentajeActual = funcionPorcentajeBoss(nivelesSinJefe);
+		Random random = new Random();
+		int numeroAleatorio = random.nextInt(100);
+		
+		if(numeroAleatorio <= porcentajeActual) {
+			nivelesSinJefe = 0;
+			return true;
+		}
+		
+		nivelesSinJefe++;
+		return false;
+	}
 	
 	
 	private Mapa establecerNivel( int nivelID )
 	{
 		juego.requestFocus();
-		Mapa mapa = new MapaGenerico( juego, this, jugador, "LEVEL " + nivelID, nivelID, (1.0 * nivelID) );
+		Mapa mapa = new MapaGenerico( juego, this, jugador, "LEVEL " + nivelID, nivelID, nivelBoss());
 		startMap(mapa);
 		
 		if (Juego.DEBUG)

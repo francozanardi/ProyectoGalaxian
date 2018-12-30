@@ -10,11 +10,12 @@ public abstract class BalanceDropPU {
 	public abstract int chancePUMultiplicador();
 	public abstract int chancePUVelocidad();
 	public abstract int chancePUArmaTriple();
+	public abstract int chancePUVelocidadAtaque();
 	public abstract int chanceNoPowerUP();
 	public int getChanceTotal() {
 		return 	chancePUCongelar()+chancePUEscudoExplosion()+chancePUHeal()+
 				chancePUMinigun()+chancePUMultiplicador()+chanceNoPowerUP()+
-				chancePUVelocidad()+chancePUArmaTriple();
+				chancePUVelocidad()+chancePUArmaTriple()+chancePUVelocidadAtaque();
 	}
 
 }
